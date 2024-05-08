@@ -1,16 +1,40 @@
-# weather_app
+# Weather App
 
-A new Flutter project.
+## 概要
 
-## Getting Started
+Weather Appは、位置情報または都市名を入力することでその地域の現在の天気と週間予報を表示するFlutterアプリです。このアプリはAPIを通じて天気情報を取得し、ユーザーインターフェースで表示します。
 
-This project is a starting point for a Flutter application.
+## 特徴
 
-A few resources to get you started if this is your first Flutter project:
+- **現在の天気表示**: ユーザーの現在位置または入力された都市の天気情報をリアルタイムで提供。
+- **週間天気予報**: 選択された地域の一週間の天気予報を表示。
+- **地域検索**: 都市名で検索可能。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 技術スタック
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Flutter**: モバイルアプリケーションフレームワーク
+- **Dart**: プログラミング言語
+- **MVVMパターン**: アプリのアーキテクチャパターン
+- **Repositoryパターン**: データ層の抽象化を提供
+
+## アーキテクチャ
+
+このアプリはMVVMパターンに基づいて設計されています。主なコンポーネントは以下の通りです。
+
+- **Model**: APIから取得したデータの構造を定義。
+- **View**: ユーザーインターフェース。ユーザーの入力を受け取り、表示を更新します。
+- **ViewModel**: ビジネスロジックを含み、ViewとModelを結びつけます。
+- **Repository**: データの取得と処理のロジックをカプセル化。
+
+## セットアップ
+
+プロジェクトのセットアップ方法を記述します。
+
+```
+git clone https://github.com/your-username/weather_app.git
+cd weather_app
+flutter pub get
+flutter run
+```
+
+
