@@ -20,10 +20,10 @@ WeatherModel _$WeatherModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherModel {
-  double get temperature => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  double get windSpeed => throw _privateConstructorUsedError;
-  int get humidity => throw _privateConstructorUsedError;
+  double get temperature => throw _privateConstructorUsedError; // 温度
+  String get description => throw _privateConstructorUsedError; // 天気の説明
+  double get windSpeed => throw _privateConstructorUsedError; // 風速
+  int get humidity => throw _privateConstructorUsedError; // 湿度
   String get cityName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -163,12 +163,16 @@ class _$WeatherModelImpl implements _WeatherModel {
 
   @override
   final double temperature;
+// 温度
   @override
   final String description;
+// 天気の説明
   @override
   final double windSpeed;
+// 風速
   @override
   final int humidity;
+// 湿度
   @override
   final String cityName;
 
@@ -226,13 +230,13 @@ abstract class _WeatherModel implements WeatherModel {
 
   @override
   double get temperature;
-  @override
+  @override // 温度
   String get description;
-  @override
+  @override // 天気の説明
   double get windSpeed;
-  @override
+  @override // 風速
   int get humidity;
-  @override
+  @override // 湿度
   String get cityName;
   @override
   @JsonKey(ignore: true)
