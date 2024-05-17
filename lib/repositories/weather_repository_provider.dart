@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/repositories/weather_repository.dart';
+import 'package:weather_app/repositories/weather_repository_impl.dart';
 import 'package:weather_app/services/weather_api_client_provider.dart';
 
 // WeatherRepositoryProviderは、WeatherApiClientに基づいてWeatherRepositoryのインスタンスを作成します。
@@ -9,6 +10,7 @@ final weatherRepositoryProvider = Provider<WeatherRepository>((ref) {
   // WeatherApiClientProviderからWeatherApiClientのインスタンスを取得。
   // このインスタンスはAPI呼び出しを担当し、その結果をRepository層で利用可能にします。
   final weatherApiClient = ref.watch(weatherApiClientProvider);
+
   // WeatherApiClientを使用して、天気データの取得と操作を行うWeatherRepositoryを生成。
-  return WeatherRepository(apiClient: weatherApiClient);
+  return WeatherRepositoryImpl(apiClient: weatherApiClient);
 });

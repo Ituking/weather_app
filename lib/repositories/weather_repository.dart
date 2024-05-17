@@ -1,22 +1,13 @@
 import 'package:weather_app/models/weather_model.dart';
-import 'package:weather_app/services/weather_api_client.dart';
 
-// WeatherRepositoryクラスは、天気データのデータソースを抽象化し、必要に応じてアプリケーションのロジックに提供します。
-class WeatherRepository {
-  final WeatherApiClient apiClient;
-
-  // [WeatherApiClient]を使用してデータ取得操作を行う
-  // [WeatherRepository]を構築します。
-  WeatherRepository({required this.apiClient});
-
-  // 指定された[cityName]の天気データを取得し、[WeatherModel]に変換します。
-  // データ取得または変換に失敗した場合は[Exception]をスローします。
-  Future<WeatherModel> getWeather(String cityName) async {
-    try {
-      final jsonData = await apiClient.fetchWeather(cityName);
-      return WeatherModel.fromJson(jsonData);
-    } catch (e) {
-      throw Exception('Failed to load weather data: $e');
-    }
-  }
+// WeatherRepositoryインターフェースは、天気データを取得するための契約を定義します。
+// 具体的な実装クラスは、このインターフェースを実装し、天気データの取得ロジックを提供します。
+abstract class WeatherRepository {
+  // 指定された都市名 [cityName] の天気データを取得します。
+  // 成功した場合は [WeatherModel] のインスタンスを返します。
+  // データ取得または変換に失敗した場合は例外をスローします。
+  //
+  // [cityName] - 天気データを取得する都市の名前
+  // 戻り値 - 取得した天気データを含むFuture<WeatherModel>
+  Future<WeatherModel> getWeather(String cityName);
 }
