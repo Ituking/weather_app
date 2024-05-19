@@ -3,12 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:weather_app/models/weather_model.dart' as _i3;
-import 'package:weather_app/repositories/weather_repository.dart' as _i4;
-import 'package:weather_app/services/weather_api_client.dart' as _i2;
+import 'package:weather_app/models/weather_model.dart' as _i2;
+import 'package:weather_app/repositories/weather_repository.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -23,19 +22,8 @@ import 'package:weather_app/services/weather_api_client.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeWeatherApiClient_0 extends _i1.SmartFake
-    implements _i2.WeatherApiClient {
-  _FakeWeatherApiClient_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeWeatherModel_1 extends _i1.SmartFake implements _i3.WeatherModel {
-  _FakeWeatherModel_1(
+class _FakeWeatherModel_0 extends _i1.SmartFake implements _i2.WeatherModel {
+  _FakeWeatherModel_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -47,33 +35,24 @@ class _FakeWeatherModel_1 extends _i1.SmartFake implements _i3.WeatherModel {
 /// A class which mocks [WeatherRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockWeatherRepository extends _i1.Mock implements _i4.WeatherRepository {
+class MockWeatherRepository extends _i1.Mock implements _i3.WeatherRepository {
   MockWeatherRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.WeatherApiClient get apiClient => (super.noSuchMethod(
-        Invocation.getter(#apiClient),
-        returnValue: _FakeWeatherApiClient_0(
-          this,
-          Invocation.getter(#apiClient),
-        ),
-      ) as _i2.WeatherApiClient);
-
-  @override
-  _i5.Future<_i3.WeatherModel> getWeather(String? cityName) =>
+  _i4.Future<_i2.WeatherModel> getWeather(String? cityName) =>
       (super.noSuchMethod(
         Invocation.method(
           #getWeather,
           [cityName],
         ),
-        returnValue: _i5.Future<_i3.WeatherModel>.value(_FakeWeatherModel_1(
+        returnValue: _i4.Future<_i2.WeatherModel>.value(_FakeWeatherModel_0(
           this,
           Invocation.method(
             #getWeather,
             [cityName],
           ),
         )),
-      ) as _i5.Future<_i3.WeatherModel>);
+      ) as _i4.Future<_i2.WeatherModel>);
 }
