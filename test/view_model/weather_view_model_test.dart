@@ -1,6 +1,8 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/weather_view_model.dart';
 
 import '../mocks/mock_weather_repository.mocks.dart';
@@ -8,12 +10,16 @@ import '../mocks/mock_weather_repository.mocks.dart';
 void main() {
   group('WeatherViewModel Test', () {
     late MockWeatherRepository mockWeatherRepository;
-    late WeatherViewModel viewModel;
+    late ProviderContainer container;
 
     setUp(() {
-      // モックリポジトリのセットアップとViewModelの初期化
+      // モックリポジトリのセットアップとProviderContainerの初期化
       mockWeatherRepository = MockWeatherRepository();
-      viewModel = WeatherViewModel(mockWeatherRepository);
+      container = ProviderContainer(
+        overrides: [
+          weatherRepositoryProvider.overrideWithValue(mockWeatherRepository),
+        ],
+      );
     });
 
     test('成功時にWeatherModelを返す', () async {
@@ -28,6 +34,8 @@ void main() {
       // モックから期待される天気データが返されるように設定
       when(mockWeatherRepository.getWeather(any))
           .thenAnswer((_) async => testWeather);
+
+      final viewModel = container.read(weatherViewModelProvider.notifier);
 
       // メソッドを実行し、期待される結果を検証
       await viewModel.fetchWeather('Tokyo');
@@ -55,6 +63,8 @@ void main() {
                     cityName: 'Tokyo',
                   )));
 
+      final viewModel = container.read(weatherViewModelProvider.notifier);
+
       // 非同期処理の実行中にローディング状態がtrueになることを確認
       final future = viewModel.fetchWeather('Tokyo');
       expect(viewModel.state.isLoading, isTrue);
@@ -69,8 +79,9 @@ void main() {
       when(mockWeatherRepository.getWeather(any))
           .thenThrow(Exception('Failed to fetch weather data'));
 
+      final viewModel = container.read(weatherViewModelProvider.notifier);
+
       // エラー発生時の処理をテスト
-      // メソッド実行前には例外を投げると設定しているため、エラーハンドリングが正しく機能するか確認します
       await viewModel.fetchWeather('Tokyo');
       // エラーが発生した際に、weatherプロパティがnullであることを確認
       expect(viewModel.state.weather, isNull);

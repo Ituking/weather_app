@@ -1,15 +1,22 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:weather_app/repositories/weather_repository.dart';
+import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/weather_view_model_state.dart';
 
-// WeatherViewModelは、天気データの状態を管理するためのクラスです。
-// StateNotifierを継承しており、WeatherModelの状態を更新します。
-class WeatherViewModel extends StateNotifier<WeatherViewModelState> {
-  // 天気データを取得するためのリポジトリ
-  final WeatherRepository _weatherRepository;
+part 'weather_view_model.g.dart';
 
-  // コンストラクタで初期状態を設定します。
-  WeatherViewModel(this._weatherRepository) : super(WeatherViewModelState());
+@riverpod
+// WeatherViewModelは、天気データの状態を管理するためのクラスです。
+class WeatherViewModel extends _$WeatherViewModel {
+  // 天気データを取得するためのリポジトリ
+  late final WeatherRepository _weatherRepository;
+
+  // 初期状態の設定
+  @override
+  WeatherViewModelState build() {
+    _weatherRepository = ref.read(weatherRepositoryProvider);
+    return WeatherViewModelState();
+  }
 
   // 指定された都市名で天気情報を非同期に取得し、状態を更新します。
   Future<void> fetchWeather(String cityName) async {
@@ -25,9 +32,9 @@ class WeatherViewModel extends StateNotifier<WeatherViewModelState> {
         errorMessage: null,
       );
     } catch (e) {
-      // エラー時に状態をnullに設定
+      // エラー時に状態を更新
       state = state.copyWith(
-        isLoading: true,
+        isLoading: false,
         errorMessage: 'Failed to fetch weather data',
       );
     }
