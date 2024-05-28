@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:weather_app/components/city_search_input.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
 
-import '../mocks/view_model/mock_city_search_view_model.dart';
+import '../mocks/mock_city_search_view_model.mocks.dart';
 
 void main() {
   group('CitySearchInput Tests', () {
