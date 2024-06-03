@@ -1,14 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/repositories/weather_repository.dart';
+import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/city_search_state.dart';
 
 // CitySearchViewModelは、都市検索に関連するビジネスロジックを処理するクラスです。
-class CitySearchViewModel extends StateNotifier<CitySearchState> {
+class CitySearchViewModel extends Notifier<CitySearchState> {
   // 天気情報を取得するためのリポジトリ
-  final WeatherRepository _weatherRepository;
+  late final WeatherRepository _weatherRepository;
 
-  // コンストラクタ。初期状態をCitySearchState()で設定します。
-  CitySearchViewModel(this._weatherRepository) : super(CitySearchState());
+  CitySearchViewModel();
+
+  @override
+  CitySearchState build() {
+    _weatherRepository = ref.read(weatherRepositoryProvider);
+    return CitySearchState();
+  }
 
   // ユーザーから入力された都市名を状態に更新するメソッド。
   void updateCityName(String cityName) {
