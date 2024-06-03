@@ -5,11 +5,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' as _i4;
+import 'package:flutter_riverpod/flutter_riverpod.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:state_notifier/state_notifier.dart' as _i6;
-import 'package:weather_app/view_model/city_search_state.dart' as _i2;
-import 'package:weather_app/view_model/city_search_view_model.dart' as _i3;
+import 'package:weather_app/view_model/city_search_state.dart' as _i3;
+import 'package:weather_app/view_model/city_search_view_model.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,9 +23,20 @@ import 'package:weather_app/view_model/city_search_view_model.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeCitySearchState_0 extends _i1.SmartFake
-    implements _i2.CitySearchState {
-  _FakeCitySearchState_0(
+class _FakeNotifierProviderRef_0<T> extends _i1.SmartFake
+    implements _i2.NotifierProviderRef<T> {
+  _FakeNotifierProviderRef_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCitySearchState_1 extends _i1.SmartFake
+    implements _i3.CitySearchState {
+  _FakeCitySearchState_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -39,43 +49,31 @@ class _FakeCitySearchState_0 extends _i1.SmartFake
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCitySearchViewModel extends _i1.Mock
-    implements _i3.CitySearchViewModel {
+    implements _i4.CitySearchViewModel {
   MockCitySearchViewModel() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set onError(_i4.ErrorListener? _onError) => super.noSuchMethod(
-        Invocation.setter(
-          #onError,
-          _onError,
+  _i2.NotifierProviderRef<_i3.CitySearchState> get ref => (super.noSuchMethod(
+        Invocation.getter(#ref),
+        returnValue: _FakeNotifierProviderRef_0<_i3.CitySearchState>(
+          this,
+          Invocation.getter(#ref),
         ),
-        returnValueForMissingStub: null,
-      );
+      ) as _i2.NotifierProviderRef<_i3.CitySearchState>);
 
   @override
-  bool get mounted => (super.noSuchMethod(
-        Invocation.getter(#mounted),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  _i5.Stream<_i2.CitySearchState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i5.Stream<_i2.CitySearchState>.empty(),
-      ) as _i5.Stream<_i2.CitySearchState>);
-
-  @override
-  _i2.CitySearchState get state => (super.noSuchMethod(
+  _i3.CitySearchState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeCitySearchState_0(
+        returnValue: _FakeCitySearchState_1(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i2.CitySearchState);
+      ) as _i3.CitySearchState);
 
   @override
-  set state(_i2.CitySearchState? value) => super.noSuchMethod(
+  set state(_i3.CitySearchState? value) => super.noSuchMethod(
         Invocation.setter(
           #state,
           value,
@@ -84,19 +82,19 @@ class MockCitySearchViewModel extends _i1.Mock
       );
 
   @override
-  _i2.CitySearchState get debugState => (super.noSuchMethod(
-        Invocation.getter(#debugState),
-        returnValue: _FakeCitySearchState_0(
-          this,
-          Invocation.getter(#debugState),
+  _i3.CitySearchState build() => (super.noSuchMethod(
+        Invocation.method(
+          #build,
+          [],
         ),
-      ) as _i2.CitySearchState);
-
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
-        returnValue: false,
-      ) as bool);
+        returnValue: _FakeCitySearchState_1(
+          this,
+          Invocation.method(
+            #build,
+            [],
+          ),
+        ),
+      ) as _i3.CitySearchState);
 
   @override
   void updateCityName(String? cityName) => super.noSuchMethod(
@@ -119,40 +117,17 @@ class MockCitySearchViewModel extends _i1.Mock
 
   @override
   bool updateShouldNotify(
-    _i2.CitySearchState? old,
-    _i2.CitySearchState? current,
+    _i3.CitySearchState? previous,
+    _i3.CitySearchState? next,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateShouldNotify,
           [
-            old,
-            current,
+            previous,
+            next,
           ],
         ),
         returnValue: false,
       ) as bool);
-
-  @override
-  _i4.RemoveListener addListener(
-    _i6.Listener<_i2.CitySearchState>? listener, {
-    bool? fireImmediately = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addListener,
-          [listener],
-          {#fireImmediately: fireImmediately},
-        ),
-        returnValue: () {},
-      ) as _i4.RemoveListener);
-
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }
