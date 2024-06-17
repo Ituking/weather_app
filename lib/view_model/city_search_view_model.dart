@@ -44,4 +44,9 @@ class CitySearchViewModel extends Notifier<CitySearchState> {
       );
     }
   }
+
+  // 任意の状態を設定するためのメソッド
+  void setState(CitySearchState newState) {
+    state = newState;
+  }
 }
