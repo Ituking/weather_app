@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/repositories/weather_repository.dart';
 import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/weather_view_model_state.dart';
@@ -24,18 +25,33 @@ class WeatherViewModel extends _$WeatherViewModel {
     state = state.copyWith(isLoading: true);
 
     try {
-      final weather = await _weatherRepository.getWeather(cityName);
-      // 成功時の天気データで状態を更新
-      state = state.copyWith(
-        weather: weather,
-        isLoading: false,
-        errorMessage: null,
+      // リポジトリを使って天気データを取得
+      final result = await _weatherRepository.getWeather(cityName);
+
+      // 結果が成功か失敗かによって状態を更新
+      result.when(
+        success: (weatherList) {
+          // 取得に成功した場合、天気データとローディング状態を更新
+          state = state.copyWith(
+            weather: Result.success(weatherList),
+            isLoading: false,
+            errorMessage: null,
+          );
+        },
+        failure: (error) {
+          // 取得に失敗した場合、エラーメッセージとローディング状態を更新
+          state = state.copyWith(
+            weather: Result.failure(error),
+            isLoading: false,
+            errorMessage: 'Failed to fetch weather data: ${error.message}',
+          );
+        },
       );
     } catch (e) {
-      // エラー時に状態を更新
+      // 予期しないエラーが発生した場合の処理
       state = state.copyWith(
         isLoading: false,
-        errorMessage: 'Failed to fetch weather data',
+        errorMessage: 'Failed to fetch weather data. Please try again later.',
       );
     }
   }
