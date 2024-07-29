@@ -1,5 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/core/network/response/result.dart';
+import 'package:weather_app/core/network/response/weather_list.dart';
+import 'package:weather_app/models/weather_description.dart';
+import 'package:weather_app/models/weather_main.dart';
+import 'package:weather_app/models/weather_wind.dart';
 import 'package:weather_app/view_model/weather_view_model_state.dart';
 
 void main() {
@@ -9,24 +13,30 @@ void main() {
     test('WeatherViewModelState initializes correctly', () {
       // WeatherViewModelStateのインスタンスを生成
       final state = WeatherViewModelState(
-        // WeatherModelを設定。各プロパティに対する期待値を設定
-        weather: const WeatherModel(
-          temperature: 20.0,
-          description: 'Sunny',
-          windSpeed: 5.0,
-          humidity: 70,
-          cityName: 'Tokyo',
-        ),
+        // Result.successにWeatherListを設定。各プロパティに対する期待値を設定
+        weather: Result.success([
+          WeatherList(
+            main: WeatherMain(temp: 20.0, humidity: 70),
+            weather: [WeatherDescription(description: 'Sunny')],
+            wind: WeatherWind(speed: 5.0),
+          )
+        ]),
         isLoading: false,
         errorMessage: null,
       );
 
       // 期待値と実際の値を検証
-      expect(state.weather!.temperature, 20.0);
-      expect(state.weather!.description, 'Sunny');
-      expect(state.weather!.windSpeed, 5.0);
-      expect(state.weather!.humidity, 70);
-      expect(state.weather!.cityName, 'Tokyo');
+      final weather = state.weather;
+
+      weather!.when(
+        success: (data) {
+          expect(data.first.main.temp, 20.0);
+          expect(data.first.weather.first.description, 'Sunny');
+          expect(data.first.wind.speed, 5.0);
+          expect(data.first.main.humidity, 70);
+        },
+        failure: (error) => fail('Expected success but got failure'),
+      );
       expect(state.isLoading, false);
       expect(state.errorMessage, null);
     });

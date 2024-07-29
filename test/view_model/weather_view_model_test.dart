@@ -1,7 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/core/network/response/result.dart';
+import 'package:weather_app/core/network/response/weather_list.dart';
+import 'package:weather_app/models/weather_description.dart';
+import 'package:weather_app/models/weather_main.dart';
+import 'package:weather_app/models/weather_wind.dart';
 import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/weather_view_model.dart';
 
@@ -23,17 +28,17 @@ void main() {
     });
 
     test('成功時にWeatherModelを返す', () async {
-      const testWeather = WeatherModel(
-        temperature: 20.0,
-        description: 'Sunny',
-        windSpeed: 5.0,
-        humidity: 70,
-        cityName: 'Tokyo',
-      );
+      final testWeatherList = [
+        WeatherList(
+          main: WeatherMain(temp: 20.0, humidity: 70),
+          weather: [WeatherDescription(description: 'Sunny')],
+          wind: WeatherWind(speed: 5.0),
+        ),
+      ];
 
       // モックから期待される天気データが返されるように設定
       when(mockWeatherRepository.getWeather(any))
-          .thenAnswer((_) async => testWeather);
+          .thenAnswer((_) async => Result.success(testWeatherList));
 
       final viewModel = container.read(weatherViewModelProvider.notifier);
 
@@ -42,26 +47,35 @@ void main() {
 
       // stateがnullでないことを確認
       expect(viewModel.state, isNotNull);
-      // WeatherModelの各属性を正しくチェック
-      expect(viewModel.state.weather!.temperature, equals(20.0));
-      expect(viewModel.state.weather!.description, equals('Sunny'));
-      expect(viewModel.state.weather!.windSpeed, equals(5.0));
-      expect(viewModel.state.weather!.humidity, equals(70));
-      expect(viewModel.state.weather!.cityName, equals('Tokyo'));
+
+      // Resultの成功時のデータを取得して検証
+      final weather = viewModel.state.weather;
+      expect(weather, isNotNull);
+      weather!.when(
+        success: (data) {
+          expect(data.first.main.temp, equals(20.0));
+          expect(data.first.weather.first.description, equals('Sunny'));
+          expect(data.first.wind.speed, equals(5.0));
+          expect(data.first.main.humidity, equals(70));
+        },
+        failure: (error) => fail('Expected success but got failure'),
+      );
     });
 
     test('ローディング状態が正しく処理される', () async {
+      final testWeatherList = [
+        WeatherList(
+          main: WeatherMain(temp: 20.0, humidity: 70),
+          weather: [WeatherDescription(description: 'Sunny')],
+          wind: WeatherWind(speed: 5.0),
+        ),
+      ];
       // レスポンスの遅延と天気データを模倣
       when(mockWeatherRepository.getWeather(any))
           .thenAnswer((_) async => Future.delayed(
-              const Duration(seconds: 1),
-              () => const WeatherModel(
-                    temperature: 20.0,
-                    description: 'Sunny',
-                    windSpeed: 5.0,
-                    humidity: 70,
-                    cityName: 'Tokyo',
-                  )));
+                const Duration(seconds: 1),
+                () => Result.success(testWeatherList),
+              ));
 
       final viewModel = container.read(weatherViewModelProvider.notifier);
 
@@ -77,14 +91,25 @@ void main() {
     test('API呼び出し失敗時に例外をスローする', () async {
       // 天気データの取得に失敗した場合に例外を投げるようモックを設定
       when(mockWeatherRepository.getWeather(any))
-          .thenThrow(Exception('Failed to fetch weather data'));
+          .thenAnswer((_) async => Result.failure(DioException(
+                requestOptions: RequestOptions(path: ''),
+                error: 'Failed to fetch weather data',
+              )));
 
       final viewModel = container.read(weatherViewModelProvider.notifier);
 
       // エラー発生時の処理をテスト
       await viewModel.fetchWeather('Tokyo');
-      // エラーが発生した際に、weatherプロパティがnullであることを確認
-      expect(viewModel.state.weather, isNull);
+
+      // 結果が失敗であることを確認
+      final weatherResult = viewModel.state.weather;
+      expect(weatherResult, isNotNull);
+      weatherResult!.when(
+        success: (data) => fail('Expected failure but got success'),
+        failure: (error) =>
+            expect(error.toString(), contains('Failed to fetch weather data')),
+      );
+
       // エラーメッセージが非nullで適切な内容を含んでいることを確認
       expect(viewModel.state.errorMessage, isNotNull);
       expect(viewModel.state.errorMessage,
