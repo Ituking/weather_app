@@ -33,9 +33,16 @@ class CitySearchViewModel extends Notifier<CitySearchState> {
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
       // リポジトリを使用して天気情報を取得。
-      final weather = await _weatherRepository.getWeather(state.cityName);
+      final weatherResult = await _weatherRepository.getWeather(state.cityName);
       // 天気情報の取得に成功したら、取得したデータで状態を更新。
-      state = state.copyWith(isLoading: false, weather: weather);
+      weatherResult.when(success: (weather) {
+        state = state.copyWith(isLoading: false, weather: weather);
+      }, failure: (error) {
+        state = state.copyWith(
+          isLoading: false,
+          errorMessage: '天気情報の取得に失敗しました。後ほど再試行してください。',
+        );
+      });
     } catch (e) {
       // 天気情報の取得に失敗した場合は、エラーメッセージを設定。
       state = state.copyWith(

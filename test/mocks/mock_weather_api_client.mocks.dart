@@ -5,8 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:weather_app/core/network/response/weather_response.dart' as _i2;
 import 'package:weather_app/services/weather_api_client.dart' as _i3;
 
 // ignore_for_file: type=lint
@@ -22,8 +22,9 @@ import 'package:weather_app/services/weather_api_client.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeDio_0 extends _i1.SmartFake implements _i2.Dio {
-  _FakeDio_0(
+class _FakeWeatherResponse_0 extends _i1.SmartFake
+    implements _i2.WeatherResponse {
+  _FakeWeatherResponse_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -41,22 +42,34 @@ class MockWeatherApiClient extends _i1.Mock implements _i3.WeatherApiClient {
   }
 
   @override
-  _i2.Dio get dio => (super.noSuchMethod(
-        Invocation.getter(#dio),
-        returnValue: _FakeDio_0(
-          this,
-          Invocation.getter(#dio),
-        ),
-      ) as _i2.Dio);
-
-  @override
-  _i4.Future<Map<String, dynamic>> fetchWeather(String? cityName) =>
+  _i4.Future<_i2.WeatherResponse> fetchWeather(
+    String? cityName,
+    String? apiKey,
+    String? lang,
+    String? units,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchWeather,
-          [cityName],
+          [
+            cityName,
+            apiKey,
+            lang,
+            units,
+          ],
         ),
         returnValue:
-            _i4.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
-      ) as _i4.Future<Map<String, dynamic>>);
+            _i4.Future<_i2.WeatherResponse>.value(_FakeWeatherResponse_0(
+          this,
+          Invocation.method(
+            #fetchWeather,
+            [
+              cityName,
+              apiKey,
+              lang,
+              units,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.WeatherResponse>);
 }

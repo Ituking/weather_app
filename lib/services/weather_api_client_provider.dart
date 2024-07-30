@@ -11,5 +11,5 @@ final weatherApiClientProvider = Provider<WeatherApiClient>((ref) {
   final dio = ref.watch(dioProvider);
   // Dioインスタンスを引数にWeatherApiClientを生成。
   // WeatherApiClientは、天気データを取得するためのAPI呼び出しを管理します。
-  return WeatherApiClient(dio: dio);
+  return WeatherApiClient(dio);
 });

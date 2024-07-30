@@ -116,6 +116,15 @@ class MockCitySearchViewModel extends _i1.Mock
       ) as _i5.Future<void>);
 
   @override
+  void setState(_i3.CitySearchState? newState) => super.noSuchMethod(
+        Invocation.method(
+          #setState,
+          [newState],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   bool updateShouldNotify(
     _i3.CitySearchState? previous,
     _i3.CitySearchState? next,
