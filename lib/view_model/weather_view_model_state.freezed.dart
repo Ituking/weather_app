@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WeatherViewModelState {
-  WeatherModel? get weather => throw _privateConstructorUsedError;
+  Result<List<WeatherList>>? get weather => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
@@ -31,9 +31,12 @@ abstract class $WeatherViewModelStateCopyWith<$Res> {
           $Res Function(WeatherViewModelState) then) =
       _$WeatherViewModelStateCopyWithImpl<$Res, WeatherViewModelState>;
   @useResult
-  $Res call({WeatherModel? weather, bool isLoading, String? errorMessage});
+  $Res call(
+      {Result<List<WeatherList>>? weather,
+      bool isLoading,
+      String? errorMessage});
 
-  $WeatherModelCopyWith<$Res>? get weather;
+  $ResultCopyWith<List<WeatherList>, $Res>? get weather;
 }
 
 /// @nodoc
@@ -58,7 +61,7 @@ class _$WeatherViewModelStateCopyWithImpl<$Res,
       weather: freezed == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as WeatherModel?,
+              as Result<List<WeatherList>>?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -72,12 +75,12 @@ class _$WeatherViewModelStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $WeatherModelCopyWith<$Res>? get weather {
+  $ResultCopyWith<List<WeatherList>, $Res>? get weather {
     if (_value.weather == null) {
       return null;
     }
 
-    return $WeatherModelCopyWith<$Res>(_value.weather!, (value) {
+    return $ResultCopyWith<List<WeatherList>, $Res>(_value.weather!, (value) {
       return _then(_value.copyWith(weather: value) as $Val);
     });
   }
@@ -92,10 +95,13 @@ abstract class _$$WeatherViewModelStateImplCopyWith<$Res>
       __$$WeatherViewModelStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({WeatherModel? weather, bool isLoading, String? errorMessage});
+  $Res call(
+      {Result<List<WeatherList>>? weather,
+      bool isLoading,
+      String? errorMessage});
 
   @override
-  $WeatherModelCopyWith<$Res>? get weather;
+  $ResultCopyWith<List<WeatherList>, $Res>? get weather;
 }
 
 /// @nodoc
@@ -118,7 +124,7 @@ class __$$WeatherViewModelStateImplCopyWithImpl<$Res>
       weather: freezed == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as WeatherModel?,
+              as Result<List<WeatherList>>?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -138,7 +144,7 @@ class _$WeatherViewModelStateImpl implements _WeatherViewModelState {
       {this.weather, this.isLoading = false, this.errorMessage});
 
   @override
-  final WeatherModel? weather;
+  final Result<List<WeatherList>>? weather;
   @override
   @JsonKey()
   final bool isLoading;
@@ -176,12 +182,12 @@ class _$WeatherViewModelStateImpl implements _WeatherViewModelState {
 
 abstract class _WeatherViewModelState implements WeatherViewModelState {
   factory _WeatherViewModelState(
-      {final WeatherModel? weather,
+      {final Result<List<WeatherList>>? weather,
       final bool isLoading,
       final String? errorMessage}) = _$WeatherViewModelStateImpl;
 
   @override
-  WeatherModel? get weather;
+  Result<List<WeatherList>>? get weather;
   @override
   bool get isLoading;
   @override
