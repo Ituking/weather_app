@@ -4,7 +4,8 @@ import 'package:weather_app/view_model/providers/city_search_view_model_provider
 
 // CitySearchInputウィジェットは、都市名の検索入力フィールドを提供します。
 class CitySearchInput extends ConsumerWidget {
-  const CitySearchInput({super.key});
+  final TextEditingController controller;
+  const CitySearchInput({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,6 +16,7 @@ class CitySearchInput extends ConsumerWidget {
 
     // テキスト入力フィールドを構築します。
     return TextFormField(
+      controller: controller,
       // 入力フィールドのデコレーションを設定します。
       decoration: InputDecoration(
         filled: true, // 背景を塗りつぶします。

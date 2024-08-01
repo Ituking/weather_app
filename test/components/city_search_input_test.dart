@@ -6,12 +6,16 @@ import 'package:weather_app/components/city_search_input.dart';
 void main() {
   group('CitySearchInput Tests', () {
     testWidgets('CitySearchInput is displayed', (WidgetTester tester) async {
+      final controller = TextEditingController();
+
       // テストウィジェットを構築
       await tester.pumpWidget(
-        const ProviderScope(
+        ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: CitySearchInput(),
+              body: CitySearchInput(
+                controller: controller,
+              ),
             ),
           ),
         ),
@@ -25,12 +29,16 @@ void main() {
 
     testWidgets('CitySearchInput accepts text input',
         (WidgetTester tester) async {
+      final controller = TextEditingController();
+
       // テストウィジェットを構築
       await tester.pumpWidget(
-        const ProviderScope(
+        ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: CitySearchInput(),
+              body: CitySearchInput(
+                controller: controller,
+              ),
             ),
           ),
         ),
