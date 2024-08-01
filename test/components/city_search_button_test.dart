@@ -12,6 +12,7 @@ void main() {
   group('CitySearchButtonのテスト', () {
     late CustomMockCitySearchViewModel mockViewModel;
     late ProviderContainer container;
+    late TextEditingController controller;
 
     setUp(() {
       // モックのViewModelを初期化
@@ -20,6 +21,8 @@ void main() {
       container = ProviderContainer(overrides: [
         customMockCitySearchViewModelProvider.overrideWithValue(mockViewModel),
       ]);
+      // コントローラの初期化
+      controller = TextEditingController();
     });
 
     testWidgets('CitySearchButtonが表示される', (WidgetTester tester) async {
@@ -29,9 +32,9 @@ void main() {
       // テスト対象のウィジェットを構築
       await tester.pumpWidget(UncontrolledProviderScope(
         container: container,
-        child: const MaterialApp(
+        child: MaterialApp(
           home: Scaffold(
-            body: CitySearchButton(),
+            body: CitySearchButton(controller: controller),
           ),
         ),
       ));
@@ -48,9 +51,9 @@ void main() {
       // テスト対象のウィジェットを構築
       await tester.pumpWidget(UncontrolledProviderScope(
         container: container,
-        child: const MaterialApp(
+        child: MaterialApp(
           home: Scaffold(
-            body: CitySearchButton(),
+            body: CitySearchButton(controller: controller),
           ),
         ),
       ));
@@ -68,9 +71,9 @@ void main() {
       // テスト対象のウィジェットを構築
       await tester.pumpWidget(UncontrolledProviderScope(
         container: container,
-        child: const MaterialApp(
+        child: MaterialApp(
           home: Scaffold(
-            body: CitySearchButton(),
+            body: CitySearchButton(controller: controller),
           ),
         ),
       ));
