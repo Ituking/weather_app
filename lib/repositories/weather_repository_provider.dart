@@ -12,5 +12,5 @@ final weatherRepositoryProvider = Provider<WeatherRepository>((ref) {
   final weatherApiClient = ref.watch(weatherApiClientProvider);
 
   // WeatherApiClientを使用して、天気データの取得と操作を行うWeatherRepositoryを生成。
-  return WeatherRepositoryImpl(apiClient: weatherApiClient);
+  return WeatherRepositoryImpl(apiClient: weatherApiClient, ref: ref);
 });
