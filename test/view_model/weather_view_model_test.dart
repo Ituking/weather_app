@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_list.dart';
 import 'package:weather_app/models/weather_description.dart';
@@ -91,9 +91,9 @@ void main() {
     test('API呼び出し失敗時に例外をスローする', () async {
       // 天気データの取得に失敗した場合に例外を投げるようモックを設定
       when(mockWeatherRepository.getWeather(any))
-          .thenAnswer((_) async => Result.failure(DioException(
-                requestOptions: RequestOptions(path: ''),
-                error: 'Failed to fetch weather data',
+          .thenAnswer((_) async => const Result.failure(ApiError(
+                type: ApiErrorType.unknown,
+                message: 'Failed to fetch weather data',
               )));
 
       final viewModel = container.read(weatherViewModelProvider.notifier);
