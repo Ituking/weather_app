@@ -19,19 +19,19 @@ mixin _$Result<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(DioException error) failure,
+    required TResult Function(ApiError error) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(DioException error)? failure,
+    TResult? Function(ApiError error)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(DioException error)? failure,
+    TResult Function(ApiError error)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,7 +139,7 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(DioException error) failure,
+    required TResult Function(ApiError error) failure,
   }) {
     return success(value);
   }
@@ -148,7 +148,7 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(DioException error)? failure,
+    TResult? Function(ApiError error)? failure,
   }) {
     return success?.call(value);
   }
@@ -157,7 +157,7 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(DioException error)? failure,
+    TResult Function(ApiError error)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -213,7 +213,9 @@ abstract class _$$FailureImplCopyWith<T, $Res> {
           _$FailureImpl<T> value, $Res Function(_$FailureImpl<T>) then) =
       __$$FailureImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({DioException error});
+  $Res call({ApiError error});
+
+  $ApiErrorCopyWith<$Res> get error;
 }
 
 /// @nodoc
@@ -233,8 +235,16 @@ class __$$FailureImplCopyWithImpl<T, $Res>
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as DioException,
+              as ApiError,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ApiErrorCopyWith<$Res> get error {
+    return $ApiErrorCopyWith<$Res>(_value.error, (value) {
+      return _then(_value.copyWith(error: value));
+    });
   }
 }
 
@@ -244,7 +254,7 @@ class _$FailureImpl<T> implements Failure<T> {
   const _$FailureImpl(this.error);
 
   @override
-  final DioException error;
+  final ApiError error;
 
   @override
   String toString() {
@@ -272,7 +282,7 @@ class _$FailureImpl<T> implements Failure<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(DioException error) failure,
+    required TResult Function(ApiError error) failure,
   }) {
     return failure(error);
   }
@@ -281,7 +291,7 @@ class _$FailureImpl<T> implements Failure<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(DioException error)? failure,
+    TResult? Function(ApiError error)? failure,
   }) {
     return failure?.call(error);
   }
@@ -290,7 +300,7 @@ class _$FailureImpl<T> implements Failure<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(DioException error)? failure,
+    TResult Function(ApiError error)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -332,9 +342,9 @@ class _$FailureImpl<T> implements Failure<T> {
 }
 
 abstract class Failure<T> implements Result<T> {
-  const factory Failure(final DioException error) = _$FailureImpl<T>;
+  const factory Failure(final ApiError error) = _$FailureImpl<T>;
 
-  DioException get error;
+  ApiError get error;
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<T, _$FailureImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;

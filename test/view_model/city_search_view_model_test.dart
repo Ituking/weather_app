@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_list.dart';
 import 'package:weather_app/models/weather_description.dart';
@@ -75,9 +75,9 @@ void main() {
       const cityName = 'Tokyo';
       viewModel.updateCityName(cityName);
       when(mockWeatherRepository.getWeather(cityName))
-          .thenAnswer((_) async => Result.failure(DioException(
-                requestOptions: RequestOptions(path: ''),
-                error: 'Failed to fetch weather',
+          .thenAnswer((_) async => const Result.failure(ApiError(
+                type: ApiErrorType.unknown,
+                message: 'Failed to fetch weather',
               )));
 
       await viewModel.fetchWeather();
