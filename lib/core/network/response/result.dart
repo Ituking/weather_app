@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:weather_app/core/network/api_error.dart';
 
 part 'result.freezed.dart';
 
@@ -11,6 +11,6 @@ abstract class Result<T> with _$Result<T> {
   // [value]は成功した場合に返される値です。
   const factory Result.success(T value) = Success<T>;
   // 失敗時のファクトリコンストラクタ。
-  // [error]は失敗した場合に発生したDioExceptionです。
-  const factory Result.failure(DioException error) = Failure<T>;
+  // [error]は失敗した場合に発生したApiErrorです。
+  const factory Result.failure(ApiError error) = Failure<T>;
 }
