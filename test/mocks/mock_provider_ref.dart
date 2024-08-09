@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mockito/annotations.dart';
 
 // ProviderRefのモッククラス
-class MockProviderRef extends Mock implements ProviderRef {}
+@GenerateMocks([ProviderRef])
+void main() {}

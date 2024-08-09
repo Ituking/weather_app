@@ -10,7 +10,7 @@ import 'package:weather_app/models/weather_wind.dart';
 import 'package:weather_app/repositories/weather_repository_impl.dart';
 import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart';
 
-import '../mocks/mock_provider_ref.dart';
+import '../mocks/mock_provider_ref.mocks.dart';
 import '../mocks/mock_weather_api_client.mocks.dart';
 
 void main() {
