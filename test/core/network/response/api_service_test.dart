@@ -8,9 +8,11 @@ import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart';
 
 import '../../../mocks/mock_dio.dart';
-import '../../../mocks/mock_provider_ref.dart';
+import '../../../mocks/mock_provider_ref.mocks.dart';
 
 void main() {
+  // DioErrorHandlerのダミー値
+  provideDummy<DioErrorHandler>(DioErrorHandler());
   group('ApiServiceのテスト', () {
     late MockDio mockDio; // Dioのモック
     late MockProviderRef mockRef; // ProviderRefのモック
