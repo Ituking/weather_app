@@ -13,26 +13,38 @@ class CitySearchScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return KeyboardDismissOnTap(
-        child: Scaffold(
-      // キーボードが表示された時にタップでキーボードを閉じる設定
-      body: Center(
-          child: SingleChildScrollView(
-        reverse: true,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      child: Scaffold(
+        body: Stack(
+          fit: StackFit.expand,
           children: [
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              // 都市名入力用のウィジェット
-              child: CitySearchInput(controller: controller),
+            // 背景画像
+            Image.asset(
+              'assets/images/clouds-4215608_1280.jpg',
+              fit: BoxFit.cover,
             ),
-            const SizedBox(height: 20),
-            // 検索ボタンウィジェット
-            CitySearchButton(controller: controller),
+            // 中央に検索インターフェイスを配置
+            Center(
+              child: SingleChildScrollView(
+                reverse: true,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                      // 都市名入力用のウィジェット
+                      child: CitySearchInput(controller: controller),
+                    ),
+                    const SizedBox(height: 20),
+                    // 検索ボタンウィジェット
+                    CitySearchButton(controller: controller),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
-      )),
-    ));
+      ),
+    );
   }
 }
