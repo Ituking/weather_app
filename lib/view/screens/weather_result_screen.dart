@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app/components/city_name_text.dart';
+import 'package:weather_app/components/humidity_text.dart';
+import 'package:weather_app/components/temperature_text.dart';
+import 'package:weather_app/components/weather_description_text.dart';
+import 'package:weather_app/components/wind_speed_text.dart';
 import 'package:weather_app/view_model/providers/city_weather_provider.dart';
 
 // WeatherResultScreenは、指定された都市の天気情報を表示する画面です。
@@ -41,14 +46,18 @@ class WeatherResultScreen extends ConsumerWidget {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('都市名: $cityName'), // 都市名を表示
-                        Text(
-                            '気温: ${weather.main.temp.toStringAsFixed(1)}°C'), // 気温を表示
-                        Text('湿度: ${weather.main.humidity}%'), // 湿度を表示
-                        Text(
-                            '風速: ${weather.wind.speed.toStringAsFixed(1)}m/s'), // 風速を表示
-                        Text(
-                            '天気: ${weather.weather.first.description}'), // 天気の説明を表示
+                        CityNameText(cityName: cityName), // 都市名を表示
+                        const SizedBox(height: 8), // スペースを追加
+                        TemperatureText(
+                            temperature: weather.main.temp), // 気温を表示
+                        const SizedBox(height: 8), // スペースを追加
+                        HumidityText(humidity: weather.main.humidity), // 湿度を表示
+                        const SizedBox(height: 8), // スペースを追加
+                        WindSpeedText(windSpeed: weather.wind.speed), // 風速を表示
+                        const SizedBox(height: 8), // スペースを追加
+                        WeatherDescriptionText(
+                            weatherDescription:
+                                weather.weather.first.description), // 天気の説明を表示
                       ],
                     );
                   },
