@@ -8,7 +8,7 @@ class AppRouter {
     // ルート設定: ルートパス '/' に対応する画面を CitySearchScreen に設定
     GoRoute(
       path: '/',
-      builder: (context, state) => CitySearchScreen(),
+      builder: (context, state) => const CitySearchScreen(),
     ),
     // ルート設定: ルートパス '/result/:city' に対応する画面を WeatherResultScreen に設定
     GoRoute(

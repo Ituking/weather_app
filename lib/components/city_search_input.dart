@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app/validator/validator.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
 
-// CitySearchInputウィジェットは、都市名の検索入力フィールドを提供します。
-class CitySearchInput extends ConsumerWidget {
+// CitySearchInputウィジェットは、都市名の検索入力フィールドを提供し、
+// バリデーション機能を備えたカスタム入力ウィジェットです。
+class CitySearchInput extends ConsumerStatefulWidget {
   final TextEditingController controller;
-  const CitySearchInput({required this.controller, super.key});
+  final Validator<String> validator;
+  const CitySearchInput({
+    required this.controller,
+    required this.validator,
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CitySearchInput> createState() => CitySearchInputState();
+}
+
+class CitySearchInputState extends ConsumerState<CitySearchInput> {
+  String? errorMessage; // バリデーションエラーメッセージ
+
+  @override
+  Widget build(BuildContext context) {
     // citySearchViewModelProviderからViewModelを取得します。
     final viewModel = ref.watch(citySearchViewModelProvider.notifier);
     // 現在のテーマデータを取得します。
@@ -16,7 +30,7 @@ class CitySearchInput extends ConsumerWidget {
 
     // テキスト入力フィールドを構築します。
     return TextFormField(
-      controller: controller,
+      controller: widget.controller,
       // 入力フィールドのデコレーションを設定します。
       decoration: InputDecoration(
         filled: true, // 背景を塗りつぶします。
@@ -28,9 +42,28 @@ class CitySearchInput extends ConsumerWidget {
           borderRadius: BorderRadius.circular(8.0), // 境界線を丸くします。
           borderSide: BorderSide.none, // 境界線を非表示にします。
         ),
+        // バリデーションの結果に基づいてエラーメッセージを表示
+        errorText: errorMessage,
       ),
-      // テキストが変更された時にViewModelのメソッドを呼び出します。
-      onChanged: (value) => viewModel.updateCityName(value),
+      // テキストが変更された時にViewModelとバリデーションを更新します。
+      onChanged: (value) {
+        viewModel.updateCityName(value);
+
+        // バリデーションの結果を取得し、エラーメッセージを更新します。
+        setState(() {
+          if (!widget.validator.validate(value)) {
+            errorMessage = widget.validator.getMessage();
+          } else {
+            errorMessage = null;
+          }
+        });
+      },
+      validator: (value) {
+        // フォームのバリデーション時にエラーメッセージを返します。
+        return widget.validator.validate(value ?? '')
+            ? null
+            : widget.validator.getMessage();
+      },
     );
   }
 }
