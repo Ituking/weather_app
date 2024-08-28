@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
+import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
 
 // CitySearchButtonウィジェットは、都市名の検索ボタンを提供します。
 class CitySearchButton extends ConsumerWidget {
-  final TextEditingController controller;
-
-  const CitySearchButton({super.key, required this.controller});
+  const CitySearchButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ViewModelと状態をProviderから取得
     final viewModel = ref.watch(citySearchViewModelProvider.notifier);
     final state = ref.watch(citySearchViewModelProvider);
+    final controller = ref.watch(textEditingControllerProvider);
 
     // 現在のテーマデータを取得してスタイリングに使用
     final theme = Theme.of(context);

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/validator/validator.dart';
+import 'package:weather_app/view_model/providers/city_name_validator_provider.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
+import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
 
 // CitySearchInputウィジェットは、都市名の検索入力フィールドを提供し、
 // バリデーション機能を備えたカスタム入力ウィジェットです。
 class CitySearchInput extends ConsumerStatefulWidget {
-  final TextEditingController controller;
-  final Validator<String> validator;
-  const CitySearchInput({
-    required this.controller,
-    required this.validator,
-    super.key,
-  });
+  const CitySearchInput({super.key});
 
   @override
   ConsumerState<CitySearchInput> createState() => CitySearchInputState();
@@ -23,14 +18,15 @@ class CitySearchInputState extends ConsumerState<CitySearchInput> {
 
   @override
   Widget build(BuildContext context) {
-    // citySearchViewModelProviderからViewModelを取得します。
     final viewModel = ref.watch(citySearchViewModelProvider.notifier);
+    final controller = ref.watch(textEditingControllerProvider);
+    final validator = ref.watch(cityNameValidatorProvider);
     // 現在のテーマデータを取得します。
     final theme = Theme.of(context);
 
     // テキスト入力フィールドを構築します。
     return TextFormField(
-      controller: widget.controller,
+      controller: controller,
       // 入力フィールドのデコレーションを設定します。
       decoration: InputDecoration(
         filled: true, // 背景を塗りつぶします。
@@ -51,8 +47,8 @@ class CitySearchInputState extends ConsumerState<CitySearchInput> {
 
         // バリデーションの結果を取得し、エラーメッセージを更新します。
         setState(() {
-          if (!widget.validator.validate(value)) {
-            errorMessage = widget.validator.getMessage();
+          if (!validator.validate(value)) {
+            errorMessage = validator.getMessage();
           } else {
             errorMessage = null;
           }
@@ -60,9 +56,7 @@ class CitySearchInputState extends ConsumerState<CitySearchInput> {
       },
       validator: (value) {
         // フォームのバリデーション時にエラーメッセージを返します。
-        return widget.validator.validate(value ?? '')
-            ? null
-            : widget.validator.getMessage();
+        return validator.validate(value ?? '') ? null : validator.getMessage();
       },
     );
   }
