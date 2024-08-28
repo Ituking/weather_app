@@ -2,23 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/components/city_search_input.dart';
-import 'package:weather_app/validator/city_name_validator.dart';
 
 void main() {
   group('CitySearchInputのテスト', () {
     testWidgets('CitySearchInputが表示される', (WidgetTester tester) async {
-      final controller = TextEditingController();
-      final validator = CityNameValidator();
-
       // テストウィジェットを構築
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: CitySearchInput(
-                controller: controller,
-                validator: validator,
-              ),
+              body: CitySearchInput(),
             ),
           ),
         ),
@@ -31,18 +24,12 @@ void main() {
     });
 
     testWidgets('CitySearchInputがテキスト入力を受け付ける', (WidgetTester tester) async {
-      final controller = TextEditingController();
-      final validator = CityNameValidator();
-
       // テストウィジェットを構築
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: CitySearchInput(
-                controller: controller,
-                validator: validator,
-              ),
+              body: CitySearchInput(),
             ),
           ),
         ),
@@ -57,17 +44,12 @@ void main() {
     });
 
     testWidgets('無効な入力に対してエラーメッセージが表示される', (WidgetTester tester) async {
-      final controller = TextEditingController();
-      final validator = CityNameValidator();
-
+      // テストウィジェットを構築
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: CitySearchInput(
-                controller: controller,
-                validator: validator,
-              ),
+              body: CitySearchInput(),
             ),
           ),
         ),
@@ -82,17 +64,12 @@ void main() {
     });
 
     testWidgets('有効な入力に対してエラーメッセージが表示されない', (WidgetTester tester) async {
-      final controller = TextEditingController();
-      final validator = CityNameValidator();
-
+      // テストウィジェットを構築
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: CitySearchInput(
-                controller: controller,
-                validator: validator,
-              ),
+              body: CitySearchInput(),
             ),
           ),
         ),
