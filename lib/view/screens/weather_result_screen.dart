@@ -24,9 +24,13 @@ class WeatherResultScreen extends ConsumerWidget {
         children: [
           // 背景に画像を全画面で表示
           Positioned.fill(
-            child: Image.asset(
-              'assets/images/clouds-4215608_1280.jpg',
-              fit: BoxFit.cover,
+            child: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.5), BlendMode.darken),
+              child: Image.asset(
+                'assets/images/clouds-4215608_1280.jpg',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Center(
