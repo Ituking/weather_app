@@ -89,5 +89,29 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
       expect(find.text('Search'), findsNothing);
     });
+
+    testWidgets('無効な入力でボタンが無効になる', (WidgetTester tester) async {
+      // 初期状態設定
+      when(mockViewModel.state).thenReturn(CitySearchState(isLoading: false));
+
+      // テスト対象のウィジェットを構築
+      await tester.pumpWidget(UncontrolledProviderScope(
+        container: container,
+        child: const MaterialApp(
+          home: Scaffold(
+            body: CitySearchButton(),
+          ),
+        ),
+      ));
+
+      // 無効な入力（例: 空文字）を設定
+      mockViewModel.updateCityName('');
+      await tester.pump();
+
+      // ボタンが無効になっていることを確認
+      expect(
+          tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed,
+          isNull);
+    });
   });
 }
