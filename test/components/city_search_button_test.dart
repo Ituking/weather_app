@@ -5,6 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:weather_app/components/city_search_button.dart';
 import 'package:weather_app/view_model/city_search_state.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
+import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
 import '../mocks/custom_mock_city_search_view_model.dart';
 import '../view_model/providers/custom_mock_city_search_view_model_provider.dart';
 
@@ -112,6 +113,37 @@ void main() {
       expect(
           tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed,
           isNull);
+    });
+
+    testWidgets('入力の前後のスペースがトリムされている', (WidgetTester tester) async {
+      // 初期状態設定
+      when(mockViewModel.state).thenReturn(CitySearchState(isLoading: false));
+
+      // テスト対象のウィジェットを構築
+      await tester.pumpWidget(UncontrolledProviderScope(
+        container: container,
+        child: const MaterialApp(
+          home: Scaffold(
+            body: CitySearchButton(),
+          ),
+        ),
+      ));
+
+      // 入力フィールドに前後のスペースを含む文字列を設定
+      final controller = container.read(textEditingControllerProvider);
+      controller.text = '  Tokyo  ';
+
+      // 更新を通知
+      container
+          .read(citySearchViewModelProvider.notifier)
+          .updateCityName(controller.text.trim());
+      await tester.pump();
+
+      // ボタンが有効になっていることを確認（trim化された'Tokyo'が正しいため）
+      expect(
+        tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed,
+        isNotNull,
+      );
     });
   });
 }

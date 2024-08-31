@@ -27,7 +27,7 @@ class CitySearchButton extends ConsumerWidget {
       onPressed: state.isLoading || !isVailed
           ? null
           : () async {
-              final cityName = controller.text;
+              final cityName = controller.text.trim();
 
               // 入力が空でないことを確認し、天気情報を取得する
               if (cityName.isNotEmpty) {
