@@ -116,6 +116,15 @@ class MockCitySearchViewModel extends _i1.Mock
       ) as _i5.Future<void>);
 
   @override
+  void navigateToResultScreen(String? cityName) => super.noSuchMethod(
+        Invocation.method(
+          #navigateToResultScreen,
+          [cityName],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void setState(_i3.CitySearchState? newState) => super.noSuchMethod(
         Invocation.method(
           #setState,

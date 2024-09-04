@@ -1,5 +1,6 @@
 import 'package:weather_app/core/network/response/weather_list.dart';
 import 'package:weather_app/core/network/response/weather_response.dart';
+import 'package:weather_app/models/city_name.dart';
 import 'package:weather_app/models/weather_description.dart';
 import 'package:weather_app/models/weather_main.dart';
 import 'package:weather_app/models/weather_wind.dart';
@@ -19,12 +20,15 @@ class StubWeatherDataSource implements WeatherApiClient {
     }
 
     // 有効な都市名が指定された場合、固定された天気データを返します。
-    return WeatherResponse(list: [
-      WeatherList(
-        main: WeatherMain(temp: 20.0, humidity: 70), // 気温と湿度
-        weather: [WeatherDescription(description: 'Sunny')], // 天気の説明
-        wind: WeatherWind(speed: 5.0), // 風速
-      )
-    ]);
+    return WeatherResponse(
+      list: [
+        WeatherList(
+          main: WeatherMain(temp: 20.0, humidity: 70), // 気温と湿度
+          weather: [WeatherDescription(description: 'Sunny')], // 天気の説明
+          wind: WeatherWind(speed: 5.0), // 風速
+        ),
+      ],
+      city: CityName(name: cityName), // 都市名
+    );
   }
 }

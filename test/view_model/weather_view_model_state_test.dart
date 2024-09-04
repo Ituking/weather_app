@@ -7,20 +7,21 @@ import 'package:weather_app/models/weather_wind.dart';
 import 'package:weather_app/view_model/weather_view_model_state.dart';
 
 void main() {
-  // WeatherViewModelStateのテストグループ
-  group('WeatherViewModelState Test', () {
-    // 初期化が正しく行われるかテストする
-    test('WeatherViewModelState initializes correctly', () {
+  group('WeatherViewModelStateのテスト', () {
+    test('WeatherViewModelStateが正しく初期化される', () {
+      // WeatherListのインスタンスを生成
+      final testWeatherList = [
+        WeatherList(
+          main: WeatherMain(temp: 20.0, humidity: 70),
+          weather: [WeatherDescription(description: 'Sunny')],
+          wind: WeatherWind(speed: 5.0),
+        ),
+      ];
+
       // WeatherViewModelStateのインスタンスを生成
       final state = WeatherViewModelState(
-        // Result.successにWeatherListを設定。各プロパティに対する期待値を設定
-        weather: Result.success([
-          WeatherList(
-            main: WeatherMain(temp: 20.0, humidity: 70),
-            weather: [WeatherDescription(description: 'Sunny')],
-            wind: WeatherWind(speed: 5.0),
-          )
-        ]),
+        // Result.successにWeatherResponseを設定
+        weather: Result.success(testWeatherList),
         isLoading: false,
         errorMessage: null,
       );
@@ -41,8 +42,7 @@ void main() {
       expect(state.errorMessage, null);
     });
 
-    // isLoadingプロパティが正しく管理されるかを確認するテスト
-    test('Handles loading state correctly', () {
+    test('ローディング状態が正しく管理される', () {
       // isLoadingがtrueに設定されたWeatherViewModelStateを生成
       final state = WeatherViewModelState(isLoading: true);
 
@@ -50,8 +50,7 @@ void main() {
       expect(state.isLoading, true);
     });
 
-    // エラーメッセージの管理が正しく機能するかを確認するテスト
-    test('Handles error state correctly', () {
+    test('エラーメッセージの管理が正しく機能する', () {
       // エラーメッセージを持つWeatherViewModelStateを生成
       final state = WeatherViewModelState(errorMessage: 'Failed to fetch data');
 

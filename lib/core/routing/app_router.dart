@@ -10,17 +10,10 @@ class AppRouter {
       path: '/',
       builder: (context, state) => const CitySearchScreen(),
     ),
-    // ルート設定: ルートパス '/result/:city' に対応する画面を WeatherResultScreen に設定
+    // ルート設定: ルートパス '/result' に対応する画面を WeatherResultScreen に設定
     GoRoute(
-      path: '/result/:city',
-      builder: (context, state) {
-        // パスパラメータから都市名を取得する
-        final cityName = state.pathParameters['city'];
-        // 取得した都市名を WeatherResultScreen に渡して画面を表示
-        return WeatherResultScreen(
-          cityName: cityName!,
-        );
-      },
+      path: '/result',
+      builder: (context, state) => const WeatherResultScreen(),
     ),
   ]);
 }

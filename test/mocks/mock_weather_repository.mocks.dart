@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:weather_app/core/network/response/result.dart' as _i2;
-import 'package:weather_app/core/network/response/weather_list.dart' as _i5;
+import 'package:weather_app/core/network/response/weather_response.dart' as _i5;
 import 'package:weather_app/repositories/weather_repository.dart' as _i3;
 
 // ignore_for_file: type=lint
@@ -42,19 +42,19 @@ class MockWeatherRepository extends _i1.Mock implements _i3.WeatherRepository {
   }
 
   @override
-  _i4.Future<_i2.Result<List<_i5.WeatherList>>> getWeather(String? cityName) =>
+  _i4.Future<_i2.Result<_i5.WeatherResponse>> getWeather(String? cityName) =>
       (super.noSuchMethod(
         Invocation.method(
           #getWeather,
           [cityName],
         ),
-        returnValue: _i4.Future<_i2.Result<List<_i5.WeatherList>>>.value(
-            _FakeResult_0<List<_i5.WeatherList>>(
+        returnValue: _i4.Future<_i2.Result<_i5.WeatherResponse>>.value(
+            _FakeResult_0<_i5.WeatherResponse>(
           this,
           Invocation.method(
             #getWeather,
             [cityName],
           ),
         )),
-      ) as _i4.Future<_i2.Result<List<_i5.WeatherList>>>);
+      ) as _i4.Future<_i2.Result<_i5.WeatherResponse>>);
 }

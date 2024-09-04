@@ -4,6 +4,8 @@ import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_list.dart';
+import 'package:weather_app/core/network/response/weather_response.dart';
+import 'package:weather_app/models/city_name.dart';
 import 'package:weather_app/models/weather_description.dart';
 import 'package:weather_app/models/weather_main.dart';
 import 'package:weather_app/models/weather_wind.dart';
@@ -13,7 +15,7 @@ import 'package:weather_app/view_model/weather_view_model.dart';
 import '../mocks/mock_weather_repository.mocks.dart';
 
 void main() {
-  group('WeatherViewModel Test', () {
+  group('WeatherViewModelのテスト', () {
     late MockWeatherRepository mockWeatherRepository;
     late ProviderContainer container;
 
@@ -27,7 +29,7 @@ void main() {
       );
     });
 
-    test('成功時にWeatherModelを返す', () async {
+    test('成功時にWeatherListと都市名を返す', () async {
       final testWeatherList = [
         WeatherList(
           main: WeatherMain(temp: 20.0, humidity: 70),
@@ -36,9 +38,15 @@ void main() {
         ),
       ];
 
+      // WeatherResponseを作成（city情報も含む）
+      final testWeatherResponse = WeatherResponse(
+        list: testWeatherList,
+        city: CityName(name: 'Tokyo'),
+      );
+
       // モックから期待される天気データが返されるように設定
       when(mockWeatherRepository.getWeather(any))
-          .thenAnswer((_) async => Result.success(testWeatherList));
+          .thenAnswer((_) async => Result.success(testWeatherResponse));
 
       final viewModel = container.read(weatherViewModelProvider.notifier);
 
@@ -52,14 +60,18 @@ void main() {
       final weather = viewModel.state.weather;
       expect(weather, isNotNull);
       weather!.when(
-        success: (data) {
-          expect(data.first.main.temp, equals(20.0));
-          expect(data.first.weather.first.description, equals('Sunny'));
-          expect(data.first.wind.speed, equals(5.0));
-          expect(data.first.main.humidity, equals(70));
+        success: (list) {
+          expect(list.first.main.temp, equals(20.0));
+          expect(list.first.weather.first.description, equals('Sunny'));
+          expect(list.first.wind.speed, equals(5.0));
+          expect(list.first.main.humidity, equals(70));
         },
         failure: (error) => fail('Expected success but got failure'),
       );
+
+      // 都市名のテスト
+      final cityName = testWeatherResponse.city.name;
+      expect(cityName, equals('Tokyo'));
     });
 
     test('ローディング状態が正しく処理される', () async {
@@ -70,11 +82,18 @@ void main() {
           wind: WeatherWind(speed: 5.0),
         ),
       ];
+
+      // WeatherResponseを作成
+      final testWeatherResponse = WeatherResponse(
+        list: testWeatherList,
+        city: CityName(name: 'Tokyo'),
+      );
+
       // レスポンスの遅延と天気データを模倣
       when(mockWeatherRepository.getWeather(any))
           .thenAnswer((_) async => Future.delayed(
                 const Duration(seconds: 1),
-                () => Result.success(testWeatherList),
+                () => Result.success(testWeatherResponse),
               ));
 
       final viewModel = container.read(weatherViewModelProvider.notifier);

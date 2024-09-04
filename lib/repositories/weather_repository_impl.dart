@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/config/env.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/core/network/response/weather_list.dart';
 import 'package:weather_app/core/network/response/weather_response.dart';
 import 'package:weather_app/repositories/weather_repository.dart';
 import 'package:weather_app/services/weather_api_client.dart';
@@ -22,10 +21,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
   // 指定された都市名 [cityName] の天気データを取得し、WeatherListに変換して返します。
   // データ取得または変換に失敗した場合は例外をスローします。
   // [cityName] - 天気データを取得する都市の名前
-  // 戻り値 - 取得した天気データを含むWeatherListのリスト
+  // 戻り値 - 取得した天気データを含むWeatherResponseオブジェクト
   // 例外 - データ取得または変換に失敗した場合に例外をスロー
   @override
-  Future<Result<List<WeatherList>>> getWeather(String cityName) async {
+  Future<Result<WeatherResponse>> getWeather(String cityName) async {
     try {
       // WeatherApiClientを使用して指定された都市の天気データを取得
       final WeatherResponse weatherResponse = await apiClient.fetchWeather(
@@ -36,7 +35,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       );
 
       // 取得した天気データを成功結果として返す
-      return Result.success(weatherResponse.list);
+      return Result.success(weatherResponse);
     } on DioException catch (e) {
       // DioExceptionをキャッチし、エラーハンドラーを使用して適切なApiErrorを生成
       final dioErrorHandler = ref.read(dioErrorHandlerProvider);

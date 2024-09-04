@@ -20,7 +20,9 @@ WeatherResponse _$WeatherResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherResponse {
-  List<WeatherList> get list => throw _privateConstructorUsedError;
+  List<WeatherList> get list =>
+      throw _privateConstructorUsedError; // 天気情報のリストを表します。
+  CityName get city => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,9 @@ abstract class $WeatherResponseCopyWith<$Res> {
           WeatherResponse value, $Res Function(WeatherResponse) then) =
       _$WeatherResponseCopyWithImpl<$Res, WeatherResponse>;
   @useResult
-  $Res call({List<WeatherList> list});
+  $Res call({List<WeatherList> list, CityName city});
+
+  $CityNameCopyWith<$Res> get city;
 }
 
 /// @nodoc
@@ -51,13 +55,26 @@ class _$WeatherResponseCopyWithImpl<$Res, $Val extends WeatherResponse>
   @override
   $Res call({
     Object? list = null,
+    Object? city = null,
   }) {
     return _then(_value.copyWith(
       list: null == list
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
               as List<WeatherList>,
+      city: null == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as CityName,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CityNameCopyWith<$Res> get city {
+    return $CityNameCopyWith<$Res>(_value.city, (value) {
+      return _then(_value.copyWith(city: value) as $Val);
+    });
   }
 }
 
@@ -69,7 +86,10 @@ abstract class _$$WeatherResponseImplCopyWith<$Res>
       __$$WeatherResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<WeatherList> list});
+  $Res call({List<WeatherList> list, CityName city});
+
+  @override
+  $CityNameCopyWith<$Res> get city;
 }
 
 /// @nodoc
@@ -84,20 +104,29 @@ class __$$WeatherResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? list = null,
+    Object? city = null,
   }) {
     return _then(_$WeatherResponseImpl(
       list: null == list
           ? _value._list
           : list // ignore: cast_nullable_to_non_nullable
               as List<WeatherList>,
+      city: null == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as CityName,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$WeatherResponseImpl implements _WeatherResponse {
-  _$WeatherResponseImpl({required final List<WeatherList> list}) : _list = list;
+class _$WeatherResponseImpl
+    with DiagnosticableTreeMixin
+    implements _WeatherResponse {
+  _$WeatherResponseImpl(
+      {required final List<WeatherList> list, required this.city})
+      : _list = list;
 
   factory _$WeatherResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherResponseImplFromJson(json);
@@ -110,9 +139,22 @@ class _$WeatherResponseImpl implements _WeatherResponse {
     return EqualUnmodifiableListView(_list);
   }
 
+// 天気情報のリストを表します。
   @override
-  String toString() {
-    return 'WeatherResponse(list: $list)';
+  final CityName city;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'WeatherResponse(list: $list, city: $city)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'WeatherResponse'))
+      ..add(DiagnosticsProperty('list', list))
+      ..add(DiagnosticsProperty('city', city));
   }
 
   @override
@@ -120,13 +162,14 @@ class _$WeatherResponseImpl implements _WeatherResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WeatherResponseImpl &&
-            const DeepCollectionEquality().equals(other._list, _list));
+            const DeepCollectionEquality().equals(other._list, _list) &&
+            (identical(other.city, city) || other.city == city));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_list));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_list), city);
 
   @JsonKey(ignore: true)
   @override
@@ -144,14 +187,17 @@ class _$WeatherResponseImpl implements _WeatherResponse {
 }
 
 abstract class _WeatherResponse implements WeatherResponse {
-  factory _WeatherResponse({required final List<WeatherList> list}) =
-      _$WeatherResponseImpl;
+  factory _WeatherResponse(
+      {required final List<WeatherList> list,
+      required final CityName city}) = _$WeatherResponseImpl;
 
   factory _WeatherResponse.fromJson(Map<String, dynamic> json) =
       _$WeatherResponseImpl.fromJson;
 
   @override
   List<WeatherList> get list;
+  @override // 天気情報のリストを表します。
+  CityName get city;
   @override
   @JsonKey(ignore: true)
   _$$WeatherResponseImplCopyWith<_$WeatherResponseImpl> get copyWith =>

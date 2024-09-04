@@ -4,6 +4,8 @@ import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_list.dart';
+import 'package:weather_app/core/network/response/weather_response.dart';
+import 'package:weather_app/models/city_name.dart';
 import 'package:weather_app/models/weather_description.dart';
 import 'package:weather_app/models/weather_main.dart';
 import 'package:weather_app/models/weather_wind.dart';
@@ -13,7 +15,7 @@ import 'package:weather_app/view_model/providers/city_search_view_model_provider
 import '../mocks/mock_weather_repository.mocks.dart';
 
 void main() {
-  group('CitySearchViewModel Tests', () {
+  group('CitySearchViewModelのテスト', () {
     late MockWeatherRepository mockWeatherRepository;
     late ProviderContainer container;
 
@@ -27,7 +29,7 @@ void main() {
       ]);
     });
 
-    test('updateCityName updates the city name in the state', () {
+    test('updateCityNameで都市名が正しく更新される', () {
       // ViewModelをプロバイダーから取得
       final viewModel = container.read(citySearchViewModelProvider.notifier);
 
@@ -39,13 +41,14 @@ void main() {
       expect(viewModel.state.cityName, cityName);
     });
 
-    test('fetchWeather updates state on success', () async {
+    test('fetchWeatherが成功時に状態を更新する', () async {
       // ViewModelをプロバイダーから取得
       final viewModel = container.read(citySearchViewModelProvider.notifier);
 
       // 天気情報取得成功時の状態更新をテスト
       const cityName = 'Tokyo';
       viewModel.updateCityName(cityName);
+
       final testWeatherList = [
         WeatherList(
           main: WeatherMain(temp: 20.0, humidity: 70),
@@ -54,20 +57,26 @@ void main() {
         )
       ];
 
+      final testWeatherResponse = WeatherResponse(
+        list: testWeatherList,
+        city: CityName(name: cityName),
+      );
+
       when(mockWeatherRepository.getWeather(cityName))
-          .thenAnswer((_) async => Result.success(testWeatherList));
+          .thenAnswer((_) async => Result.success(testWeatherResponse));
 
       await viewModel.fetchWeather();
 
       // 正常に天気情報が取得されたことを確認
       expect(viewModel.state.isLoading, isFalse);
       expect(viewModel.state.weather, isNotNull);
-      expect(viewModel.state.weather!.first.main.temp,
+      expect(viewModel.state.weather!.list.first.main.temp,
           equals(testWeatherList.first.main.temp));
+      expect(viewModel.state.weather!.city.name, cityName);
       expect(viewModel.state.errorMessage, isNull);
     });
 
-    test('fetchWeather handles errors correctly', () async {
+    test('fetchWeatherがエラーを正しく処理する', () async {
       // ViewModelをプロバイダーから取得
       final viewModel = container.read(citySearchViewModelProvider.notifier);
 
@@ -88,7 +97,7 @@ void main() {
       expect(viewModel.state.errorMessage, isNotEmpty);
     });
 
-    test('fetchWeather handles empty city name error', () async {
+    test('fetchWeatherが空の都市名のエラーを処理する', () async {
       // ViewModelをプロバイダーから取得
       final viewModel = container.read(citySearchViewModelProvider.notifier);
 

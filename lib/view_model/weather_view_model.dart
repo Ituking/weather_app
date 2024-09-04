@@ -30,10 +30,9 @@ class WeatherViewModel extends _$WeatherViewModel {
 
       // 結果が成功か失敗かによって状態を更新
       result.when(
-        success: (weatherList) {
-          // 取得に成功した場合、天気データとローディング状態を更新
+        success: (weatherResponse) {
           state = state.copyWith(
-            weather: Result.success(weatherList),
+            weather: Result.success(weatherResponse.list),
             isLoading: false,
             errorMessage: null,
           );
