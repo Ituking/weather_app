@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/repositories/weather_repository.dart';
 import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/city_search_state.dart';
+import 'package:weather_app/view_model/providers/app_router_provider.dart';
 
 // CitySearchViewModelは、都市検索に関連するビジネスロジックを処理するクラスです。
 class CitySearchViewModel extends Notifier<CitySearchState> {
@@ -50,6 +51,12 @@ class CitySearchViewModel extends Notifier<CitySearchState> {
         errorMessage: '天気情報の取得に失敗しました。後ほど再試行してください。',
       );
     }
+  }
+
+  // 画面遷移を管理するメソッド
+  void navigateToResultScreen(String cityName) {
+    final router = ref.read(appRouterProvider);
+    router.go('/result?city=$cityName');
   }
 
   // 任意の状態を設定するためのメソッド

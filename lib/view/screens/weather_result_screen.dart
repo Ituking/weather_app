@@ -5,19 +5,23 @@ import 'package:weather_app/components/humidity_text.dart';
 import 'package:weather_app/components/temperature_text.dart';
 import 'package:weather_app/components/weather_description_text.dart';
 import 'package:weather_app/components/wind_speed_text.dart';
-import 'package:weather_app/view_model/providers/city_weather_provider.dart';
+import 'package:weather_app/view_model/providers/city_weather_notifier_provider.dart';
 
 // WeatherResultScreenは、指定された都市の天気情報を表示する画面です。
-class WeatherResultScreen extends ConsumerWidget {
-  final String cityName;
-
+class WeatherResultScreen extends ConsumerStatefulWidget {
   // コンストラクタ：必須のcityNameパラメータを受け取る
-  const WeatherResultScreen({super.key, required this.cityName});
+  const WeatherResultScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // cityWeatherProviderを利用して天気情報を取得
-    final weatherResult = ref.watch(cityWeatherProvider(cityName));
+  ConsumerState<WeatherResultScreen> createState() =>
+      _WeatherResultScreenState();
+}
+
+class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
+  @override
+  Widget build(BuildContext context) {
+    // cityWeatherNotifierProviderを利用して天気情報を取得
+    final weatherResult = ref.watch(cityWeatherNotifierProvider);
 
     return Scaffold(
       body: Stack(
@@ -40,17 +44,18 @@ class WeatherResultScreen extends ConsumerWidget {
               data: (data) {
                 // 成功時のResultをさらに確認
                 return data.when(
-                  success: (weatherList) {
-                    if (weatherList.isEmpty) {
+                  success: (weatherResponse) {
+                    if (weatherResponse.list.isEmpty) {
                       // 天気データが空の場合の処理
                       return const Text('天気データが利用できません');
                     }
                     // 最初の天気情報を取得
-                    final weather = weatherList.first;
+                    final weather = weatherResponse.list.first;
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CityNameText(cityName: cityName), // 都市名を表示
+                        CityNameText(
+                            cityName: weatherResponse.city.name), // 都市名を表示
                         const SizedBox(height: 8), // スペースを追加
                         TemperatureText(
                             temperature: weather.main.temp), // 気温を表示

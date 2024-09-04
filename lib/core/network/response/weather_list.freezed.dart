@@ -145,7 +145,7 @@ class __$$WeatherListImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$WeatherListImpl implements _WeatherList {
+class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
   _$WeatherListImpl(
       {required this.main,
       required final List<WeatherDescription> weather,
@@ -172,8 +172,18 @@ class _$WeatherListImpl implements _WeatherList {
   final WeatherWind wind;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'WeatherList(main: $main, weather: $weather, wind: $wind)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'WeatherList'))
+      ..add(DiagnosticsProperty('main', main))
+      ..add(DiagnosticsProperty('weather', weather))
+      ..add(DiagnosticsProperty('wind', wind));
   }
 
   @override

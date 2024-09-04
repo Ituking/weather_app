@@ -20,7 +20,7 @@ mixin _$CitySearchState {
   bool get isLoading => throw _privateConstructorUsedError; // データのロード状態。
   String? get errorMessage =>
       throw _privateConstructorUsedError; // エラーメッセージ、存在する場合は非null。
-  List<WeatherList>? get weather => throw _privateConstructorUsedError;
+  WeatherResponse? get weather => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CitySearchStateCopyWith<CitySearchState> get copyWith =>
@@ -37,7 +37,9 @@ abstract class $CitySearchStateCopyWith<$Res> {
       {String cityName,
       bool isLoading,
       String? errorMessage,
-      List<WeatherList>? weather});
+      WeatherResponse? weather});
+
+  $WeatherResponseCopyWith<$Res>? get weather;
 }
 
 /// @nodoc
@@ -74,8 +76,20 @@ class _$CitySearchStateCopyWithImpl<$Res, $Val extends CitySearchState>
       weather: freezed == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as List<WeatherList>?,
+              as WeatherResponse?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WeatherResponseCopyWith<$Res>? get weather {
+    if (_value.weather == null) {
+      return null;
+    }
+
+    return $WeatherResponseCopyWith<$Res>(_value.weather!, (value) {
+      return _then(_value.copyWith(weather: value) as $Val);
+    });
   }
 }
 
@@ -91,7 +105,10 @@ abstract class _$$CitySearchStateImplCopyWith<$Res>
       {String cityName,
       bool isLoading,
       String? errorMessage,
-      List<WeatherList>? weather});
+      WeatherResponse? weather});
+
+  @override
+  $WeatherResponseCopyWith<$Res>? get weather;
 }
 
 /// @nodoc
@@ -124,9 +141,9 @@ class __$$CitySearchStateImplCopyWithImpl<$Res>
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
       weather: freezed == weather
-          ? _value._weather
+          ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as List<WeatherList>?,
+              as WeatherResponse?,
     ));
   }
 }
@@ -138,8 +155,7 @@ class _$CitySearchStateImpl implements _CitySearchState {
       {this.cityName = '',
       this.isLoading = false,
       this.errorMessage,
-      final List<WeatherList>? weather})
-      : _weather = weather;
+      this.weather});
 
   @override
   @JsonKey()
@@ -152,16 +168,8 @@ class _$CitySearchStateImpl implements _CitySearchState {
   @override
   final String? errorMessage;
 // エラーメッセージ、存在する場合は非null。
-  final List<WeatherList>? _weather;
-// エラーメッセージ、存在する場合は非null。
   @override
-  List<WeatherList>? get weather {
-    final value = _weather;
-    if (value == null) return null;
-    if (_weather is EqualUnmodifiableListView) return _weather;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final WeatherResponse? weather;
 
   @override
   String toString() {
@@ -179,12 +187,12 @@ class _$CitySearchStateImpl implements _CitySearchState {
                 other.isLoading == isLoading) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            const DeepCollectionEquality().equals(other._weather, _weather));
+            (identical(other.weather, weather) || other.weather == weather));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, cityName, isLoading,
-      errorMessage, const DeepCollectionEquality().hash(_weather));
+  int get hashCode =>
+      Object.hash(runtimeType, cityName, isLoading, errorMessage, weather);
 
   @JsonKey(ignore: true)
   @override
@@ -199,7 +207,7 @@ abstract class _CitySearchState implements CitySearchState {
       {final String cityName,
       final bool isLoading,
       final String? errorMessage,
-      final List<WeatherList>? weather}) = _$CitySearchStateImpl;
+      final WeatherResponse? weather}) = _$CitySearchStateImpl;
 
   @override
   String get cityName;
@@ -208,7 +216,7 @@ abstract class _CitySearchState implements CitySearchState {
   @override // データのロード状態。
   String? get errorMessage;
   @override // エラーメッセージ、存在する場合は非null。
-  List<WeatherList>? get weather;
+  WeatherResponse? get weather;
   @override
   @JsonKey(ignore: true)
   _$$CitySearchStateImplCopyWith<_$CitySearchStateImpl> get copyWith =>

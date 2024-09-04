@@ -12,10 +12,12 @@ _$WeatherResponseImpl _$$WeatherResponseImplFromJson(
       list: (json['list'] as List<dynamic>)
           .map((e) => WeatherList.fromJson(e as Map<String, dynamic>))
           .toList(),
+      city: CityName.fromJson(json['city'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$WeatherResponseImplToJson(
         _$WeatherResponseImpl instance) =>
     <String, dynamic>{
       'list': instance.list,
+      'city': instance.city,
     };
