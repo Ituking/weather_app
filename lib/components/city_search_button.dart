@@ -45,60 +45,65 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
   @override
   Widget build(BuildContext context) {
     final cityWeatherNotifier = ref.watch(cityWeatherNotifierProvider.notifier);
+    final isLoading = ref.watch(citySearchViewModelProvider).isLoading;
 
     // 現在のテーマデータを取得してスタイリングに使用
     final theme = Theme.of(context);
 
-    return ElevatedButton(
-      // ボタンが押されたときの動作
-      onPressed: !isValid
-          ? null
-          : () async {
-              final cityName = controller.text.trim();
+    return isLoading
+        ? const CircularProgressIndicator()
+        : ElevatedButton(
+            // ボタンが押されたときの動作
+            onPressed: !isValid
+                ? null
+                : () async {
+                    final cityName = controller.text.trim();
 
-              // 入力が空でないことを確認し、天気情報を取得する
-              if (cityName.isNotEmpty) {
-                await cityWeatherNotifier.fetchWeather(cityName);
-                final weatherResult = ref.read(cityWeatherNotifierProvider);
+                    // 入力が空でないことを確認し、天気情報を取得する
+                    if (cityName.isNotEmpty) {
+                      await cityWeatherNotifier.fetchWeather(cityName);
+                      final weatherResult =
+                          ref.read(cityWeatherNotifierProvider);
 
-                // APIレスポンスから都市名を取得して画面遷移
-                weatherResult.when(
-                  data: (result) {
-                    result.when(
-                      success: (weatherResponse) {
-                        final cityNameFromApi = weatherResponse.city.name;
-                        ref
-                            .read(citySearchViewModelProvider.notifier)
-                            .navigateToResultScreen(cityNameFromApi);
-                      },
-                      failure: (error) {
-                        // エラーハンドリング
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('エラー: ${error.message}')),
-                        );
-                      },
-                    );
+                      // APIレスポンスから都市名を取得して画面遷移
+                      weatherResult.when(
+                        data: (result) {
+                          result.when(
+                            success: (weatherResponse) {
+                              final cityNameFromApi = weatherResponse.city.name;
+                              ref
+                                  .read(citySearchViewModelProvider.notifier)
+                                  .navigateToResultScreen(cityNameFromApi);
+                            },
+                            failure: (error) {
+                              // エラーハンドリング
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text('エラー: ${error.message}')),
+                              );
+                            },
+                          );
+                        },
+                        loading: () => const CircularProgressIndicator(),
+                        error: (err, stack) => {
+                          // エラーハンドリング
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('データ取得に失敗しました')),
+                          ),
+                        },
+                      );
+                    }
                   },
-                  loading: () => const CircularProgressIndicator(),
-                  error: (err, stack) => {
-                    // エラーハンドリング
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('データ取得に失敗しました')),
-                    ),
-                  },
-                );
-              }
-            },
-      // ボタンのスタイルを定義。テーマから色を取得し、最小サイズを設定
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white, // フォアグラウンドカラーを白に設定
-        backgroundColor: theme.primaryColor, // 背景色をテーマのプライマリカラーに設定
-        minimumSize: const Size.fromHeight(50), // ボタンの最小サイズを高さ50に設定
-      ),
-      child: const Text(
-        'Search',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-      ),
-    );
+            // ボタンのスタイルを定義。テーマから色を取得し、最小サイズを設定
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white, // フォアグラウンドカラーを白に設定
+              backgroundColor: theme.primaryColor, // 背景色をテーマのプライマリカラーに設定
+              minimumSize: const Size.fromHeight(50), // ボタンの最小サイズを高さ50に設定
+            ),
+            child: const Text(
+              'Search',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+          );
   }
 }

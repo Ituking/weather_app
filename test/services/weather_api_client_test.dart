@@ -20,7 +20,6 @@ void main() {
       client = WeatherApiClient(dio);
     });
 
-    // 天気情報取得のAPI呼び出しが正常に動作することを検証
     test('API呼び出しが成功した時、天気データを返す', () async {
       const relativeUrl = 'forecast';
       final queryParameters = {
@@ -35,6 +34,9 @@ void main() {
       dioAdapter.onGet(
         relativeUrl,
         (server) => server.reply(200, {
+          'city': {
+            'name': 'Kumagaya',
+          },
           'list': [
             {
               'main': {
@@ -68,7 +70,6 @@ void main() {
       expect(firstWeather.wind.speed, 5.2); // 風速
     });
 
-    // API呼び出しに失敗した場合、例外が投げられることを確認するテストケース
     test('API呼び出しに失敗した場合、例外を投げる', () async {
       const relativeUrl = 'forecast';
       final queryParameters = {
