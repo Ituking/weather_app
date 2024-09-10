@@ -3,4 +3,4 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // TextEditingControllerを提供するProvider
 final textEditingControllerProvider =
-    Provider((ref) => TextEditingController());
+    Provider.autoDispose((ref) => TextEditingController());
