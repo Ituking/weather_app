@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app/components/app_back_button.dart';
 import 'package:weather_app/components/city_name_text.dart';
 import 'package:weather_app/components/humidity_text.dart';
 import 'package:weather_app/components/temperature_text.dart';
@@ -9,7 +10,6 @@ import 'package:weather_app/view_model/providers/city_weather_notifier_provider.
 
 // WeatherResultScreenは、指定された都市の天気情報を表示する画面です。
 class WeatherResultScreen extends ConsumerStatefulWidget {
-  // コンストラクタ：必須のcityNameパラメータを受け取る
   const WeatherResultScreen({super.key});
 
   @override
@@ -55,18 +55,19 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CityNameText(
-                            cityName: weatherResponse.city.name), // 都市名を表示
-                        const SizedBox(height: 8), // スペースを追加
-                        TemperatureText(
-                            temperature: weather.main.temp), // 気温を表示
-                        const SizedBox(height: 8), // スペースを追加
-                        HumidityText(humidity: weather.main.humidity), // 湿度を表示
-                        const SizedBox(height: 8), // スペースを追加
-                        WindSpeedText(windSpeed: weather.wind.speed), // 風速を表示
-                        const SizedBox(height: 8), // スペースを追加
+                            cityName: weatherResponse.city.name), // 都市名
+                        const SizedBox(height: 8),
+                        TemperatureText(temperature: weather.main.temp), // 気温
+                        const SizedBox(height: 8),
+                        HumidityText(humidity: weather.main.humidity), // 湿度
+                        const SizedBox(height: 8),
+                        WindSpeedText(windSpeed: weather.wind.speed), // 風速
+                        const SizedBox(height: 8),
                         WeatherDescriptionText(
                             weatherDescription:
-                                weather.weather.first.description), // 天気の説明を表示
+                                weather.weather.first.description), // 天気の説明
+                        const SizedBox(height: 8),
+                        const AppBackButton(), // 戻るボタン
                       ],
                     );
                   },

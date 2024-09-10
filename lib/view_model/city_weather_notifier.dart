@@ -25,7 +25,7 @@ class CityWeatherNotifier
 
     try {
       // TextEditingControllerから都市名を取得
-      final cityName = ref.watch(textEditingControllerProvider).text.trim();
+      final cityName = ref.read(textEditingControllerProvider).text.trim();
 
       // 指定された都市の天気情報を非同期に取得し、結果をresultに格納
       final result = await _weatherRepository.getWeather(cityName);
