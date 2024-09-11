@@ -76,7 +76,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('エラー: ${error.message}'), // エラーメッセージを表示
+                        Text(error.message), // エラーメッセージを表示
                       ],
                     );
                   },

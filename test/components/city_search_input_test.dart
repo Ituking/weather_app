@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/components/city_search_input.dart';
+import 'package:weather_app/core/strings/city_name_validator_strings.dart';
+import 'package:weather_app/core/strings/city_search_input_strings.dart';
 
 void main() {
   group('CitySearchInputのテスト', () {
@@ -20,7 +22,8 @@ void main() {
       // TextFormFieldが表示されていることを確認
       expect(find.byType(TextFormField), findsOneWidget);
       // ヒントテキストが表示されていることを確認
-      expect(find.text('Tokyo'), findsOneWidget);
+      expect(find.text(CitySearchInputStrings.hintTextCityNameExample),
+          findsOneWidget);
     });
 
     testWidgets('CitySearchInputがテキスト入力を受け付ける', (WidgetTester tester) async {
@@ -60,7 +63,8 @@ void main() {
       await tester.pump();
 
       // エラーメッセージが表示されていることを確認
-      expect(find.text('都市名は英字とスペースのみを使用してください。'), findsOneWidget);
+      expect(
+          find.text(CityNameValidatorStrings.cityNameInvalid), findsOneWidget);
     });
 
     testWidgets('有効な入力に対してエラーメッセージが表示されない', (WidgetTester tester) async {
@@ -80,7 +84,7 @@ void main() {
       await tester.pump();
 
       // エラーメッセージが表示されていないことを確認
-      expect(find.text('都市名は英字とスペースのみを使用してください。'), findsNothing);
+      expect(find.text(CityNameValidatorStrings.cityNameInvalid), findsNothing);
     });
   });
 }

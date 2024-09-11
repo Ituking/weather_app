@@ -1,3 +1,4 @@
+import 'package:weather_app/core/strings/city_name_validator_strings.dart';
 import 'package:weather_app/validator/validator.dart';
 
 // 都市名のバリデーションを行うクラス
@@ -19,10 +20,10 @@ class CityNameValidator implements Validator<String> {
   @override
   bool validate(String value) {
     if (value.isEmpty) {
-      _message = '都市名を入力してください。';
+      _message = CityNameValidatorStrings.cityNameEmpty;
       return false;
     } else if (!_cityNameRegExp.hasMatch(value)) {
-      _message = '都市名は英字とスペースのみを使用してください。';
+      _message = CityNameValidatorStrings.cityNameInvalid;
       return false;
     }
     _message = ''; // バリデーションが成功した場合、エラーメッセージを空に設定

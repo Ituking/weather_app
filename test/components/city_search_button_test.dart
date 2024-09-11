@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/components/city_search_button.dart';
+import 'package:weather_app/core/strings/city_search_button_strings.dart';
 import 'package:weather_app/view_model/city_search_state.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
 import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
@@ -56,8 +57,9 @@ void main() {
         ),
       ));
 
-      // 初期状態で"Search"テキストが表示されていることを確認
-      expect(find.text('Search'), findsOneWidget);
+      // 初期状態で"検索"テキストが表示されていることを確認
+      expect(
+          find.text(CitySearchButtonStrings.buttonLabelSearch), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsNothing);
     });
 
@@ -76,8 +78,9 @@ void main() {
         ),
       ));
 
-      // 初期状態で"Search"テキストが表示されていることを確認
-      expect(find.text('Search'), findsOneWidget);
+      // 初期状態で"検索"テキストが表示されていることを確認
+      expect(
+          find.text(CitySearchButtonStrings.buttonLabelSearch), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsNothing);
 
       // 状態をローディング中に変更
@@ -88,7 +91,8 @@ void main() {
 
       // CircularProgressIndicatorが表示されていることを確認
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      expect(find.text('Search'), findsNothing);
+      expect(
+          find.text(CitySearchButtonStrings.buttonLabelSearch), findsNothing);
     });
 
     testWidgets('無効な入力でボタンが無効になる', (WidgetTester tester) async {

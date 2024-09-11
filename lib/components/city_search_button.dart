@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app/core/strings/city_search_button_strings.dart';
 import 'package:weather_app/view_model/providers/city_name_validator_provider.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
 import 'package:weather_app/view_model/providers/city_weather_notifier_provider.dart';
@@ -78,8 +79,7 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
                             failure: (error) {
                               // エラーハンドリング
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content: Text('エラー: ${error.message}')),
+                                SnackBar(content: Text(error.message)),
                               );
                             },
                           );
@@ -101,7 +101,7 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
               minimumSize: const Size.fromHeight(50), // ボタンの最小サイズを高さ50に設定
             ),
             child: const Text(
-              'Search',
+              CitySearchButtonStrings.buttonLabelSearch,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           );

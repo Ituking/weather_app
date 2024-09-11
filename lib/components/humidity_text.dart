@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/strings/humidity_text_strings.dart';
 
 // HumidityTextは、湿度を表示するためのテキストウィジェット
 class HumidityText extends StatelessWidget {
@@ -8,7 +9,7 @@ class HumidityText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '湿度: $humidity%',
+      '${HumidityTextStrings.textLabelHumidity} $humidity${HumidityTextStrings.unitPercentage}',
       style: const TextStyle(
         fontSize: 20,
         color: Colors.white,
