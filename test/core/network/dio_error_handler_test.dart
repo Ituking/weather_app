@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/dio_error_handler.dart';
+import 'package:weather_app/core/strings/dio_error_handler_strings.dart';
 
 void main() {
   group('DioErrorHandlerのテスト', () {
@@ -16,7 +17,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.timeout);
-      expect(apiError.message, '接続タイムアウトが発生しました。\nネットワークの状態を確認してください。');
+      expect(apiError.message, DioErrorHandlerStrings.connectionTimeout);
     });
 
     test('送信タイムアウトエラーを処理する', () {
@@ -28,7 +29,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.timeout);
-      expect(apiError.message, 'リクエスト送信タイムアウトが発生しました。\nネットワークの状態を確認してください。');
+      expect(apiError.message, DioErrorHandlerStrings.sendTimeout);
     });
 
     test('受信タイムアウトエラーを処理する', () {
@@ -40,7 +41,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.timeout);
-      expect(apiError.message, 'レスポンス受信タイムアウトが発生しました。\nネットワークの状態を確認してください。');
+      expect(apiError.message, DioErrorHandlerStrings.receiveTimeout);
     });
 
     test('不正リクエストエラーを処理する', () {
@@ -56,7 +57,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.badRequest);
-      expect(apiError.message, 'リクエストが不正です。\n必須パラメータが欠如しているか、フォーマットが不正です。');
+      expect(apiError.message, DioErrorHandlerStrings.badRequest);
     });
 
     test('認証エラーを処理する', () {
@@ -72,7 +73,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.unauthorized);
-      expect(apiError.message, '認証されていません。\nAPIトークンが提供されていないか、アクセス権がありません。');
+      expect(apiError.message, DioErrorHandlerStrings.unauthorized);
     });
 
     test('リソースが見つからないエラーを処理する', () {
@@ -88,7 +89,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.notFound);
-      expect(apiError.message, 'データが見つかりませんでした。\nリクエストパラメータに誤りがあります。');
+      expect(apiError.message, DioErrorHandlerStrings.notFound);
     });
 
     test('リクエストが多すぎるエラーを処理する', () {
@@ -104,7 +105,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.tooManyRequests);
-      expect(apiError.message, 'リクエストが多すぎます。\nしばらく待ってから再試行してください。');
+      expect(apiError.message, DioErrorHandlerStrings.tooManyRequests);
     });
 
     test('内部サーバーエラーを処理する', () {
@@ -120,7 +121,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.internalServerError);
-      expect(apiError.message, '内部サーバーエラーが発生しました。\nしばらくしてから再試行してください。');
+      expect(apiError.message, DioErrorHandlerStrings.internalServerError);
     });
 
     test('不明なエラータイプを処理する', () {
@@ -132,7 +133,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.unknown);
-      expect(apiError.message, '不明なエラーが発生しました。\n後でもう一度お試しください。');
+      expect(apiError.message, DioErrorHandlerStrings.unknownError);
     });
 
     test('不明なステータスコードを処理する', () {
@@ -148,7 +149,7 @@ void main() {
       final apiError = dioErrorHandler.handle(dioError);
 
       expect(apiError.type, ApiErrorType.unknown);
-      expect(apiError.message, '不明なエラーが発生しました。\n後でもう一度お試しください。');
+      expect(apiError.message, DioErrorHandlerStrings.unknownError);
     });
   });
 }

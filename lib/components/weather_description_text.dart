@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/strings/weather_description_text_strings.dart';
 
 // WeatherDescriptionTextは、天気の説明を表示するためのテキストウィジェット
 class WeatherDescriptionText extends StatelessWidget {
@@ -8,7 +9,7 @@ class WeatherDescriptionText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '天気: $weatherDescription',
+      '${WeatherDescriptionTextStrings.textLabelWeatherDescription} $weatherDescription',
       style: const TextStyle(
         fontSize: 22,
         color: Colors.white,

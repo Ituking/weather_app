@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app/core/strings/city_search_input_strings.dart';
 import 'package:weather_app/view_model/providers/city_name_validator_provider.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
 import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
@@ -31,7 +32,8 @@ class CitySearchInputState extends ConsumerState<CitySearchInput> {
       decoration: InputDecoration(
         filled: true, // 背景を塗りつぶします。
         fillColor: Colors.white.withOpacity(0.8), // 背景色を白の半透明に設定します。
-        hintText: 'Tokyo', // ヒントテキストを設定します。
+        hintText:
+            CitySearchInputStrings.hintTextCityNameExample, // ヒントテキストを設定します。
         labelStyle:
             TextStyle(color: theme.hintColor), // ラベルスタイルをテーマのヒントカラーに設定します。
         border: OutlineInputBorder(
