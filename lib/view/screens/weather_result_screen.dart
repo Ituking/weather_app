@@ -6,6 +6,7 @@ import 'package:weather_app/components/humidity_text.dart';
 import 'package:weather_app/components/temperature_text.dart';
 import 'package:weather_app/components/weather_description_text.dart';
 import 'package:weather_app/components/wind_speed_text.dart';
+import 'package:weather_app/view/screens/error_display_screen.dart';
 import 'package:weather_app/view_model/providers/city_weather_notifier_provider.dart';
 
 // WeatherResultScreenは、指定された都市の天気情報を表示する画面です。
@@ -84,13 +85,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
               },
               // 非同期処理でエラーが発生した場合の処理
               error: (e, s) {
-                // 例外発生時のエラーメッセージを表示
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('例外が発生しました: $e'),
-                  ],
-                );
+                return const ErrorDisplayScreen();
               },
               // データ取得中の処理
               loading: () =>

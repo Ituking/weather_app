@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:weather_app/core/strings/city_search_button_strings.dart';
 import 'package:weather_app/view_model/providers/city_name_validator_provider.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
 import 'package:weather_app/view_model/providers/city_weather_notifier_provider.dart';
+import 'package:weather_app/view_model/providers/error_view_model_provider.dart';
+
 import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
 
 // CitySearchButtonウィジェットは、都市名の検索ボタンを提供します。
@@ -77,19 +80,22 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
                                   .navigateToResultScreen(cityNameFromApi);
                             },
                             failure: (error) {
-                              // エラーハンドリング
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(error.message)),
-                              );
+                              final errorMessage = error.message;
+
+                              // エラーメッセージを設定してエラー画面に遷移
+                              ref
+                                  .read(errorViewModelProvider.notifier)
+                                  .setErrorMessage(errorMessage);
+                              context.go('/error', extra: errorMessage);
                             },
                           );
                         },
                         loading: () => const CircularProgressIndicator(),
-                        error: (err, stack) => {
-                          // エラーハンドリング
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('データ取得に失敗しました')),
-                          ),
+                        error: (err, stack) {
+                          // エラーハンドリング: エラーメッセージを渡してエラー画面に遷移
+                          context.go('/error', extra: {
+                            'message': err.toString(),
+                          });
                         },
                       );
                     }

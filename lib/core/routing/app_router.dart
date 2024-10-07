@@ -1,6 +1,10 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/view/screens/city_search_screen.dart';
+import 'package:weather_app/view/screens/error_display_screen.dart';
 import 'package:weather_app/view/screens/weather_result_screen.dart';
+import 'package:weather_app/view_model/error_view_model.dart';
+import 'package:weather_app/view_model/providers/error_view_model_provider.dart';
 
 class AppRouter {
   // アプリケーションのルーターを定義
@@ -14,6 +18,25 @@ class AppRouter {
     GoRoute(
       path: '/result',
       builder: (context, state) => const WeatherResultScreen(),
+    ),
+    // ルート設定: エラー画面に遷移するルートを定義
+    GoRoute(
+      path: '/error',
+      builder: (context, state) {
+        // エラーメッセージをクエリパラメータから取得して渡す
+        final errorMessage = state.extra.toString();
+
+        return ProviderScope(
+          overrides: [
+            errorViewModelProvider.overrideWith(() {
+              final viewModel = ErrorViewModel();
+              viewModel.setErrorMessage(errorMessage);
+              return viewModel;
+            }),
+          ],
+          child: const ErrorDisplayScreen(),
+        );
+      },
     ),
   ]);
 }
