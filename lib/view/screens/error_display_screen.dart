@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/components/app_back_button.dart';
+import 'package:weather_app/components/background_image.dart';
 import 'package:weather_app/core/strings/dio_error_handler_strings.dart';
 import 'package:weather_app/view_model/providers/error_view_model_provider.dart';
 
+// ErrorDisplayScreenは、APIからのエラーメッセージを取得し、それを画面中央に表示する画面です。
 class ErrorDisplayScreen extends ConsumerWidget {
   const ErrorDisplayScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ErrorViewModelからエラー情報を取得
     final error = ref.watch(errorViewModelProvider).error;
+
+    // エラーメッセージがnullの場合、デフォルトメッセージを表示
     final errorMessage = error?.message ?? DioErrorHandlerStrings.unknownError;
 
     return Scaffold(
       body: Stack(
         children: [
-          // 背景に画像を全画面で表示
-          Positioned.fill(
-            child: ColorFiltered(
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.5), BlendMode.darken),
-              child: Image.asset(
-                'assets/images/clouds-4215608_1280.jpg',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          const BackgroundImage(),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // エラーメッセージを表示
                 Text(
                   errorMessage,
                   style: const TextStyle(
@@ -39,7 +35,7 @@ class ErrorDisplayScreen extends ConsumerWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const AppBackButton(),
+                const AppBackButton(), // 戻るボタン
               ],
             ),
           ),
