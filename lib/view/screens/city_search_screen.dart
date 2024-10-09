@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app/components/background_image.dart';
 import 'package:weather_app/components/city_search_button.dart';
 import 'package:weather_app/components/city_search_input.dart';
 
@@ -10,18 +11,14 @@ class CitySearchScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return KeyboardDismissOnTap(
+    return const KeyboardDismissOnTap(
       child: Scaffold(
         body: Stack(
           fit: StackFit.expand,
           children: [
-            // 背景画像
-            Image.asset(
-              'assets/images/clouds-4215608_1280.jpg',
-              fit: BoxFit.cover,
-            ),
+            BackgroundImage(),
             // 中央に検索インターフェイスを配置
-            const Center(
+            Center(
               child: SingleChildScrollView(
                 reverse: true,
                 child: Column(

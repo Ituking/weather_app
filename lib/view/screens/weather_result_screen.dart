@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/components/app_back_button.dart';
+import 'package:weather_app/components/background_image.dart';
 import 'package:weather_app/components/city_name_text.dart';
 import 'package:weather_app/components/humidity_text.dart';
 import 'package:weather_app/components/temperature_text.dart';
@@ -27,17 +28,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // 背景に画像を全画面で表示
-          Positioned.fill(
-            child: ColorFiltered(
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.5), BlendMode.darken),
-              child: Image.asset(
-                'assets/images/clouds-4215608_1280.jpg',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          const BackgroundImage(),
           Center(
             // データの状態に応じたウィジェットを返す
             child: weatherResult.when(
