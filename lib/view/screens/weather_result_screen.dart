@@ -37,10 +37,6 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                 // 成功時のResultをさらに確認
                 return data.when(
                   success: (weatherResponse) {
-                    if (weatherResponse.list.isEmpty) {
-                      // 天気データが空の場合の処理
-                      return const Text('天気データが利用できません');
-                    }
                     // 最初の天気情報を取得
                     final weather = weatherResponse.list.first;
                     return Column(
