@@ -33,7 +33,12 @@ void main() {
       final testWeatherList = [
         WeatherList(
           main: WeatherMain(temp: 20.0, humidity: 70),
-          weather: [WeatherDescription(description: 'Sunny')],
+          weather: [
+            WeatherDescription(
+              description: 'Sunny',
+              icon: '01d',
+            ),
+          ],
           wind: WeatherWind(speed: 5.0),
         ),
       ];
@@ -63,6 +68,7 @@ void main() {
         success: (list) {
           expect(list.first.main.temp, equals(20.0));
           expect(list.first.weather.first.description, equals('Sunny'));
+          expect(list.first.weather.first.icon, equals('01d'));
           expect(list.first.wind.speed, equals(5.0));
           expect(list.first.main.humidity, equals(70));
         },
@@ -78,7 +84,12 @@ void main() {
       final testWeatherList = [
         WeatherList(
           main: WeatherMain(temp: 20.0, humidity: 70),
-          weather: [WeatherDescription(description: 'Sunny')],
+          weather: [
+            WeatherDescription(
+              description: 'Sunny',
+              icon: '01d',
+            ),
+          ],
           wind: WeatherWind(speed: 5.0),
         ),
       ];

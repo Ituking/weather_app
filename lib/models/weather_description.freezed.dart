@@ -20,7 +20,9 @@ WeatherDescription _$WeatherDescriptionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherDescription {
-  String get description => throw _privateConstructorUsedError;
+  String get description =>
+      throw _privateConstructorUsedError; // 天気の詳細な説明を表します。
+  String get icon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,7 @@ abstract class $WeatherDescriptionCopyWith<$Res> {
           WeatherDescription value, $Res Function(WeatherDescription) then) =
       _$WeatherDescriptionCopyWithImpl<$Res, WeatherDescription>;
   @useResult
-  $Res call({String description});
+  $Res call({String description, String icon});
 }
 
 /// @nodoc
@@ -51,11 +53,16 @@ class _$WeatherDescriptionCopyWithImpl<$Res, $Val extends WeatherDescription>
   @override
   $Res call({
     Object? description = null,
+    Object? icon = null,
   }) {
     return _then(_value.copyWith(
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      icon: null == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -69,7 +76,7 @@ abstract class _$$WeatherDescriptionImplCopyWith<$Res>
       __$$WeatherDescriptionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String description});
+  $Res call({String description, String icon});
 }
 
 /// @nodoc
@@ -84,11 +91,16 @@ class __$$WeatherDescriptionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? description = null,
+    Object? icon = null,
   }) {
     return _then(_$WeatherDescriptionImpl(
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      icon: null == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -97,17 +109,20 @@ class __$$WeatherDescriptionImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$WeatherDescriptionImpl implements _WeatherDescription {
-  _$WeatherDescriptionImpl({required this.description});
+  _$WeatherDescriptionImpl({required this.description, required this.icon});
 
   factory _$WeatherDescriptionImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherDescriptionImplFromJson(json);
 
   @override
   final String description;
+// 天気の詳細な説明を表します。
+  @override
+  final String icon;
 
   @override
   String toString() {
-    return 'WeatherDescription(description: $description)';
+    return 'WeatherDescription(description: $description, icon: $icon)';
   }
 
   @override
@@ -116,12 +131,13 @@ class _$WeatherDescriptionImpl implements _WeatherDescription {
         (other.runtimeType == runtimeType &&
             other is _$WeatherDescriptionImpl &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.icon, icon) || other.icon == icon));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, description);
+  int get hashCode => Object.hash(runtimeType, description, icon);
 
   @JsonKey(ignore: true)
   @override
@@ -139,14 +155,17 @@ class _$WeatherDescriptionImpl implements _WeatherDescription {
 }
 
 abstract class _WeatherDescription implements WeatherDescription {
-  factory _WeatherDescription({required final String description}) =
-      _$WeatherDescriptionImpl;
+  factory _WeatherDescription(
+      {required final String description,
+      required final String icon}) = _$WeatherDescriptionImpl;
 
   factory _WeatherDescription.fromJson(Map<String, dynamic> json) =
       _$WeatherDescriptionImpl.fromJson;
 
   @override
   String get description;
+  @override // 天気の詳細な説明を表します。
+  String get icon;
   @override
   @JsonKey(ignore: true)
   _$$WeatherDescriptionImplCopyWith<_$WeatherDescriptionImpl> get copyWith =>

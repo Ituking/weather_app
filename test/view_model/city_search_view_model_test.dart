@@ -52,7 +52,12 @@ void main() {
       final testWeatherList = [
         WeatherList(
           main: WeatherMain(temp: 20.0, humidity: 70),
-          weather: [WeatherDescription(description: 'Sunny')],
+          weather: [
+            WeatherDescription(
+              description: 'Sunny',
+              icon: '01d',
+            ),
+          ],
           wind: WeatherWind(speed: 5.0),
         )
       ];
@@ -73,6 +78,7 @@ void main() {
       expect(viewModel.state.weather!.list.first.main.temp,
           equals(testWeatherList.first.main.temp));
       expect(viewModel.state.weather!.city.name, cityName);
+      expect(viewModel.state.weather!.list.first.weather.first.icon, '01d');
       expect(viewModel.state.errorMessage, isNull);
     });
 

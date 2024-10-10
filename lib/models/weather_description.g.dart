@@ -10,10 +10,12 @@ _$WeatherDescriptionImpl _$$WeatherDescriptionImplFromJson(
         Map<String, dynamic> json) =>
     _$WeatherDescriptionImpl(
       description: json['description'] as String,
+      icon: json['icon'] as String,
     );
 
 Map<String, dynamic> _$$WeatherDescriptionImplToJson(
         _$WeatherDescriptionImpl instance) =>
     <String, dynamic>{
       'description': instance.description,
+      'icon': instance.icon,
     };

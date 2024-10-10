@@ -44,7 +44,10 @@ void main() {
                 'humidity': 65,
               },
               'weather': [
-                {'description': 'clear sky'}
+                {
+                  'description': 'clear sky',
+                  'icon': '01d',
+                }
               ],
               'wind': {'speed': 5.2},
               'dt': DateTime.now().millisecondsSinceEpoch,
@@ -67,6 +70,7 @@ void main() {
       expect(firstWeather.main.temp, 20.0); // 温度
       expect(firstWeather.main.humidity, 65); // 湿度
       expect(firstWeather.weather.first.description, 'clear sky'); // 天気の説明
+      expect(firstWeather.weather.first.icon, '01d'); // 天気アイコン
       expect(firstWeather.wind.speed, 5.2); // 風速
     });
 
