@@ -6,6 +6,7 @@ import 'package:weather_app/components/city_name_text.dart';
 import 'package:weather_app/components/humidity_text.dart';
 import 'package:weather_app/components/temperature_text.dart';
 import 'package:weather_app/components/weather_description_text.dart';
+import 'package:weather_app/components/weather_icon.dart';
 import 'package:weather_app/components/wind_speed_text.dart';
 import 'package:weather_app/view/screens/error_display_screen.dart';
 import 'package:weather_app/view_model/providers/city_weather_notifier_provider.dart';
@@ -54,6 +55,10 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                         WeatherDescriptionText(
                             weatherDescription:
                                 weather.weather.first.description), // 天気の説明
+                        const SizedBox(height: 8),
+                        WeatherIcon(
+                            iconCode:
+                                "${weather.weather.first.icon}@2x"), // 天気アイコン
                         const SizedBox(height: 8),
                         const AppBackButton(), // 戻るボタン
                       ],

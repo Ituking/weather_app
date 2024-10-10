@@ -42,7 +42,12 @@ void main() {
         list: [
           WeatherList(
             main: WeatherMain(temp: 20.0, humidity: 70),
-            weather: [WeatherDescription(description: 'Sunny')],
+            weather: [
+              WeatherDescription(
+                description: 'Sunny',
+                icon: '01d',
+              ),
+            ],
             wind: WeatherWind(speed: 5.0),
           ),
         ],
@@ -64,6 +69,7 @@ void main() {
       expect(weatherData.city.name, 'Tokyo');
       expect(weatherData.list.first.main.temp, 20.0);
       expect(weatherData.list.first.weather.first.description, 'Sunny');
+      expect(weatherData.list.first.weather.first.icon, '01d');
       expect(weatherData.list.first.wind.speed, 5.0);
       expect(weatherData.list.first.main.humidity, 70);
     });
