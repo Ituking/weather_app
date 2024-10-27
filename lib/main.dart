@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/routing/app_router.dart';
+import 'package:weather_app/core/theme/app_theme.dart';
 
 // アプリケーションのエントリーポイント
 void main() {
@@ -17,12 +18,8 @@ class MyApp extends StatelessWidget {
       // アプリのタイトル
       title: 'Weather App',
       // アプリのテーマ設定
-      theme: ThemeData(
-        // カラースキームの設定。深い紫色を基調にしています。
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // Material 3の使用を有効化
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
+      themeMode: ThemeMode.light,
       // ルーティングの設定
       routerConfig: AppRouter.router,
     );

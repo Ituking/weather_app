@@ -102,9 +102,11 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
                   },
             // ボタンのスタイルを定義。テーマから色を取得し、最小サイズを設定
             style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white, // フォアグラウンドカラーを白に設定
-              backgroundColor: theme.primaryColor, // 背景色をテーマのプライマリカラーに設定
-              minimumSize: const Size.fromHeight(50), // ボタンの最小サイズを高さ50に設定
+              foregroundColor: theme.colorScheme.onPrimary,
+              backgroundColor: theme.primaryColor,
+              minimumSize: const Size(200, 50),
+              textStyle: theme.textTheme.bodyLarge
+                  ?.copyWith(fontWeight: FontWeight.bold),
             ),
             child: const Text(
               CitySearchButtonStrings.buttonLabelSearch,
