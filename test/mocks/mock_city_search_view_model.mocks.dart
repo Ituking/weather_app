@@ -134,6 +134,26 @@ class MockCitySearchViewModel extends _i1.Mock
       );
 
   @override
+  void listenSelf(
+    void Function(
+      _i3.CitySearchState?,
+      _i3.CitySearchState,
+    )? listener, {
+    void Function(
+      Object,
+      StackTrace,
+    )? onError,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #listenSelf,
+          [listener],
+          {#onError: onError},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   bool updateShouldNotify(
     _i3.CitySearchState? previous,
     _i3.CitySearchState? next,

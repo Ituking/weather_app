@@ -25,8 +25,12 @@ mixin _$WeatherList {
       throw _privateConstructorUsedError; // 天気の詳細情報を表します。
   WeatherWind get wind => throw _privateConstructorUsedError;
 
+  /// Serializes this WeatherList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WeatherList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WeatherListCopyWith<WeatherList> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$WeatherListCopyWithImpl<$Res, $Val extends WeatherList>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WeatherList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -77,6 +83,8 @@ class _$WeatherListCopyWithImpl<$Res, $Val extends WeatherList>
     ) as $Val);
   }
 
+  /// Create a copy of WeatherList
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WeatherMainCopyWith<$Res> get main {
@@ -85,6 +93,8 @@ class _$WeatherListCopyWithImpl<$Res, $Val extends WeatherList>
     });
   }
 
+  /// Create a copy of WeatherList
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WeatherWindCopyWith<$Res> get wind {
@@ -119,6 +129,8 @@ class __$$WeatherListImplCopyWithImpl<$Res>
       _$WeatherListImpl _value, $Res Function(_$WeatherListImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WeatherList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -196,12 +208,14 @@ class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
             (identical(other.wind, wind) || other.wind == wind));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, main, const DeepCollectionEquality().hash(_weather), wind);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WeatherList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WeatherListImplCopyWith<_$WeatherListImpl> get copyWith =>
@@ -225,13 +239,16 @@ abstract class _WeatherList implements WeatherList {
       _$WeatherListImpl.fromJson;
 
   @override
-  WeatherMain get main;
-  @override // メインの天気情報を表します。
-  List<WeatherDescription> get weather;
-  @override // 天気の詳細情報を表します。
-  WeatherWind get wind;
+  WeatherMain get main; // メインの天気情報を表します。
   @override
-  @JsonKey(ignore: true)
+  List<WeatherDescription> get weather; // 天気の詳細情報を表します。
+  @override
+  WeatherWind get wind;
+
+  /// Create a copy of WeatherList
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WeatherListImplCopyWith<_$WeatherListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

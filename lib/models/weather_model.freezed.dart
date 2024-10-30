@@ -26,8 +26,12 @@ mixin _$WeatherModel {
   int get humidity => throw _privateConstructorUsedError; // 湿度
   String get cityName => throw _privateConstructorUsedError;
 
+  /// Serializes this WeatherModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WeatherModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WeatherModelCopyWith<WeatherModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$WeatherModelCopyWithImpl<$Res, $Val extends WeatherModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WeatherModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$WeatherModelImplCopyWithImpl<$Res>
       _$WeatherModelImpl _value, $Res Function(_$WeatherModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WeatherModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -198,12 +206,14 @@ class _$WeatherModelImpl implements _WeatherModel {
                 other.cityName == cityName));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, temperature, description, windSpeed, humidity, cityName);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WeatherModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WeatherModelImplCopyWith<_$WeatherModelImpl> get copyWith =>
@@ -229,17 +239,20 @@ abstract class _WeatherModel implements WeatherModel {
       _$WeatherModelImpl.fromJson;
 
   @override
-  double get temperature;
-  @override // 温度
-  String get description;
-  @override // 天気の説明
-  double get windSpeed;
-  @override // 風速
-  int get humidity;
-  @override // 湿度
-  String get cityName;
+  double get temperature; // 温度
   @override
-  @JsonKey(ignore: true)
+  String get description; // 天気の説明
+  @override
+  double get windSpeed; // 風速
+  @override
+  int get humidity; // 湿度
+  @override
+  String get cityName;
+
+  /// Create a copy of WeatherModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WeatherModelImplCopyWith<_$WeatherModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -22,8 +22,12 @@ WeatherWind _$WeatherWindFromJson(Map<String, dynamic> json) {
 mixin _$WeatherWind {
   double get speed => throw _privateConstructorUsedError;
 
+  /// Serializes this WeatherWind to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WeatherWind
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WeatherWindCopyWith<WeatherWind> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$WeatherWindCopyWithImpl<$Res, $Val extends WeatherWind>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WeatherWind
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$WeatherWindImplCopyWithImpl<$Res>
       _$WeatherWindImpl _value, $Res Function(_$WeatherWindImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WeatherWind
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,11 +126,13 @@ class _$WeatherWindImpl implements _WeatherWind {
             (identical(other.speed, speed) || other.speed == speed));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, speed);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WeatherWind
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WeatherWindImplCopyWith<_$WeatherWindImpl> get copyWith =>
@@ -144,8 +154,11 @@ abstract class _WeatherWind implements WeatherWind {
 
   @override
   double get speed;
+
+  /// Create a copy of WeatherWind
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WeatherWindImplCopyWith<_$WeatherWindImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart
 // WeatherApiClientを使用して、指定された都市の天気データを取得します。
 class WeatherRepositoryImpl implements WeatherRepository {
   final WeatherApiClient apiClient;
-  final ProviderRef ref;
+  final Ref ref;
 
   // WeatherRepositoryImplのコンストラクタ。
   // [apiClient] と [ref] を受け取り、フィールドに設定します。

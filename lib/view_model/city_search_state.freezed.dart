@@ -22,7 +22,9 @@ mixin _$CitySearchState {
       throw _privateConstructorUsedError; // エラーメッセージ、存在する場合は非null。
   WeatherResponse? get weather => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CitySearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CitySearchStateCopyWith<CitySearchState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$CitySearchStateCopyWithImpl<$Res, $Val extends CitySearchState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CitySearchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +84,8 @@ class _$CitySearchStateCopyWithImpl<$Res, $Val extends CitySearchState>
     ) as $Val);
   }
 
+  /// Create a copy of CitySearchState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WeatherResponseCopyWith<$Res>? get weather {
@@ -119,6 +125,8 @@ class __$$CitySearchStateImplCopyWithImpl<$Res>
       _$CitySearchStateImpl _value, $Res Function(_$CitySearchStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CitySearchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -194,7 +202,9 @@ class _$CitySearchStateImpl implements _CitySearchState {
   int get hashCode =>
       Object.hash(runtimeType, cityName, isLoading, errorMessage, weather);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CitySearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CitySearchStateImplCopyWith<_$CitySearchStateImpl> get copyWith =>
@@ -210,15 +220,18 @@ abstract class _CitySearchState implements CitySearchState {
       final WeatherResponse? weather}) = _$CitySearchStateImpl;
 
   @override
-  String get cityName;
-  @override // 検索される都市の名前。
-  bool get isLoading;
-  @override // データのロード状態。
-  String? get errorMessage;
-  @override // エラーメッセージ、存在する場合は非null。
-  WeatherResponse? get weather;
+  String get cityName; // 検索される都市の名前。
   @override
-  @JsonKey(ignore: true)
+  bool get isLoading; // データのロード状態。
+  @override
+  String? get errorMessage; // エラーメッセージ、存在する場合は非null。
+  @override
+  WeatherResponse? get weather;
+
+  /// Create a copy of CitySearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CitySearchStateImplCopyWith<_$CitySearchStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

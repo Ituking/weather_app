@@ -23,7 +23,9 @@ mixin _$WeatherViewModelState {
       throw _privateConstructorUsedError; // errorMessage は、エラーメッセージを格納します。エラーがない場合は null です。
   String? get errorMessage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WeatherViewModelState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WeatherViewModelStateCopyWith<WeatherViewModelState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +55,8 @@ class _$WeatherViewModelStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WeatherViewModelState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -76,6 +80,8 @@ class _$WeatherViewModelStateCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of WeatherViewModelState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ResultCopyWith<List<WeatherList>, $Res>? get weather {
@@ -116,6 +122,8 @@ class __$$WeatherViewModelStateImplCopyWithImpl<$Res>
       $Res Function(_$WeatherViewModelStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WeatherViewModelState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -178,7 +186,9 @@ class _$WeatherViewModelStateImpl implements _WeatherViewModelState {
   int get hashCode =>
       Object.hash(runtimeType, weather, isLoading, errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WeatherViewModelState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WeatherViewModelStateImplCopyWith<_$WeatherViewModelStateImpl>
@@ -192,14 +202,19 @@ abstract class _WeatherViewModelState implements WeatherViewModelState {
       final bool isLoading,
       final String? errorMessage}) = _$WeatherViewModelStateImpl;
 
-  @override // weather は、天気データの取得結果を格納します。
-  Result<List<WeatherList>>? get weather;
-  @override // isLoading は、データ取得中のローディング状態を示します。デフォルトは false です。
-  bool get isLoading;
-  @override // errorMessage は、エラーメッセージを格納します。エラーがない場合は null です。
-  String? get errorMessage;
+// weather は、天気データの取得結果を格納します。
   @override
-  @JsonKey(ignore: true)
+  Result<List<WeatherList>>?
+      get weather; // isLoading は、データ取得中のローディング状態を示します。デフォルトは false です。
+  @override
+  bool get isLoading; // errorMessage は、エラーメッセージを格納します。エラーがない場合は null です。
+  @override
+  String? get errorMessage;
+
+  /// Create a copy of WeatherViewModelState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WeatherViewModelStateImplCopyWith<_$WeatherViewModelStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -24,8 +24,12 @@ mixin _$WeatherResponse {
       throw _privateConstructorUsedError; // 天気情報のリストを表します。
   CityName get city => throw _privateConstructorUsedError;
 
+  /// Serializes this WeatherResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WeatherResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WeatherResponseCopyWith<WeatherResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$WeatherResponseCopyWithImpl<$Res, $Val extends WeatherResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WeatherResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -69,6 +75,8 @@ class _$WeatherResponseCopyWithImpl<$Res, $Val extends WeatherResponse>
     ) as $Val);
   }
 
+  /// Create a copy of WeatherResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CityNameCopyWith<$Res> get city {
@@ -100,6 +108,8 @@ class __$$WeatherResponseImplCopyWithImpl<$Res>
       _$WeatherResponseImpl _value, $Res Function(_$WeatherResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WeatherResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -166,12 +176,14 @@ class _$WeatherResponseImpl
             (identical(other.city, city) || other.city == city));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_list), city);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WeatherResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WeatherResponseImplCopyWith<_$WeatherResponseImpl> get copyWith =>
@@ -195,11 +207,14 @@ abstract class _WeatherResponse implements WeatherResponse {
       _$WeatherResponseImpl.fromJson;
 
   @override
-  List<WeatherList> get list;
-  @override // 天気情報のリストを表します。
-  CityName get city;
+  List<WeatherList> get list; // 天気情報のリストを表します。
   @override
-  @JsonKey(ignore: true)
+  CityName get city;
+
+  /// Create a copy of WeatherResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WeatherResponseImplCopyWith<_$WeatherResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
