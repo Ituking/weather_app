@@ -23,8 +23,12 @@ mixin _$WeatherMain {
   double get temp => throw _privateConstructorUsedError; // 温度を表します。
   int get humidity => throw _privateConstructorUsedError;
 
+  /// Serializes this WeatherMain to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WeatherMain
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WeatherMainCopyWith<WeatherMain> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$WeatherMainCopyWithImpl<$Res, $Val extends WeatherMain>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WeatherMain
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$WeatherMainImplCopyWithImpl<$Res>
       _$WeatherMainImpl _value, $Res Function(_$WeatherMainImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WeatherMain
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,11 +142,13 @@ class _$WeatherMainImpl implements _WeatherMain {
                 other.humidity == humidity));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, temp, humidity);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WeatherMain
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WeatherMainImplCopyWith<_$WeatherMainImpl> get copyWith =>
@@ -161,11 +171,14 @@ abstract class _WeatherMain implements WeatherMain {
       _$WeatherMainImpl.fromJson;
 
   @override
-  double get temp;
-  @override // 温度を表します。
-  int get humidity;
+  double get temp; // 温度を表します。
   @override
-  @JsonKey(ignore: true)
+  int get humidity;
+
+  /// Create a copy of WeatherMain
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WeatherMainImplCopyWith<_$WeatherMainImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -19,7 +19,9 @@ mixin _$ApiError {
   ApiErrorType get type => throw _privateConstructorUsedError; // エラーの種類
   String get message => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ApiError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ApiErrorCopyWith<ApiError> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$ApiErrorCopyWithImpl<$Res, $Val extends ApiError>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ApiError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +84,8 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
       _$ApiErrorImpl _value, $Res Function(_$ApiErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ApiError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,7 +133,9 @@ class _$ApiErrorImpl implements _ApiError {
   @override
   int get hashCode => Object.hash(runtimeType, type, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ApiError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ApiErrorImplCopyWith<_$ApiErrorImpl> get copyWith =>
@@ -140,11 +148,14 @@ abstract class _ApiError implements ApiError {
       required final String message}) = _$ApiErrorImpl;
 
   @override
-  ApiErrorType get type;
-  @override // エラーの種類
-  String get message;
+  ApiErrorType get type; // エラーの種類
   @override
-  @JsonKey(ignore: true)
+  String get message;
+
+  /// Create a copy of ApiError
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ApiErrorImplCopyWith<_$ApiErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

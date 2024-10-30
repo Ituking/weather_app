@@ -24,8 +24,12 @@ mixin _$WeatherDescription {
       throw _privateConstructorUsedError; // 天気の詳細な説明を表します。
   String get icon => throw _privateConstructorUsedError;
 
+  /// Serializes this WeatherDescription to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WeatherDescription
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WeatherDescriptionCopyWith<WeatherDescription> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$WeatherDescriptionCopyWithImpl<$Res, $Val extends WeatherDescription>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WeatherDescription
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +93,8 @@ class __$$WeatherDescriptionImplCopyWithImpl<$Res>
       $Res Function(_$WeatherDescriptionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WeatherDescription
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,11 +143,13 @@ class _$WeatherDescriptionImpl implements _WeatherDescription {
             (identical(other.icon, icon) || other.icon == icon));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, description, icon);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WeatherDescription
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WeatherDescriptionImplCopyWith<_$WeatherDescriptionImpl> get copyWith =>
@@ -163,11 +173,14 @@ abstract class _WeatherDescription implements WeatherDescription {
       _$WeatherDescriptionImpl.fromJson;
 
   @override
-  String get description;
-  @override // 天気の詳細な説明を表します。
-  String get icon;
+  String get description; // 天気の詳細な説明を表します。
   @override
-  @JsonKey(ignore: true)
+  String get icon;
+
+  /// Create a copy of WeatherDescription
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WeatherDescriptionImplCopyWith<_$WeatherDescriptionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

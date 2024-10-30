@@ -6,7 +6,7 @@ import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart
 // ApiServiceクラスの定義
 class ApiService {
   final Dio _dio;
-  final ProviderRef ref;
+  final Ref ref;
 
   // コンストラクタでDioインスタンスとProviderRefを受け取る
   ApiService(this._dio, this.ref);
