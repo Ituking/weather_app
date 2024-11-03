@@ -4,6 +4,6 @@ part 'env.g.dart';
 
 @Envied()
 abstract class Env {
-  @EnviedField(varName: 'API_KEY', obfuscate: true)
-  static String apiKey = _Env.apiKey;
+  @EnviedField(varName: 'OPENWEATHERMAP_API_KEY_DEV', obfuscate: true)
+  static String openWeatherMapApiKeyDev = _Env.openWeatherMapApiKeyDev;
 }
