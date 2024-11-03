@@ -25,7 +25,7 @@ void main() {
       final queryParameters = {
         // APIリクエストのクエリパラメータ
         'q': 'Kumagaya',
-        'appId': Env.apiKey,
+        'appId': Env.openWeatherMapApiKeyDev,
         'lang': 'ja',
         'units': 'metric',
       };
@@ -59,7 +59,7 @@ void main() {
 
       final result = await client.fetchWeather(
         'Kumagaya',
-        Env.apiKey,
+        Env.openWeatherMapApiKeyDev,
         'ja',
         'metric',
       );
@@ -78,7 +78,7 @@ void main() {
       const relativeUrl = 'forecast';
       final queryParameters = {
         'q': 'Kumagaya',
-        'appId': Env.apiKey,
+        'appId': Env.openWeatherMapApiKeyDev,
         'lang': 'ja',
         'units': 'metric',
       };
@@ -95,7 +95,7 @@ void main() {
       expect(
           () async => await client.fetchWeather(
                 'Kumagaya',
-                Env.apiKey,
+                Env.openWeatherMapApiKeyDev,
                 'ja',
                 'metric',
               ),

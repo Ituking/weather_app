@@ -29,7 +29,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       // WeatherApiClientを使用して指定された都市の天気データを取得
       final WeatherResponse weatherResponse = await apiClient.fetchWeather(
         cityName,
-        Env.apiKey,
+        Env.openWeatherMapApiKeyDev,
         'ja',
         'metric',
       );
