@@ -8,6 +8,8 @@ import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart';
 import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
 
+import '../core/logger/logger_provider.dart';
+
 // CityWeatherNotifierは、都市名に基づいて天気情報を取得するNotifier
 class CityWeatherNotifier
     extends Notifier<AsyncValue<Result<WeatherResponse>>> {
@@ -21,6 +23,7 @@ class CityWeatherNotifier
 
   // 都市名を設定して天気情報を取得
   Future<void> fetchWeather(String cityName) async {
+    final logger = ref.read(loggerProvider);
     state = const AsyncLoading();
 
     try {
@@ -35,16 +38,32 @@ class CityWeatherNotifier
           state = AsyncData(Result.success(weatherResponse));
         },
         failure: (error) {
+          logger.logError(
+            'Failed to fetch weather for city: $cityName. Error: ${error.message}',
+            StackTrace.current,
+          );
+
           state = AsyncData(Result.failure(error));
         },
       );
-    } on DioException catch (e) {
+    } on DioException catch (e, stackTrace) {
       // DioExceptionをキャッチし、エラーハンドラーを使用して適切なApiErrorを生成
       final dioErrorHandler = ref.read(dioErrorHandlerProvider);
       final apiError = dioErrorHandler.handle(e);
+
+      logger.logError(
+        'DioException while fetching weather for city: $cityName. Message: ${e.message}',
+        stackTrace,
+      );
+
       state = AsyncData(Result.failure(apiError));
-    } catch (e) {
+    } catch (e, stackTrace) {
       // その他のエラー処理
+      logger.logError(
+        'Unexpected error while fetching weather for city: $cityName. Error: $e',
+        stackTrace,
+      );
+
       state = AsyncData(Result.failure(
           ApiError(type: ApiErrorType.unknown, message: e.toString())));
     }

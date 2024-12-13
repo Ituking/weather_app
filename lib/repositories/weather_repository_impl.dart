@@ -8,6 +8,8 @@ import 'package:weather_app/repositories/weather_repository.dart';
 import 'package:weather_app/services/weather_api_client.dart';
 import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart';
 
+import '../core/logger/logger_provider.dart';
+
 // WeatherRepositoryImplクラスは、WeatherRepositoryインターフェースの具体的な実装を提供します。
 // WeatherApiClientを使用して、指定された都市の天気データを取得します。
 class WeatherRepositoryImpl implements WeatherRepository {
@@ -25,6 +27,8 @@ class WeatherRepositoryImpl implements WeatherRepository {
   // 例外 - データ取得または変換に失敗した場合に例外をスロー
   @override
   Future<Result<WeatherResponse>> getWeather(String cityName) async {
+    final logger = ref.read(loggerProvider);
+
     try {
       // WeatherApiClientを使用して指定された都市の天気データを取得
       final WeatherResponse weatherResponse = await apiClient.fetchWeather(
@@ -36,12 +40,23 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
       // 取得した天気データを成功結果として返す
       return Result.success(weatherResponse);
-    } on DioException catch (e) {
+    } on DioException catch (e, stackTrace) {
       // DioExceptionをキャッチし、エラーハンドラーを使用して適切なApiErrorを生成
       final dioErrorHandler = ref.read(dioErrorHandlerProvider);
       final apiError = dioErrorHandler.handle(e);
+
+      logger.logError(
+        'DioException in getWeather: ${e.message}, Response: ${e.response?.data}',
+        stackTrace,
+      );
+
       return Result.failure(apiError);
-    } catch (e) {
+    } catch (e, stackTrace) {
+      logger.logError(
+        'Unexpected error in getWeather: $e',
+        stackTrace,
+      );
+
       // その他のエラー処理
       return Result.failure(
           ApiError(type: ApiErrorType.unknown, message: e.toString()));
