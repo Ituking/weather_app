@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:weather_app/core/logger/i_logger.dart';
+import 'package:weather_app/core/logger/logger_provider.dart';
 import 'package:weather_app/core/network/dio_error_handler.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_list.dart';
@@ -11,6 +13,7 @@ import 'package:weather_app/models/weather_wind.dart';
 import 'package:weather_app/repositories/weather_repository_impl.dart';
 import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart';
 
+import '../core/logger/mock_i_logger.mocks.dart';
 import '../mocks/mock_ref.mocks.dart';
 import '../mocks/mock_weather_api_client.mocks.dart';
 
@@ -20,16 +23,38 @@ void main() {
     late MockRef mockRef; // Refのモック
     late DioErrorHandler dioErrorHandler; // DioErrorHandlerのインスタンス
     late WeatherRepositoryImpl repository; // テスト対象のリポジトリ
+    late MockILogger mockLogger; // ILoggerのモック
+
+    final weatherResponse = WeatherResponse(
+      list: [
+        WeatherList(
+          main: WeatherMain(temp: 20.0, humidity: 70),
+          weather: [
+            WeatherDescription(
+              description: 'Sunny',
+              icon: '01d',
+            ),
+          ],
+          wind: WeatherWind(speed: 5.0),
+        ),
+      ],
+      city: CityName(name: 'Tokyo'),
+    );
 
     setUp(() {
+      // ILoggerのダミーを提供
+      provideDummy<ILogger>(MockILogger());
+
       // モックおよび依存関係の初期化
       mockApiClient = MockWeatherApiClient();
       mockRef = MockRef();
       dioErrorHandler = DioErrorHandler();
+      mockLogger = MockILogger();
 
-      // ProviderRefのモックにDioErrorHandlerを設定
+      // ProviderRefのモックにDioErrorHandlerとILoggerを設定
       when(mockRef.read<DioErrorHandler?>(dioErrorHandlerProvider))
           .thenReturn(dioErrorHandler);
+      when(mockRef.read<ILogger>(loggerProvider)).thenReturn(mockLogger);
 
       // WeatherRepositoryImplのインスタンスを作成
       repository =
@@ -37,23 +62,6 @@ void main() {
     });
 
     test('成功時にWeatherResponseを返す', () async {
-      // モックのWeatherResponseを作成
-      final weatherResponse = WeatherResponse(
-        list: [
-          WeatherList(
-            main: WeatherMain(temp: 20.0, humidity: 70),
-            weather: [
-              WeatherDescription(
-                description: 'Sunny',
-                icon: '01d',
-              ),
-            ],
-            wind: WeatherWind(speed: 5.0),
-          ),
-        ],
-        city: CityName(name: 'Tokyo'),
-      );
-
       // fetchWeatherのモック設定
       when(mockApiClient.fetchWeather('Tokyo', any, any, any))
           .thenAnswer((_) async => weatherResponse);

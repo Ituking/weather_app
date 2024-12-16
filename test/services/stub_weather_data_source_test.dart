@@ -1,20 +1,27 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:weather_app/core/logger/logger_provider.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_response.dart';
 import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/services/stub_weather_data_source.dart';
 import 'package:weather_app/services/weather_api_client_provider.dart';
 
+import '../core/logger/mock_i_logger.mocks.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   group('StubWeatherDataSourceを使用したWeatherRepositoryImplのテスト', () {
     late ProviderContainer container;
+    late MockILogger mockLogger;
 
     // 各テスト前に実行されるセットアップ処理
     setUp(() {
-      // ProviderContainerを作成し、weatherApiClientProviderをStubWeatherDataSourceでオーバーライド
+      mockLogger = MockILogger();
       container = ProviderContainer(overrides: [
-        weatherApiClientProvider.overrideWithValue(StubWeatherDataSource())
+        weatherApiClientProvider.overrideWithValue(StubWeatherDataSource()),
+        loggerProvider.overrideWithValue(mockLogger),
       ]);
     });
 
