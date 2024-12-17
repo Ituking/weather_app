@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/core/strings/weather_description_text_strings.dart';
+
+import '../core/strings/weather_description_text_strings.dart';
 
 // WeatherDescriptionTextは、天気の説明を表示するためのテキストウィジェット
 class WeatherDescriptionText extends StatelessWidget {

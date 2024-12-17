@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart';
+
+import '../../../view_model/providers/dio_error_handler_provider.dart';
+import 'result.dart';
 
 // ApiServiceクラスの定義
 class ApiService {

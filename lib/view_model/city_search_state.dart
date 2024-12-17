@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:weather_app/core/network/response/weather_response.dart';
+
+import '../core/network/response/weather_response.dart';
 
 part 'city_search_state.freezed.dart';
 

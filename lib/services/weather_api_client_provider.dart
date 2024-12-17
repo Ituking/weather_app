@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/core/network/dio_provider.dart';
-import 'package:weather_app/services/weather_api_client.dart';
+
+import '../core/network/dio_provider.dart';
+import 'weather_api_client.dart';
 
 // WeatherApiClientのProvider
 // このProviderは、Dioクライアントを使用してWeatherApiClientのインスタンスを作成します。

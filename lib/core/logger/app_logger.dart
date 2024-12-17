@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:weather_app/core/logger/async_file_output.dart';
-import 'package:weather_app/core/logger/i_logger.dart';
+
+import 'async_file_output.dart';
+import 'i_logger.dart';
 
 /// アプリケーション全体で使用するロガー
 class AppLogger implements ILogger {

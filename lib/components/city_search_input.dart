@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/core/strings/city_search_input_strings.dart';
-import 'package:weather_app/view_model/providers/city_name_validator_provider.dart';
-import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
-import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
+
+import '../core/strings/city_search_input_strings.dart';
+import '../view_model/providers/city_name_validator_provider.dart';
+import '../view_model/providers/city_search_view_model_provider.dart';
+import '../view_model/providers/text_editing_controller_provider.dart';
 
 // CitySearchInputウィジェットは、都市名の検索入力フィールドを提供し、
 // バリデーション機能を備えたカスタム入力ウィジェットです。

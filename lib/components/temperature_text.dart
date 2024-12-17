@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/core/strings/temperature_text_strings.dart';
+
+import '../core/strings/temperature_text_strings.dart';
 
 // TemperatureTextは、気温を表示するためのテキストウィジェット
 class TemperatureText extends StatelessWidget {

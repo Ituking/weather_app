@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:weather_app/core/network/response/weather_response.dart';
+
+import '../core/network/response/weather_response.dart';
 
 part 'weather_api_client.g.dart';
 

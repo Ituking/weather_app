@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/core/strings/wind_speed_text_strings.dart';
+
+import '../core/strings/wind_speed_text_strings.dart';
 
 // WindSpeedTextは、風速を表示するためのテキストウィジェット
 class WindSpeedText extends StatelessWidget {

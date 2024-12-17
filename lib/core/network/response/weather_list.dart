@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:weather_app/models/weather_main.dart';
-import 'package:weather_app/models/weather_description.dart';
-import 'package:weather_app/models/weather_wind.dart';
+
+import '../../../models/weather_main.dart';
+import '../../../models/weather_description.dart';
+import '../../../models/weather_wind.dart';
 
 part 'weather_list.freezed.dart';
 part 'weather_list.g.dart';

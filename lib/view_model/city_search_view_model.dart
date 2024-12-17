@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/repositories/weather_repository.dart';
-import 'package:weather_app/repositories/weather_repository_provider.dart';
-import 'package:weather_app/view_model/city_search_state.dart';
-import 'package:weather_app/view_model/providers/app_router_provider.dart';
+
+import '../repositories/weather_repository.dart';
+import '../repositories/weather_repository_provider.dart';
+import 'city_search_state.dart';
+import 'providers/app_router_provider.dart';
 
 // CitySearchViewModelは、都市検索に関連するビジネスロジックを処理するクラスです。
 class CitySearchViewModel extends Notifier<CitySearchState> {
