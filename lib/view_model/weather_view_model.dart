@@ -4,6 +4,8 @@ import 'package:weather_app/repositories/weather_repository.dart';
 import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/weather_view_model_state.dart';
 
+import '../core/logger/logger_provider.dart';
+
 part 'weather_view_model.g.dart';
 
 @riverpod
@@ -21,6 +23,8 @@ class WeatherViewModel extends _$WeatherViewModel {
 
   // 指定された都市名で天気情報を非同期に取得し、状態を更新します。
   Future<void> fetchWeather(String cityName) async {
+    final logger = ref.read(loggerProvider);
+
     // ローディング状態をtrueに設定
     state = state.copyWith(isLoading: true);
 
@@ -39,6 +43,11 @@ class WeatherViewModel extends _$WeatherViewModel {
         },
         failure: (error) {
           // 取得に失敗した場合、エラーメッセージとローディング状態を更新
+          logger.logError(
+            'Failed to fetch weather data for city: $cityName. Error: ${error.message}',
+            StackTrace.current,
+          );
+
           state = state.copyWith(
             weather: Result.failure(error),
             isLoading: false,
@@ -46,8 +55,13 @@ class WeatherViewModel extends _$WeatherViewModel {
           );
         },
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       // 予期しないエラーが発生した場合の処理
+      logger.logError(
+        'Unexpected error while fetching weather data for city: $cityName. Error: $e',
+        stackTrace,
+      );
+
       state = state.copyWith(
         isLoading: false,
         errorMessage: 'Failed to fetch weather data. Please try again later.',
