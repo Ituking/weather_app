@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/core/network/api_error.dart';
-import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/core/network/response/weather_response.dart';
-import 'package:weather_app/repositories/weather_repository.dart';
-import 'package:weather_app/repositories/weather_repository_provider.dart';
-import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart';
-import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
 
 import '../core/logger/logger_provider.dart';
+import '../core/network/api_error.dart';
+import '../core/network/response/result.dart';
+import '../core/network/response/weather_response.dart';
+import '../repositories/weather_repository.dart';
+import '../repositories/weather_repository_provider.dart';
+import 'providers/dio_error_handler_provider.dart';
+import 'providers/text_editing_controller_provider.dart';
 
 // CityWeatherNotifierは、都市名に基づいて天気情報を取得するNotifier
 class CityWeatherNotifier

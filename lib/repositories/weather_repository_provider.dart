@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/repositories/weather_repository.dart';
-import 'package:weather_app/repositories/weather_repository_impl.dart';
-import 'package:weather_app/services/weather_api_client_provider.dart';
+
+import '../services/weather_api_client_provider.dart';
+import 'weather_repository.dart';
+import 'weather_repository_impl.dart';
 
 // WeatherRepositoryProviderは、WeatherApiClientに基づいてWeatherRepositoryのインスタンスを作成します。
 // このProviderは、WeatherApiClientのインスタンスを取得し、それを使ってWeatherRepositoryを初期化します。

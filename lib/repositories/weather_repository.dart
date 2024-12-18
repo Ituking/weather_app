@@ -1,5 +1,5 @@
-import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/core/network/response/weather_response.dart';
+import '../core/network/response/result.dart';
+import '../core/network/response/weather_response.dart';
 
 // WeatherRepositoryインターフェースは、天気データを取得するための契約を定義します。
 // 具体的な実装クラスは、このインターフェースを実装し、天気データの取得ロジックを提供します。

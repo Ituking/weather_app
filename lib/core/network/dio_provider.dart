@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/view_model/providers/dio_error_handler_provider.dart';
+
+import '../../view_model/providers/dio_error_handler_provider.dart';
 
 // Dioインスタンスを提供するProvider
 // このProviderは、天気予報APIの通信に使用されるDioクライアントを提供します。

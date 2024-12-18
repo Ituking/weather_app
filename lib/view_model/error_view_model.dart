@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/core/network/api_error.dart';
-import 'package:weather_app/view_model/error_state.dart';
+
+import '../core/network/api_error.dart';
+import 'error_state.dart';
 
 // ErrorViewModelクラスは、エラー状態を管理するための状態管理クラスです。
 class ErrorViewModel extends Notifier<ErrorState> {

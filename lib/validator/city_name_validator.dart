@@ -1,5 +1,5 @@
-import 'package:weather_app/core/strings/city_name_validator_strings.dart';
-import 'package:weather_app/validator/validator.dart';
+import '../core/strings/city_name_validator_strings.dart';
+import 'validator.dart';
 
 // 都市名のバリデーションを行うクラス
 //

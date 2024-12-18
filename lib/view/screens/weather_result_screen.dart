@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/components/app_back_button.dart';
-import 'package:weather_app/components/background_image.dart';
-import 'package:weather_app/components/city_name_text.dart';
-import 'package:weather_app/components/humidity_text.dart';
-import 'package:weather_app/components/temperature_text.dart';
-import 'package:weather_app/components/weather_description_text.dart';
-import 'package:weather_app/components/weather_icon.dart';
-import 'package:weather_app/components/wind_speed_text.dart';
-import 'package:weather_app/view/screens/error_display_screen.dart';
-import 'package:weather_app/view_model/providers/city_weather_notifier_provider.dart';
+
+import '../../components/app_back_button.dart';
+import '../../components/background_image.dart';
+import '../../components/city_name_text.dart';
+import '../../components/humidity_text.dart';
+import '../../components/temperature_text.dart';
+import '../../components/weather_description_text.dart';
+import '../../components/weather_icon.dart';
+import '../../components/wind_speed_text.dart';
+import 'error_display_screen.dart';
+import '../../view_model/providers/city_weather_notifier_provider.dart';
 
 // WeatherResultScreenは、指定された都市の天気情報を表示する画面です。
 class WeatherResultScreen extends ConsumerStatefulWidget {

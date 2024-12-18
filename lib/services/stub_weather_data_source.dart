@@ -1,10 +1,10 @@
-import 'package:weather_app/core/network/response/weather_list.dart';
-import 'package:weather_app/core/network/response/weather_response.dart';
-import 'package:weather_app/models/city_name.dart';
-import 'package:weather_app/models/weather_description.dart';
-import 'package:weather_app/models/weather_main.dart';
-import 'package:weather_app/models/weather_wind.dart';
-import 'package:weather_app/services/weather_api_client.dart';
+import '../core/network/response/weather_list.dart';
+import '../core/network/response/weather_response.dart';
+import '../models/city_name.dart';
+import '../models/weather_description.dart';
+import '../models/weather_main.dart';
+import '../models/weather_wind.dart';
+import 'weather_api_client.dart';
 
 // StubWeatherDataSourceクラスは、WeatherApiClientインターフェースのスタブ実装です。
 // テスト目的で使用され、固定されたデータを返します。

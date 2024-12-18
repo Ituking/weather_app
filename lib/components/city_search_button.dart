@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:weather_app/core/strings/city_search_button_strings.dart';
-import 'package:weather_app/view_model/providers/city_name_validator_provider.dart';
-import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
-import 'package:weather_app/view_model/providers/city_weather_notifier_provider.dart';
-import 'package:weather_app/view_model/providers/error_view_model_provider.dart';
 
-import 'package:weather_app/view_model/providers/text_editing_controller_provider.dart';
+import '../core/strings/city_search_button_strings.dart';
+import '../view_model/providers/city_name_validator_provider.dart';
+import '../view_model/providers/city_search_view_model_provider.dart';
+import '../view_model/providers/city_weather_notifier_provider.dart';
+import '../view_model/providers/error_view_model_provider.dart';
+import '../view_model/providers/text_editing_controller_provider.dart';
 
 // CitySearchButtonウィジェットは、都市名の検索ボタンを提供します。
 class CitySearchButton extends ConsumerStatefulWidget {

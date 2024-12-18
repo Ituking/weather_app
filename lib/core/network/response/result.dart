@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:weather_app/core/network/api_error.dart';
+
+import '../api_error.dart';
 
 part 'result.freezed.dart';
 

@@ -1,10 +1,10 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/repositories/weather_repository.dart';
-import 'package:weather_app/repositories/weather_repository_provider.dart';
-import 'package:weather_app/view_model/weather_view_model_state.dart';
 
 import '../core/logger/logger_provider.dart';
+import '../core/network/response/result.dart';
+import '../repositories/weather_repository.dart';
+import '../repositories/weather_repository_provider.dart';
+import 'weather_view_model_state.dart';
 
 part 'weather_view_model.g.dart';
 

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:weather_app/core/network/api_error.dart';
-import 'package:weather_app/core/strings/dio_error_handler_strings.dart';
+
+import '../strings/dio_error_handler_strings.dart';
+import 'api_error.dart';
 
 // DioErrorHandlerクラスはDioExceptionを処理し、適切なApiErrorに変換します。
 class DioErrorHandler {
