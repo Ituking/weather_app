@@ -44,5 +44,6 @@ flutter:
   
   uses-material-design: true
   assets: 
-    - assets/images/clouds-4215608_1280.jpg
+    - assets/images/
+    - assets/splash/
 
