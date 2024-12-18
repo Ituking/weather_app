@@ -60,7 +60,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                         WeatherIcon(
                             iconCode:
                                 "${weather.weather.first.icon}@2x"), // 天気アイコン
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 20),
                         const AppBackButton(), // 戻るボタン
                       ],
                     );

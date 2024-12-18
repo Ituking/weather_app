@@ -36,6 +36,7 @@ class ErrorDisplayScreen extends ConsumerWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 20),
                 const AppBackButton(), // 戻るボタン
               ],
             ),
