@@ -13,7 +13,7 @@ class BackgroundImage extends StatelessWidget {
           BlendMode.darken,
         ),
         child: Image.asset(
-          'assets/images/clouds-4215608_1280.jpg',
+          'assets/images/background.jpg',
           fit: BoxFit.cover,
         ),
       ),
