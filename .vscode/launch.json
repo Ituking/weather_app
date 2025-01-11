@@ -7,8 +7,7 @@
             "type": "dart",
             "flutterMode": "debug",
             "args": [
-                "--flavor", "dev",
-                "--dart-define-from-file=dart_defines/dev.json"
+                "--dart-define=FLAVOR=dev"
             ]
         },
         {
@@ -17,8 +16,7 @@
             "type": "dart",
             "flutterMode": "debug",
             "args": [
-                "--flavor", "stg",
-                "--dart-define-from-file=dart_defines/stg.json"
+                "--dart-define=FLAVOR=stg"
             ]
         },
         {
@@ -27,8 +25,7 @@
             "type": "dart",
             "flutterMode": "debug",
             "args": [
-                "--flavor", "prod",
-                "--dart-define-from-file=dart_defines/prod.json"
+                "--dart-define=FLAVOR=prod"
             ]
         },
         {
@@ -37,8 +34,7 @@
             "type": "dart",
             "flutterMode": "release",
             "args": [
-                "--flavor", "dev",
-                "--dart-define-from-file=dart_defines/dev.json"
+                "--dart-define=FLAVOR=dev"
             ]
         },
         {
@@ -47,8 +43,7 @@
             "type": "dart",
             "flutterMode": "release",
             "args": [
-                "--flavor", "stg",
-                "--dart-define-from-file=dart_defines/stg.json"
+                "--dart-define=FLAVOR=stg"
             ]
         },
         {
@@ -57,8 +52,7 @@
             "type": "dart",
             "flutterMode": "release",
             "args": [
-                "--flavor", "prod",
-                "--dart-define-from-file=dart_defines/prod.json"
+                "--dart-define=FLAVOR=prod"
             ]
         }
     ]
