@@ -42,7 +42,7 @@ app.*.map.json
 
 # Xcode related
 ios/build/
-**/ios/Flutter/Dart-Defines.xcconfig
+**/ios/Flutter/DartDefines.xcconfig
 
 # Android Studio will place build artifacts here
 /android/app/debug
