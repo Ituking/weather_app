@@ -30,7 +30,10 @@ jobs:
           cache: true
 
       - name: Create .env file
-        run: echo "OPENWEATHERMAP_API_KEY_DEV=${{ secrets.OPENWEATHERMAP_API_KEY_DEV }}" > .env
+        run: |
+          echo "OPENWEATHERMAP_API_KEY_DEV=${{ secrets.OPENWEATHERMAP_API_KEY_DEV }}" >> .env
+          echo "OPENWEATHERMAP_API_KEY_STG=${{ secrets.OPENWEATHERMAP_API_KEY_STG }}" >> .env
+          echo "OPENWEATHERMAP_API_KEY_PROD=${{ secrets.OPENWEATHERMAP_API_KEY_PROD }}" >> .env
 
       - name: Install dependencies
         run: flutter pub get
@@ -41,5 +44,13 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Build APK
-        run: flutter build apk
+      - name: Build APK (Development)
+        run: flutter build apk --dart-define=FLAVOR=dev
+
+      - name: Build APK (Staging)
+        if: github.event_name == 'push'
+        run: flutter build apk --dart-define=FLAVOR=stg
+
+      - name: Build APK (Production)
+        if: github.event_name == 'push'
+        run: flutter build apk --dart-define=FLAVOR=prod
