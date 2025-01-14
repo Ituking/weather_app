@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:weather_app/core/config/api_config.dart';
 import 'package:weather_app/core/logger/i_logger.dart';
 import 'package:weather_app/core/logger/logger_provider.dart';
 import 'package:weather_app/core/network/dio_error_handler.dart';
@@ -24,6 +25,7 @@ void main() {
     late DioErrorHandler dioErrorHandler; // DioErrorHandlerのインスタンス
     late WeatherRepositoryImpl repository; // テスト対象のリポジトリ
     late MockILogger mockLogger; // ILoggerのモック
+    late ApiConfig apiConfig; // ApiConfigのインスタンス
 
     final weatherResponse = WeatherResponse(
       list: [
@@ -50,6 +52,7 @@ void main() {
       mockRef = MockRef();
       dioErrorHandler = DioErrorHandler();
       mockLogger = MockILogger();
+      apiConfig = ApiConfig(apiKey: '開発用のAPIキー');
 
       // ProviderRefのモックにDioErrorHandlerとILoggerを設定
       when(mockRef.read<DioErrorHandler?>(dioErrorHandlerProvider))
@@ -57,8 +60,8 @@ void main() {
       when(mockRef.read<ILogger>(loggerProvider)).thenReturn(mockLogger);
 
       // WeatherRepositoryImplのインスタンスを作成
-      repository =
-          WeatherRepositoryImpl(apiClient: mockApiClient, ref: mockRef);
+      repository = WeatherRepositoryImpl(
+          apiClient: mockApiClient, apiConfig: apiConfig, ref: mockRef);
     });
 
     test('成功時にWeatherResponseを返す', () async {

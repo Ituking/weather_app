@@ -12,4 +12,17 @@ abstract class Env {
 
   @EnviedField(varName: 'OPENWEATHERMAP_API_KEY_PROD', obfuscate: true)
   static String openWeatherMapApiKeyProd = _Env.openWeatherMapApiKeyProd;
+
+  static String get openWeatherMapApiKey {
+    const flavor = String.fromEnvironment('FLAVOR', defaultValue: 'prod');
+    switch (flavor) {
+      case 'dev':
+        return openWeatherMapApiKeyDev;
+      case 'stg':
+        return openWeatherMapApiKeyStg;
+      case 'prod':
+      default:
+        return openWeatherMapApiKeyProd;
+    }
+  }
 }
