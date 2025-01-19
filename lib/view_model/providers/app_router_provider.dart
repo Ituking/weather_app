@@ -3,5 +3,5 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/routing/app_router.dart';
 
-// AppRouterを提供するProvider
+/// [AppRouter]を提供する[Provider]
 final appRouterProvider = Provider<GoRouter>((ref) => AppRouter.router);
