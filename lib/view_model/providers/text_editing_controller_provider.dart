@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// TextEditingControllerを提供するProvider
+/// [TextEditingController]を提供する[Provider]
 final textEditingControllerProvider =
     Provider.autoDispose((ref) => TextEditingController());

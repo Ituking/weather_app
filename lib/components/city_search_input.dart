@@ -6,8 +6,8 @@ import '../view_model/providers/city_name_validator_provider.dart';
 import '../view_model/providers/city_search_view_model_provider.dart';
 import '../view_model/providers/text_editing_controller_provider.dart';
 
-// CitySearchInputウィジェットは、都市名の検索入力フィールドを提供し、
-// バリデーション機能を備えたカスタム入力ウィジェットです。
+/// [CitySearchInput]ウィジェットは、都市名の検索入力フィールドを提供し、
+/// バリデーション機能を備えたカスタム入力ウィジェットです。
 class CitySearchInput extends ConsumerStatefulWidget {
   const CitySearchInput({super.key});
 

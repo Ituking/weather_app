@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// CityNameTextは、都市名を表示するためのテキストウィジェット
+/// [CityNameText]は、都市名を表示するためのテキストウィジェットです。
 class CityNameText extends StatelessWidget {
   final String cityName;
   const CityNameText({super.key, required this.cityName});

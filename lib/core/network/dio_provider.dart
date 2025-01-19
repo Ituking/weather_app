@@ -4,9 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../view_model/providers/dio_error_handler_provider.dart';
 
-// Dioインスタンスを提供するProvider
-// このProviderは、天気予報APIの通信に使用されるDioクライアントを提供します。
-// 天気予報APIの通信に使用するHTTPクライアントとしてDioを設定
+/// 天気予報APIとの通信に使用される[Dio]クライアントを提供するプロバイダー。
 final dioProvider = Provider<Dio>((ref) {
   // Dioの基本設定を定義
   final dio = Dio(BaseOptions(

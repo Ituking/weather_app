@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// WeatherIconは、天気アイコンを表示するウィジェット
+/// [WeatherIcon]は、天気アイコンを表示するウィジェットです。
 class WeatherIcon extends StatelessWidget {
   final String iconCode;
 

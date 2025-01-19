@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/strings/humidity_text_strings.dart';
 
-// HumidityTextは、湿度を表示するためのテキストウィジェット
+/// [HumidityText]は、湿度を表示するためのテキストウィジェットです。
 class HumidityText extends StatelessWidget {
   final int humidity;
   const HumidityText({super.key, required this.humidity});

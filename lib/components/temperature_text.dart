@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/strings/temperature_text_strings.dart';
 
-// TemperatureTextは、気温を表示するためのテキストウィジェット
+/// [TemperatureText]は、気温を表示するためのテキストウィジェットです。
 class TemperatureText extends StatelessWidget {
   final double temperature;
   const TemperatureText({super.key, required this.temperature});

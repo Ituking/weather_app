@@ -1,22 +1,30 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-// freezedとjson_serializableの自動生成ファイルへの参照
 part 'weather_model.freezed.dart';
 part 'weather_model.g.dart';
 
-// `freezed`アノテーションを使用して不変のデータクラスを定義
+/// [WeatherModel]クラスは、天気情報を表す不変のデータクラスです。
 @freezed
 class WeatherModel with _$WeatherModel {
-  // WeatherModelのコンストラクタ。各フィールドは必須。
+  /// コンストラクタ。各フィールドは必須です。
   const factory WeatherModel({
-    required double temperature, // 温度
-    required String description, // 天気の説明
-    required double windSpeed, // 風速
-    required int humidity, // 湿度
-    required String cityName, // 都市名
+    /// 温度を表します。
+    required double temperature,
+
+    /// 天気の説明を表します。
+    required String description,
+
+    /// 風速を表します。
+    required double windSpeed,
+
+    /// 湿度を表します。
+    required int humidity,
+
+    /// 都市名を表します。
+    required String cityName,
   }) = _WeatherModel;
 
-  // JSONからWeatherModelのインスタンスを生成するファクトリメソッド
+  /// JSONから[WeatherModel]のインスタンスを生成するファクトリメソッド。
   factory WeatherModel.fromJson(Map<String, dynamic> json) =>
       _$WeatherModelFromJson(json);
 }

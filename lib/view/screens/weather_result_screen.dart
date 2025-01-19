@@ -12,7 +12,7 @@ import '../../components/wind_speed_text.dart';
 import 'error_display_screen.dart';
 import '../../view_model/providers/city_weather_notifier_provider.dart';
 
-// WeatherResultScreenは、指定された都市の天気情報を表示する画面です。
+/// [WeatherResultScreen]は、指定された都市の天気情報を表示する画面です。
 class WeatherResultScreen extends ConsumerStatefulWidget {
   const WeatherResultScreen({super.key});
 

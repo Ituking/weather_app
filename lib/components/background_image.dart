@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// BackgroundImageは画面全体に表示される背景画像ウィジェット
+/// [BackgroundImage]は画面全体に表示される背景画像ウィジェットです。
 class BackgroundImage extends StatelessWidget {
   const BackgroundImage({super.key});
 

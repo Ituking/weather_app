@@ -6,7 +6,7 @@ import '../../components/background_image.dart';
 import '../../core/strings/dio_error_handler_strings.dart';
 import '../../view_model/providers/error_view_model_provider.dart';
 
-// ErrorDisplayScreenは、APIからのエラーメッセージを取得し、それを画面中央に表示する画面です。
+/// [ErrorDisplayScreen]は、APIからのエラーメッセージを取得し、それを画面中央に表示する画面です。
 class ErrorDisplayScreen extends ConsumerWidget {
   const ErrorDisplayScreen({super.key});
 

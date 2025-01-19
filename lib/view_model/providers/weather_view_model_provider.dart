@@ -5,10 +5,10 @@ import '../weather_view_model.dart';
 
 part 'weather_view_model_provider.g.dart';
 
-// Riverpodのプロバイダーを定義
+/// [Riverpod] のプロバイダーを定義します。
+///
+/// このプロバイダーは、[WeatherViewModel] のインスタンスを提供します。
 @riverpod
-// WeatherViewModelプロバイダーを作成する関数
 WeatherViewModel weatherViewModelProvider(Ref ref) {
-  // WeatherViewModelのインスタンスを返す
   return WeatherViewModel();
 }
