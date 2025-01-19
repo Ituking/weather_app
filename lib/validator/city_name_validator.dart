@@ -1,22 +1,17 @@
 import '../core/strings/city_name_validator_strings.dart';
 import 'validator.dart';
 
-// 都市名のバリデーションを行うクラス
-//
-// 都市名が空でないこと、または英字とスペースのみで構成されていることを検証します。
+/// 都市名のバリデーションを行うクラス。
+///
+/// 英字とスペースのみで構成され、空でないことを検証します。
 class CityNameValidator implements Validator<String> {
-  // 都市名の形式をチェックするための正規表現
-  // 英字とスペースのみを許可します。
   static final RegExp _cityNameRegExp = RegExp(r'^[a-zA-Z\s]+$');
-
-  // バリデーションエラーメッセージを保持するフィールド
   String _message = '';
 
-  // 都市名を検証するメソッド
-  //
-  // [value] - 検証対象の都市名
-  //
-  // 戻り値は、バリデーションが成功した場合は `true`、失敗した場合は `false` を返します。
+  /// 入力された都市名[value]を検証します。
+  ///
+  /// - `true`: バリデーション成功
+  /// - `false`: バリデーション失敗
   @override
   bool validate(String value) {
     if (value.isEmpty) {
@@ -26,14 +21,14 @@ class CityNameValidator implements Validator<String> {
       _message = CityNameValidatorStrings.cityNameInvalid;
       return false;
     }
-    _message = ''; // バリデーションが成功した場合、エラーメッセージを空に設定
+    _message = '';
     return true;
   }
 
-  // バリデーションエラーメッセージを取得するメソッド
-  //
-  // 戻り値は、バリデーションに失敗した場合のエラーメッセージです。
-  // バリデーションが成功した場合は空文字列が返されます。
+  /// バリデーションエラーメッセージを取得します。
+  ///
+  /// バリデーションに失敗した場合、その理由を示すメッセージを返します。
+  /// 成功した場合は空文字列を返します。
   @override
   String getMessage() {
     return _message;
