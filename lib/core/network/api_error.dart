@@ -2,23 +2,42 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'api_error.freezed.dart';
 
-// APIエラーの種類を定義する列挙型
+/// [ApiErrorType] 列挙型は、APIエラーの種類を定義します。
 enum ApiErrorType {
-  timeout, // タイムアウト
-  cancel, // リクエストキャンセル
-  badRequest, // 不正なリクエスト
-  unauthorized, // 認証エラー
-  notFound, // リソースが見つからない
-  tooManyRequests, // リクエストが多すぎる
-  internalServerError, // サーバー内部エラー
-  unknown, // 不明なエラー
+  /// タイムアウトエラー
+  timeout,
+
+  /// リクエストのキャンセル
+  cancel,
+
+  /// 不正なリクエスト
+  badRequest,
+
+  /// 認証エラー
+  unauthorized,
+
+  /// リソースが見つからない
+  notFound,
+
+  /// リクエストが多すぎる
+  tooManyRequests,
+
+  /// サーバー内部エラー
+  internalServerError,
+
+  /// 不明なエラー
+  unknown,
 }
 
-// APIエラーを表現するクラス
+/// [ApiError] クラスは、APIエラーを表現します。
 @freezed
 class ApiError with _$ApiError {
+  /// コンストラクタ。
+  ///
+  /// [type] : エラーの種類を表す [ApiErrorType]。
+  /// [message] : エラーメッセージ。
   const factory ApiError({
-    required ApiErrorType type, // エラーの種類
-    required String message, // エラーメッセージ
+    required ApiErrorType type,
+    required String message,
   }) = _ApiError;
 }

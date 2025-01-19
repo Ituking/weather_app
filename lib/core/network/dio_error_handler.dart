@@ -1,34 +1,30 @@
 import 'package:dio/dio.dart';
-
 import '../strings/dio_error_handler_strings.dart';
 import 'api_error.dart';
 
-// DioErrorHandlerクラスはDioExceptionを処理し、適切なApiErrorに変換します。
+/// [DioErrorHandler] クラスは、[DioException] を処理し、適切な [ApiError] に変換します。
 class DioErrorHandler {
-  // DioExceptionを受け取り、対応するApiErrorを返すメソッド。
+  /// [DioException] を受け取り、対応する [ApiError] を返すメソッド。
+  ///
+  /// [error] : 処理する [DioException]。
+  /// 戻り値 : 対応する [ApiError]。
   ApiError handle(DioException error) {
     switch (error.type) {
-      // 接続タイムアウトエラーの処理
       case DioExceptionType.connectionTimeout:
         return const ApiError(
           type: ApiErrorType.timeout,
           message: DioErrorHandlerStrings.connectionTimeout,
         );
-
-      // リクエスト送信タイムアウトエラーの処理
       case DioExceptionType.sendTimeout:
         return const ApiError(
-            type: ApiErrorType.timeout,
-            message: DioErrorHandlerStrings.sendTimeout);
-
-      // レスポンス受信タイムアウトエラーの処理
+          type: ApiErrorType.timeout,
+          message: DioErrorHandlerStrings.sendTimeout,
+        );
       case DioExceptionType.receiveTimeout:
         return const ApiError(
           type: ApiErrorType.timeout,
           message: DioErrorHandlerStrings.receiveTimeout,
         );
-
-      // 不正リクエストなどのサーバーからのエラーレスポンスの処理
       case DioExceptionType.badResponse:
         switch (error.response?.statusCode) {
           case 400:
@@ -65,15 +61,11 @@ class DioErrorHandler {
               message: DioErrorHandlerStrings.unknownError,
             );
         }
-
-      // リクエストがキャンセルされた場合の処理
       case DioExceptionType.cancel:
         return const ApiError(
           type: ApiErrorType.cancel,
           message: DioErrorHandlerStrings.requestCancelled,
         );
-
-      // その他の未知のエラータイプの処理
       case DioExceptionType.unknown:
       default:
         return const ApiError(
