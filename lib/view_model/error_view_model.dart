@@ -1,16 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../core/network/api_error.dart';
 import 'error_state.dart';
 
-// ErrorViewModelクラスは、エラー状態を管理するための状態管理クラスです。
+/// [ErrorViewModel]クラスは、アプリケーション内のエラー状態を管理します。
 class ErrorViewModel extends Notifier<ErrorState> {
   @override
   ErrorState build() {
     return ErrorState();
   }
 
-  // エラーメッセージのみを設定するメソッド（非同期に処理）
+  /// エラーメッセージを設定します。
+  /// [message] : 設定するエラーメッセージ。
   void setErrorMessage(String message) {
     Future.microtask(() {
       final error = ApiError(
@@ -21,12 +21,13 @@ class ErrorViewModel extends Notifier<ErrorState> {
     });
   }
 
-  // エラー状態を設定するメソッド。
+  /// [ApiError]オブジェクトを設定します。
+  /// [error] : 設定する[ApiError]オブジェクト。
   void setError(ApiError error) {
     state = state.copyWith(error: error);
   }
 
-  // エラー状態をクリアするメソッド。
+  /// エラー状態をクリアします。
   void clearError() {
     state = state.copyWith(error: null);
   }

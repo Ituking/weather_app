@@ -10,7 +10,8 @@ import '../repositories/weather_repository_provider.dart';
 import 'providers/dio_error_handler_provider.dart';
 import 'providers/text_editing_controller_provider.dart';
 
-// CityWeatherNotifierは、都市名に基づいて天気情報を取得するNotifier
+/// [CityWeatherNotifier]は、指定された都市の天気情報を非同期に取得し、
+/// その結果を管理するための[Notifier]クラスです。
 class CityWeatherNotifier
     extends Notifier<AsyncValue<Result<WeatherResponse>>> {
   late final WeatherRepository _weatherRepository;
@@ -21,7 +22,12 @@ class CityWeatherNotifier
     return const AsyncLoading();
   }
 
-  // 都市名を設定して天気情報を取得
+  /// 指定された都市名の天気情報を取得し、状態を更新します。
+  ///
+  /// [cityName] : 天気情報を取得する都市の名前。
+  ///
+  /// このメソッドは、都市名をトリムし、[WeatherRepository]を使用して
+  /// 天気情報を取得します。取得結果は[state]に格納されます。
   Future<void> fetchWeather(String cityName) async {
     final logger = ref.read(loggerProvider);
     state = const AsyncLoading();

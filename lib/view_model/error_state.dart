@@ -1,14 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../core/network/api_error.dart';
 
 part 'error_state.freezed.dart';
 
-// ErrorStateは、アプリケーションのエラーに関連する状態を保持するデータモデルです。
+/// [ErrorState]クラスは、アプリケーション内のエラー状態を管理します。
 @freezed
 class ErrorState with _$ErrorState {
-  // ファクトリコンストラクタ。デフォルト値や省略可能なプロパティを定義します。
+  /// [error] : エラー情報を保持するオプショナルなプロパティ。
   factory ErrorState({
-    ApiError? error, // エラーデータを保持するオプショナルなプロパティ
+    ApiError? error,
   }) = _ErrorState;
 }
