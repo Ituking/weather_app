@@ -8,17 +8,24 @@ import '../../../models/weather_wind.dart';
 part 'weather_list.freezed.dart';
 part 'weather_list.g.dart';
 
-// `WeatherList` クラスは、天気情報のリスト項目を表します。
+/// [WeatherList] クラスは、天気情報のリスト項目を表します。
 @freezed
 class WeatherList with _$WeatherList {
-  // コンストラクタ。メイン情報 [main]、天気の詳細 [weather]、風情報 [wind] を受け取ります。
+  /// コンストラクタ。
+  ///
+  /// [main] : メインの天気情報を表します。
+  /// [weather] : 天気の詳細情報のリストを表します。
+  /// [wind] : 風の情報を表します。
   factory WeatherList({
-    required WeatherMain main, // メインの天気情報を表します。
-    required List<WeatherDescription> weather, // 天気の詳細情報を表します。
-    required WeatherWind wind, // 風の情報を表します。
+    required WeatherMain main,
+    required List<WeatherDescription> weather,
+    required WeatherWind wind,
   }) = _WeatherList;
 
-  // JSON から `WeatherList` インスタンスを生成するファクトリメソッド。
+  /// JSON から [WeatherList] インスタンスを生成するファクトリメソッド。
+  ///
+  /// [json] : [WeatherList] のプロパティを含むマップ。
+  /// 戻り値 : [WeatherList] の新しいインスタンス。
   factory WeatherList.fromJson(Map<String, dynamic> json) =>
       _$WeatherListFromJson(json);
 }
