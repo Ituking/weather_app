@@ -6,7 +6,7 @@ import '../../components/background_image.dart';
 import '../../components/city_search_button.dart';
 import '../../components/city_search_input.dart';
 
-// CitySearchScreenは、ユーザーが都市名を入力して天気情報を検索する画面です。
+/// [CitySearchScreen]は、ユーザーが都市名を入力して天気情報を検索する画面です。
 class CitySearchScreen extends ConsumerWidget {
   const CitySearchScreen({super.key});
 
