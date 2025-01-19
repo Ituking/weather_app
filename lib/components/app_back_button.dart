@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../core/strings/app_back_button_strings.dart';
 
-// AppBackButtonは、天気検索画面に遷移するボタン
+/// [AppBackButton]は、天気検索画面に遷移するボタンです。
 class AppBackButton extends StatelessWidget {
   const AppBackButton({super.key});
 

@@ -9,7 +9,10 @@ import '../view_model/providers/city_weather_notifier_provider.dart';
 import '../view_model/providers/error_view_model_provider.dart';
 import '../view_model/providers/text_editing_controller_provider.dart';
 
-// CitySearchButtonウィジェットは、都市名の検索ボタンを提供します。
+/// 都市名を検索するボタンウィジェット。
+///
+/// 入力された都市名をバリデーションし、天気情報を取得して結果画面に遷移します。
+/// エラー発生時はエラー画面に遷移します。
 class CitySearchButton extends ConsumerStatefulWidget {
   const CitySearchButton({super.key});
 
@@ -18,23 +21,23 @@ class CitySearchButton extends ConsumerStatefulWidget {
 }
 
 class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
+  /// 入力内容が有効かどうかを示すフラグ。
   bool isValid = false;
+
+  /// 都市名の入力を管理するコントローラー。
   late TextEditingController controller;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    // TextEditingControllerをProviderから取得
+    // TextEditingControllerをProviderから取得。
     controller = ref.read(textEditingControllerProvider);
 
-    // 都市名のバリデータをProviderから取得
+    // 都市名のバリデータをProviderから取得し、入力内容の変更を検知してバリデーションを実行。
     final validator = ref.read(cityNameValidatorProvider);
-
-    // TextEditingControllerのリスナーを追加して、テキストが変更されるたびにバリデーションを行う
     controller.addListener(() {
       setState(() {
-        // 都市名が有効かどうかをチェックし、isValidフラグを更新
         isValid = validator.validate(controller.text);
       });
     });
@@ -48,28 +51,28 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
 
   @override
   Widget build(BuildContext context) {
+    // 状態を取得
     final cityWeatherNotifier = ref.watch(cityWeatherNotifierProvider.notifier);
     final isLoading = ref.watch(citySearchViewModelProvider).isLoading;
 
-    // 現在のテーマデータを取得してスタイリングに使用
+    // テーマを取得
     final theme = Theme.of(context);
 
     return isLoading
         ? const CircularProgressIndicator()
         : ElevatedButton(
-            // ボタンが押されたときの動作
-            onPressed: !isValid
-                ? null
-                : () async {
+            onPressed: isValid
+                ? () async {
                     final cityName = controller.text.trim();
 
-                    // 入力が空でないことを確認し、天気情報を取得する
+                    // 入力が空でない場合のみ処理を実行。
                     if (cityName.isNotEmpty) {
                       await cityWeatherNotifier.fetchWeather(cityName);
+
+                      // APIレスポンスに基づいて遷移を制御。
                       final weatherResult =
                           ref.read(cityWeatherNotifierProvider);
 
-                      // APIレスポンスから都市名を取得して画面遷移
                       weatherResult.when(
                         data: (result) {
                           result.when(
@@ -81,8 +84,6 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
                             },
                             failure: (error) {
                               final errorMessage = error.message;
-
-                              // エラーメッセージを設定してエラー画面に遷移
                               ref
                                   .read(errorViewModelProvider.notifier)
                                   .setErrorMessage(errorMessage);
@@ -90,17 +91,17 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
                             },
                           );
                         },
-                        loading: () => const CircularProgressIndicator(),
+                        loading: () =>
+                            const CircularProgressIndicator(), // ローディング中。
                         error: (err, stack) {
-                          // エラーハンドリング: エラーメッセージを渡してエラー画面に遷移
                           context.go('/error', extra: {
                             'message': err.toString(),
                           });
                         },
                       );
                     }
-                  },
-            // ボタンのスタイルを定義。テーマから色を取得し、最小サイズを設定
+                  }
+                : null,
             style: ElevatedButton.styleFrom(
               foregroundColor: theme.colorScheme.onPrimary,
               backgroundColor: theme.primaryColor,
