@@ -1,11 +1,27 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'core/firebase/firebase_options_manager.dart';
 import 'core/routing/app_router.dart';
 import 'core/theme/app_theme.dart';
 
 /// アプリケーションのエントリーポイント。
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Firebaseの初期化
+  await Firebase.initializeApp(
+    options: FirebaseOptionsManager.options,
+  );
+
+  // Crashlyticsをすべての環境 (`dev/stg/prod`) で有効化
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+
+  // Crashlyticsの初期化
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
