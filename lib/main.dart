@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +18,16 @@ void main() async {
     options: FirebaseOptionsManager.options,
   );
 
-  // Crashlyticsをすべての環境 (`dev/stg/prod`) で有効化
-  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  // Flutterフレームワーク内のエラーをキャッチして報告
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
 
-  // Crashlyticsの初期化
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  // 非同期エラーをキャッチして報告
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   runApp(const ProviderScope(child: MyApp()));
 }
