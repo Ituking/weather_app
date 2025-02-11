@@ -4,30 +4,54 @@
         "ios": {
           "default": {
             "projectId": "weatherapp-af85c",
-            "appId": "1:623192295723:ios:8ededa644e1dc07a849d6e",
-            "uploadDebugSymbols": false,
-            "fileOutput": "ios/Runner/GoogleService-Info.plist"
+            "appId": "1:623192295723:ios:8ededa644e1dc07a849d6e"
+          }
+        }
+      },
+      "dart": {
+        "lib/firebase_options_dev.dart": {
+          "projectId": "weatherappdev-af5fa",
+          "configurations": {
+            "ios": "1:190514111525:ios:9086ff1a144424f2b6cbcc"
           }
         },
-        "dart": {
-          "lib/firebase_options_dev.dart": {
-            "projectId": "weatherappdev-af5fa",
-            "configurations": {
-              "ios": "1:190514111525:ios:9086ff1a144424f2b6cbcc"
-            }
-          },
-          "lib/firebase_options_stg.dart": {
-            "projectId": "weatherappstg-bc0aa",
-            "configurations": {
-              "ios": "1:456642418270:ios:5289ac3ee9aa922901c6cf"
-            }
-          },
-          "lib/firebase_options_prod.dart": {
-            "projectId": "weatherapp-af85c",
-            "configurations": {
-              "ios": "1:623192295723:ios:8ededa644e1dc07a849d6e"
-            }
+        "lib/core/firebase/firebase_options_dev.dart": {
+          "projectId": "weatherappdev-af5fa",
+          "configurations": {
+            "ios": "1:190514111525:ios:9086ff1a144424f2b6cbcc"
           }
+        },
+        "lib/core/firebase/firebase_options_stg.dart": {
+          "projectId": "weatherappstg-bc0aa",
+          "configurations": {
+            "ios": "1:456642418270:ios:5289ac3ee9aa922901c6cf"
+          }
+        },
+        "lib/core/firebase/firebase_options_prod.dart": {
+          "projectId": "weatherapp-af85c",
+          "configurations": {
+            "ios": "1:623192295723:ios:8ededa644e1dc07a849d6e"
+          }
+        }
+      }
+    },
+    "dart": {
+      "lib/core/firebase/firebase_options_dev.dart": {
+        "projectId": "weatherappdev-af5fa",
+        "configurations": {
+          "ios": "1:190514111525:ios:9086ff1a144424f2b6cbcc"
+        }
+      },
+      "lib/core/firebase/firebase_options_stg.dart": {
+        "projectId": "weatherappstg-bc0aa",
+        "configurations": {
+          "ios": "1:456642418270:ios:5289ac3ee9aa922901c6cf"
+        }
+      },
+      "lib/core/firebase/firebase_options_prod.dart": {
+        "projectId": "weatherapp-af85c",
+        "configurations": {
+          "ios": "1:623192295723:ios:8ededa644e1dc07a849d6e"
         }
       }
     }
