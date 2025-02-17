@@ -8,3 +8,9 @@ typings/
 # Node.js dependency directory
 node_modules/
 *.local
+
+# Ignore environment variables (sensitive data)
+.env
+
+# Ignore Firebase service account keys (keep them private)
+secrets/
