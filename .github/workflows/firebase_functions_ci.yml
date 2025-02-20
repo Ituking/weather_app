@@ -1,4 +1,4 @@
-name: Firebase Functions Tests
+name: Firebase Functions CI
 
 on:
   push:
