@@ -12,6 +12,10 @@
     "types": ["mocha", "node"]
   },
   "compileOnSave": true,
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "include": [
     "src", "test"
   ]
