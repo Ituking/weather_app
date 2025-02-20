@@ -1,4 +1,4 @@
-name: Firebase Functions Tests
+name: Firebase Functions CI
 
 on:
   push:
@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: functions 
 
     steps:
       - name: Checkout repository
@@ -17,12 +20,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22 
 
       - name: Install dependencies
-        run: |
-          cd functions
-          npm install
+        run: npm install
 
       - name: Set up Firebase credentials
         run: echo "$FIREBASE_SERVICE_ACCOUNT_DEV" | base64 --decode > $HOME/service-account.json
@@ -33,6 +34,4 @@ jobs:
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/service-account.json" >> $GITHUB_ENV
 
       - name: Run unit tests
-        run: |
-          cd functions
-          npm test
+        run: npm test

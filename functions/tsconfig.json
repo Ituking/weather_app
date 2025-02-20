@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "CommonJS",
     "esModuleInterop": true,
     "moduleResolution": "node",
     "noImplicitReturns": true,
@@ -8,9 +8,15 @@
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017"
+    "target": "ES2022",
+    "types": ["mocha", "node"],
+    "baseUrl": "./"
   },
   "compileOnSave": true,
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "include": [
     "src", "test"
   ]
