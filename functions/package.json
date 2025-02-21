@@ -17,6 +17,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "firebase-admin": "^13.1.0",
     "firebase-functions": "^6.3.1",
     "long": "^5.2.0"
