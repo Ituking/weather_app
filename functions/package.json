@@ -9,7 +9,8 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "mocha --require ts-node/register 'test/**/*_test.ts'"
+    "test": "mocha --require ts-node/register 'test/**/*_test.ts'",
+    "format": "npx prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
   },
   "engines": {
     "node": "22"
