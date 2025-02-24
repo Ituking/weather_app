@@ -7,6 +7,7 @@ import firebaseFunctionsTest from 'firebase-functions-test';
 import * as admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
 import { expect } from 'chai';
+import nock from 'nock';
 
 dotenv.config();
 
@@ -17,8 +18,20 @@ const testEnv = firebaseFunctionsTest({
 
 const db = admin.firestore();
 
+// テスト開始前にOpenWeatherMapAPIのレスポンスをモック
+before(() => {
+  nock('https://api.openweathermap.org')
+    .get(/\/data\/2.5\/weather/)
+    .reply(200, {
+      main: { temp: 8.98, humidity: 27 },
+      wind: { speed: 9.77 },
+      weather: [{ description: '雲' }],
+    });
+});
+
 after(() => {
   testEnv.cleanup(); // テスト終了後にFirebase接続をクリーンアップ
+  nock.cleanAll();
 });
 
 describe('weather_service (オンラインモード)', () => {
@@ -28,16 +41,13 @@ describe('weather_service (オンラインモード)', () => {
 
     console.log('fetchWeatherFromAPI result:', result);
 
-    expect(result).to.have.property('city', city);
-    expect(result).to.have.property('temperature');
-    expect(result).to.have.property('humidity');
-    expect(result).to.have.property('windSpeed');
-    expect(result).to.have.property('description');
-
-    expect(result.temperature).to.equal(8.98);
-    expect(result.humidity).to.equal(27);
-    expect(result.windSpeed).to.equal(9.77);
-    expect(result.description).to.equal('雲');
+    expect(result).to.deep.include({
+      city,
+      temperature: 8.98,
+      humidity: 27,
+      windSpeed: 9.77,
+      description: '雲',
+    });
   });
 
   it('saveWeatherToFirestoreはデータをFirestoreに保存する', async () => {
@@ -64,19 +74,16 @@ describe('weather_service (オンラインモード)', () => {
       .get();
 
     
-    if (snapshot.empty) {
-      console.log('Firestoreにデータが存在しません');
-    } else {
-      const storedData = snapshot.docs[0].data();
-      console.log('Firestoreから取得したデータ:', storedData);
-    }
-
     expect(snapshot.empty).to.be.false;
     const storedData = snapshot.docs[0].data();
 
-    expect(storedData.temperature).to.equal(8.98);
-    expect(storedData.humidity).to.equal(27);
-    expect(storedData.windSpeed).to.equal(9.77);
-    expect(storedData.description).to.equal('雲');
+    console.log('Firestoreから取得したデータ:', storedData);
+
+    expect(storedData).to.deep.include({
+      temperature: 8.98,
+      humidity: 27,
+      windSpeed: 9.77,
+      description: '雲',
+    });
   });
 });
