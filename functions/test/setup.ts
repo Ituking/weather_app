@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
-import firebaseFunctionsTest from 'firebase-functions-test';
 import * as admin from 'firebase-admin';
+import firebaseFunctionsTest from 'firebase-functions-test';
 
 dotenv.config();
 const test = firebaseFunctionsTest();
