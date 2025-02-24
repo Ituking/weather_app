@@ -39,8 +39,6 @@ describe('weather_service (オンラインモード)', () => {
     const city = 'Tokyo';
     const result: WeatherData = await fetchWeatherFromAPI(city);
 
-    console.log('fetchWeatherFromAPI result:', result);
-
     expect(result).to.deep.include({
       city,
       temperature: 8.98,
@@ -62,8 +60,7 @@ describe('weather_service (オンラインモード)', () => {
     };
 
     await saveWeatherToFirestore(city, weatherData);
-    console.log('saveWeatherToFirestore 完了:', weatherData);
-
+  
     // Firestoreからデータを取得して確認
     const snapshot = await db
       .collection('weather')
@@ -76,8 +73,6 @@ describe('weather_service (オンラインモード)', () => {
     
     expect(snapshot.empty).to.be.false;
     const storedData = snapshot.docs[0].data();
-
-    console.log('Firestoreから取得したデータ:', storedData);
 
     expect(storedData).to.deep.include({
       temperature: 8.98,
