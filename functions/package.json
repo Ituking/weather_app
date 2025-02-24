@@ -27,6 +27,7 @@
     "@babel/generator": "^7.26.8",
     "@babel/template": "^7.26.8",
     "@babel/types": "^7.26.8",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/axios": "^0.9.36",
     "@types/chai": "^5.0.1",
     "@types/mocha": "^10.0.10",
