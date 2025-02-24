@@ -1,9 +1,9 @@
-import * as admin from 'firebase-admin';
 import axios from 'axios';
+import * as admin from 'firebase-admin';
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
-  projectId: "weatherapptest-f7454"
+  projectId: 'weatherapptest-f7454',
 });
 
 // Firestoreインスタンス
@@ -46,7 +46,7 @@ export async function fetchWeatherFromAPI(city: string): Promise<WeatherData> {
 
   try {
     const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${OPENWEATHER_API_KEY}&units=metric&lang=ja`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${OPENWEATHER_API_KEY}&units=metric&lang=ja`,
     );
 
     return {
@@ -71,7 +71,7 @@ export async function fetchWeatherFromAPI(city: string): Promise<WeatherData> {
  */
 export async function saveWeatherToFirestore(
   city: string,
-  weatherData: WeatherData
+  weatherData: WeatherData,
 ): Promise<void> {
   const now = new Date();
   const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}`;

@@ -1,13 +1,14 @@
+import { expect } from 'chai';
+import * as dotenv from 'dotenv';
+import * as admin from 'firebase-admin';
+import firebaseFunctionsTest from 'firebase-functions-test';
+import nock from 'nock';
+
 import {
+  WeatherData,
   fetchWeatherFromAPI,
   saveWeatherToFirestore,
-  WeatherData,
 } from '../src/weather_service';
-import firebaseFunctionsTest from 'firebase-functions-test';
-import * as admin from 'firebase-admin';
-import * as dotenv from 'dotenv';
-import { expect } from 'chai';
-import nock from 'nock';
 
 dotenv.config();
 
@@ -60,7 +61,7 @@ describe('weather_service (オンラインモード)', () => {
     };
 
     await saveWeatherToFirestore(city, weatherData);
-  
+
     // Firestoreからデータを取得して確認
     const snapshot = await db
       .collection('weather')
@@ -70,7 +71,6 @@ describe('weather_service (オンラインモード)', () => {
       .limit(1)
       .get();
 
-    
     expect(snapshot.empty).to.be.false;
     const storedData = snapshot.docs[0].data();
 
