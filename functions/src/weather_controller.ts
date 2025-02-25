@@ -14,8 +14,15 @@ interface WeatherRequest {
  * ユーザーがリクエストした都市の天気を取得するCloudFunction
  */
 export const getWeatherForCity = functions.https.onCall(
-  async (data: functions.https.CallableRequest<WeatherRequest>, context) => {
-    const city = data.data.city;
+  async (request: functions.https.CallableRequest<WeatherRequest>) => {
+    const city = request.data.city;
+
+    if (!city) {
+      throw new functions.https.HttpsError(
+        'invalid-argument',
+        '都市名が必要です。',
+      );
+    }
 
     // Firestoreから最新データを取得
     const weatherRef = db
