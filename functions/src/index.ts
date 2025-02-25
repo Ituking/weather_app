@@ -1,10 +1,10 @@
-import { onRequest } from 'firebase-functions/v2/https';
-import * as logger from 'firebase-functions/logger';
-import admin from 'firebase-admin';
+import * as admin from 'firebase-admin';
+
+import { getWeatherForCity } from './weather_controller';
 
 admin.initializeApp();
 
-export const helloWorld = onRequest((request, response) => {
-  logger.info('Hello logs!', { structuredData: true });
-  response.send('Hello from Firebase!');
-});
+export { getWeatherForCity };
+
+export * from './weather_controller';
+export * from './weather_service';
