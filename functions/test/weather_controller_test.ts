@@ -98,10 +98,6 @@ describe('getWeatherForCityの動作検証 (Cloud Functions)', () => {
     } as unknown as functions.https.CallableRequest<any>;
     const result = await wrapped(mockRequest);
 
-    console.log('getStub.called:', getStub.called);
-    console.log('fetchWeatherStub.calledOnce:', fetchWeatherStub.calledOnce);
-    console.log('saveWeatherStub.calledOnce:', saveWeatherStub.calledOnce);
-
     expect(fetchWeatherStub.calledOnce).to.be.true;
     expect(saveWeatherStub.calledOnce).to.be.true;
     expect(result).to.deep.include({
