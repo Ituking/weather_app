@@ -1,16 +1,11 @@
-import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
-import test from 'firebase-functions-test';
 import { expect } from 'chai';
+import * as functions from 'firebase-functions';
+import test from 'firebase-functions-test';
 
 // FirebaseFunctionsTestを初期化
 const firebaseTest = test();
 
 describe('FirebaseFunctionsのロードテスト', () => {
-  before(() => {
-    admin.initializeApp();
-  });
-
   after(() => {
     firebaseTest.cleanup();
   });
