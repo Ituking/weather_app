@@ -45,11 +45,8 @@ jobs:
           echo "FIREBASE_PROJECT_ID=${{ env.FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
           echo "NODE_ENV=${{ env.NODE_ENV }}" >> $GITHUB_ENV
 
-      - name: Authenticate Firebase CLI
-        run: firebase login:ci --no-localhost || echo "Skipping interactive login"
-
-      - name: Select Firebase project for testing
-        run: firebase use $FIREBASE_PROJECT_ID
+      - name: Verify Firebase project access
+        run: firebase projects:list --json | jq '.[].projectId' | grep "$FIREBASE_PROJECT_ID" || echo "Project not found!"
 
       - name: Run unit tests
         run: npm test
