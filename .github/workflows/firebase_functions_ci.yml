@@ -34,7 +34,7 @@ jobs:
 
       - name: Set up Firebase credentials
         run: |
-          echo "$FIREBASE_SERVICE_ACCOUNT_TEST" | base64 --decode > $HOME/service-account.json
+          echo "$FIREBASE_SERVICE_ACCOUNT_TEST" | tr -d '\n' | base64 --decode > $HOME/service-account.json
           echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/service-account.json" >> $GITHUB_ENV
         env:
           FIREBASE_SERVICE_ACCOUNT_TEST: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TEST }}
