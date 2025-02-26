@@ -2,9 +2,9 @@ name: Firebase Functions CI
 
 on:
   push:
-    branches: [develop]
+    branches: [ develop ]
   pull_request:
-    branches: [develop]
+    branches: [ develop ]
 
 jobs:
   test:
@@ -12,6 +12,10 @@ jobs:
     defaults:
       run:
         working-directory: functions 
+
+    env:
+      NODE_ENV: dev  # テスト環境を示す変数
+      FIREBASE_PROJECT_ID: weatherapptest-f7454  # テスト用のFirebaseプロジェクト
 
     steps:
       - name: Checkout repository
@@ -25,13 +29,34 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Set up Firebase credentials
-        run: echo "$FIREBASE_SERVICE_ACCOUNT_DEV" | base64 --decode > $HOME/service-account.json
-        env:
-          FIREBASE_SERVICE_ACCOUNT_DEV: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
 
-      - name: Set GOOGLE_APPLICATION_CREDENTIALS
-        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/service-account.json" >> $GITHUB_ENV
+      - name: Set up Firebase credentials
+        run: |
+          echo "$FIREBASE_SERVICE_ACCOUNT_TEST" | tr -d '\n' | base64 --decode > $HOME/service-account.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/service-account.json" >> $GITHUB_ENV
+        env:
+          FIREBASE_SERVICE_ACCOUNT_TEST: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TEST }}
+
+      - name: Configure Test Environment
+        run: |
+          echo "OPENWEATHERMAP_API_KEY_DEV=${{ secrets.OPENWEATHERMAP_API_KEY_DEV }}" >> $GITHUB_ENV
+          echo "FIREBASE_PROJECT_ID=${{ env.FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
+          echo "NODE_ENV=${{ env.NODE_ENV }}" >> $GITHUB_ENV
+
+      - name: Debug environment variables
+        run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS"
+          echo "FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID"
+          echo "NODE_ENV=$NODE_ENV"
+          echo "OPENWEATHERMAP_API_KEY_DEV is set"
+
+      - name: Debug Firebase project list
+        run: firebase projects:list
+
+      - name: Verify Firebase project access
+        run: firebase projects:list --json | jq '.[].projectId' | grep "$FIREBASE_PROJECT_ID" || echo "Project not found!"
 
       - name: Run unit tests
         run: npm test

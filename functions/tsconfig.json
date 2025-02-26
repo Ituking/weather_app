@@ -10,7 +10,7 @@
     "strict": true,
     "target": "ES2022",
     "types": ["mocha", "node"],
-    "baseUrl": "./"
+    "baseUrl": "./src"
   },
   "compileOnSave": true,
   "ts-node": {
