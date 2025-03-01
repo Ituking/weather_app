@@ -9,7 +9,7 @@ class BackgroundImage extends StatelessWidget {
     return Positioned.fill(
       child: ColorFiltered(
         colorFilter: ColorFilter.mode(
-          Colors.black.withOpacity(0.5),
+          Colors.black.withAlpha((0.5 * 255).toInt()),
           BlendMode.darken,
         ),
         child: Image.asset(
