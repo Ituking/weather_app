@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 
 import '../../components/app_back_button.dart';
 import '../../components/background_image.dart';
@@ -46,21 +47,21 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                       children: [
                         CityNameText(
                             cityName: weatherResponse.city.name), // 都市名
-                        const SizedBox(height: 8),
+                        Gap(8),
                         TemperatureText(temperature: weather.main.temp), // 気温
-                        const SizedBox(height: 8),
+                        Gap(8),
                         HumidityText(humidity: weather.main.humidity), // 湿度
-                        const SizedBox(height: 8),
+                        Gap(8),
                         WindSpeedText(windSpeed: weather.wind.speed), // 風速
-                        const SizedBox(height: 8),
+                        Gap(8),
                         WeatherDescriptionText(
                             weatherDescription:
                                 weather.weather.first.description), // 天気の説明
-                        const SizedBox(height: 8),
+                        Gap(8),
                         WeatherIcon(
                             iconCode:
                                 "${weather.weather.first.icon}@2x"), // 天気アイコン
-                        const SizedBox(height: 20),
+                        Gap(20),
                         const AppBackButton(), // 戻るボタン
                       ],
                     );

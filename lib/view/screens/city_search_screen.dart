@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 
 import '../../components/background_image.dart';
 import '../../components/city_search_button.dart';
@@ -25,13 +26,13 @@ class CitySearchScreen extends ConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 20),
+                    Gap(20),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40.0),
                       // 都市名入力用のウィジェット
                       child: CitySearchInput(),
                     ),
-                    SizedBox(height: 20),
+                    Gap(20),
                     // 検索ボタンウィジェット
                     CitySearchButton(),
                   ],
