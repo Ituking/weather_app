@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../api_error.dart';
 
 part 'result.freezed.dart';
