@@ -1,5 +1,11 @@
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    - "**/*.freezed.dart"  
+    - "**/*.g.dart"        
+    - "**/*.mocks.dart"    
+
 linter:
   rules:
     - avoid_dynamic_calls: true
