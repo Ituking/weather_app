@@ -20,8 +20,10 @@ WeatherDescription _$WeatherDescriptionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherDescription {
-  String get description =>
-      throw _privateConstructorUsedError; // 天気の詳細な説明を表します。
+  /// 天気の詳細な説明を表します。
+  String get description => throw _privateConstructorUsedError;
+
+  /// 天気アイコンのIDを表します。
   String get icon => throw _privateConstructorUsedError;
 
   /// Serializes this WeatherDescription to a JSON map.
@@ -122,9 +124,11 @@ class _$WeatherDescriptionImpl implements _WeatherDescription {
   factory _$WeatherDescriptionImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherDescriptionImplFromJson(json);
 
+  /// 天気の詳細な説明を表します。
   @override
   final String description;
-// 天気の詳細な説明を表します。
+
+  /// 天気アイコンのIDを表します。
   @override
   final String icon;
 
@@ -172,8 +176,11 @@ abstract class _WeatherDescription implements WeatherDescription {
   factory _WeatherDescription.fromJson(Map<String, dynamic> json) =
       _$WeatherDescriptionImpl.fromJson;
 
+  /// 天気の詳細な説明を表します。
   @override
-  String get description; // 天気の詳細な説明を表します。
+  String get description;
+
+  /// 天気アイコンのIDを表します。
   @override
   String get icon;
 

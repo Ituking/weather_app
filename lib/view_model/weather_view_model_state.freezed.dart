@@ -16,11 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WeatherViewModelState {
-// weather は、天気データの取得結果を格納します。
   Result<List<WeatherList>>? get weather =>
-      throw _privateConstructorUsedError; // isLoading は、データ取得中のローディング状態を示します。デフォルトは false です。
-  bool get isLoading =>
-      throw _privateConstructorUsedError; // errorMessage は、エラーメッセージを格納します。エラーがない場合は null です。
+      throw _privateConstructorUsedError; // 天気データの取得結果
+  bool get isLoading => throw _privateConstructorUsedError; // データのロード状態。
   String? get errorMessage => throw _privateConstructorUsedError;
 
   /// Create a copy of WeatherViewModelState
@@ -154,14 +152,13 @@ class _$WeatherViewModelStateImpl implements _WeatherViewModelState {
   _$WeatherViewModelStateImpl(
       {this.weather, this.isLoading = false, this.errorMessage});
 
-// weather は、天気データの取得結果を格納します。
   @override
   final Result<List<WeatherList>>? weather;
-// isLoading は、データ取得中のローディング状態を示します。デフォルトは false です。
+// 天気データの取得結果
   @override
   @JsonKey()
   final bool isLoading;
-// errorMessage は、エラーメッセージを格納します。エラーがない場合は null です。
+// データのロード状態。
   @override
   final String? errorMessage;
 
@@ -202,12 +199,10 @@ abstract class _WeatherViewModelState implements WeatherViewModelState {
       final bool isLoading,
       final String? errorMessage}) = _$WeatherViewModelStateImpl;
 
-// weather は、天気データの取得結果を格納します。
   @override
-  Result<List<WeatherList>>?
-      get weather; // isLoading は、データ取得中のローディング状態を示します。デフォルトは false です。
+  Result<List<WeatherList>>? get weather; // 天気データの取得結果
   @override
-  bool get isLoading; // errorMessage は、エラーメッセージを格納します。エラーがない場合は null です。
+  bool get isLoading; // データのロード状態。
   @override
   String? get errorMessage;
 

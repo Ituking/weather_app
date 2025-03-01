@@ -32,7 +32,8 @@ class CitySearchInputState extends ConsumerState<CitySearchInput> {
       // 入力フィールドのデコレーションを設定します。
       decoration: InputDecoration(
         filled: true, // 背景を塗りつぶします。
-        fillColor: Colors.white.withOpacity(0.8), // 背景色を白の半透明に設定します。
+        fillColor:
+            Colors.white.withAlpha((0.8 * 255).toInt()), // 背景色を白の半透明に設定します。
         hintText:
             CitySearchInputStrings.hintTextCityNameExample, // ヒントテキストを設定します。
         labelStyle:

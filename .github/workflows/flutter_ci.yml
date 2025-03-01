@@ -41,6 +41,12 @@ jobs:
       - name: Generate code
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
+      - name: Run Lint analysis
+        run: dart analyze
+
+      - name: Check code formatting
+        run: dart format --set-exit-if-changed .
+
       - name: Run tests
         run: flutter test
 

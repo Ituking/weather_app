@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ApiError {
-  ApiErrorType get type => throw _privateConstructorUsedError; // エラーの種類
+  ApiErrorType get type => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
 
   /// Create a copy of ApiError
@@ -112,7 +112,6 @@ class _$ApiErrorImpl implements _ApiError {
 
   @override
   final ApiErrorType type;
-// エラーの種類
   @override
   final String message;
 
@@ -148,7 +147,7 @@ abstract class _ApiError implements ApiError {
       required final String message}) = _$ApiErrorImpl;
 
   @override
-  ApiErrorType get type; // エラーの種類
+  ApiErrorType get type;
   @override
   String get message;
 

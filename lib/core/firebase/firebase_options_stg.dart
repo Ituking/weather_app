@@ -60,5 +60,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'weatherappstg-bc0aa.firebasestorage.app',
     iosBundleId: 'com.example.weatherapp.stg',
   );
-
 }
