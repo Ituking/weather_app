@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import '../core/logger/logger_provider.dart';
 import '../core/network/response/result.dart';
 import '../repositories/weather_repository.dart';
