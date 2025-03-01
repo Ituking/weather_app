@@ -20,6 +20,7 @@ WeatherWind _$WeatherWindFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherWind {
+  /// 風速を表します。
   double get speed => throw _privateConstructorUsedError;
 
   /// Serializes this WeatherWind to a JSON map.
@@ -110,6 +111,7 @@ class _$WeatherWindImpl implements _WeatherWind {
   factory _$WeatherWindImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherWindImplFromJson(json);
 
+  /// 風速を表します。
   @override
   final double speed;
 
@@ -152,6 +154,7 @@ abstract class _WeatherWind implements WeatherWind {
   factory _WeatherWind.fromJson(Map<String, dynamic> json) =
       _$WeatherWindImpl.fromJson;
 
+  /// 風速を表します。
   @override
   double get speed;
 

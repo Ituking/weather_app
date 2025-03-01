@@ -8,7 +8,9 @@ part of 'weather_view_model.dart';
 
 String _$weatherViewModelHash() => r'9f6b0c8c2e47759d2b2804ed13b96405a3e2cede';
 
-/// See also [WeatherViewModel].
+/// 天気データの状態を管理するViewModelクラス。
+///
+/// Copied from [WeatherViewModel].
 @ProviderFor(WeatherViewModel)
 final weatherViewModelProvider = AutoDisposeNotifierProvider<WeatherViewModel,
     WeatherViewModelState>.internal(

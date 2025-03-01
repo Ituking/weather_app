@@ -20,10 +20,19 @@ WeatherModel _$WeatherModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherModel {
-  double get temperature => throw _privateConstructorUsedError; // 温度
-  String get description => throw _privateConstructorUsedError; // 天気の説明
-  double get windSpeed => throw _privateConstructorUsedError; // 風速
-  int get humidity => throw _privateConstructorUsedError; // 湿度
+  /// 温度を表します。
+  double get temperature => throw _privateConstructorUsedError;
+
+  /// 天気の説明を表します。
+  String get description => throw _privateConstructorUsedError;
+
+  /// 風速を表します。
+  double get windSpeed => throw _privateConstructorUsedError;
+
+  /// 湿度を表します。
+  int get humidity => throw _privateConstructorUsedError;
+
+  /// 都市名を表します。
   String get cityName => throw _privateConstructorUsedError;
 
   /// Serializes this WeatherModel to a JSON map.
@@ -169,18 +178,23 @@ class _$WeatherModelImpl implements _WeatherModel {
   factory _$WeatherModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherModelImplFromJson(json);
 
+  /// 温度を表します。
   @override
   final double temperature;
-// 温度
+
+  /// 天気の説明を表します。
   @override
   final String description;
-// 天気の説明
+
+  /// 風速を表します。
   @override
   final double windSpeed;
-// 風速
+
+  /// 湿度を表します。
   @override
   final int humidity;
-// 湿度
+
+  /// 都市名を表します。
   @override
   final String cityName;
 
@@ -238,14 +252,23 @@ abstract class _WeatherModel implements WeatherModel {
   factory _WeatherModel.fromJson(Map<String, dynamic> json) =
       _$WeatherModelImpl.fromJson;
 
+  /// 温度を表します。
   @override
-  double get temperature; // 温度
+  double get temperature;
+
+  /// 天気の説明を表します。
   @override
-  String get description; // 天気の説明
+  String get description;
+
+  /// 風速を表します。
   @override
-  double get windSpeed; // 風速
+  double get windSpeed;
+
+  /// 湿度を表します。
   @override
-  int get humidity; // 湿度
+  int get humidity;
+
+  /// 都市名を表します。
   @override
   String get cityName;
 

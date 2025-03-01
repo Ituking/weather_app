@@ -20,7 +20,10 @@ WeatherMain _$WeatherMainFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherMain {
-  double get temp => throw _privateConstructorUsedError; // 温度を表します。
+  /// 温度を表します。
+  double get temp => throw _privateConstructorUsedError;
+
+  /// 湿度を表します。
   int get humidity => throw _privateConstructorUsedError;
 
   /// Serializes this WeatherMain to a JSON map.
@@ -121,9 +124,11 @@ class _$WeatherMainImpl implements _WeatherMain {
   factory _$WeatherMainImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherMainImplFromJson(json);
 
+  /// 温度を表します。
   @override
   final double temp;
-// 温度を表します。
+
+  /// 湿度を表します。
   @override
   final int humidity;
 
@@ -170,8 +175,11 @@ abstract class _WeatherMain implements WeatherMain {
   factory _WeatherMain.fromJson(Map<String, dynamic> json) =
       _$WeatherMainImpl.fromJson;
 
+  /// 温度を表します。
   @override
-  double get temp; // 温度を表します。
+  double get temp;
+
+  /// 湿度を表します。
   @override
   int get humidity;
 

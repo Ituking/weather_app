@@ -20,9 +20,8 @@ WeatherList _$WeatherListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherList {
-  WeatherMain get main => throw _privateConstructorUsedError; // メインの天気情報を表します。
-  List<WeatherDescription> get weather =>
-      throw _privateConstructorUsedError; // 天気の詳細情報を表します。
+  WeatherMain get main => throw _privateConstructorUsedError;
+  List<WeatherDescription> get weather => throw _privateConstructorUsedError;
   WeatherWind get wind => throw _privateConstructorUsedError;
 
   /// Serializes this WeatherList to a JSON map.
@@ -169,9 +168,7 @@ class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
 
   @override
   final WeatherMain main;
-// メインの天気情報を表します。
   final List<WeatherDescription> _weather;
-// メインの天気情報を表します。
   @override
   List<WeatherDescription> get weather {
     if (_weather is EqualUnmodifiableListView) return _weather;
@@ -179,7 +176,6 @@ class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
     return EqualUnmodifiableListView(_weather);
   }
 
-// 天気の詳細情報を表します。
   @override
   final WeatherWind wind;
 
@@ -239,9 +235,9 @@ abstract class _WeatherList implements WeatherList {
       _$WeatherListImpl.fromJson;
 
   @override
-  WeatherMain get main; // メインの天気情報を表します。
+  WeatherMain get main;
   @override
-  List<WeatherDescription> get weather; // 天気の詳細情報を表します。
+  List<WeatherDescription> get weather;
   @override
   WeatherWind get wind;
 

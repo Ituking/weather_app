@@ -20,6 +20,7 @@ CityName _$CityNameFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CityName {
+  /// 都市の名前を表します。
   String get name => throw _privateConstructorUsedError;
 
   /// Serializes this CityName to a JSON map.
@@ -109,6 +110,7 @@ class _$CityNameImpl with DiagnosticableTreeMixin implements _CityName {
   factory _$CityNameImpl.fromJson(Map<String, dynamic> json) =>
       _$$CityNameImplFromJson(json);
 
+  /// 都市の名前を表します。
   @override
   final String name;
 
@@ -159,6 +161,7 @@ abstract class _CityName implements CityName {
   factory _CityName.fromJson(Map<String, dynamic> json) =
       _$CityNameImpl.fromJson;
 
+  /// 都市の名前を表します。
   @override
   String get name;
 

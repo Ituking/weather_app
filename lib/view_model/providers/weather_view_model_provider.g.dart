@@ -9,7 +9,11 @@ part of 'weather_view_model_provider.dart';
 String _$weatherViewModelProviderHash() =>
     r'41bffb77ebd6b99ff5ad9cd6725d167a2a453a2d';
 
-/// See also [weatherViewModelProvider].
+/// [Riverpod] のプロバイダーを定義します。
+///
+/// このプロバイダーは、[WeatherViewModel] のインスタンスを提供します。
+///
+/// Copied from [weatherViewModelProvider].
 @ProviderFor(weatherViewModelProvider)
 final weatherViewModelProviderProvider =
     AutoDisposeProvider<WeatherViewModel>.internal(

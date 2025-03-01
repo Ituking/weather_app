@@ -20,8 +20,7 @@ WeatherResponse _$WeatherResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherResponse {
-  List<WeatherList> get list =>
-      throw _privateConstructorUsedError; // 天気情報のリストを表します。
+  List<WeatherList> get list => throw _privateConstructorUsedError;
   CityName get city => throw _privateConstructorUsedError;
 
   /// Serializes this WeatherResponse to a JSON map.
@@ -149,7 +148,6 @@ class _$WeatherResponseImpl
     return EqualUnmodifiableListView(_list);
   }
 
-// 天気情報のリストを表します。
   @override
   final CityName city;
 
@@ -207,7 +205,7 @@ abstract class _WeatherResponse implements WeatherResponse {
       _$WeatherResponseImpl.fromJson;
 
   @override
-  List<WeatherList> get list; // 天気情報のリストを表します。
+  List<WeatherList> get list;
   @override
   CityName get city;
 
