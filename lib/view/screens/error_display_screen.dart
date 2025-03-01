@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 
 import '../../components/app_back_button.dart';
 import '../../components/background_image.dart';
@@ -36,7 +37,7 @@ class ErrorDisplayScreen extends ConsumerWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 20),
+                Gap(20),
                 const AppBackButton(), // 戻るボタン
               ],
             ),
