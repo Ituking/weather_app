@@ -3,4 +3,5 @@ include: package:flutter_lints/flutter.yaml
 linter:
   rules:
     - avoid_dynamic_calls: true
+    - prefer_relative_imports: true
     - sort_pub_dependencies: true
