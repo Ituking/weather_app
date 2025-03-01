@@ -3,5 +3,6 @@ include: package:flutter_lints/flutter.yaml
 linter:
   rules:
     - avoid_dynamic_calls: true
+    - lines_longer_than_80_chars: true
     - prefer_relative_imports: true
     - sort_pub_dependencies: true
