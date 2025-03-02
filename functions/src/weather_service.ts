@@ -1,10 +1,5 @@
-import axios from 'axios';
-import * as admin from 'firebase-admin';
-
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  projectId: 'weatherapptest-f7454',
-});
+import axios from "axios";
+import * as admin from "firebase-admin";
 
 // Firestoreインスタンス
 const db = admin.firestore();
@@ -12,13 +7,13 @@ const db = admin.firestore();
 // NODE_ENVに応じてAPIキーを設定
 const getOpenWeatherApiKey = (): string => {
   switch (process.env.NODE_ENV) {
-    case 'prod':
-      return process.env.OPENWEATHERMAP_API_KEY_PROD || '';
-    case 'stg':
-      return process.env.OPENWEATHERMAP_API_KEY_STG || '';
-    case 'dev':
-    default:
-      return process.env.OPENWEATHERMAP_API_KEY_DEV || '';
+  case "prod":
+    return process.env.OPENWEATHERMAP_API_KEY_PROD || "";
+  case "stg":
+    return process.env.OPENWEATHERMAP_API_KEY_STG || "";
+  case "dev":
+  default:
+    return process.env.OPENWEATHERMAP_API_KEY_DEV || "";
   }
 };
 
@@ -41,7 +36,7 @@ export interface WeatherData {
  */
 export async function fetchWeatherFromAPI(city: string): Promise<WeatherData> {
   if (!OPENWEATHER_API_KEY) {
-    throw new Error('APIキーが設定されていません');
+    throw new Error("APIキーが設定されていません");
   }
 
   try {
@@ -59,7 +54,7 @@ export async function fetchWeatherFromAPI(city: string): Promise<WeatherData> {
     };
   } catch (error) {
     console.error(`${city}の天気データ取得に失敗:`, error);
-    throw new Error('天気データの取得に失敗しました');
+    throw new Error("天気データの取得に失敗しました");
   }
 }
 
@@ -74,18 +69,18 @@ export async function saveWeatherToFirestore(
   weatherData: WeatherData,
 ): Promise<void> {
   const now = new Date();
-  const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}`;
+  const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}-${String(now.getHours()).padStart(2, "0")}`;
 
   try {
     await db
-      .collection('weather')
+      .collection("weather")
       .doc(city)
-      .collection('forecasts')
+      .collection("forecasts")
       .doc(timestamp)
       .set(weatherData);
     console.log(`Firestoreに${city}の天気データを保存`);
   } catch (error) {
-    console.error(`Firestoreへの保存に失敗:`, error);
-    throw new Error('Firestoreへの保存に失敗しました');
+    console.error("Firestoreへの保存に失敗:", error);
+    throw new Error("Firestoreへの保存に失敗しました");
   }
 }
