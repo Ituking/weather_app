@@ -12,7 +12,8 @@
     "noUnusedLocals": true,
     "sourceMap": true,
     "types": [
-      "node"
+      "node",
+      "mocha"
     ]
   },
   "compileOnSave": true,
