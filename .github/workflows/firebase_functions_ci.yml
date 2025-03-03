@@ -15,7 +15,6 @@ jobs:
 
     env:
       NODE_ENV: dev  # テスト環境を示す変数
-      FIREBASE_PROJECT_ID: weatherapptest-f7454  # テスト用のFirebaseプロジェクト
 
     steps:
       - name: Checkout repository
@@ -42,7 +41,7 @@ jobs:
       - name: Configure Test Environment
         run: |
           echo "OPENWEATHERMAP_API_KEY_DEV=${{ secrets.OPENWEATHERMAP_API_KEY_DEV }}" >> $GITHUB_ENV
-          echo "FIREBASE_PROJECT_ID=${{ env.FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
+          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID_TEST }}" >> $GITHUB_ENV  # 修正: GitHub Secrets を使用
           echo "NODE_ENV=${{ env.NODE_ENV }}" >> $GITHUB_ENV
 
       - name: Debug environment variables
