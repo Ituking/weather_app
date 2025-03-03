@@ -1,7 +1,7 @@
-import * as admin from 'firebase-admin';
-import * as functions from 'firebase-functions';
+import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
 
-import { fetchWeatherFromAPI, saveWeatherToFirestore } from './weather_service';
+import { fetchWeatherFromAPI, saveWeatherToFirestore } from "./weather_service";
 
 const db = admin.firestore();
 
@@ -19,17 +19,17 @@ export const getWeatherForCity = functions.https.onCall(
 
     if (!city) {
       throw new functions.https.HttpsError(
-        'invalid-argument',
-        '都市名が必要です。',
+        "invalid-argument",
+        "都市名が必要です。",
       );
     }
 
     // Firestoreから最新データを取得
     const weatherRef = db
-      .collection('weather')
+      .collection("weather")
       .doc(city)
-      .collection('forecasts')
-      .orderBy('timestamp', 'desc')
+      .collection("forecasts")
+      .orderBy("timestamp", "desc")
       .limit(1);
 
     const snapshot = await weatherRef.get();

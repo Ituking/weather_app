@@ -1,23 +1,28 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
+    "target": "ES2022",
+    "outDir": "lib",
+    "rootDir": "src",
+    "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "outDir": "lib",
     "sourceMap": true,
-    "strict": true,
-    "target": "ES2022",
-    "types": ["mocha", "node"],
-    "baseUrl": "./src"
+    "types": [
+      "node",
+      "mocha"
+    ]
   },
   "compileOnSave": true,
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  },
   "include": [
-    "src", "test"
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "test"
   ]
 }
