@@ -41,39 +41,14 @@ jobs:
       - name: Configure Test Environment
         run: |
           echo "OPENWEATHERMAP_API_KEY_DEV=${{ secrets.OPENWEATHERMAP_API_KEY_DEV }}" >> $GITHUB_ENV
-          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID_TEST }}" >> $GITHUB_ENV  # 修正: GitHub Secrets を使用
+          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID_TEST }}" >> $GITHUB_ENV  # シンプルにする
           echo "NODE_ENV=${{ env.NODE_ENV }}" >> $GITHUB_ENV
-
-      - name: Debug environment variables
-        run: |
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS"
-          echo "FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID"
-          echo "NODE_ENV=$NODE_ENV"
-          echo "OPENWEATHERMAP_API_KEY_DEV is set"
-
-      - name: Debug Firebase project list raw output
-        run: firebase projects:list --json
 
       - name: Debug authentication
         run: |
           echo "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS"
           ls -l $GOOGLE_APPLICATION_CREDENTIALS
           cat $GOOGLE_APPLICATION_CREDENTIALS
-
-      - name: Debug Firebase project list with error handling
-        run: |
-          PROJECTS_JSON=$(firebase projects:list --json)
-          if [[ "$PROJECTS_JSON" == "null" ]]; then
-            echo "Error: Firebase projects list returned null."
-            exit 1
-          fi
-          echo "$PROJECTS_JSON" | jq '.results[].projectId'
-
-      - name: Debug Firebase project list
-        run: firebase projects:list --json | jq '.results[].projectId'
-
-      - name: Verify Firebase project access
-        run: firebase projects:list --json | jq -r '.results[].projectId' | grep "$FIREBASE_PROJECT_ID" || echo "Project not found!"
 
       - name: Run unit tests
         run: npm test
