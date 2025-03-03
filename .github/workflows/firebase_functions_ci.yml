@@ -54,6 +54,21 @@ jobs:
       - name: Debug Firebase project list raw output
         run: firebase projects:list --json
 
+      - name: Debug authentication
+        run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS"
+          ls -l $GOOGLE_APPLICATION_CREDENTIALS
+          cat $GOOGLE_APPLICATION_CREDENTIALS
+
+      - name: Debug Firebase project list with error handling
+        run: |
+          PROJECTS_JSON=$(firebase projects:list --json)
+          if [[ "$PROJECTS_JSON" == "null" ]]; then
+            echo "Error: Firebase projects list returned null."
+            exit 1
+          fi
+          echo "$PROJECTS_JSON" | jq '.results[].projectId'
+
       - name: Debug Firebase project list
         run: firebase projects:list --json | jq '.results[].projectId'
 
