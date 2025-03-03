@@ -52,7 +52,7 @@ jobs:
           echo "OPENWEATHERMAP_API_KEY_DEV is set"
 
       - name: Debug Firebase project list
-        run: firebase projects:list
+        run: firebase projects:list --json | jq '.[].projectId'
 
       - name: Verify Firebase project access
         run: firebase projects:list --json | jq '.[].projectId' | grep "$FIREBASE_PROJECT_ID" || echo "Project not found!"
