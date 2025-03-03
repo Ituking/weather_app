@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as admin from "firebase-admin";
 
+admin.initializeApp();
+
 // Firestoreインスタンス
 const db = admin.firestore();
 
