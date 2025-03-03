@@ -44,11 +44,13 @@ jobs:
           echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID_TEST }}" >> $GITHUB_ENV  # シンプルにする
           echo "NODE_ENV=${{ env.NODE_ENV }}" >> $GITHUB_ENV
 
-      - name: Debug authentication
+      - name: Verify Firebase credentials
         run: |
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS"
-          ls -l $GOOGLE_APPLICATION_CREDENTIALS
-          cat $GOOGLE_APPLICATION_CREDENTIALS
+          if [ ! -f "$GOOGLE_APPLICATION_CREDENTIALS" ]; then
+            echo "Error: GOOGLE_APPLICATION_CREDENTIALS file not found!"
+            exit 1
+          fi
+        shell: bash
 
       - name: Run unit tests
         run: npm test
