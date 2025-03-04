@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weather_app/core/config/api_config.dart';
 import 'package:weather_app/core/logger/i_logger.dart';
 import 'package:weather_app/core/logger/logger_provider.dart';
+import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/dio_error_handler.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_list.dart';
@@ -25,7 +25,6 @@ void main() {
     late DioErrorHandler dioErrorHandler; // DioErrorHandlerのインスタンス
     late WeatherRepositoryImpl repository; // テスト対象のリポジトリ
     late MockILogger mockLogger; // ILoggerのモック
-    late ApiConfig apiConfig; // ApiConfigのインスタンス
 
     final weatherResponse = WeatherResponse(
       list: [
@@ -52,7 +51,6 @@ void main() {
       mockRef = MockRef();
       dioErrorHandler = DioErrorHandler();
       mockLogger = MockILogger();
-      apiConfig = ApiConfig(apiKey: '開発用のAPIキー');
 
       // ProviderRefのモックにDioErrorHandlerとILoggerを設定
       when(mockRef.read<DioErrorHandler?>(dioErrorHandlerProvider))
@@ -60,14 +58,14 @@ void main() {
       when(mockRef.read<ILogger>(loggerProvider)).thenReturn(mockLogger);
 
       // WeatherRepositoryImplのインスタンスを作成
-      repository = WeatherRepositoryImpl(
-          apiClient: mockApiClient, apiConfig: apiConfig, ref: mockRef);
+      repository =
+          WeatherRepositoryImpl(apiClient: mockApiClient, ref: mockRef);
     });
 
     test('成功時にWeatherResponseを返す', () async {
       // fetchWeatherのモック設定
-      when(mockApiClient.fetchWeather('Tokyo', any, any, any))
-          .thenAnswer((_) async => weatherResponse);
+      when(mockApiClient.fetchWeather('Tokyo'))
+          .thenAnswer((_) async => Result.success(weatherResponse));
 
       // 天気データを取得
       final result = await repository.getWeather('Tokyo');
@@ -85,16 +83,21 @@ void main() {
       expect(weatherData.list.first.main.humidity, 70);
     });
 
-    test('無効な都市名で失敗時に例外をスローする', () async {
-      // fetchWeatherが例外をスローするようにモック設定
-      when(mockApiClient.fetchWeather('InvalidCity', any, any, any))
-          .thenThrow(Exception('天気データの取得に失敗'));
+    test('無効な都市名で失敗時に適切なエラーを返す', () async {
+      // fetchWeatherがエラーを返すようにモック設定
+      when(mockApiClient.fetchWeather('InvalidCity')).thenAnswer((_) async =>
+          Result.failure(
+              ApiError(type: ApiErrorType.unknown, message: '天気データの取得に失敗')));
 
       // 天気データ取得を試みる
       final result = await repository.getWeather('InvalidCity');
 
       // 失敗したかを検証
       expect(result, isA<Failure<WeatherResponse>>());
+      final error = (result as Failure<WeatherResponse>).error;
+
+      // エラーメッセージが正しいか確認
+      expect(error.message, '天気データの取得に失敗');
     });
   });
 }
