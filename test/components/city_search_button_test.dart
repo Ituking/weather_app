@@ -8,27 +8,28 @@ import 'package:weather_app/core/strings/city_search_button_strings.dart';
 import 'package:weather_app/view_model/city_search_state.dart';
 
 import '../mocks/custom_mock_city_search_view_model.dart';
+import '../mocks/mock_firebase.dart';
 import '../mocks/mock_firebase_functions.mocks.dart';
 import '../view_model/providers/custom_mock_city_search_view_model_provider.dart';
 
 void main() {
   group('CitySearchButtonのテスト', () {
-    late CustomMockCitySearchViewModel mockViewModel;
     late ProviderContainer container;
     late MockFirebaseFunctions mockFirebaseFunctions;
 
     // Firebaseをモック
     setUpAll(() async {
       TestWidgetsFlutterBinding.ensureInitialized();
+      setupFirebaseMocks();
       await Firebase.initializeApp();
     });
 
     setUp(() {
-      mockViewModel = CustomMockCitySearchViewModel();
       mockFirebaseFunctions = MockFirebaseFunctions();
 
       container = ProviderContainer(overrides: [
-        customMockCitySearchViewModelProvider.overrideWithValue(mockViewModel),
+        customMockCitySearchViewModelProvider
+            .overrideWith(CustomMockCitySearchViewModel.new),
         firebaseFunctionsProvider.overrideWithValue(mockFirebaseFunctions),
       ]);
     });
@@ -77,7 +78,9 @@ void main() {
           find.text(CitySearchButtonStrings.buttonLabelSearch), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsNothing);
 
-      mockViewModel.setState(CitySearchState(isLoading: true));
+      container.read(customMockCitySearchViewModelProvider.notifier).setState(
+            CitySearchState(isLoading: true),
+          );
       await tester.pump();
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
