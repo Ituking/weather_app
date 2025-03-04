@@ -1,105 +1,59 @@
-import 'package:dio/dio.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http_mock_adapter/http_mock_adapter.dart';
-import 'package:weather_app/core/config/env.dart';
+import 'package:mockito/mockito.dart';
+import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_response.dart';
-
+import 'package:weather_app/models/city_name.dart';
 import 'package:weather_app/services/weather_api_client.dart';
+
+import '../mocks/mock_firebase_functions.mocks.dart';
 
 void main() {
   group('WeatherApiClientのテスト', () {
-    late Dio dio; // Dioインスタンス
-    late DioAdapter dioAdapter; // DioAdapterインスタンス
-    late WeatherApiClient client; // WeatherApiClientインスタンス
+    late MockFirebaseFunctions mockFunctions;
+    late MockHttpsCallable mockCallable;
+    late MockHttpsCallableResult mockCallableResult;
+    late WeatherApiClient client;
 
-    // 各テスト前に実行される初期設定
+    final weatherResponse = WeatherResponse(
+      list: [],
+      city: CityName(name: 'Tokyo'),
+    );
+
     setUp(() {
-      dio = Dio();
-      dioAdapter = DioAdapter(dio: dio); // DioAdapterの初期化
-      dio.httpClientAdapter = dioAdapter; // DioのHTTPクライアントアダプターを設定
-      client = WeatherApiClient(dio);
+      mockFunctions = MockFirebaseFunctions();
+      mockCallable = MockHttpsCallable();
+      mockCallableResult = MockHttpsCallableResult();
+
+      client = WeatherApiClient(mockFunctions);
     });
 
     test('API呼び出しが成功した時、天気データを返す', () async {
-      const relativeUrl = 'forecast';
-      final queryParameters = {
-        // APIリクエストのクエリパラメータ
-        'q': 'Kumagaya',
-        'appId': Env.openWeatherMapApiKeyDev,
-        'lang': 'ja',
-        'units': 'metric',
-      };
+      when(mockFunctions.httpsCallable('getWeatherForCity'))
+          .thenReturn(mockCallable);
 
-      // API呼び出しの成功をシミュレートし、期待される天気データを返すモックの設定
-      dioAdapter.onGet(
-        relativeUrl,
-        (server) => server.reply(200, {
-          'city': {
-            'name': 'Kumagaya',
-          },
-          'list': [
-            {
-              'main': {
-                'temp': 20.0,
-                'humidity': 65,
-              },
-              'weather': [
-                {
-                  'description': 'clear sky',
-                  'icon': '01d',
-                }
-              ],
-              'wind': {'speed': 5.2},
-              'dt': DateTime.now().millisecondsSinceEpoch,
-            }
-          ]
-        }),
-        queryParameters: queryParameters,
-      );
+      when(mockCallableResult.data).thenReturn(weatherResponse.toJson());
 
-      final result = await client.fetchWeather(
-        'Kumagaya',
-        Env.openWeatherMapApiKeyDev,
-        'ja',
-        'metric',
-      );
+      when(mockCallable.call({'city': 'Tokyo'}))
+          .thenAnswer((_) async => mockCallableResult);
 
-      // アサーション: 結果が期待通りかを確認
-      expect(result, isA<WeatherResponse>());
-      final firstWeather = result.list.first;
-      expect(firstWeather.main.temp, 20.0); // 温度
-      expect(firstWeather.main.humidity, 65); // 湿度
-      expect(firstWeather.weather.first.description, 'clear sky'); // 天気の説明
-      expect(firstWeather.weather.first.icon, '01d'); // 天気アイコン
-      expect(firstWeather.wind.speed, 5.2); // 風速
+      final result = await client.fetchWeather('Tokyo');
+
+      expect(result, isA<Success<WeatherResponse>>());
     });
 
-    test('API呼び出しに失敗した場合、例外を投げる', () async {
-      const relativeUrl = 'forecast';
-      final queryParameters = {
-        'q': 'Kumagaya',
-        'appId': Env.openWeatherMapApiKeyDev,
-        'lang': 'ja',
-        'units': 'metric',
-      };
+    test('API呼び出しに失敗した場合、エラーを返す', () async {
+      when(mockFunctions.httpsCallable('getWeatherForCity'))
+          .thenReturn(mockCallable);
 
-      // 404 Not Foundエラーを模倣するモックの設定
-      dioAdapter.onGet(
-        relativeUrl,
-        (server) => server
-            .reply(404, {'message': 'Not found'}), // 404 Not Found レスポンスをモック
-        queryParameters: queryParameters,
-      );
+      when(mockCallable.call({'city': 'InvalidCity'})).thenThrow(
+          FirebaseFunctionsException(message: 'Not found', code: 'not-found'));
 
-      // 関数が例外を投げることを検証
-      expect(
-          () async => await client.fetchWeather(
-                'Kumagaya',
-                Env.openWeatherMapApiKeyDev,
-                'ja',
-                'metric',
-              ),
-          throwsException);
+      final result = await client.fetchWeather('InvalidCity');
+
+      expect(result, isA<Failure<WeatherResponse>>());
+      final error = (result as Failure<WeatherResponse>).error;
+      expect(error.message, 'Not found');
     });
   });
 }
