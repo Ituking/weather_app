@@ -1,29 +1,31 @@
-import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
+import '../core/network/api_error.dart';
+import '../core/network/response/result.dart';
 import '../core/network/response/weather_response.dart';
+import 'i_weather_api_client.dart';
 
-part 'weather_api_client.g.dart';
+/// [FirebaseFunctions]を利用するAPIクライアント
+class WeatherApiClient implements IWeatherApiClient {
+  final FirebaseFunctions _functions;
 
-/// 天気情報を取得するためのAPIクライアント。
-@RestApi(baseUrl: "https://api.openweathermap.org/data/2.5/")
-abstract class WeatherApiClient {
-  /// [Dio]インスタンスとオプションの[baseUrl]を受け取るファクトリコンストラクタ。
-  factory WeatherApiClient(Dio dio, {String baseUrl}) = _WeatherApiClient;
+  WeatherApiClient(this._functions);
 
-  /// 指定された都市の天気情報を取得します。
-  ///
-  /// - Parameters:
-  /// [cityName] : 天気情報を取得する都市の名前。
-  /// [apiKey] : OpenWeatherMap APIのキー。
-  /// [lang] : レスポンスの言語設定。
-  /// [units] : 単位系（例: メートル法や華氏）。
-  /// - Returns: [WeatherResponse]を含む[Future]。
-  @GET("forecast")
-  Future<WeatherResponse> fetchWeather(
-    @Query("q") String cityName,
-    @Query("appId") String apiKey,
-    @Query("lang") String lang,
-    @Query("units") String units,
-  );
+  /// 指定された都市の天気情報を[FirebaseFunctions]経由で取得
+  @override
+  Future<Result<WeatherResponse>> fetchWeather(String cityName) async {
+    try {
+      final callable = _functions.httpsCallable('getWeatherForCity');
+      final response = await callable.call({'city': cityName});
+
+      return Result.success(WeatherResponse.fromJson(response.data));
+    } on FirebaseFunctionsException catch (e) {
+      return Result.failure(ApiError(
+          type: ApiErrorType.internalServerError,
+          message: e.message ?? 'Unknown Firebase error'));
+    } catch (e) {
+      return Result.failure(
+          ApiError(type: ApiErrorType.unknown, message: e.toString()));
+    }
+  }
 }
