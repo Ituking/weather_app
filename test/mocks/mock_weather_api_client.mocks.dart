@@ -6,7 +6,8 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:weather_app/core/network/response/weather_response.dart' as _i2;
+import 'package:weather_app/core/network/response/result.dart' as _i2;
+import 'package:weather_app/core/network/response/weather_response.dart' as _i5;
 import 'package:weather_app/services/weather_api_client.dart' as _i3;
 
 // ignore_for_file: type=lint
@@ -22,9 +23,8 @@ import 'package:weather_app/services/weather_api_client.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeWeatherResponse_0 extends _i1.SmartFake
-    implements _i2.WeatherResponse {
-  _FakeWeatherResponse_0(
+class _FakeResult_0<T> extends _i1.SmartFake implements _i2.Result<T> {
+  _FakeResult_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -42,34 +42,19 @@ class MockWeatherApiClient extends _i1.Mock implements _i3.WeatherApiClient {
   }
 
   @override
-  _i4.Future<_i2.WeatherResponse> fetchWeather(
-    String? cityName,
-    String? apiKey,
-    String? lang,
-    String? units,
-  ) =>
+  _i4.Future<_i2.Result<_i5.WeatherResponse>> fetchWeather(String? cityName) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchWeather,
-          [
-            cityName,
-            apiKey,
-            lang,
-            units,
-          ],
+          [cityName],
         ),
-        returnValue:
-            _i4.Future<_i2.WeatherResponse>.value(_FakeWeatherResponse_0(
+        returnValue: _i4.Future<_i2.Result<_i5.WeatherResponse>>.value(
+            _FakeResult_0<_i5.WeatherResponse>(
           this,
           Invocation.method(
             #fetchWeather,
-            [
-              cityName,
-              apiKey,
-              lang,
-              units,
-            ],
+            [cityName],
           ),
         )),
-      ) as _i4.Future<_i2.WeatherResponse>);
+      ) as _i4.Future<_i2.Result<_i5.WeatherResponse>>);
 }
