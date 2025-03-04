@@ -44,6 +44,7 @@ dev_dependencies:
   json_serializable: ^6.8.0
   retrofit_generator: ^9.1.4
   riverpod_generator: ^2.4.0
+  firebase_core_platform_interface: ^5.4.0
 
 flutter:
   uses-material-design: true
