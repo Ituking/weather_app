@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,7 +6,6 @@ import 'package:weather_app/core/firebase/providers/firebase_functions_provider.
 import 'package:weather_app/core/strings/city_search_button_strings.dart';
 
 import '../mocks/custom_mock_city_search_view_model.dart';
-import '../mocks/mock_firebase.dart';
 import '../mocks/mock_firebase_functions.mocks.dart';
 import '../view_model/providers/custom_mock_city_search_view_model_provider.dart';
 
@@ -15,13 +13,6 @@ void main() {
   group('CitySearchButtonのテスト', () {
     late ProviderContainer container;
     late MockFirebaseFunctions mockFirebaseFunctions;
-
-    // Firebaseをモック
-    setUpAll(() async {
-      TestWidgetsFlutterBinding.ensureInitialized();
-      setupFirebaseMocks();
-      await Firebase.initializeApp();
-    });
 
     setUp(() {
       mockFirebaseFunctions = MockFirebaseFunctions();
