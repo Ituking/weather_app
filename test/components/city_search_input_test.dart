@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -5,7 +6,14 @@ import 'package:weather_app/components/city_search_input.dart';
 import 'package:weather_app/core/strings/city_name_validator_strings.dart';
 import 'package:weather_app/core/strings/city_search_input_strings.dart';
 
+import '../mocks/mock_firebase.dart';
+
 void main() {
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    setupFirebaseMocks();
+    await Firebase.initializeApp();
+  });
   group('CitySearchInputのテスト', () {
     testWidgets('CitySearchInputが表示される', (WidgetTester tester) async {
       // テストウィジェットを構築
