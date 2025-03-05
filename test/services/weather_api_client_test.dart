@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_response.dart';
-import 'package:weather_app/models/city_name.dart';
 import 'package:weather_app/services/weather_api_client.dart';
 
 import '../mocks/mock_firebase_functions.mocks.dart';
@@ -14,11 +13,6 @@ void main() {
     late MockHttpsCallable mockCallable;
     late MockHttpsCallableResult mockCallableResult;
     late WeatherApiClient client;
-
-    final weatherResponse = WeatherResponse(
-      list: [],
-      city: CityName(name: 'Tokyo'),
-    );
 
     setUp(() {
       mockFunctions = MockFirebaseFunctions();
@@ -32,7 +26,10 @@ void main() {
       when(mockFunctions.httpsCallable('getWeatherForCity'))
           .thenReturn(mockCallable);
 
-      when(mockCallableResult.data).thenReturn(weatherResponse.toJson());
+      when(mockCallableResult.data).thenReturn({
+        'list': [],
+        'city': {'name': 'Tokyo'}
+      });
 
       when(mockCallable.call({'city': 'Tokyo'}))
           .thenAnswer((_) async => mockCallableResult);
