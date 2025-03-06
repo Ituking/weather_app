@@ -34,20 +34,20 @@ jobs:
       - name: Set up Firebase credentials
         run: |
           echo "$FIREBASE_SERVICE_ACCOUNT_TEST" | tr -d '\n' | base64 --decode > $HOME/service-account.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/service-account.json" >> $GITHUB_ENV
+          echo "GOOGLE_APPLICATION_CREDENTIALS_TEST=$HOME/service-account.json" >> $GITHUB_ENV
         env:
           FIREBASE_SERVICE_ACCOUNT_TEST: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TEST }}
 
       - name: Configure Test Environment
         run: |
           echo "OPENWEATHERMAP_API_KEY_DEV=${{ secrets.OPENWEATHERMAP_API_KEY_DEV }}" >> $GITHUB_ENV
-          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID_TEST }}" >> $GITHUB_ENV  # シンプルにする
+          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID_TEST }}" >> $GITHUB_ENV  
           echo "NODE_ENV=${{ env.NODE_ENV }}" >> $GITHUB_ENV
 
       - name: Verify Firebase credentials
         run: |
-          if [ ! -f "$GOOGLE_APPLICATION_CREDENTIALS" ]; then
-            echo "Error: GOOGLE_APPLICATION_CREDENTIALS file not found!"
+          if [ ! -f "$GOOGLE_APPLICATION_CREDENTIALS_TEST" ]; then
+            echo "Error: GOOGLE_APPLICATION_CREDENTIALS_TEST file not found!"
             exit 1
           fi
         shell: bash
