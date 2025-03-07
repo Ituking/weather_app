@@ -1,13 +1,6 @@
 import axios from "axios";
 import * as admin from "firebase-admin";
 
-const projectId = process.env.FIREBASE_PROJECT_ID || process.env.FIREBASE_PROJECT_ID_DEV;
-
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  projectId,
-});
-
 // Firestoreインスタンス
 const db = admin.firestore();
 
