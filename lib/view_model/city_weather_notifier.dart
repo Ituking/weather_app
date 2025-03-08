@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/logger/logger_provider.dart';
@@ -8,7 +9,6 @@ import '../core/network/response/weather_response.dart';
 import '../repositories/weather_repository.dart';
 import '../repositories/weather_repository_provider.dart';
 import 'providers/dio_error_handler_provider.dart';
-import 'providers/text_editing_controller_provider.dart';
 
 /// [CityWeatherNotifier]は、指定された都市の天気情報を非同期に取得し、
 /// その結果を管理するための[Notifier]クラスです。
@@ -30,20 +30,35 @@ class CityWeatherNotifier
   /// 天気情報を取得します。取得結果は[state]に格納されます。
   Future<void> fetchWeather(String cityName) async {
     final logger = ref.read(loggerProvider);
+
+    if (kDebugMode) {
+      print("fetchWeather called with city: $cityName");
+    }
+
     state = const AsyncLoading();
 
     try {
-      // TextEditingControllerから都市名を取得
-      final cityName = ref.read(textEditingControllerProvider).text.trim();
+      // // TextEditingControllerから都市名を取得
+      // final cityName = ref.read(textEditingControllerProvider).text.trim();
 
       // 指定された都市の天気情報を非同期に取得し、結果をresultに格納
       final result = await _weatherRepository.getWeather(cityName);
 
+      if (kDebugMode) {
+        print("API Response received: $result");
+      }
+
       result.when(
         success: (weatherResponse) {
+          if (kDebugMode) {
+            print("Weather data received: ${weatherResponse.toJson()}");
+          }
           state = AsyncData(Result.success(weatherResponse));
         },
         failure: (error) {
+          if (kDebugMode) {
+            print("Error fetching weather: ${error.message}");
+          }
           logger.logError(
             'Failed to fetch weather for city: $cityName. Error: ${error.message}',
             StackTrace.current,
@@ -57,6 +72,10 @@ class CityWeatherNotifier
       final dioErrorHandler = ref.read(dioErrorHandlerProvider);
       final apiError = dioErrorHandler.handle(e);
 
+      if (kDebugMode) {
+        print("DioException: ${e.message}");
+      }
+
       logger.logError(
         'DioException while fetching weather for city: $cityName. Message: ${e.message}',
         stackTrace,
@@ -64,6 +83,10 @@ class CityWeatherNotifier
 
       state = AsyncData(Result.failure(apiError));
     } catch (e, stackTrace) {
+      if (kDebugMode) {
+        print("Unexpected error: $e");
+      }
+
       // その他のエラー処理
       logger.logError(
         'Unexpected error while fetching weather for city: $cityName. Error: $e',
