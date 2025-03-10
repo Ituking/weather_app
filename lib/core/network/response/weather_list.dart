@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../models/converters/weather_description_converter.dart';
+import '../../../models/converters/weather_main_converter.dart';
+import '../../../models/converters/weather_wind_converter.dart';
 import '../../../models/weather_description.dart';
 import '../../../models/weather_main.dart';
 import '../../../models/weather_wind.dart';
@@ -17,9 +20,9 @@ class WeatherList with _$WeatherList {
   /// [weather] : 天気の詳細情報のリストを表します。
   /// [wind] : 風の情報を表します。
   factory WeatherList({
-    required WeatherMain main,
-    required List<WeatherDescription> weather,
-    required WeatherWind wind,
+    @WeatherMainConverter() required WeatherMain main,
+    @WeatherDescriptionConverter() required List<WeatherDescription> weather,
+    @WeatherWindConverter() required WeatherWind wind,
   }) = _WeatherList;
 
   /// JSON から [WeatherList] インスタンスを生成するファクトリメソッド。

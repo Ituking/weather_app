@@ -20,8 +20,11 @@ WeatherList _$WeatherListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherList {
+  @WeatherMainConverter()
   WeatherMain get main => throw _privateConstructorUsedError;
+  @WeatherDescriptionConverter()
   List<WeatherDescription> get weather => throw _privateConstructorUsedError;
+  @WeatherWindConverter()
   WeatherWind get wind => throw _privateConstructorUsedError;
 
   /// Serializes this WeatherList to a JSON map.
@@ -41,7 +44,9 @@ abstract class $WeatherListCopyWith<$Res> {
       _$WeatherListCopyWithImpl<$Res, WeatherList>;
   @useResult
   $Res call(
-      {WeatherMain main, List<WeatherDescription> weather, WeatherWind wind});
+      {@WeatherMainConverter() WeatherMain main,
+      @WeatherDescriptionConverter() List<WeatherDescription> weather,
+      @WeatherWindConverter() WeatherWind wind});
 
   $WeatherMainCopyWith<$Res> get main;
   $WeatherWindCopyWith<$Res> get wind;
@@ -112,7 +117,9 @@ abstract class _$$WeatherListImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {WeatherMain main, List<WeatherDescription> weather, WeatherWind wind});
+      {@WeatherMainConverter() WeatherMain main,
+      @WeatherDescriptionConverter() List<WeatherDescription> weather,
+      @WeatherWindConverter() WeatherWind wind});
 
   @override
   $WeatherMainCopyWith<$Res> get main;
@@ -158,18 +165,21 @@ class __$$WeatherListImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
   _$WeatherListImpl(
-      {required this.main,
+      {@WeatherMainConverter() required this.main,
+      @WeatherDescriptionConverter()
       required final List<WeatherDescription> weather,
-      required this.wind})
+      @WeatherWindConverter() required this.wind})
       : _weather = weather;
 
   factory _$WeatherListImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherListImplFromJson(json);
 
   @override
+  @WeatherMainConverter()
   final WeatherMain main;
   final List<WeatherDescription> _weather;
   @override
+  @WeatherDescriptionConverter()
   List<WeatherDescription> get weather {
     if (_weather is EqualUnmodifiableListView) return _weather;
     // ignore: implicit_dynamic_type
@@ -177,6 +187,7 @@ class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
   }
 
   @override
+  @WeatherWindConverter()
   final WeatherWind wind;
 
   @override
@@ -227,18 +238,23 @@ class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
 
 abstract class _WeatherList implements WeatherList {
   factory _WeatherList(
-      {required final WeatherMain main,
-      required final List<WeatherDescription> weather,
-      required final WeatherWind wind}) = _$WeatherListImpl;
+          {@WeatherMainConverter() required final WeatherMain main,
+          @WeatherDescriptionConverter()
+          required final List<WeatherDescription> weather,
+          @WeatherWindConverter() required final WeatherWind wind}) =
+      _$WeatherListImpl;
 
   factory _WeatherList.fromJson(Map<String, dynamic> json) =
       _$WeatherListImpl.fromJson;
 
   @override
+  @WeatherMainConverter()
   WeatherMain get main;
   @override
+  @WeatherDescriptionConverter()
   List<WeatherDescription> get weather;
   @override
+  @WeatherWindConverter()
   WeatherWind get wind;
 
   /// Create a copy of WeatherList
