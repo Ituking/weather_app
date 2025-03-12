@@ -9,10 +9,10 @@ part of 'weather_list.dart';
 _$WeatherListImpl _$$WeatherListImplFromJson(Map<String, dynamic> json) =>
     _$WeatherListImpl(
       main: const WeatherMainConverter()
-          .fromJson(json['main'] as Map<String, dynamic>),
+          .fromJson(json['main'] as Map<String, dynamic>?),
       weather: (json['weather'] as List<dynamic>)
           .map((e) => const WeatherDescriptionConverter()
-              .fromJson(e as Map<String, dynamic>))
+              .fromJson(e as Map<String, dynamic>?))
           .toList(),
       wind: const WeatherWindConverter()
           .fromJson(json['wind'] as Map<String, dynamic>),
