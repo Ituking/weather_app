@@ -7,8 +7,12 @@ class WeatherWindConverter
   const WeatherWindConverter();
 
   @override
-  WeatherWind fromJson(Map<String, dynamic> json) => WeatherWind.fromJson(json);
+  WeatherWind fromJson(Map<String, dynamic> json) => WeatherWind(
+        speed: json['windSpeed'] as double? ?? 0.0,
+      );
 
   @override
-  Map<String, dynamic> toJson(WeatherWind wind) => wind.toJson();
+  Map<String, dynamic> toJson(WeatherWind wind) => {
+        'windSpeed': wind.speed,
+      };
 }
