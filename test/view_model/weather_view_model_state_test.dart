@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/core/network/response/weather_list.dart';
 import 'package:weather_app/models/weather_description.dart';
+import 'package:weather_app/models/weather_list.dart';
 import 'package:weather_app/models/weather_main.dart';
 import 'package:weather_app/models/weather_wind.dart';
 import 'package:weather_app/view_model/weather_view_model_state.dart';

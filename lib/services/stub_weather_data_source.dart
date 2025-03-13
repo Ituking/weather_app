@@ -1,10 +1,10 @@
 import 'package:weather_app/core/network/response/result.dart';
 
 import '../core/network/api_error.dart';
-import '../core/network/response/weather_list.dart';
 import '../core/network/response/weather_response.dart';
 import '../models/city_name.dart';
 import '../models/weather_description.dart';
+import '../models/weather_list.dart';
 import '../models/weather_main.dart';
 import '../models/weather_wind.dart';
 import 'i_weather_api_client.dart';
