@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../models/city_name.dart';
-import 'weather_list.dart';
+import '../../../models/converters/weather_list_converter.dart';
+import '../../../models/weather_list.dart';
 
 part 'weather_response.freezed.dart';
 part 'weather_response.g.dart';
@@ -15,7 +16,7 @@ class WeatherResponse with _$WeatherResponse {
   /// [list] : 天気情報のリストを表します。
   /// [city] : 都市の情報を表します。
   factory WeatherResponse({
-    required List<WeatherList> list,
+    @WeatherListConverter() required List<WeatherList> list,
     required CityName city,
   }) = _WeatherResponse;
 

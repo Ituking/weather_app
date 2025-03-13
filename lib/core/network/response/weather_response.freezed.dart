@@ -20,6 +20,7 @@ WeatherResponse _$WeatherResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherResponse {
+  @WeatherListConverter()
   List<WeatherList> get list => throw _privateConstructorUsedError;
   CityName get city => throw _privateConstructorUsedError;
 
@@ -39,7 +40,7 @@ abstract class $WeatherResponseCopyWith<$Res> {
           WeatherResponse value, $Res Function(WeatherResponse) then) =
       _$WeatherResponseCopyWithImpl<$Res, WeatherResponse>;
   @useResult
-  $Res call({List<WeatherList> list, CityName city});
+  $Res call({@WeatherListConverter() List<WeatherList> list, CityName city});
 
   $CityNameCopyWith<$Res> get city;
 }
@@ -93,7 +94,7 @@ abstract class _$$WeatherResponseImplCopyWith<$Res>
       __$$WeatherResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<WeatherList> list, CityName city});
+  $Res call({@WeatherListConverter() List<WeatherList> list, CityName city});
 
   @override
   $CityNameCopyWith<$Res> get city;
@@ -134,7 +135,8 @@ class _$WeatherResponseImpl
     with DiagnosticableTreeMixin
     implements _WeatherResponse {
   _$WeatherResponseImpl(
-      {required final List<WeatherList> list, required this.city})
+      {@WeatherListConverter() required final List<WeatherList> list,
+      required this.city})
       : _list = list;
 
   factory _$WeatherResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -142,6 +144,7 @@ class _$WeatherResponseImpl
 
   final List<WeatherList> _list;
   @override
+  @WeatherListConverter()
   List<WeatherList> get list {
     if (_list is EqualUnmodifiableListView) return _list;
     // ignore: implicit_dynamic_type
@@ -198,13 +201,14 @@ class _$WeatherResponseImpl
 
 abstract class _WeatherResponse implements WeatherResponse {
   factory _WeatherResponse(
-      {required final List<WeatherList> list,
+      {@WeatherListConverter() required final List<WeatherList> list,
       required final CityName city}) = _$WeatherResponseImpl;
 
   factory _WeatherResponse.fromJson(Map<String, dynamic> json) =
       _$WeatherResponseImpl.fromJson;
 
   @override
+  @WeatherListConverter()
   List<WeatherList> get list;
   @override
   CityName get city;
