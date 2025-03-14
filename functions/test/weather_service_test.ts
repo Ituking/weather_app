@@ -57,7 +57,6 @@ describe("weather_service (オンラインモード)", () => {
       humidity: 27,
       windSpeed: 9.77,
       description: "雲",
-      timestamp: admin.firestore.FieldValue.serverTimestamp(),
     };
 
     await saveWeatherToFirestore(city, weatherData);
