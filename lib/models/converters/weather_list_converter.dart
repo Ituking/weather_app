@@ -15,12 +15,10 @@ class WeatherListConverter
           temp: (json?['temperature'] as num?)?.toDouble() ?? 0.0,
           humidity: json?['humidity'] as int? ?? 0,
         ),
-        weather: [
-          WeatherDescription(
-            description: json?['description'] as String? ?? '不明',
-            icon: '01d', // `icon` はFirestoreには存在しないため仮のデータ
-          )
-        ],
+        weather: WeatherDescription(
+          description: json?['weather']?['description'] as String? ?? '不明',
+          icon: json?['weather']?['icon'] as String? ?? '01d', // 仮のデータ
+        ),
         wind: WeatherWind(
           speed: (json?['windSpeed'] as num?)?.toDouble() ?? 0.0,
         ),
@@ -30,7 +28,10 @@ class WeatherListConverter
   Map<String, dynamic> toJson(WeatherList weatherList) => {
         'temperature': weatherList.main.temp,
         'humidity': weatherList.main.humidity,
-        'description': weatherList.weather.first.description,
+        'weather': {
+          'description': weatherList.weather.description,
+          'icon': weatherList.weather.icon,
+        },
         'windSpeed': weatherList.wind.speed,
       };
 }
