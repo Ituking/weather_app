@@ -10,8 +10,8 @@ import '../../components/temperature_text.dart';
 import '../../components/weather_description_text.dart';
 import '../../components/weather_icon.dart';
 import '../../components/wind_speed_text.dart';
-import 'error_display_screen.dart';
 import '../../view_model/providers/city_weather_notifier_provider.dart';
+import 'error_display_screen.dart';
 
 /// [WeatherResultScreen]は、指定された都市の天気情報を表示する画面です。
 class WeatherResultScreen extends ConsumerStatefulWidget {
@@ -41,7 +41,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                 return data.when(
                   success: (weatherResponse) {
                     // 最初の天気情報を取得
-                    final weather = weatherResponse.list.first;
+                    final weather = weatherResponse.list;
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -56,11 +56,10 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                         Gap(8),
                         WeatherDescriptionText(
                             weatherDescription:
-                                weather.weather.first.description), // 天気の説明
+                                weather.weather.description), // 天気の説明
                         Gap(8),
                         WeatherIcon(
-                            iconCode:
-                                "${weather.weather.first.icon}@2x"), // 天気アイコン
+                            iconCode: "${weather.weather.icon}@2x"), // 天気アイコン
                         Gap(20),
                         const AppBackButton(), // 戻るボタン
                       ],
