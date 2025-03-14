@@ -10,10 +10,8 @@ _$WeatherListImpl _$$WeatherListImplFromJson(Map<String, dynamic> json) =>
     _$WeatherListImpl(
       main: const WeatherMainConverter()
           .fromJson(json['main'] as Map<String, dynamic>?),
-      weather: (json['weather'] as List<dynamic>)
-          .map((e) => const WeatherDescriptionConverter()
-              .fromJson(e as Map<String, dynamic>?))
-          .toList(),
+      weather: const WeatherDescriptionConverter()
+          .fromJson(json['weather'] as Map<String, dynamic>?),
       wind: const WeatherWindConverter()
           .fromJson(json['wind'] as Map<String, dynamic>),
     );
@@ -21,8 +19,6 @@ _$WeatherListImpl _$$WeatherListImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$WeatherListImplToJson(_$WeatherListImpl instance) =>
     <String, dynamic>{
       'main': const WeatherMainConverter().toJson(instance.main),
-      'weather': instance.weather
-          .map(const WeatherDescriptionConverter().toJson)
-          .toList(),
+      'weather': const WeatherDescriptionConverter().toJson(instance.weather),
       'wind': const WeatherWindConverter().toJson(instance.wind),
     };

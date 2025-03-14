@@ -21,7 +21,7 @@ class WeatherList with _$WeatherList {
   /// [wind] : 風の情報を表します。
   factory WeatherList({
     @WeatherMainConverter() required WeatherMain main,
-    @WeatherDescriptionConverter() required List<WeatherDescription> weather,
+    @WeatherDescriptionConverter() required WeatherDescription weather,
     @WeatherWindConverter() required WeatherWind wind,
   }) = _WeatherList;
 

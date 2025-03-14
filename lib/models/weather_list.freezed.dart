@@ -23,7 +23,7 @@ mixin _$WeatherList {
   @WeatherMainConverter()
   WeatherMain get main => throw _privateConstructorUsedError;
   @WeatherDescriptionConverter()
-  List<WeatherDescription> get weather => throw _privateConstructorUsedError;
+  WeatherDescription get weather => throw _privateConstructorUsedError;
   @WeatherWindConverter()
   WeatherWind get wind => throw _privateConstructorUsedError;
 
@@ -45,10 +45,11 @@ abstract class $WeatherListCopyWith<$Res> {
   @useResult
   $Res call(
       {@WeatherMainConverter() WeatherMain main,
-      @WeatherDescriptionConverter() List<WeatherDescription> weather,
+      @WeatherDescriptionConverter() WeatherDescription weather,
       @WeatherWindConverter() WeatherWind wind});
 
   $WeatherMainCopyWith<$Res> get main;
+  $WeatherDescriptionCopyWith<$Res> get weather;
   $WeatherWindCopyWith<$Res> get wind;
 }
 
@@ -79,7 +80,7 @@ class _$WeatherListCopyWithImpl<$Res, $Val extends WeatherList>
       weather: null == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as List<WeatherDescription>,
+              as WeatherDescription,
       wind: null == wind
           ? _value.wind
           : wind // ignore: cast_nullable_to_non_nullable
@@ -94,6 +95,16 @@ class _$WeatherListCopyWithImpl<$Res, $Val extends WeatherList>
   $WeatherMainCopyWith<$Res> get main {
     return $WeatherMainCopyWith<$Res>(_value.main, (value) {
       return _then(_value.copyWith(main: value) as $Val);
+    });
+  }
+
+  /// Create a copy of WeatherList
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WeatherDescriptionCopyWith<$Res> get weather {
+    return $WeatherDescriptionCopyWith<$Res>(_value.weather, (value) {
+      return _then(_value.copyWith(weather: value) as $Val);
     });
   }
 
@@ -118,11 +129,13 @@ abstract class _$$WeatherListImplCopyWith<$Res>
   @useResult
   $Res call(
       {@WeatherMainConverter() WeatherMain main,
-      @WeatherDescriptionConverter() List<WeatherDescription> weather,
+      @WeatherDescriptionConverter() WeatherDescription weather,
       @WeatherWindConverter() WeatherWind wind});
 
   @override
   $WeatherMainCopyWith<$Res> get main;
+  @override
+  $WeatherDescriptionCopyWith<$Res> get weather;
   @override
   $WeatherWindCopyWith<$Res> get wind;
 }
@@ -150,9 +163,9 @@ class __$$WeatherListImplCopyWithImpl<$Res>
           : main // ignore: cast_nullable_to_non_nullable
               as WeatherMain,
       weather: null == weather
-          ? _value._weather
+          ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as List<WeatherDescription>,
+              as WeatherDescription,
       wind: null == wind
           ? _value.wind
           : wind // ignore: cast_nullable_to_non_nullable
@@ -166,10 +179,8 @@ class __$$WeatherListImplCopyWithImpl<$Res>
 class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
   _$WeatherListImpl(
       {@WeatherMainConverter() required this.main,
-      @WeatherDescriptionConverter()
-      required final List<WeatherDescription> weather,
-      @WeatherWindConverter() required this.wind})
-      : _weather = weather;
+      @WeatherDescriptionConverter() required this.weather,
+      @WeatherWindConverter() required this.wind});
 
   factory _$WeatherListImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherListImplFromJson(json);
@@ -177,15 +188,9 @@ class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
   @override
   @WeatherMainConverter()
   final WeatherMain main;
-  final List<WeatherDescription> _weather;
   @override
   @WeatherDescriptionConverter()
-  List<WeatherDescription> get weather {
-    if (_weather is EqualUnmodifiableListView) return _weather;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_weather);
-  }
-
+  final WeatherDescription weather;
   @override
   @WeatherWindConverter()
   final WeatherWind wind;
@@ -211,14 +216,13 @@ class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
         (other.runtimeType == runtimeType &&
             other is _$WeatherListImpl &&
             (identical(other.main, main) || other.main == main) &&
-            const DeepCollectionEquality().equals(other._weather, _weather) &&
+            (identical(other.weather, weather) || other.weather == weather) &&
             (identical(other.wind, wind) || other.wind == wind));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, main, const DeepCollectionEquality().hash(_weather), wind);
+  int get hashCode => Object.hash(runtimeType, main, weather, wind);
 
   /// Create a copy of WeatherList
   /// with the given fields replaced by the non-null parameter values.
@@ -238,11 +242,10 @@ class _$WeatherListImpl with DiagnosticableTreeMixin implements _WeatherList {
 
 abstract class _WeatherList implements WeatherList {
   factory _WeatherList(
-          {@WeatherMainConverter() required final WeatherMain main,
-          @WeatherDescriptionConverter()
-          required final List<WeatherDescription> weather,
-          @WeatherWindConverter() required final WeatherWind wind}) =
-      _$WeatherListImpl;
+      {@WeatherMainConverter() required final WeatherMain main,
+      @WeatherDescriptionConverter() required final WeatherDescription weather,
+      @WeatherWindConverter()
+      required final WeatherWind wind}) = _$WeatherListImpl;
 
   factory _WeatherList.fromJson(Map<String, dynamic> json) =
       _$WeatherListImpl.fromJson;
@@ -252,7 +255,7 @@ abstract class _WeatherList implements WeatherList {
   WeatherMain get main;
   @override
   @WeatherDescriptionConverter()
-  List<WeatherDescription> get weather;
+  WeatherDescription get weather;
   @override
   @WeatherWindConverter()
   WeatherWind get wind;
