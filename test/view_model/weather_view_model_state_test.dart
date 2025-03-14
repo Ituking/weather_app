@@ -13,12 +13,10 @@ void main() {
       final testWeatherList = [
         WeatherList(
           main: WeatherMain(temp: 20.0, humidity: 70),
-          weather: [
-            WeatherDescription(
-              description: 'Sunny',
-              icon: '01d',
-            ),
-          ],
+          weather: WeatherDescription(
+            description: 'Sunny',
+            icon: '01d',
+          ),
           wind: WeatherWind(speed: 5.0),
         ),
       ];
@@ -37,8 +35,8 @@ void main() {
       weather!.when(
         success: (data) {
           expect(data.first.main.temp, 20.0);
-          expect(data.first.weather.first.description, 'Sunny');
-          expect(data.first.weather.first.icon, '01d');
+          expect(data.first.weather.description, 'Sunny');
+          expect(data.first.weather.icon, '01d');
           expect(data.first.wind.speed, 5.0);
           expect(data.first.main.humidity, 70);
         },

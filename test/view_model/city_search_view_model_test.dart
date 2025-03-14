@@ -49,18 +49,14 @@ void main() {
       const cityName = 'Tokyo';
       viewModel.updateCityName(cityName);
 
-      final testWeatherList = [
-        WeatherList(
-          main: WeatherMain(temp: 20.0, humidity: 70),
-          weather: [
-            WeatherDescription(
-              description: 'Sunny',
-              icon: '01d',
-            ),
-          ],
-          wind: WeatherWind(speed: 5.0),
-        )
-      ];
+      final testWeatherList = WeatherList(
+        main: WeatherMain(temp: 20.0, humidity: 70),
+        weather: WeatherDescription(
+          description: 'Sunny',
+          icon: '01d',
+        ),
+        wind: WeatherWind(speed: 5.0),
+      );
 
       final testWeatherResponse = WeatherResponse(
         list: testWeatherList,
@@ -75,10 +71,10 @@ void main() {
       // 正常に天気情報が取得されたことを確認
       expect(viewModel.state.isLoading, isFalse);
       expect(viewModel.state.weather, isNotNull);
-      expect(viewModel.state.weather!.list.first.main.temp,
-          equals(testWeatherList.first.main.temp));
+      expect(viewModel.state.weather!.list..main.temp,
+          equals(testWeatherList.main.temp));
       expect(viewModel.state.weather!.city.name, cityName);
-      expect(viewModel.state.weather!.list.first.weather.first.icon, '01d');
+      expect(viewModel.state.weather!.list..weather.icon, '01d');
       expect(viewModel.state.errorMessage, isNull);
     });
 
