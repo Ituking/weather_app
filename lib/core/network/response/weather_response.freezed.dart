@@ -21,7 +21,7 @@ WeatherResponse _$WeatherResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WeatherResponse {
   @WeatherListConverter()
-  List<WeatherList> get list => throw _privateConstructorUsedError;
+  WeatherList get list => throw _privateConstructorUsedError;
   CityName get city => throw _privateConstructorUsedError;
 
   /// Serializes this WeatherResponse to a JSON map.
@@ -40,8 +40,9 @@ abstract class $WeatherResponseCopyWith<$Res> {
           WeatherResponse value, $Res Function(WeatherResponse) then) =
       _$WeatherResponseCopyWithImpl<$Res, WeatherResponse>;
   @useResult
-  $Res call({@WeatherListConverter() List<WeatherList> list, CityName city});
+  $Res call({@WeatherListConverter() WeatherList list, CityName city});
 
+  $WeatherListCopyWith<$Res> get list;
   $CityNameCopyWith<$Res> get city;
 }
 
@@ -67,12 +68,22 @@ class _$WeatherResponseCopyWithImpl<$Res, $Val extends WeatherResponse>
       list: null == list
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
-              as List<WeatherList>,
+              as WeatherList,
       city: null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as CityName,
     ) as $Val);
+  }
+
+  /// Create a copy of WeatherResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WeatherListCopyWith<$Res> get list {
+    return $WeatherListCopyWith<$Res>(_value.list, (value) {
+      return _then(_value.copyWith(list: value) as $Val);
+    });
   }
 
   /// Create a copy of WeatherResponse
@@ -94,8 +105,10 @@ abstract class _$$WeatherResponseImplCopyWith<$Res>
       __$$WeatherResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@WeatherListConverter() List<WeatherList> list, CityName city});
+  $Res call({@WeatherListConverter() WeatherList list, CityName city});
 
+  @override
+  $WeatherListCopyWith<$Res> get list;
   @override
   $CityNameCopyWith<$Res> get city;
 }
@@ -118,9 +131,9 @@ class __$$WeatherResponseImplCopyWithImpl<$Res>
   }) {
     return _then(_$WeatherResponseImpl(
       list: null == list
-          ? _value._list
+          ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
-              as List<WeatherList>,
+              as WeatherList,
       city: null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -135,22 +148,14 @@ class _$WeatherResponseImpl
     with DiagnosticableTreeMixin
     implements _WeatherResponse {
   _$WeatherResponseImpl(
-      {@WeatherListConverter() required final List<WeatherList> list,
-      required this.city})
-      : _list = list;
+      {@WeatherListConverter() required this.list, required this.city});
 
   factory _$WeatherResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherResponseImplFromJson(json);
 
-  final List<WeatherList> _list;
   @override
   @WeatherListConverter()
-  List<WeatherList> get list {
-    if (_list is EqualUnmodifiableListView) return _list;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_list);
-  }
-
+  final WeatherList list;
   @override
   final CityName city;
 
@@ -173,14 +178,13 @@ class _$WeatherResponseImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WeatherResponseImpl &&
-            const DeepCollectionEquality().equals(other._list, _list) &&
+            (identical(other.list, list) || other.list == list) &&
             (identical(other.city, city) || other.city == city));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_list), city);
+  int get hashCode => Object.hash(runtimeType, list, city);
 
   /// Create a copy of WeatherResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -201,7 +205,7 @@ class _$WeatherResponseImpl
 
 abstract class _WeatherResponse implements WeatherResponse {
   factory _WeatherResponse(
-      {@WeatherListConverter() required final List<WeatherList> list,
+      {@WeatherListConverter() required final WeatherList list,
       required final CityName city}) = _$WeatherResponseImpl;
 
   factory _WeatherResponse.fromJson(Map<String, dynamic> json) =
@@ -209,7 +213,7 @@ abstract class _WeatherResponse implements WeatherResponse {
 
   @override
   @WeatherListConverter()
-  List<WeatherList> get list;
+  WeatherList get list;
   @override
   CityName get city;
 
