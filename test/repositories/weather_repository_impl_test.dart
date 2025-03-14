@@ -27,18 +27,14 @@ void main() {
     late MockILogger mockLogger; // ILoggerのモック
 
     final weatherResponse = WeatherResponse(
-      list: [
-        WeatherList(
-          main: WeatherMain(temp: 20.0, humidity: 70),
-          weather: [
-            WeatherDescription(
-              description: 'Sunny',
-              icon: '01d',
-            ),
-          ],
-          wind: WeatherWind(speed: 5.0),
+      list: WeatherList(
+        main: WeatherMain(temp: 20.0, humidity: 70),
+        weather: WeatherDescription(
+          description: 'Sunny',
+          icon: '01d',
         ),
-      ],
+        wind: WeatherWind(speed: 5.0),
+      ),
       city: CityName(name: 'Tokyo'),
     );
 
@@ -76,11 +72,11 @@ void main() {
 
       // 取得したデータの検証
       expect(weatherData.city.name, 'Tokyo');
-      expect(weatherData.list.first.main.temp, 20.0);
-      expect(weatherData.list.first.weather.first.description, 'Sunny');
-      expect(weatherData.list.first.weather.first.icon, '01d');
-      expect(weatherData.list.first.wind.speed, 5.0);
-      expect(weatherData.list.first.main.humidity, 70);
+      expect(weatherData.list.main.temp, 20.0);
+      expect(weatherData.list.weather.description, 'Sunny');
+      expect(weatherData.list.weather.icon, '01d');
+      expect(weatherData.list.wind.speed, 5.0);
+      expect(weatherData.list.main.humidity, 70);
     });
 
     test('無効な都市名で失敗時に適切なエラーを返す', () async {
