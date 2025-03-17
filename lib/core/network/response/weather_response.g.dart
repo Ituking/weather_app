@@ -11,12 +11,12 @@ _$WeatherResponseImpl _$$WeatherResponseImplFromJson(
     _$WeatherResponseImpl(
       list: const WeatherListConverter()
           .fromJson(json['list'] as Map<String, dynamic>?),
-      city: CityName.fromJson(json['city'] as Map<String, dynamic>),
+      city: const CityNameConverter().fromJson(json['city']),
     );
 
 Map<String, dynamic> _$$WeatherResponseImplToJson(
         _$WeatherResponseImpl instance) =>
     <String, dynamic>{
       'list': const WeatherListConverter().toJson(instance.list),
-      'city': instance.city,
+      'city': const CityNameConverter().toJson(instance.city),
     };

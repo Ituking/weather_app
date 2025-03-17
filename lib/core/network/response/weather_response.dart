@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:weather_app/models/converters/city_name_converter.dart';
 
 import '../../../models/city_name.dart';
 import '../../../models/converters/weather_list_converter.dart';
@@ -17,7 +18,7 @@ class WeatherResponse with _$WeatherResponse {
   /// [city] : 都市の情報を表します。
   factory WeatherResponse({
     @WeatherListConverter() required WeatherList list,
-    required CityName city,
+    @CityNameConverter() required CityName city,
   }) = _WeatherResponse;
 
   /// JSON から [WeatherResponse] インスタンスを生成するファクトリメソッド。
