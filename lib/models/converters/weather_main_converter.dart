@@ -8,7 +8,7 @@ class WeatherMainConverter
 
   @override
   WeatherMain fromJson(Map<String, dynamic>? json) => WeatherMain(
-        temp: json?['temperature'] as double? ?? 0.0,
+        temp: (json?['temperature'] as num?)?.toDouble() ?? 0.0,
         humidity: json?['humidity'] as int? ?? 0,
       );
 
