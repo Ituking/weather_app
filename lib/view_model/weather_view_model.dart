@@ -36,11 +36,7 @@ class WeatherViewModel extends _$WeatherViewModel {
       result.when(
         success: (weatherResponse) {
           state = state.copyWith(
-            weather: Result.success(
-              [
-                weatherResponse.list,
-              ],
-            ),
+            weather: Result.success(weatherResponse.list),
             isLoading: false,
             errorMessage: null,
           );
