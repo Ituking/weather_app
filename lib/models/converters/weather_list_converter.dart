@@ -6,42 +6,47 @@ import '../weather_main.dart';
 import '../weather_wind.dart';
 
 class WeatherListConverter
-    implements JsonConverter<WeatherList, Map<String, dynamic>?> {
+    implements JsonConverter<List<WeatherList>, List<dynamic>?> {
   const WeatherListConverter();
 
   @override
-  WeatherList fromJson(Map<String, dynamic>? json) {
-    final weatherData = json?['weather'];
+  List<WeatherList> fromJson(List<dynamic>? json) {
+    return json?.map((entry) {
+          final weatherData = (entry['weather'] as List<dynamic>?)?.first;
 
-    final weatherDescription = (weatherData is String)
-        ? weatherData
-        : weatherData?['description'] as String? ?? '不明';
-
-    return WeatherList(
-      main: WeatherMain(
-        temp: (json?['temperature'] as num?)?.toDouble() ?? 0.0,
-        humidity: json?['humidity'] as int? ?? 0,
-      ),
-      weather: WeatherDescription(
-        description: weatherDescription,
-        icon: weatherData is Map<String, dynamic>
-            ? weatherData['icon'] as String? ?? '01d'
-            : '01d',
-      ),
-      wind: WeatherWind(
-        speed: (json?['windSpeed'] as num?)?.toDouble() ?? 0.0,
-      ),
-    );
+          return WeatherList(
+            main: WeatherMain(
+              temp: (entry['main']?['temp'] as num?)?.toDouble() ?? 0.0,
+              humidity: entry['main']?['humidity'] as int? ?? 0,
+            ),
+            weather: WeatherDescription(
+              description: weatherData?['description'] as String? ?? '不明',
+              icon: weatherData?['icon'] as String? ?? '01d',
+            ),
+            wind: WeatherWind(
+              speed: (entry['wind']?['speed'] as num?)?.toDouble() ?? 0.0,
+            ),
+          );
+        }).toList() ??
+        [];
   }
 
   @override
-  Map<String, dynamic> toJson(WeatherList weatherList) => {
-        'temperature': weatherList.main.temp,
-        'humidity': weatherList.main.humidity,
-        'weather': {
-          'description': weatherList.weather.description,
-          'icon': weatherList.weather.icon,
-        },
-        'windSpeed': weatherList.wind.speed,
-      };
+  List<dynamic> toJson(List<WeatherList> weatherList) => weatherList
+      .map((weather) => {
+            'main': {
+              'temp': weather.main.temp,
+              'humidity': weather.main.humidity,
+            },
+            'weather': [
+              {
+                'description': weather.weather.description,
+                'icon': weather.weather.icon,
+              }
+            ],
+            'wind': {
+              'speed': weather.wind.speed,
+            }
+          })
+      .toList();
 }
