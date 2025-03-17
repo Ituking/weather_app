@@ -25,14 +25,16 @@ class StubWeatherDataSource implements IWeatherApiClient {
 
     // 有効な都市名が指定された場合、固定された天気データを返します。
     return Result.success(WeatherResponse(
-      list: WeatherList(
-        main: WeatherMain(temp: 20.0, humidity: 70), // 気温と湿度
-        weather: WeatherDescription(
-          description: 'Sunny',
-          icon: '01d',
-        ), // 天気の説明
-        wind: WeatherWind(speed: 5.0), // 風速
-      ),
+      list: [
+        WeatherList(
+          main: WeatherMain(temp: 20.0, humidity: 70), // 気温と湿度
+          weather: WeatherDescription(
+            description: 'Sunny',
+            icon: '01d',
+          ), // 天気の説明
+          wind: WeatherWind(speed: 5.0), // 風速
+        )
+      ],
       city: CityName(name: cityName), // 都市名
     ));
   }
