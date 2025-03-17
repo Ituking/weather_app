@@ -10,19 +10,29 @@ class WeatherListConverter
   const WeatherListConverter();
 
   @override
-  WeatherList fromJson(Map<String, dynamic>? json) => WeatherList(
-        main: WeatherMain(
-          temp: (json?['temperature'] as num?)?.toDouble() ?? 0.0,
-          humidity: json?['humidity'] as int? ?? 0,
-        ),
-        weather: WeatherDescription(
-          description: json?['weather']?['description'] as String? ?? '不明',
-          icon: json?['weather']?['icon'] as String? ?? '01d', // 仮のデータ
-        ),
-        wind: WeatherWind(
-          speed: (json?['windSpeed'] as num?)?.toDouble() ?? 0.0,
-        ),
-      );
+  WeatherList fromJson(Map<String, dynamic>? json) {
+    final weatherData = json?['weather'];
+
+    final weatherDescription = (weatherData is String)
+        ? weatherData
+        : weatherData?['description'] as String? ?? '不明';
+
+    return WeatherList(
+      main: WeatherMain(
+        temp: (json?['temperature'] as num?)?.toDouble() ?? 0.0,
+        humidity: json?['humidity'] as int? ?? 0,
+      ),
+      weather: WeatherDescription(
+        description: weatherDescription,
+        icon: weatherData is Map<String, dynamic>
+            ? weatherData['icon'] as String? ?? '01d'
+            : '01d',
+      ),
+      wind: WeatherWind(
+        speed: (json?['windSpeed'] as num?)?.toDouble() ?? 0.0,
+      ),
+    );
+  }
 
   @override
   Map<String, dynamic> toJson(WeatherList weatherList) => {
