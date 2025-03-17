@@ -8,7 +8,7 @@ class WeatherWindConverter
 
   @override
   WeatherWind fromJson(Map<String, dynamic> json) => WeatherWind(
-        speed: json['windSpeed'] as double? ?? 0.0,
+        speed: (json['windSpeed'] as num?)?.toDouble() ?? 0.0,
       );
 
   @override
