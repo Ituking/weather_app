@@ -40,6 +40,13 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                 // 成功時のResultをさらに確認
                 return data.when(
                   success: (weatherResponse) {
+                    if (weatherResponse.list.isEmpty) {
+                      debugPrint("データがありません");
+                      return const Center(
+                        child: Text('データがありません'),
+                      );
+                    }
+
                     // 最初の天気情報を取得
                     final weather = weatherResponse.list;
                     return Column(
@@ -48,18 +55,20 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                         CityNameText(
                             cityName: weatherResponse.city.name), // 都市名
                         Gap(8),
-                        TemperatureText(temperature: weather.main.temp), // 気温
+                        TemperatureText(
+                            temperature: weather[0].main.temp), // 気温
                         Gap(8),
-                        HumidityText(humidity: weather.main.humidity), // 湿度
+                        HumidityText(humidity: weather[0].main.humidity), // 湿度
                         Gap(8),
-                        WindSpeedText(windSpeed: weather.wind.speed), // 風速
+                        WindSpeedText(windSpeed: weather[0].wind.speed), // 風速
                         Gap(8),
                         WeatherDescriptionText(
                             weatherDescription:
-                                weather.weather.description), // 天気の説明
+                                weather[0].weather.description), // 天気の説明
                         Gap(8),
                         WeatherIcon(
-                            iconCode: "${weather.weather.icon}@2x"), // 天気アイコン
+                            iconCode:
+                                "${weather[0].weather.icon}@2x"), // 天気アイコン
                         Gap(20),
                         const AppBackButton(), // 戻るボタン
                       ],
