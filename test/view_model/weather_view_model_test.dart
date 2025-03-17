@@ -47,7 +47,7 @@ void main() {
 
       // WeatherResponseを作成（city情報も含む）
       final testWeatherResponse = WeatherResponse(
-        list: testWeatherList,
+        list: [testWeatherList],
         city: CityName(name: 'Tokyo'),
       );
 
@@ -94,7 +94,7 @@ void main() {
 
       // WeatherResponseを作成
       final testWeatherResponse = WeatherResponse(
-        list: testWeatherList,
+        list: [testWeatherList],
         city: CityName(name: 'Tokyo'),
       );
 

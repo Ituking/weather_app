@@ -25,16 +25,17 @@ void main() {
     late DioErrorHandler dioErrorHandler; // DioErrorHandlerのインスタンス
     late WeatherRepositoryImpl repository; // テスト対象のリポジトリ
     late MockILogger mockLogger; // ILoggerのモック
-
     final weatherResponse = WeatherResponse(
-      list: WeatherList(
-        main: WeatherMain(temp: 20.0, humidity: 70),
-        weather: WeatherDescription(
-          description: 'Sunny',
-          icon: '01d',
-        ),
-        wind: WeatherWind(speed: 5.0),
-      ),
+      list: [
+        WeatherList(
+          main: WeatherMain(temp: 20.0, humidity: 70),
+          weather: WeatherDescription(
+            description: 'Sunny',
+            icon: '01d',
+          ),
+          wind: WeatherWind(speed: 5.0),
+        )
+      ],
       city: CityName(name: 'Tokyo'),
     );
 
@@ -72,11 +73,11 @@ void main() {
 
       // 取得したデータの検証
       expect(weatherData.city.name, 'Tokyo');
-      expect(weatherData.list.main.temp, 20.0);
-      expect(weatherData.list.weather.description, 'Sunny');
-      expect(weatherData.list.weather.icon, '01d');
-      expect(weatherData.list.wind.speed, 5.0);
-      expect(weatherData.list.main.humidity, 70);
+      expect(weatherData.list[0].main.temp, 20.0);
+      expect(weatherData.list[0].weather.description, 'Sunny');
+      expect(weatherData.list[0].weather.icon, '01d');
+      expect(weatherData.list[0].wind.speed, 5.0);
+      expect(weatherData.list[0].main.humidity, 70);
     });
 
     test('無効な都市名で失敗時に適切なエラーを返す', () async {

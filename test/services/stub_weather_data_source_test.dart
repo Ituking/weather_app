@@ -40,10 +40,10 @@ void main() {
 
       // データが期待通りか確認
       expect(weatherResponse, isA<WeatherResponse>());
-      expect(weatherResponse.list..main.temp, 20.0);
-      expect(weatherResponse.list..weather.description, 'Sunny');
-      expect(weatherResponse.list..wind.speed, 5.0);
-      expect(weatherResponse.list..main.humidity, 70);
+      expect(weatherResponse.list[0].main.temp, 20.0);
+      expect(weatherResponse.list[0].weather.description, 'Sunny');
+      expect(weatherResponse.list[0].wind.speed, 5.0);
+      expect(weatherResponse.list[0].main.humidity, 70);
     });
 
     test('API呼び出し失敗時にResult.failureを返す', () async {
