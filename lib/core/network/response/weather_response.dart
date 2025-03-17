@@ -17,7 +17,7 @@ class WeatherResponse with _$WeatherResponse {
   /// [list] : 天気情報のリストを表します。
   /// [city] : 都市の情報を表します。
   factory WeatherResponse({
-    @WeatherListConverter() required WeatherList list,
+    @WeatherListConverter() required List<WeatherList> list,
     @CityNameConverter() required CityName city,
   }) = _WeatherResponse;
 

@@ -9,8 +9,7 @@ part of 'weather_response.dart';
 _$WeatherResponseImpl _$$WeatherResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$WeatherResponseImpl(
-      list: const WeatherListConverter()
-          .fromJson(json['list'] as Map<String, dynamic>?),
+      list: const WeatherListConverter().fromJson(json['list'] as List?),
       city: const CityNameConverter().fromJson(json['city']),
     );
 
