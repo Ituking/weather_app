@@ -64,11 +64,11 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                         Gap(8),
                         WeatherDescriptionText(
                             weatherDescription:
-                                weather[0].weather.description), // 天気の説明
+                                weather[0].weather[0].description), // 天気の説明
                         Gap(8),
                         WeatherIcon(
                             iconCode:
-                                "${weather[0].weather.icon}@2x"), // 天気アイコン
+                                "${weather[0].weather[0].icon}@2x"), // 天気アイコン
                         Gap(20),
                         const AppBackButton(), // 戻るボタン
                       ],
