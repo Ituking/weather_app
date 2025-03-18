@@ -12,17 +12,20 @@ class WeatherListConverter
   @override
   List<WeatherList> fromJson(List<dynamic>? json) {
     return json?.map((entry) {
-          final weatherData = (entry['weather'] as List<dynamic>?)?.first;
+          final weatherData = (entry['weather'] as List<dynamic>?) ?? [];
 
           return WeatherList(
             main: WeatherMain(
               temp: (entry['main']?['temp'] as num?)?.toDouble() ?? 0.0,
               humidity: entry['main']?['humidity'] as int? ?? 0,
             ),
-            weather: WeatherDescription(
-              description: weatherData?['description'] as String? ?? '不明',
-              icon: weatherData?['icon'] as String? ?? '01d',
-            ),
+            weather: weatherData
+                .map((weatherEntry) => WeatherDescription(
+                      description:
+                          weatherEntry['description'] as String? ?? '不明',
+                      icon: weatherEntry['icon'] as String? ?? '01d',
+                    ))
+                .toList(), // リスト形式に対応
             wind: WeatherWind(
               speed: (entry['wind']?['speed'] as num?)?.toDouble() ?? 0.0,
             ),
@@ -38,12 +41,12 @@ class WeatherListConverter
               'temp': weather.main.temp,
               'humidity': weather.main.humidity,
             },
-            'weather': [
-              {
-                'description': weather.weather.description,
-                'icon': weather.weather.icon,
-              }
-            ],
+            'weather': weather.weather
+                .map((w) => {
+                      'description': w.description,
+                      'icon': w.icon,
+                    })
+                .toList(),
             'wind': {
               'speed': weather.wind.speed,
             }
