@@ -41,7 +41,7 @@ void main() {
       // データが期待通りか確認
       expect(weatherResponse, isA<WeatherResponse>());
       expect(weatherResponse.list[0].main.temp, 20.0);
-      expect(weatherResponse.list[0].weather.description, 'Sunny');
+      expect(weatherResponse.list[0].weather[0].description, 'Sunny');
       expect(weatherResponse.list[0].wind.speed, 5.0);
       expect(weatherResponse.list[0].main.humidity, 70);
     });

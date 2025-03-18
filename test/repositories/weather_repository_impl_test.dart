@@ -29,10 +29,12 @@ void main() {
       list: [
         WeatherList(
           main: WeatherMain(temp: 20.0, humidity: 70),
-          weather: WeatherDescription(
-            description: 'Sunny',
-            icon: '01d',
-          ),
+          weather: [
+            WeatherDescription(
+              description: 'Sunny',
+              icon: '01d',
+            )
+          ],
           wind: WeatherWind(speed: 5.0),
         )
       ],
@@ -74,8 +76,8 @@ void main() {
       // 取得したデータの検証
       expect(weatherData.city.name, 'Tokyo');
       expect(weatherData.list[0].main.temp, 20.0);
-      expect(weatherData.list[0].weather.description, 'Sunny');
-      expect(weatherData.list[0].weather.icon, '01d');
+      expect(weatherData.list[0].weather[0].description, 'Sunny');
+      expect(weatherData.list[0].weather[0].icon, '01d');
       expect(weatherData.list[0].wind.speed, 5.0);
       expect(weatherData.list[0].main.humidity, 70);
     });

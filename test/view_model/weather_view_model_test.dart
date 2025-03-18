@@ -38,10 +38,12 @@ void main() {
     test('成功時にWeatherListと都市名を返す', () async {
       final testWeatherList = WeatherList(
         main: WeatherMain(temp: 20.0, humidity: 70),
-        weather: WeatherDescription(
-          description: 'Sunny',
-          icon: '01d',
-        ),
+        weather: [
+          WeatherDescription(
+            description: 'Sunny',
+            icon: '01d',
+          )
+        ],
         wind: WeatherWind(speed: 5.0),
       );
 
@@ -69,8 +71,8 @@ void main() {
       weather!.when(
         success: (list) {
           expect(list.first.main.temp, equals(20.0));
-          expect(list.first.weather.description, equals('Sunny'));
-          expect(list.first.weather.icon, equals('01d'));
+          expect(list.first.weather.first.description, equals('Sunny'));
+          expect(list.first.weather.first.icon, equals('01d'));
           expect(list.first.wind.speed, equals(5.0));
           expect(list.first.main.humidity, equals(70));
         },
@@ -85,10 +87,12 @@ void main() {
     test('ローディング状態が正しく処理される', () async {
       final testWeatherList = WeatherList(
         main: WeatherMain(temp: 20.0, humidity: 70),
-        weather: WeatherDescription(
-          description: 'Sunny',
-          icon: '01d',
-        ),
+        weather: [
+          WeatherDescription(
+            description: 'Sunny',
+            icon: '01d',
+          )
+        ],
         wind: WeatherWind(speed: 5.0),
       );
 
