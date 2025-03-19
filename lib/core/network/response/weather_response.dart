@@ -13,18 +13,12 @@ part 'weather_response.g.dart';
 @freezed
 class WeatherResponse with _$WeatherResponse {
   /// コンストラクタ。
-  ///
-  /// [list] : 天気情報のリストを表します。
-  /// [city] : 都市の情報を表します。
   factory WeatherResponse({
     @WeatherListConverter() required List<WeatherList> list,
     @CityNameConverter() required CityName city,
   }) = _WeatherResponse;
 
-  /// JSON から [WeatherResponse] インスタンスを生成するファクトリメソッド。
-  ///
-  /// [json] : [WeatherResponse] のプロパティを含むマップ。
-  /// 戻り値: 新しい [WeatherResponse] インスタンス。
+  /// JSON から [WeatherResponse] インスタンスを生成
   factory WeatherResponse.fromJson(Map<String, dynamic> json) =>
       _$WeatherResponseFromJson(json);
 }
