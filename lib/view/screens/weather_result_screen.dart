@@ -40,15 +40,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                 // 成功時のResultをさらに確認
                 return data.when(
                   success: (weatherResponse) {
-                    final weather = weatherResponse.list;
-
-                    if (weather.isEmpty) {
-                      debugPrint("データがありません");
-                      return const Center(
-                        child: Text('データがありません'),
-                      );
-                    }
-
+                    // データの存在確認
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -56,19 +48,21 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                             cityName: weatherResponse.city.name), // 都市名
                         Gap(8),
                         TemperatureText(
-                            temperature: weather[0].main.temp), // 気温
+                            temperature: weatherResponse.main.temp), // 気温
                         Gap(8),
-                        HumidityText(humidity: weather[0].main.humidity), // 湿度
+                        HumidityText(
+                            humidity: weatherResponse.main.humidity), // 湿度
                         Gap(8),
-                        WindSpeedText(windSpeed: weather[0].wind.speed), // 風速
+                        WindSpeedText(
+                            windSpeed: weatherResponse.wind.speed), // 風速
                         Gap(8),
                         WeatherDescriptionText(
                             weatherDescription:
-                                weather[0].weather[0].description), // 天気の説明
+                                weatherResponse.weather.description), // 天気の説明
                         Gap(8),
                         WeatherIcon(
                             iconCode:
-                                "${weather[0].weather[0].icon}@2x"), // 天気アイコン
+                                "${weatherResponse.weather.icon}@2x"), // 天気アイコン
                         Gap(20),
                         const AppBackButton(), // 戻るボタン
                       ],
