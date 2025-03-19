@@ -40,15 +40,15 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                 // 成功時のResultをさらに確認
                 return data.when(
                   success: (weatherResponse) {
-                    if (weatherResponse.list.isEmpty) {
+                    final weather = weatherResponse.list;
+
+                    if (weather.isEmpty) {
                       debugPrint("データがありません");
                       return const Center(
                         child: Text('データがありません'),
                       );
                     }
 
-                    // 最初の天気情報を取得
-                    final weather = weatherResponse.list;
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
