@@ -6,7 +6,7 @@ part of 'weather_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$weatherViewModelHash() => r'9f6b0c8c2e47759d2b2804ed13b96405a3e2cede';
+String _$weatherViewModelHash() => r'07ad70eda4cfa224e2a670b05755d069039997ca';
 
 /// 天気データの状態を管理するViewModelクラス。
 ///
