@@ -60,7 +60,9 @@ void main() {
         wind: WeatherWind(speed: 5.0),
       );
       final testWeatherResponse = WeatherResponse(
-        list: [testWeatherList],
+        main: WeatherMain(temp: 20.0, humidity: 70),
+        weather: WeatherDescription(description: 'Sunny', icon: '01d'),
+        wind: WeatherWind(speed: 5.0),
         city: CityName(name: cityName),
       );
 
@@ -72,10 +74,10 @@ void main() {
       // 正常に天気情報が取得されたことを確認
       expect(viewModel.state.isLoading, isFalse);
       expect(viewModel.state.weather, isNotNull);
-      expect(viewModel.state.weather!.list[0].main.temp,
+      expect(viewModel.state.weather!.main.temp,
           equals(testWeatherList.main.temp));
       expect(viewModel.state.weather!.city.name, cityName);
-      expect(viewModel.state.weather!.list[0].weather[0].icon, '01d');
+      expect(viewModel.state.weather!.weather.icon, '01d');
       expect(viewModel.state.errorMessage, isNull);
     });
 

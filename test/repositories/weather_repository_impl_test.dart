@@ -8,7 +8,6 @@ import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/core/network/response/weather_response.dart';
 import 'package:weather_app/models/city_name.dart';
 import 'package:weather_app/models/weather_description.dart';
-import 'package:weather_app/models/weather_list.dart';
 import 'package:weather_app/models/weather_main.dart';
 import 'package:weather_app/models/weather_wind.dart';
 import 'package:weather_app/repositories/weather_repository_impl.dart';
@@ -26,18 +25,12 @@ void main() {
     late WeatherRepositoryImpl repository; // テスト対象のリポジトリ
     late MockILogger mockLogger; // ILoggerのモック
     final weatherResponse = WeatherResponse(
-      list: [
-        WeatherList(
-          main: WeatherMain(temp: 20.0, humidity: 70),
-          weather: [
-            WeatherDescription(
-              description: 'Sunny',
-              icon: '01d',
-            )
-          ],
-          wind: WeatherWind(speed: 5.0),
-        )
-      ],
+      main: WeatherMain(temp: 20.0, humidity: 70),
+      weather: WeatherDescription(
+        description: 'Sunny',
+        icon: '01d',
+      ),
+      wind: WeatherWind(speed: 5.0),
       city: CityName(name: 'Tokyo'),
     );
 
@@ -75,11 +68,11 @@ void main() {
 
       // 取得したデータの検証
       expect(weatherData.city.name, 'Tokyo');
-      expect(weatherData.list[0].main.temp, 20.0);
-      expect(weatherData.list[0].weather[0].description, 'Sunny');
-      expect(weatherData.list[0].weather[0].icon, '01d');
-      expect(weatherData.list[0].wind.speed, 5.0);
-      expect(weatherData.list[0].main.humidity, 70);
+      expect(weatherData.main.temp, 20.0);
+      expect(weatherData.weather.description, 'Sunny');
+      expect(weatherData.weather.icon, '01d');
+      expect(weatherData.wind.speed, 5.0);
+      expect(weatherData.main.humidity, 70);
     });
 
     test('無効な都市名で失敗時に適切なエラーを返す', () async {
