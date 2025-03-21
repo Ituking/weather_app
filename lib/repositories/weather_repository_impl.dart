@@ -27,6 +27,15 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
     try {
       final result = await apiClient.fetchWeather(cityName);
+
+      logger.log('fetchWeather result: $result');
+
+      final data = result.when(
+        success: (weatherResponse) => weatherResponse.toJson(),
+        failure: (error) => 'Error: ${error.message}',
+      );
+      logger.log('WeatherResponse Data: $data');
+
       return result;
     } on FirebaseFunctionsException catch (e, stackTrace) {
       logger.logError(
