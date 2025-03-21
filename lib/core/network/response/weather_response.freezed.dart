@@ -203,6 +203,7 @@ class __$$WeatherResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@WeatherResponseConverter()
 class _$WeatherResponseImpl
     with DiagnosticableTreeMixin
     implements _WeatherResponse {

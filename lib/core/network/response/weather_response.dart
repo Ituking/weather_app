@@ -9,6 +9,7 @@ import '../../../models/converters/weather_wind_converter.dart';
 import '../../../models/weather_description.dart';
 import '../../../models/weather_main.dart';
 import '../../../models/weather_wind.dart';
+import 'converters/weather_response_converter.dart';
 
 part 'weather_response.freezed.dart';
 part 'weather_response.g.dart';
@@ -17,6 +18,7 @@ part 'weather_response.g.dart';
 @freezed
 class WeatherResponse with _$WeatherResponse {
   /// コンストラクタ。
+  @WeatherResponseConverter()
   factory WeatherResponse({
     @WeatherMainConverter() required WeatherMain main,
     @WeatherDescriptionConverter() required WeatherDescription weather,
