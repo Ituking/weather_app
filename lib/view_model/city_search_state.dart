@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../core/network/response/weather_response.dart';
+import '../models/forecast.dart';
 
 part 'city_search_state.freezed.dart';
 
@@ -11,6 +11,6 @@ class CitySearchState with _$CitySearchState {
     @Default('') String cityName, // 検索される都市の名前。
     @Default(false) bool isLoading, // データのロード状態。
     String? errorMessage, // エラーメッセージ、存在する場合は非null。
-    WeatherResponse? weather, // WeatherResponseオブジェクトのリスト、天気データを保持します。
+    Forecast? weather,
   }) = _CitySearchState;
 }
