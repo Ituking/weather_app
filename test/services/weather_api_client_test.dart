@@ -2,7 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/core/network/response/weather_response.dart';
+import 'package:weather_app/models/forecast.dart';
 import 'package:weather_app/services/weather_api_client.dart';
 
 import '../mocks/mock_firebase_functions.mocks.dart';
@@ -36,7 +36,7 @@ void main() {
 
       final result = await client.fetchWeather('Tokyo');
 
-      expect(result, isA<Success<WeatherResponse>>());
+      expect(result, isA<Success<Forecast>>());
     });
 
     test('API呼び出しに失敗した場合、エラーを返す', () async {
@@ -48,8 +48,8 @@ void main() {
 
       final result = await client.fetchWeather('InvalidCity');
 
-      expect(result, isA<Failure<WeatherResponse>>());
-      final error = (result as Failure<WeatherResponse>).error;
+      expect(result, isA<Failure<Forecast>>());
+      final error = (result as Failure<Forecast>).error;
       expect(error.message, 'Not found');
     });
   });
