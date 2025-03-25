@@ -1,5 +1,5 @@
 import '../core/network/response/result.dart';
-import '../core/network/response/weather_response.dart';
+import '../models/forecast.dart';
 import '../repositories/firestore_weather_repository.dart';
 import '../repositories/weather_repository.dart';
 
@@ -14,8 +14,8 @@ class WeatherService {
   });
 
   /// Firestore優先でデータ取得し、なければCloud Functionsから取得
-  Future<Result<WeatherResponse>> getWeatherData(String cityName) async {
-    final firestoreResult = await firestoreRepository.getWeather(cityName);
+  Future<Result<Forecast>> getWeatherData(String cityName) async {
+    final firestoreResult = await firestoreRepository.getForecast(cityName);
 
     return firestoreResult.maybeWhen(
       success: (weatherResponse) => Result.success(weatherResponse),
