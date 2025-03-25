@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../repositories/weather_repository.dart';
-import '../repositories/weather_repository_provider.dart';
+import '../repositories/firestore_weather_repository.dart';
+import '../repositories/firestore_weather_repository_provider.dart';
 import 'city_search_state.dart';
 import 'providers/app_router_provider.dart';
 
@@ -9,13 +9,13 @@ import 'providers/app_router_provider.dart';
 /// このクラスは、都市名の更新、天気情報の取得、画面遷移などの機能を提供します。
 class CitySearchViewModel extends Notifier<CitySearchState> {
   /// 天気情報を取得するためのリポジトリ。
-  late final WeatherRepository _weatherRepository;
+  late final FirestoreWeatherRepository _firestoreWeatherRepository;
 
   CitySearchViewModel();
 
   @override
   CitySearchState build() {
-    _weatherRepository = ref.read(weatherRepositoryProvider);
+    _firestoreWeatherRepository = ref.read(firestoreWeatherRepositoryProvider);
     return CitySearchState();
   }
 
@@ -36,9 +36,11 @@ class CitySearchViewModel extends Notifier<CitySearchState> {
 
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
-      final weatherResult = await _weatherRepository.getWeather(state.cityName);
-      weatherResult.when(success: (weather) {
-        state = state.copyWith(isLoading: false, weather: weather);
+      final forecastResult =
+          await _firestoreWeatherRepository.getForecast(state.cityName);
+
+      forecastResult.when(success: (forecast) {
+        state = state.copyWith(isLoading: false, weather: forecast);
       }, failure: (error) {
         state = state.copyWith(
           isLoading: false,
