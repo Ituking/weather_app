@@ -8,7 +8,6 @@ import '../../components/city_name_text.dart';
 import '../../components/humidity_text.dart';
 import '../../components/temperature_text.dart';
 import '../../components/weather_description_text.dart';
-import '../../components/weather_icon.dart';
 import '../../components/wind_speed_text.dart';
 import '../../view_model/providers/city_weather_notifier_provider.dart';
 import 'error_display_screen.dart';
@@ -39,30 +38,25 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
               data: (data) {
                 // 成功時のResultをさらに確認
                 return data.when(
-                  success: (weatherResponse) {
+                  success: (forecast) {
                     // データの存在確認
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CityNameText(
-                            cityName: weatherResponse.city.name), // 都市名
+                        CityNameText(cityName: forecast.city), // 都市名
                         Gap(8),
                         TemperatureText(
-                            temperature: weatherResponse.main.temp), // 気温
+                            temperature: forecast.temperature), // 気温
                         Gap(8),
-                        HumidityText(
-                            humidity: weatherResponse.main.humidity), // 湿度
+                        HumidityText(humidity: forecast.humidity.toInt()), // 湿度
                         Gap(8),
-                        WindSpeedText(
-                            windSpeed: weatherResponse.wind.speed), // 風速
+                        WindSpeedText(windSpeed: forecast.windSpeed), // 風速
                         Gap(8),
                         WeatherDescriptionText(
-                            weatherDescription:
-                                weatherResponse.weather.description), // 天気の説明
+                            weatherDescription: forecast.description), // 天気の説明
                         Gap(8),
-                        WeatherIcon(
-                            iconCode:
-                                "${weatherResponse.weather.icon}@2x"), // 天気アイコン
+                        // WeatherIcon(
+                        //     iconCode: "${forecast.icon}@2x"), // 天気アイコン
                         Gap(20),
                         const AppBackButton(), // 戻るボタン
                       ],
