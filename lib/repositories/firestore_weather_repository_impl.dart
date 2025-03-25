@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 import '../core/network/api_error.dart';
 import '../core/network/response/result.dart';
-import '../core/network/response/weather_response.dart';
+import '../models/forecast.dart';
 import 'firestore_weather_repository.dart';
 
 /// Firestoreから天気データを取得するリポジトリ
 class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
   @override
-  Future<Result<WeatherResponse>> getWeather(String cityName) async {
+  Future<Result<Forecast>> getForecast(String cityName) async {
     try {
       final snapshot = await FirebaseFirestore.instance
           .collection('weather')
@@ -34,7 +34,8 @@ class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
       if (weatherData['temperature'] == null ||
           weatherData['humidity'] == null ||
           weatherData['windSpeed'] == null ||
-          weatherData['description'] == null) {
+          weatherData['description'] == null ||
+          weatherData['city'] == null) {
         return Result.failure(
           ApiError(
             type: ApiErrorType.unknown,
@@ -43,26 +44,17 @@ class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
         );
       }
 
-      // WeatherResponse 生成用のデータ整形
-      final formattedData = {
-        "main": {
-          "temp": weatherData['temperature'],
-          "humidity": weatherData['humidity'],
-        },
-        "wind": {
-          "speed": weatherData['windSpeed'],
-        },
-        "weather": [
-          {
-            "description": weatherData['description'],
-            "icon": "01d" // Firestoreにはアイコン情報がないため、仮で固定値
-          }
-        ],
-      };
+      // Forecastオブジェクト生成
+      final forecast = Forecast(
+        id: snapshot.docs.first.id,
+        city: weatherData['city'],
+        description: weatherData['description'],
+        temperature: weatherData['temperature'].toDouble(),
+        humidity: weatherData['humidity'].toDouble(),
+        windSpeed: weatherData['windSpeed'].toDouble(),
+      );
 
-      final weatherResponse = WeatherResponse.fromJson(formattedData);
-
-      return Result.success(weatherResponse);
+      return Result.success(forecast);
     } catch (e) {
       return Result.failure(
         ApiError(type: ApiErrorType.unknown, message: e.toString()),

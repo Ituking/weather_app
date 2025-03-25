@@ -1,5 +1,5 @@
 import '../core/network/response/result.dart';
-import '../core/network/response/weather_response.dart';
+import '../models/forecast.dart';
 
 /// Firestoreから天気データを取得するためのリポジトリインターフェース。
 ///
@@ -11,7 +11,7 @@ abstract class FirestoreWeatherRepository {
   /// [cityName] : 天気データを取得する都市の名前。
   ///
   /// 戻り値 :
-  /// - 成功時は [WeatherResponse] を含む [Result.success]。
+  /// - 成功時は [Forecast] を含む [Result.success]。
   /// - データが存在しない場合やエラー発生時は [ApiError] を含む [Result.failure]。
-  Future<Result<WeatherResponse>> getWeather(String cityName);
+  Future<Result<Forecast>> getForecast(String cityName);
 }
