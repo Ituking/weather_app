@@ -1,30 +1,23 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/core/network/response/weather_response.dart';
-import 'package:weather_app/models/city_name.dart';
-import 'package:weather_app/models/weather_description.dart';
-import 'package:weather_app/models/weather_main.dart';
-import 'package:weather_app/models/weather_wind.dart';
+import 'package:weather_app/models/forecast.dart';
 import 'package:weather_app/view_model/weather_view_model_state.dart';
 
 void main() {
   group('WeatherViewModelStateのテスト', () {
     test('WeatherViewModelStateが正しく初期化される', () {
-      // WeatherResponseのインスタンスを生成
-      final testWeatherResponse = WeatherResponse(
-        main: WeatherMain(temp: 20.0, humidity: 70),
-        weather: WeatherDescription(
-          description: 'Sunny',
-          icon: '01d',
-        ),
-        wind: WeatherWind(speed: 5.0),
-        city: CityName(name: 'Test City'),
+      final testForecast = Forecast(
+        id: 'forecast_id_001',
+        city: 'Test City',
+        description: 'Sunny',
+        temperature: 20.0,
+        humidity: 70.0,
+        windSpeed: 5.0,
       );
 
       // WeatherViewModelStateのインスタンスを生成
       final state = WeatherViewModelState(
-        // Result.successにWeatherResponseを設定
-        weather: Result.success(testWeatherResponse),
+        weather: Result.success(testForecast),
         isLoading: false,
         errorMessage: null,
       );
@@ -34,11 +27,11 @@ void main() {
 
       weather!.when(
         success: (data) {
-          expect(data.main.temp, 20.0);
-          expect(data.weather.description, 'Sunny');
-          expect(data.weather.icon, '01d');
-          expect(data.wind.speed, 5.0);
-          expect(data.main.humidity, 70);
+          expect(data.temperature, 20.0);
+          expect(data.description, 'Sunny');
+          expect(data.windSpeed, 5.0);
+          expect(data.humidity, 70);
+          expect(data.city, 'Test City');
         },
         failure: (error) => fail('Expected success but got failure'),
       );
