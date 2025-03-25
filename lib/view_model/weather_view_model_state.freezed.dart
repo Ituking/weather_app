@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WeatherViewModelState {
-  Result<WeatherResponse>? get weather =>
+  Result<Forecast>? get weather =>
       throw _privateConstructorUsedError; // 天気データの取得結果
   bool get isLoading => throw _privateConstructorUsedError; // データのロード状態。
   String? get errorMessage => throw _privateConstructorUsedError;
@@ -34,10 +34,9 @@ abstract class $WeatherViewModelStateCopyWith<$Res> {
           $Res Function(WeatherViewModelState) then) =
       _$WeatherViewModelStateCopyWithImpl<$Res, WeatherViewModelState>;
   @useResult
-  $Res call(
-      {Result<WeatherResponse>? weather, bool isLoading, String? errorMessage});
+  $Res call({Result<Forecast>? weather, bool isLoading, String? errorMessage});
 
-  $ResultCopyWith<WeatherResponse, $Res>? get weather;
+  $ResultCopyWith<Forecast, $Res>? get weather;
 }
 
 /// @nodoc
@@ -64,7 +63,7 @@ class _$WeatherViewModelStateCopyWithImpl<$Res,
       weather: freezed == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as Result<WeatherResponse>?,
+              as Result<Forecast>?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -80,12 +79,12 @@ class _$WeatherViewModelStateCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ResultCopyWith<WeatherResponse, $Res>? get weather {
+  $ResultCopyWith<Forecast, $Res>? get weather {
     if (_value.weather == null) {
       return null;
     }
 
-    return $ResultCopyWith<WeatherResponse, $Res>(_value.weather!, (value) {
+    return $ResultCopyWith<Forecast, $Res>(_value.weather!, (value) {
       return _then(_value.copyWith(weather: value) as $Val);
     });
   }
@@ -100,11 +99,10 @@ abstract class _$$WeatherViewModelStateImplCopyWith<$Res>
       __$$WeatherViewModelStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {Result<WeatherResponse>? weather, bool isLoading, String? errorMessage});
+  $Res call({Result<Forecast>? weather, bool isLoading, String? errorMessage});
 
   @override
-  $ResultCopyWith<WeatherResponse, $Res>? get weather;
+  $ResultCopyWith<Forecast, $Res>? get weather;
 }
 
 /// @nodoc
@@ -129,7 +127,7 @@ class __$$WeatherViewModelStateImplCopyWithImpl<$Res>
       weather: freezed == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as Result<WeatherResponse>?,
+              as Result<Forecast>?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -149,7 +147,7 @@ class _$WeatherViewModelStateImpl implements _WeatherViewModelState {
       {this.weather, this.isLoading = false, this.errorMessage});
 
   @override
-  final Result<WeatherResponse>? weather;
+  final Result<Forecast>? weather;
 // 天気データの取得結果
   @override
   @JsonKey()
@@ -191,12 +189,12 @@ class _$WeatherViewModelStateImpl implements _WeatherViewModelState {
 
 abstract class _WeatherViewModelState implements WeatherViewModelState {
   factory _WeatherViewModelState(
-      {final Result<WeatherResponse>? weather,
+      {final Result<Forecast>? weather,
       final bool isLoading,
       final String? errorMessage}) = _$WeatherViewModelStateImpl;
 
   @override
-  Result<WeatherResponse>? get weather; // 天気データの取得結果
+  Result<Forecast>? get weather; // 天気データの取得結果
   @override
   bool get isLoading; // データのロード状態。
   @override
