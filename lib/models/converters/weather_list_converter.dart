@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../weather_description.dart';
@@ -12,17 +11,12 @@ class WeatherListConverter
 
   @override
   List<WeatherList> fromJson(List<dynamic>? json) {
-    debugPrint('Received JSON for WeatherListConverter: $json');
-
     if (json == null || json.isEmpty) {
-      debugPrint('JSON data is null or empty.');
       return [];
     }
 
     return json.map((entry) {
       final weatherData = (entry['weather'] as List<dynamic>?) ?? [];
-      debugPrint('Entry Data: $entry');
-      debugPrint('Weather Data: $weatherData');
 
       return WeatherList(
         main: WeatherMain(

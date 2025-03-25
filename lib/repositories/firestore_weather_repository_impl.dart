@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 import '../core/network/api_error.dart';
 import '../core/network/response/result.dart';
@@ -26,9 +25,6 @@ class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
       }
 
       final weatherData = snapshot.docs.first.data();
-
-      // データ構造確認用のログ
-      debugPrint('Firestore weather data: $weatherData');
 
       // 必須フィールドの存在確認
       if (weatherData['temperature'] == null ||
