@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/logger/logger_provider.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/core/network/response/weather_response.dart';
+import 'package:weather_app/models/forecast.dart';
 import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/services/stub_weather_data_source.dart';
 import 'package:weather_app/services/weather_api_client_provider.dart';
@@ -33,17 +33,17 @@ void main() {
       final result = await repository.getWeather('Tokyo');
 
       // 成功かどうかをチェック
-      expect(result, isA<Success<WeatherResponse>>());
+      expect(result, isA<Success<Forecast>>());
 
       // 成功時の結果を取得
-      final weatherResponse = (result as Success<WeatherResponse>).value;
+      final weatherResponse = (result as Success<Forecast>).value;
 
       // データが期待通りか確認
-      expect(weatherResponse, isA<WeatherResponse>());
-      expect(weatherResponse.main.temp, 20.0);
-      expect(weatherResponse.weather.description, 'Sunny');
-      expect(weatherResponse.wind.speed, 5.0);
-      expect(weatherResponse.main.humidity, 70);
+      expect(weatherResponse, isA<Forecast>());
+      expect(weatherResponse.temperature, 20.0);
+      expect(weatherResponse.description, 'Sunny');
+      expect(weatherResponse.windSpeed, 5.0);
+      expect(weatherResponse.humidity, 70);
     });
 
     test('API呼び出し失敗時にResult.failureを返す', () async {
@@ -54,7 +54,7 @@ void main() {
       final result = await repository.getWeather('InvalidCity');
 
       // 失敗かどうかをチェック
-      expect(result, isA<Failure<WeatherResponse>>());
+      expect(result, isA<Failure<Forecast>>());
     });
   });
 }
