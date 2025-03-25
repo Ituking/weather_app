@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:weather_app/core/network/response/result.dart' as _i2;
-import 'package:weather_app/core/network/response/weather_response.dart' as _i5;
+import 'package:weather_app/models/forecast.dart' as _i5;
 import 'package:weather_app/services/weather_api_client.dart' as _i3;
 
 // ignore_for_file: type=lint
@@ -42,19 +42,19 @@ class MockWeatherApiClient extends _i1.Mock implements _i3.WeatherApiClient {
   }
 
   @override
-  _i4.Future<_i2.Result<_i5.WeatherResponse>> fetchWeather(String? cityName) =>
+  _i4.Future<_i2.Result<_i5.Forecast>> fetchWeather(String? cityName) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchWeather,
           [cityName],
         ),
-        returnValue: _i4.Future<_i2.Result<_i5.WeatherResponse>>.value(
-            _FakeResult_0<_i5.WeatherResponse>(
+        returnValue: _i4.Future<_i2.Result<_i5.Forecast>>.value(
+            _FakeResult_0<_i5.Forecast>(
           this,
           Invocation.method(
             #fetchWeather,
             [cityName],
           ),
         )),
-      ) as _i4.Future<_i2.Result<_i5.WeatherResponse>>);
+      ) as _i4.Future<_i2.Result<_i5.Forecast>>);
 }
