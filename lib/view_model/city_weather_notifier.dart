@@ -5,19 +5,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/logger/logger_provider.dart';
 import '../core/network/api_error.dart';
 import '../core/network/response/result.dart';
-import '../core/network/response/weather_response.dart';
+import '../models/forecast.dart';
 import '../repositories/weather_repository.dart';
 import '../repositories/weather_repository_provider.dart';
 import 'providers/dio_error_handler_provider.dart';
 
 /// [CityWeatherNotifier]は、指定された都市の天気情報を非同期に取得し、
 /// その結果を管理するための[Notifier]クラスです。
-class CityWeatherNotifier
-    extends Notifier<AsyncValue<Result<WeatherResponse>>> {
+class CityWeatherNotifier extends Notifier<AsyncValue<Result<Forecast>>> {
   late final WeatherRepository _weatherRepository;
 
   @override
-  AsyncValue<Result<WeatherResponse>> build() {
+  AsyncValue<Result<Forecast>> build() {
     _weatherRepository = ref.read(weatherRepositoryProvider);
     return const AsyncLoading();
   }
