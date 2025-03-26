@@ -4,23 +4,23 @@ import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/models/forecast.dart';
-import 'package:weather_app/repositories/weather_repository_provider.dart';
+import 'package:weather_app/repositories/firestore_weather_repository_provider.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
 
-import '../mocks/mock_weather_repository.mocks.dart';
+import '../mocks/mock_firestore_weather_repository.mocks.dart';
 
 void main() {
   group('CitySearchViewModelのテスト', () {
-    late MockWeatherRepository mockWeatherRepository;
+    late MockFirestoreWeatherRepository mockFirestoreWeatherRepository;
     late ProviderContainer container;
 
     setUp(() {
       // モックリポジトリの初期化
-      mockWeatherRepository = MockWeatherRepository();
+      mockFirestoreWeatherRepository = MockFirestoreWeatherRepository();
       // ProviderContainerの初期化
       container = ProviderContainer(overrides: [
-        // weatherRepositoryProviderをモックリポジトリでオーバーライド
-        weatherRepositoryProvider.overrideWithValue(mockWeatherRepository),
+        firestoreWeatherRepositoryProvider
+            .overrideWithValue(mockFirestoreWeatherRepository),
       ]);
     });
 
@@ -53,7 +53,7 @@ void main() {
         windSpeed: 5.0,
       );
 
-      when(mockWeatherRepository.getWeather(cityName))
+      when(mockFirestoreWeatherRepository.fetchForecast(cityName))
           .thenAnswer((_) async => Result.success(testForecast));
 
       await viewModel.fetchWeather();
@@ -77,7 +77,7 @@ void main() {
       // 天気情報取得失敗時のエラーハンドリングをテスト
       const cityName = 'Tokyo';
       viewModel.updateCityName(cityName);
-      when(mockWeatherRepository.getWeather(cityName))
+      when(mockFirestoreWeatherRepository.fetchForecast(cityName))
           .thenAnswer((_) async => const Result.failure(ApiError(
                 type: ApiErrorType.unknown,
                 message: 'Failed to fetch weather',
