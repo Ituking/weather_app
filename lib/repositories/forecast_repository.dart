@@ -10,7 +10,7 @@ class ForecastRepository {
 
   final Ref _ref;
 
-  /// 特定のドキュメントIDから `Forecast` データを取得
+  /// 特定のドキュメントIDから[Forecast]データを取得
   Future<Forecast?> getForecastById({
     required String forecastId,
   }) async {
@@ -32,7 +32,7 @@ class ForecastRepository {
     }
   }
 
-  /// 指定した日付リストに対応する `Forecast` データを一括取得
+  /// 指定した日付リストに対応する[Forecast]データを一括取得
   Future<List<Forecast>> getForecastsByDates({
     required List<String> forecastDates,
   }) async {
