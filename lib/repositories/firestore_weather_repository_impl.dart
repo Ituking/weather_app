@@ -8,7 +8,7 @@ import 'firestore_weather_repository.dart';
 /// Firestoreから天気データを取得するリポジトリ
 class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
   @override
-  Future<Result<Forecast>> getForecast(String cityName) async {
+  Future<Result<Forecast>> fetchForecast(String cityName) async {
     try {
       final snapshot = await FirebaseFirestore.instance
           .collection('weather')

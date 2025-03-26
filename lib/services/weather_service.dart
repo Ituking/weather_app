@@ -15,7 +15,7 @@ class WeatherService {
 
   /// Firestore優先でデータ取得し、なければCloud Functionsから取得
   Future<Result<Forecast>> getWeatherData(String cityName) async {
-    final firestoreResult = await firestoreRepository.getForecast(cityName);
+    final firestoreResult = await firestoreRepository.fetchForecast(cityName);
 
     return firestoreResult.maybeWhen(
       success: (weatherResponse) => Result.success(weatherResponse),

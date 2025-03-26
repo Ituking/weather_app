@@ -13,5 +13,5 @@ abstract class FirestoreWeatherRepository {
   /// 戻り値 :
   /// - 成功時は [Forecast] を含む [Result.success]。
   /// - データが存在しない場合やエラー発生時は [ApiError] を含む [Result.failure]。
-  Future<Result<Forecast>> getForecast(String cityName);
+  Future<Result<Forecast>> fetchForecast(String cityName);
 }

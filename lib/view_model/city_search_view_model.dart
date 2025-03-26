@@ -37,7 +37,7 @@ class CitySearchViewModel extends Notifier<CitySearchState> {
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
       final forecastResult =
-          await _firestoreWeatherRepository.getForecast(state.cityName);
+          await _firestoreWeatherRepository.fetchForecast(state.cityName);
 
       forecastResult.when(success: (forecast) {
         state = state.copyWith(isLoading: false, weather: forecast);
