@@ -35,7 +35,6 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
         humidity: 27,
         windSpeed: 9.77,
         description: "雲",
-        timestamp: admin.firestore.FieldValue.serverTimestamp(),
       });
 
     saveWeatherStub = sinon
