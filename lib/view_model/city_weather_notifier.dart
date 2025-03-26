@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/logger/logger_provider.dart';
@@ -30,10 +29,6 @@ class CityWeatherNotifier extends Notifier<AsyncValue<Result<Forecast>>> {
   Future<void> fetchWeather(String cityName) async {
     final logger = ref.read(loggerProvider);
 
-    if (kDebugMode) {
-      print("fetchWeather called with city: $cityName");
-    }
-
     state = const AsyncLoading();
 
     try {
@@ -43,21 +38,11 @@ class CityWeatherNotifier extends Notifier<AsyncValue<Result<Forecast>>> {
       // 指定された都市の天気情報を非同期に取得し、結果をresultに格納
       final result = await _weatherRepository.getWeather(cityName);
 
-      if (kDebugMode) {
-        print("API Response received: $result");
-      }
-
       result.when(
         success: (weatherResponse) {
-          if (kDebugMode) {
-            print("Weather data received: ${weatherResponse.toJson()}");
-          }
           state = AsyncData(Result.success(weatherResponse));
         },
         failure: (error) {
-          if (kDebugMode) {
-            print("Error fetching weather: ${error.message}");
-          }
           logger.logError(
             'Failed to fetch weather for city: $cityName. Error: ${error.message}',
             StackTrace.current,
@@ -71,10 +56,6 @@ class CityWeatherNotifier extends Notifier<AsyncValue<Result<Forecast>>> {
       final dioErrorHandler = ref.read(dioErrorHandlerProvider);
       final apiError = dioErrorHandler.handle(e);
 
-      if (kDebugMode) {
-        print("DioException: ${e.message}");
-      }
-
       logger.logError(
         'DioException while fetching weather for city: $cityName. Message: ${e.message}',
         stackTrace,
@@ -82,10 +63,6 @@ class CityWeatherNotifier extends Notifier<AsyncValue<Result<Forecast>>> {
 
       state = AsyncData(Result.failure(apiError));
     } catch (e, stackTrace) {
-      if (kDebugMode) {
-        print("Unexpected error: $e");
-      }
-
       // その他のエラー処理
       logger.logError(
         'Unexpected error while fetching weather for city: $cityName. Error: $e',

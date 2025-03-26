@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:flutter/foundation.dart';
 
 import '../core/network/api_error.dart';
 import '../core/network/response/result.dart';
@@ -20,12 +17,6 @@ class WeatherApiClient implements IWeatherApiClient {
     try {
       final callable = _functions.httpsCallable('getWeatherForCity');
       final response = await callable.call({'city': cityName});
-      if (kDebugMode) {
-        print("レスポンス全体: ${jsonEncode(response.data)}");
-        print("都市名: ${response.data['city']}");
-        print("気温: ${response.data['temperature']}℃");
-        print("タイムスタンプ: ${response.data['timestamp']}");
-      }
 
       final forecast = Forecast(
         id: response.data['id'] ?? '',
