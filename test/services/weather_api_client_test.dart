@@ -27,8 +27,11 @@ void main() {
           .thenReturn(mockCallable);
 
       when(mockCallableResult.data).thenReturn({
-        'list': [],
-        'city': {'name': 'Tokyo'}
+        'city': 'Tokyo',
+        'description': 'Sunny',
+        'temperature': 25.0,
+        'humidity': 60.0,
+        'windSpeed': 5.0,
       });
 
       when(mockCallable.call({'city': 'Tokyo'}))
@@ -37,6 +40,17 @@ void main() {
       final result = await client.fetchWeather('Tokyo');
 
       expect(result, isA<Success<Forecast>>());
+
+      result.when(
+        success: (forecast) {
+          expect(forecast.city, 'Tokyo');
+          expect(forecast.description, 'Sunny');
+          expect(forecast.temperature, 25.0);
+          expect(forecast.humidity, 60.0);
+          expect(forecast.windSpeed, 5.0);
+        },
+        failure: (_) => fail('Expected success but got failure'),
+      );
     });
 
     test('API呼び出しに失敗した場合、エラーを返す', () async {
