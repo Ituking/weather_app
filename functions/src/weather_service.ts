@@ -1,13 +1,6 @@
 import axios from "axios";
 import * as admin from "firebase-admin";
 
-const projectId = process.env.FIREBASE_PROJECT_ID || process.env.FIREBASE_PROJECT_ID_DEV;
-
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  projectId,
-});
-
 // Firestoreインスタンス
 const db = admin.firestore();
 
@@ -33,7 +26,6 @@ export interface WeatherData {
   humidity: number;
   windSpeed: number;
   description: string;
-  timestamp: FirebaseFirestore.FieldValue;
 }
 
 /**
@@ -57,7 +49,6 @@ export async function fetchWeatherFromAPI(city: string): Promise<WeatherData> {
       humidity: response.data.main.humidity,
       windSpeed: response.data.wind.speed,
       description: response.data.weather[0].description,
-      timestamp: admin.firestore.FieldValue.serverTimestamp(),
     };
   } catch (error) {
     console.error(`${city}の天気データ取得に失敗:`, error);

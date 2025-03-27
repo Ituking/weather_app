@@ -76,8 +76,8 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
                       weatherResult.when(
                         data: (result) {
                           result.when(
-                            success: (weatherResponse) {
-                              final cityNameFromApi = weatherResponse.city.name;
+                            success: (forecast) {
+                              final cityNameFromApi = forecast.city;
                               ref
                                   .read(citySearchViewModelProvider.notifier)
                                   .navigateToResultScreen(cityNameFromApi);

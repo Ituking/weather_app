@@ -20,7 +20,7 @@ mixin _$CitySearchState {
   bool get isLoading => throw _privateConstructorUsedError; // データのロード状態。
   String? get errorMessage =>
       throw _privateConstructorUsedError; // エラーメッセージ、存在する場合は非null。
-  WeatherResponse? get weather => throw _privateConstructorUsedError;
+  Forecast? get weather => throw _privateConstructorUsedError;
 
   /// Create a copy of CitySearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -39,9 +39,9 @@ abstract class $CitySearchStateCopyWith<$Res> {
       {String cityName,
       bool isLoading,
       String? errorMessage,
-      WeatherResponse? weather});
+      Forecast? weather});
 
-  $WeatherResponseCopyWith<$Res>? get weather;
+  $ForecastCopyWith<$Res>? get weather;
 }
 
 /// @nodoc
@@ -80,7 +80,7 @@ class _$CitySearchStateCopyWithImpl<$Res, $Val extends CitySearchState>
       weather: freezed == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as WeatherResponse?,
+              as Forecast?,
     ) as $Val);
   }
 
@@ -88,12 +88,12 @@ class _$CitySearchStateCopyWithImpl<$Res, $Val extends CitySearchState>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $WeatherResponseCopyWith<$Res>? get weather {
+  $ForecastCopyWith<$Res>? get weather {
     if (_value.weather == null) {
       return null;
     }
 
-    return $WeatherResponseCopyWith<$Res>(_value.weather!, (value) {
+    return $ForecastCopyWith<$Res>(_value.weather!, (value) {
       return _then(_value.copyWith(weather: value) as $Val);
     });
   }
@@ -111,10 +111,10 @@ abstract class _$$CitySearchStateImplCopyWith<$Res>
       {String cityName,
       bool isLoading,
       String? errorMessage,
-      WeatherResponse? weather});
+      Forecast? weather});
 
   @override
-  $WeatherResponseCopyWith<$Res>? get weather;
+  $ForecastCopyWith<$Res>? get weather;
 }
 
 /// @nodoc
@@ -151,7 +151,7 @@ class __$$CitySearchStateImplCopyWithImpl<$Res>
       weather: freezed == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as WeatherResponse?,
+              as Forecast?,
     ));
   }
 }
@@ -177,7 +177,7 @@ class _$CitySearchStateImpl implements _CitySearchState {
   final String? errorMessage;
 // エラーメッセージ、存在する場合は非null。
   @override
-  final WeatherResponse? weather;
+  final Forecast? weather;
 
   @override
   String toString() {
@@ -217,7 +217,7 @@ abstract class _CitySearchState implements CitySearchState {
       {final String cityName,
       final bool isLoading,
       final String? errorMessage,
-      final WeatherResponse? weather}) = _$CitySearchStateImpl;
+      final Forecast? weather}) = _$CitySearchStateImpl;
 
   @override
   String get cityName; // 検索される都市の名前。
@@ -226,7 +226,7 @@ abstract class _CitySearchState implements CitySearchState {
   @override
   String? get errorMessage; // エラーメッセージ、存在する場合は非null。
   @override
-  WeatherResponse? get weather;
+  Forecast? get weather;
 
   /// Create a copy of CitySearchState
   /// with the given fields replaced by the non-null parameter values.

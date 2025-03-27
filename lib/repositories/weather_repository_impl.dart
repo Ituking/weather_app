@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/logger/logger_provider.dart';
 import '../core/network/api_error.dart';
 import '../core/network/response/result.dart';
-import '../core/network/response/weather_response.dart';
+import '../models/forecast.dart';
 import '../services/i_weather_api_client.dart';
 import 'weather_repository.dart';
 
@@ -20,13 +20,22 @@ class WeatherRepositoryImpl implements WeatherRepository {
   /// 指定された都市名[cityName]の天気データを取得します。
   ///
   /// [cityName] - 天気データを取得する都市の名前。
-  /// 戻り値 - [Result]オブジェクトで、成功時には[WeatherResponse]を含みます。
+  /// 戻り値 - [Result]オブジェクトで、成功時には[Forecast]を含みます。
   @override
-  Future<Result<WeatherResponse>> getWeather(String cityName) async {
+  Future<Result<Forecast>> getWeather(String cityName) async {
     final logger = ref.read(loggerProvider);
 
     try {
       final result = await apiClient.fetchWeather(cityName);
+
+      logger.log('fetchWeather result: $result');
+
+      final data = result.when(
+        success: (weatherResponse) => weatherResponse.toJson(),
+        failure: (error) => 'Error: ${error.message}',
+      );
+      logger.log('WeatherResponse Data: $data');
+
       return result;
     } on FirebaseFunctionsException catch (e, stackTrace) {
       logger.logError(

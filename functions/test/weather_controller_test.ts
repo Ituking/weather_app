@@ -5,6 +5,8 @@ import firebaseFunctionsTest from "firebase-functions-test";
 import { WrappedV2CallableFunction } from "firebase-functions-test/lib/v2";
 import * as sinon from "sinon";
 
+admin.initializeApp();
+
 import { getWeatherForCity } from "../src/weather_controller";
 import * as weatherService from "../src/weather_service";
 
@@ -35,7 +37,6 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
         humidity: 27,
         windSpeed: 9.77,
         description: "雲",
-        timestamp: admin.firestore.FieldValue.serverTimestamp(),
       });
 
     saveWeatherStub = sinon
