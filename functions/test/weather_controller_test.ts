@@ -5,6 +5,8 @@ import firebaseFunctionsTest from "firebase-functions-test";
 import { WrappedV2CallableFunction } from "firebase-functions-test/lib/v2";
 import * as sinon from "sinon";
 
+admin.initializeApp();
+
 import { getWeatherForCity } from "../src/weather_controller";
 import * as weatherService from "../src/weather_service";
 
