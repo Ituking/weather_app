@@ -25,6 +25,7 @@ class WeatherApiClient implements IWeatherApiClient {
         temperature: (response.data['temperature'] as num?)?.toDouble() ?? 0.0,
         humidity: (response.data['humidity'] as num?)?.toDouble() ?? 0.0,
         windSpeed: (response.data['windSpeed'] as num?)?.toDouble() ?? 0.0,
+        icon: response.data['icon'] ?? '',
       );
 
       return Result.success(forecast);
