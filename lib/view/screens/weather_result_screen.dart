@@ -8,6 +8,7 @@ import '../../components/city_name_text.dart';
 import '../../components/humidity_text.dart';
 import '../../components/temperature_text.dart';
 import '../../components/weather_description_text.dart';
+import '../../components/weather_icon.dart';
 import '../../components/wind_speed_text.dart';
 import '../../view_model/providers/city_weather_notifier_provider.dart';
 import 'error_display_screen.dart';
@@ -55,8 +56,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                         WeatherDescriptionText(
                             weatherDescription: forecast.description), // 天気の説明
                         Gap(8),
-                        // WeatherIcon(
-                        //     iconCode: "${forecast.icon}@2x"), // 天気アイコン
+                        WeatherIcon(iconCode: "${forecast.icon}@2x"), // 天気アイコン
                         Gap(20),
                         const AppBackButton(), // 戻るボタン
                       ],
