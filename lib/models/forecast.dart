@@ -12,6 +12,7 @@ class Forecast with _$Forecast {
     @Default(0.0) double humidity,
     @Default(0.0) double temperature,
     @Default(0.0) double windSpeed,
+    @Default('') String icon,
   }) = _Forecast;
 
   const Forecast._();

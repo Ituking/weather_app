@@ -18,6 +18,7 @@ type WeatherData = {
   humidity: number;
   windSpeed: number;
   description: string;
+  icon: string;
 };
 
 describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
@@ -37,6 +38,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
         humidity: 27,
         windSpeed: 9.77,
         description: "雲",
+        icon: "04d",
       });
 
     saveWeatherStub = sinon
@@ -81,6 +83,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
             humidity: 27,
             windSpeed: 9.77,
             description: "雲",
+            icon: "04d",
           }),
         },
       ],
@@ -100,6 +103,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
       humidity: 27,
       windSpeed: 9.77,
       description: "雲",
+      icon: "04d",
     });
     assert.isFalse(fetchWeatherStub.called);
   });
@@ -124,6 +128,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
       humidity: 27,
       windSpeed: 9.77,
       description: "雲",
+      icon: "04d",
     });
   });
 });

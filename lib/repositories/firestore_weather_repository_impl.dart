@@ -31,7 +31,8 @@ class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
           weatherData['humidity'] == null ||
           weatherData['windSpeed'] == null ||
           weatherData['description'] == null ||
-          weatherData['city'] == null) {
+          weatherData['city'] == null ||
+          weatherData['icon'] == null) {
         return Result.failure(
           ApiError(
             type: ApiErrorType.unknown,
@@ -48,6 +49,7 @@ class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
         temperature: weatherData['temperature'].toDouble(),
         humidity: weatherData['humidity'].toDouble(),
         windSpeed: weatherData['windSpeed'].toDouble(),
+        icon: weatherData['icon'],
       );
 
       return Result.success(forecast);
