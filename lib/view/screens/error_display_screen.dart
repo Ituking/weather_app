@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../../components/app_back_button.dart';
 import '../../components/background_image.dart';
+import '../../core/extensions/api_error_ui_message.dart';
 import '../../core/strings/dio_error_handler_strings.dart';
 import '../../view_model/providers/error_view_model_provider.dart';
 
@@ -17,7 +18,8 @@ class ErrorDisplayScreen extends ConsumerWidget {
     final error = ref.watch(errorViewModelProvider).error;
 
     // エラーメッセージがnullの場合、デフォルトメッセージを表示
-    final errorMessage = error?.message ?? DioErrorHandlerStrings.unknownError;
+    final errorMessage =
+        error?.uiMessage ?? DioErrorHandlerStrings.unknownError;
 
     return Scaffold(
       body: Stack(
