@@ -26,6 +26,7 @@ export interface WeatherData {
   humidity: number;
   windSpeed: number;
   description: string;
+  icon: string;
 }
 
 /**
@@ -49,6 +50,7 @@ export async function fetchWeatherFromAPI(city: string): Promise<WeatherData> {
       humidity: response.data.main.humidity,
       windSpeed: response.data.wind.speed,
       description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
     };
   } catch (error) {
     console.error(`${city}の天気データ取得に失敗:`, error);
