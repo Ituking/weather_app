@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/logger/logger_provider.dart';
@@ -7,7 +6,6 @@ import '../core/network/response/result.dart';
 import '../models/forecast.dart';
 import '../repositories/weather_repository.dart';
 import '../repositories/weather_repository_provider.dart';
-import 'providers/dio_error_handler_provider.dart';
 
 /// [CityWeatherNotifier]は、指定された都市の天気情報を非同期に取得し、
 /// その結果を管理するための[Notifier]クラスです。
@@ -48,17 +46,6 @@ class CityWeatherNotifier extends Notifier<AsyncValue<Result<Forecast>>> {
           state = AsyncData(Result.failure(error));
         },
       );
-    } on DioException catch (e, stackTrace) {
-      // DioExceptionをキャッチし、エラーハンドラーを使用して適切なApiErrorを生成
-      final dioErrorHandler = ref.read(dioErrorHandlerProvider);
-      final apiError = dioErrorHandler.handle(e);
-
-      logger.logError(
-        'DioException while fetching weather for city: $cityName. Message: ${e.message}',
-        stackTrace,
-      );
-
-      state = AsyncData(Result.failure(apiError));
     } catch (e, stackTrace) {
       // その他のエラー処理
       logger.logError(
