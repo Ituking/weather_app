@@ -28,7 +28,7 @@ class ErrorDisplayScreen extends ConsumerWidget {
               children: [
                 // エラーメッセージを表示
                 Text(
-                  errorMessage!,
+                  errorMessage ?? '予期しないエラーが発生しました。',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
