@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import '../../components/app_back_button.dart';
 import '../../components/background_image.dart';
 import '../../core/extensions/api_error_ui_message.dart';
-import '../../core/strings/dio_error_handler_strings.dart';
 import '../../view_model/providers/error_view_model_provider.dart';
 
 /// [ErrorDisplayScreen]は、APIからのエラーメッセージを取得し、それを画面中央に表示する画面です。
@@ -17,9 +16,7 @@ class ErrorDisplayScreen extends ConsumerWidget {
     // ErrorViewModelからエラー情報を取得
     final error = ref.watch(errorViewModelProvider).error;
 
-    // エラーメッセージがnullの場合、デフォルトメッセージを表示
-    final errorMessage =
-        error?.uiMessage ?? DioErrorHandlerStrings.unknownError;
+    final errorMessage = error?.uiMessage;
 
     return Scaffold(
       body: Stack(
@@ -31,7 +28,7 @@ class ErrorDisplayScreen extends ConsumerWidget {
               children: [
                 // エラーメッセージを表示
                 Text(
-                  errorMessage,
+                  errorMessage!,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
