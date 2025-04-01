@@ -32,6 +32,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   cloud_functions: ^5.3.4
   cloud_firestore: ^5.6.5
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   build_runner: ^2.4.9 
@@ -45,6 +46,11 @@ dev_dependencies:
   riverpod_generator: ^2.4.0
   firebase_core_platform_interface: ^5.4.0
 
+flutter_launcher_icons:
+  ios: true
+  image_path: assets/images/icons/Icon.png
+  remove_alpha_ios: true
+  
 flutter:
   uses-material-design: true
   assets: 
