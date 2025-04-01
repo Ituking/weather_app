@@ -47,7 +47,7 @@ dev_dependencies:
 
 flutter_launcher_icons:
   ios: true
-  image_path: assets/images/icons/Icon.png
+  image_path: 'assets/images/icons/icon.png'
   remove_alpha_ios: true
   
 flutter:
