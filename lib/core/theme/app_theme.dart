@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// アプリケーション全体のテーマ設定を提供します。
 class AppTheme {
@@ -16,13 +17,13 @@ class AppTheme {
       secondary: secondaryColor,
       surface: backgroundColor,
     ),
-    textTheme: const TextTheme(
-      displayLarge: TextStyle(
+    textTheme: GoogleFonts.notoSansJpTextTheme().copyWith(
+      displayLarge: GoogleFonts.notoSansJp(
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: Colors.black87,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: GoogleFonts.notoSansJp(
         fontSize: 16,
         color: Colors.black87,
       ),
