@@ -1,14 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weather_app/core/logger/logger_provider.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/models/forecast.dart';
 import 'package:weather_app/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/weather_view_model.dart';
 
-import '../core/logger/mock_i_logger.mocks.dart';
 import '../mocks/mock_weather_repository.mocks.dart';
 
 void main() {
@@ -16,16 +14,15 @@ void main() {
 
   group('WeatherViewModelのテスト', () {
     late MockWeatherRepository mockWeatherRepository;
-    late MockILogger mockLogger;
+
     late ProviderContainer container;
 
     setUp(() {
       mockWeatherRepository = MockWeatherRepository();
-      mockLogger = MockILogger();
+
       container = ProviderContainer(
         overrides: [
           weatherRepositoryProvider.overrideWithValue(mockWeatherRepository),
-          loggerProvider.overrideWithValue(mockLogger),
         ],
       );
     });
