@@ -1,21 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../core/logger/logger_provider.dart';
+import '../core/logger/app_log.dart';
 import '../models/forecast.dart';
 import 'forecasts_ref.dart';
 
 class ForecastRepository {
-  ForecastRepository(this._ref);
-
-  final Ref _ref;
-
   /// 特定のドキュメントIDから[Forecast]データを取得
   Future<Forecast?> getForecastById({
     required String forecastId,
   }) async {
-    final logger = _ref.read(loggerProvider);
-
     try {
       final docSnapshot = await forecastsRef().doc(forecastId).get();
       if (docSnapshot.exists) {
@@ -23,10 +16,11 @@ class ForecastRepository {
       } else {
         return null;
       }
-    } on Exception catch (e, stackTrace) {
-      logger.logError(
-        'Error fetching forecast: $e',
-        stackTrace,
+    } catch (e, stackTrace) {
+      AppLog.error(
+        message: 'Error fetching forecast: $e',
+        exception: e,
+        stackTrace: stackTrace,
       );
       return null;
     }
@@ -36,8 +30,6 @@ class ForecastRepository {
   Future<List<Forecast>> getForecastsByDates({
     required List<String> forecastDates,
   }) async {
-    final logger = _ref.read(loggerProvider);
-
     try {
       final querySnapshot = await forecastsRef()
           .where(FieldPath.documentId, whereIn: forecastDates)
@@ -50,10 +42,11 @@ class ForecastRepository {
           'id': doc.id,
         });
       }).toList();
-    } on Exception catch (e, stackTrace) {
-      logger.logError(
-        'Error fetching forecasts: $e',
-        stackTrace,
+    } catch (e, stackTrace) {
+      AppLog.error(
+        message: 'Error fetching forecasts: $e',
+        exception: e,
+        stackTrace: stackTrace,
       );
       return [];
     }
