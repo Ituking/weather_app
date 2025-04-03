@@ -1,22 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weather_app/core/logger/i_logger.dart';
-import 'package:weather_app/core/logger/logger_provider.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/models/forecast.dart';
 import 'package:weather_app/repositories/weather_repository_impl.dart';
 
-import '../core/logger/mock_i_logger.mocks.dart';
-import '../mocks/mock_ref.mocks.dart';
 import '../mocks/mock_weather_api_client.mocks.dart';
 
 void main() {
   group('WeatherRepositoryImplのテスト', () {
     late MockWeatherApiClient mockApiClient; // WeatherApiClientのモック
-    late MockRef mockRef; // Refのモック
     late WeatherRepositoryImpl repository; // テスト対象のリポジトリ
-    late MockILogger mockLogger; // ILoggerのモック
 
     final forecast = Forecast(
       id: 'forecast_id_001',
@@ -28,19 +22,10 @@ void main() {
     );
 
     setUp(() {
-      // ILoggerのダミーを提供
-      provideDummy<ILogger>(MockILogger());
-
-      // モックおよび依存関係の初期化
       mockApiClient = MockWeatherApiClient();
-      mockRef = MockRef();
-      mockLogger = MockILogger();
-
-      when(mockRef.read<ILogger>(loggerProvider)).thenReturn(mockLogger);
 
       // WeatherRepositoryImplのインスタンスを作成
-      repository =
-          WeatherRepositoryImpl(apiClient: mockApiClient, ref: mockRef);
+      repository = WeatherRepositoryImpl(apiClient: mockApiClient);
     });
 
     test('成功時にWeatherResponseを返す', () async {
