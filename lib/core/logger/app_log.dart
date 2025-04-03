@@ -41,17 +41,21 @@ class AppLog {
       );
     }
 
-    if (level.index >= Level.info.index) {
-      FirebaseCrashlytics.instance.log(message);
-    }
+    try {
+      if (level.index >= Level.info.index) {
+        FirebaseCrashlytics.instance.log(message);
+      }
 
-    if (level.index >= Level.error.index && exception != null) {
-      FirebaseCrashlytics.instance.recordFlutterError(
-        FlutterErrorDetails(
-          exception: exception,
-          stack: stackTrace,
-        ),
-      );
+      if (level.index >= Level.error.index && exception != null) {
+        FirebaseCrashlytics.instance.recordFlutterError(
+          FlutterErrorDetails(
+            exception: exception,
+            stack: stackTrace,
+          ),
+        );
+      }
+    } catch (e) {
+      _logger.w('Crashlytics unavailable: $e');
     }
   }
 }
