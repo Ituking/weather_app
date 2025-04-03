@@ -1,7 +1,6 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../core/logger/logger_provider.dart';
+import '../core/logger/app_log.dart';
 import '../core/network/api_error.dart';
 import '../core/network/response/result.dart';
 import '../models/forecast.dart';
@@ -13,9 +12,8 @@ import 'weather_repository.dart';
 /// [IWeatherApiClient]を使用して指定された都市の天気情報を取得します。
 class WeatherRepositoryImpl implements WeatherRepository {
   final IWeatherApiClient apiClient;
-  final Ref ref;
 
-  WeatherRepositoryImpl({required this.apiClient, required this.ref});
+  WeatherRepositoryImpl({required this.apiClient});
 
   /// 指定された都市名[cityName]の天気データを取得します。
   ///
@@ -23,24 +21,24 @@ class WeatherRepositoryImpl implements WeatherRepository {
   /// 戻り値 - [Result]オブジェクトで、成功時には[Forecast]を含みます。
   @override
   Future<Result<Forecast>> getWeather(String cityName) async {
-    final logger = ref.read(loggerProvider);
-
     try {
       final result = await apiClient.fetchWeather(cityName);
 
-      logger.log('fetchWeather result: $result');
+      AppLog.debug(message: 'fetchWeather result: $result');
 
       final data = result.when(
         success: (weatherResponse) => weatherResponse.toJson(),
         failure: (error) => 'Error: ${error.message}',
       );
-      logger.log('WeatherResponse Data: $data');
+
+      AppLog.debug(message: 'WeatherResponse Data: $data');
 
       return result;
     } on FirebaseFunctionsException catch (e, stackTrace) {
-      logger.logError(
-        'FirebaseFunctionsException in getWeather: ${e.message}',
-        stackTrace,
+      AppLog.error(
+        message: 'FirebaseFunctionsException in getWeather: ${e.message}',
+        exception: e,
+        stackTrace: stackTrace,
       );
 
       return Result.failure(ApiError(
@@ -48,9 +46,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
         message: e.message ?? 'Unknown Firebase error',
       ));
     } catch (e, stackTrace) {
-      logger.logError(
-        'Unexpected error in getWeather: $e',
-        stackTrace,
+      AppLog.error(
+        message: 'Unexpected error in getWeather: $e',
+        exception: e,
+        stackTrace: stackTrace,
       );
 
       return Result.failure(ApiError(

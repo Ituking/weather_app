@@ -8,8 +8,5 @@ import 'weather_repository_impl.dart';
 final weatherRepositoryProvider = Provider<WeatherRepository>((ref) {
   final weatherApiClient = ref.watch(weatherApiClientProvider);
 
-  return WeatherRepositoryImpl(
-    apiClient: weatherApiClient,
-    ref: ref,
-  );
+  return WeatherRepositoryImpl(apiClient: weatherApiClient);
 });

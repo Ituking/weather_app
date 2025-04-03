@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../core/logger/logger_provider.dart';
+import '../core/logger/app_log.dart';
 import '../core/network/api_error.dart';
 import '../core/network/response/result.dart';
 import '../models/forecast.dart';
@@ -25,8 +25,6 @@ class CityWeatherNotifier extends Notifier<AsyncValue<Result<Forecast>>> {
   /// このメソッドは、都市名をトリムし、[WeatherRepository]を使用して
   /// 天気情報を取得します。取得結果は[state]に格納されます。
   Future<void> fetchWeather(String cityName) async {
-    final logger = ref.read(loggerProvider);
-
     state = const AsyncLoading();
 
     try {
@@ -38,19 +36,22 @@ class CityWeatherNotifier extends Notifier<AsyncValue<Result<Forecast>>> {
           state = AsyncData(Result.success(weatherResponse));
         },
         failure: (error) {
-          logger.logError(
-            'Failed to fetch weather for city: $cityName. Error: ${error.message}',
-            StackTrace.current,
+          AppLog.error(
+            message:
+                'Failed to fetch weather for city: $cityName. Error: ${error.message}',
+            exception: error,
+            stackTrace: StackTrace.current,
           );
 
           state = AsyncData(Result.failure(error));
         },
       );
     } catch (e, stackTrace) {
-      // その他のエラー処理
-      logger.logError(
-        'Unexpected error while fetching weather for city: $cityName. Error: $e',
-        stackTrace,
+      AppLog.error(
+        message:
+            'Unexpected error while fetching weather for city: $cityName. Error: $e',
+        exception: e,
+        stackTrace: stackTrace,
       );
 
       state = AsyncData(Result.failure(
