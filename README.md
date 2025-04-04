@@ -26,6 +26,14 @@ Weather Appは、位置情報または都市名を入力することでその地
 - **ViewModel**: ビジネスロジックを含み、ViewとModelを結びつけます。
 - **Repository**: データの取得と処理のロジックをカプセル化。
 
+### システム構成図
+
+以下は、OpenWeatherMap APIやCloud Functionsを含むシステム全体の構成です。
+
+<p align="center">
+  <img src="assets/images/system-architecture.svg" alt="System Architecture" width="700"/>
+</p>
+
 ## セットアップ
 
 プロジェクトのセットアップ方法を記述します。
