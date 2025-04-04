@@ -28,8 +28,6 @@ Weather Appは、位置情報または都市名を入力することでその地
 
 ### システム構成図
 
-以下は、OpenWeatherMap APIやCloud Functionsを含むシステム全体の構成です。
-
 <p align="center">
   <img src="assets/images/system-architecture.svg" alt="System Architecture" width="700"/>
 </p>
