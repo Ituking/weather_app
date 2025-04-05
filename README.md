@@ -4,11 +4,15 @@
 
 Weather Appは、位置情報または都市名を入力することでその地域の現在の天気と週間予報を表示するFlutterアプリです。このアプリはAPIを通じて天気情報を取得し、ユーザーインターフェースで表示します。
 
+---
+
 ## 特徴
 
 - **現在の天気表示**: ユーザーの現在位置または入力された都市の天気情報をリアルタイムで提供。
 - **週間天気予報**: 選択された地域の一週間の天気予報を表示。
 - **地域検索**: 都市名で検索可能。
+
+---
 
 ## 技術スタック
 
@@ -16,6 +20,8 @@ Weather Appは、位置情報または都市名を入力することでその地
 - **Dart**: プログラミング言語
 - **MVVMパターン**: アプリのアーキテクチャパターン
 - **Repositoryパターン**: データ層の抽象化を提供
+
+---
 
 ## アーキテクチャ
 
@@ -32,15 +38,15 @@ Weather Appは、位置情報または都市名を入力することでその地
   <img src="assets/images/system-architecture.svg" alt="System Architecture" width="700"/>
 </p>
 
+---
+
 ## セットアップ
 
-プロジェクトのセットアップ方法を記述します。
+### 初期セットアップ手順
 
-```
+```bash
 git clone https://github.com/your-username/weather_app.git
 cd weather_app
-flutter pub get
+make setup
+make run-build-runner
 flutter run
-```
-
-
