@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../view/screens/city_search_screen.dart';
-import '../../view/screens/error_display_screen.dart';
-import '../../view/screens/weather_result_screen.dart';
-import '../../view_model/error_view_model.dart';
-import '../../view_model/providers/error_view_model_provider.dart';
+import '../../features/weather/view/screens/city_search_screen.dart';
+import '../../features/weather/view/screens/error_display_screen.dart';
+import '../../features/weather/view/screens/weather_result_screen.dart';
+import '../../features/weather/view_model/error_view_model.dart';
+import '../../features/weather/view_model/providers/error_view_model_provider.dart';
 
 /// アプリケーションのルーターを定義するクラス。
 class AppRouter {
