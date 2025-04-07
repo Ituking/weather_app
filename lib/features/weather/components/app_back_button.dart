@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../core/strings/app_back_button_strings.dart';
+import '../../../core/strings/app_back_button_strings.dart';
 
 /// [AppBackButton]は、天気検索画面に遷移するボタンです。
 class AppBackButton extends StatelessWidget {
