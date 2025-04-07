@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/features/weather/models/forecast.dart';
-import 'package:weather_app/repositories/weather_repository_provider.dart';
+import 'package:weather_app/features/weather/repositories/weather_repository_provider.dart';
 import 'package:weather_app/view_model/weather_view_model.dart';
 
 import '../mocks/mock_weather_repository.mocks.dart';
