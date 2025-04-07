@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-import '../../components/app_back_button.dart';
-import '../../components/background_image.dart';
-import '../../components/city_name_text.dart';
-import '../../components/humidity_text.dart';
-import '../../components/temperature_text.dart';
-import '../../components/weather_description_text.dart';
-import '../../components/weather_icon.dart';
-import '../../components/wind_speed_text.dart';
+import '../../features/weather/components/app_back_button.dart';
+import '../../features/weather/components/background_image.dart';
+import '../../features/weather/components/city_name_text.dart';
+import '../../features/weather/components/humidity_text.dart';
+import '../../features/weather/components/temperature_text.dart';
+import '../../features/weather/components/weather_description_text.dart';
+import '../../features/weather/components/weather_icon.dart';
+import '../../features/weather/components/wind_speed_text.dart';
 import '../../view_model/providers/city_weather_notifier_provider.dart';
 import 'error_display_screen.dart';
 
