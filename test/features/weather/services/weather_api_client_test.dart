@@ -5,7 +5,7 @@ import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/features/weather/models/forecast.dart';
 import 'package:weather_app/features/weather/services/weather_api_client.dart';
 
-import '../features/weather/mocks/mock_firebase_functions.mocks.dart';
+import '../mocks/mock_firebase_functions.mocks.dart';
 
 void main() {
   group('WeatherApiClientのテスト', () {
