@@ -3,8 +3,8 @@ import 'package:cloud_functions/cloud_functions.dart';
 import '../../../core/logger/app_log.dart';
 import '../../../core/network/api_error.dart';
 import '../../../core/network/response/result.dart';
-import '../../../services/i_weather_api_client.dart';
 import '../models/forecast.dart';
+import '../services/i_weather_api_client.dart';
 import 'weather_repository.dart';
 
 /// 天気データを取得するリポジトリの実装クラス。
