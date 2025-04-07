@@ -5,7 +5,7 @@ import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/features/weather/models/forecast.dart';
 import 'package:weather_app/features/weather/repositories/weather_repository_impl.dart';
 
-import '../mocks/mock_weather_api_client.mocks.dart';
+import '../features/weather/mocks/mock_weather_api_client.mocks.dart';
 
 void main() {
   group('WeatherRepositoryImplのテスト', () {
