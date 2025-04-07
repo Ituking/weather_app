@@ -1,4 +1,4 @@
-import '../core/strings/city_name_validator_strings.dart';
+import '../../../core/strings/city_name_validator_strings.dart';
 import 'validator.dart';
 
 /// 都市名のバリデーションを行うクラス。
