@@ -7,8 +7,10 @@ import 'dart:async' as _i5;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:weather_app/view_model/city_search_state.dart' as _i3;
-import 'package:weather_app/view_model/city_search_view_model.dart' as _i4;
+import 'package:weather_app/features/weather/view_model/city_search_state.dart'
+    as _i3;
+import 'package:weather_app/features/weather/view_model/city_search_view_model.dart'
+    as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

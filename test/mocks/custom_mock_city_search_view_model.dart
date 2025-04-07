@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/view_model/city_search_state.dart';
-import 'package:weather_app/view_model/city_search_view_model.dart';
+import 'package:weather_app/features/weather/view_model/city_search_state.dart';
+import 'package:weather_app/features/weather/view_model/city_search_view_model.dart';
 
 /// [Notifier]を使ったテスト用の[CitySearchViewModel]モック実装
 class CustomMockCitySearchViewModel extends Notifier<CitySearchState> {
