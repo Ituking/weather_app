@@ -5,7 +5,7 @@ import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/features/weather/models/forecast.dart';
 import 'package:weather_app/features/weather/repositories/firestore_weather_repository_provider.dart';
-import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
+import 'package:weather_app/features/weather/view_model/providers/city_search_view_model_provider.dart';
 
 import '../mocks/mock_firestore_weather_repository.mocks.dart';
 
