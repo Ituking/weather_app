@@ -5,7 +5,9 @@ import firebaseFunctionsTest from "firebase-functions-test";
 import { WrappedV2CallableFunction } from "firebase-functions-test/lib/v2";
 import * as sinon from "sinon";
 
-admin.initializeApp();
+if (!admin.apps.length) {
+  admin.initializeApp();
+}
 
 import { getWeatherForCity } from "../src/weather_controller";
 import * as weatherService from "../src/weather_service";
@@ -118,9 +120,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
     } as unknown as functions.https.CallableRequest<unknown>;
     const result = await wrapped(mockRequest);
 
-    // expect(fetchWeatherStub.calledOnce).to.be.true;
     assert.isTrue(fetchWeatherStub.calledOnce);
-    // expect(saveWeatherStub.calledOnce).to.be.true;
     assert.isTrue(saveWeatherStub.calledOnce);
     expect(result).to.deep.include({
       city: "Tokyo",
