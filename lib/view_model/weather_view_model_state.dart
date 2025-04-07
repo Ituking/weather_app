@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../core/network/response/result.dart';
-import '../models/forecast.dart';
+import '../features/weather/models/forecast.dart';
 
 part 'weather_view_model_state.freezed.dart';
 
