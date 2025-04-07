@@ -6,7 +6,7 @@ import 'package:weather_app/core/strings/city_name_validator_strings.dart';
 import 'package:weather_app/core/strings/city_search_input_strings.dart';
 import 'package:weather_app/features/weather/components/city_search_input.dart';
 
-import '../mocks/mock_firebase.dart';
+import '../../../mocks/mock_firebase.dart';
 
 void main() {
   setUpAll(() async {
