@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/models/forecast.dart';
+import 'package:weather_app/features/weather/models/forecast.dart';
 import 'package:weather_app/view_model/weather_view_model_state.dart';
 
 void main() {

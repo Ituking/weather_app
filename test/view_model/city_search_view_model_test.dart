@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/models/forecast.dart';
+import 'package:weather_app/features/weather/models/forecast.dart';
 import 'package:weather_app/repositories/firestore_weather_repository_provider.dart';
 import 'package:weather_app/view_model/providers/city_search_view_model_provider.dart';
 
