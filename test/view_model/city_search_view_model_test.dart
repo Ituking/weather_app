@@ -7,7 +7,7 @@ import 'package:weather_app/features/weather/models/forecast.dart';
 import 'package:weather_app/features/weather/repositories/firestore_weather_repository_provider.dart';
 import 'package:weather_app/features/weather/view_model/providers/city_search_view_model_provider.dart';
 
-import '../mocks/mock_firestore_weather_repository.mocks.dart';
+import '../features/weather/mocks/mock_firestore_weather_repository.mocks.dart';
 
 void main() {
   group('CitySearchViewModelのテスト', () {
