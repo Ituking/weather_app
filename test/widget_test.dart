@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/features/weather/view/screens/city_search_screen.dart';
 import 'package:weather_app/main.dart';
 
-import 'mocks/mock_firebase.dart';
+import 'features/weather/mocks/mock_firebase.dart';
 
 void main() {
   setUpAll(() async {
