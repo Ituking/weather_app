@@ -1,5 +1,5 @@
 import '../core/network/response/result.dart';
-import '../models/forecast.dart';
+import '../features/weather/models/forecast.dart';
 
 /// Firestoreから天気データを取得するためのリポジトリインターフェース。
 ///

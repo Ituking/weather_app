@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/forecast.dart';
+import '../features/weather/models/forecast.dart';
 
 /// [Forecast]用コレクションのためのレファレンス
 CollectionReference<Forecast> forecastsRef() {
