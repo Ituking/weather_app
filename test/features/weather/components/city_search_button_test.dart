@@ -5,9 +5,9 @@ import 'package:weather_app/core/firebase/providers/firebase_functions_provider.
 import 'package:weather_app/core/strings/city_search_button_strings.dart';
 import 'package:weather_app/features/weather/components/city_search_button.dart';
 
-import '../../../view_model/providers/custom_mock_city_search_view_model_provider.dart';
 import '../mocks/custom_mock_city_search_view_model.dart';
 import '../mocks/mock_firebase_functions.mocks.dart';
+import '../view_model/providers/custom_mock_city_search_view_model_provider.dart';
 
 void main() {
   group('CitySearchButtonのテスト', () {
