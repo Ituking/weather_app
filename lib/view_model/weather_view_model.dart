@@ -2,8 +2,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../core/logger/app_log.dart';
 import '../core/network/response/result.dart';
-import '../repositories/weather_repository.dart';
-import '../repositories/weather_repository_provider.dart';
+import '../features/weather/repositories/weather_repository.dart';
+import '../features/weather/repositories/weather_repository_provider.dart';
 import 'weather_view_model_state.dart';
 
 part 'weather_view_model.g.dart';
