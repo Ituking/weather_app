@@ -1,7 +1,7 @@
-import '../core/network/response/result.dart';
-import '../features/weather/models/forecast.dart';
-import '../features/weather/repositories/firestore_weather_repository.dart';
-import '../features/weather/repositories/weather_repository.dart';
+import '../../../core/network/response/result.dart';
+import '../models/forecast.dart';
+import '../repositories/firestore_weather_repository.dart';
+import '../repositories/weather_repository.dart';
 
 /// 天気データの取得とビジネスロジックを管理するサービス
 class WeatherService {
