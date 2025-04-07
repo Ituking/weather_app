@@ -1,5 +1,5 @@
 import 'package:mockito/annotations.dart';
-import 'package:weather_app/services/weather_api_client.dart';
+import 'package:weather_app/features/weather/services/weather_api_client.dart';
 
 // WeatherApiClientクラスのモックを生成するためのアノテーション。
 // `build_runner`コマンドを実行することで、指定されたクラスのモッククラスが自動的に生成されます。
