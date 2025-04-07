@@ -1,5 +1,5 @@
 import '../core/network/response/result.dart';
-import '../models/forecast.dart';
+import '../features/weather/models/forecast.dart';
 import '../repositories/firestore_weather_repository.dart';
 import '../repositories/weather_repository.dart';
 

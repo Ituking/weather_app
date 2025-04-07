@@ -2,7 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 
 import '../core/network/api_error.dart';
 import '../core/network/response/result.dart';
-import '../models/forecast.dart';
+import '../features/weather/models/forecast.dart';
 import 'i_weather_api_client.dart';
 
 /// [FirebaseFunctions]を利用するAPIクライアント
