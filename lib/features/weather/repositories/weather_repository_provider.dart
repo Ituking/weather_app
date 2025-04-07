@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../services/weather_api_client_provider.dart';
+import '../../../services/weather_api_client_provider.dart';
 import 'weather_repository.dart';
 import 'weather_repository_impl.dart';
 

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../core/logger/app_log.dart';
-import '../features/weather/models/forecast.dart';
+import '../../../core/logger/app_log.dart';
+import '../models/forecast.dart';
 import 'forecasts_ref.dart';
 
 class ForecastRepository {
