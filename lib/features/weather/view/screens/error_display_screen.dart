@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-import '../../../core/extensions/api_error_ui_message.dart';
-import '../../../view_model/providers/error_view_model_provider.dart';
-import '../components/app_back_button.dart';
-import '../components/background_image.dart';
+import '../../../../core/extensions/api_error_ui_message.dart';
+import '../../../../view_model/providers/error_view_model_provider.dart';
+import '../../components/app_back_button.dart';
+import '../../components/background_image.dart';
 
 /// [ErrorDisplayScreen]は、APIからのエラーメッセージを取得し、それを画面中央に表示する画面です。
 class ErrorDisplayScreen extends ConsumerWidget {
