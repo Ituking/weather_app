@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/features/weather/models/forecast.dart';
-import 'package:weather_app/repositories/weather_repository_provider.dart';
+import 'package:weather_app/features/weather/repositories/weather_repository_provider.dart';
 import 'package:weather_app/services/stub_weather_data_source.dart';
 import 'package:weather_app/services/weather_api_client_provider.dart';
 
