@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../core/network/api_error.dart';
+import '../../../core/network/api_error.dart';
 import 'error_state.dart';
 
 /// [ErrorViewModel]クラスは、アプリケーション内のエラー状態を管理します。

@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../core/logger/app_log.dart';
-import '../core/network/api_error.dart';
-import '../core/network/response/result.dart';
-import '../features/weather/models/forecast.dart';
-import '../features/weather/repositories/weather_repository.dart';
-import '../features/weather/repositories/weather_repository_provider.dart';
+import '../../../core/logger/app_log.dart';
+import '../../../core/network/api_error.dart';
+import '../../../core/network/response/result.dart';
+import '../models/forecast.dart';
+import '../repositories/weather_repository.dart';
+import '../repositories/weather_repository_provider.dart';
 
 /// [CityWeatherNotifier]は、指定された都市の天気情報を非同期に取得し、
 /// その結果を管理するための[Notifier]クラスです。
