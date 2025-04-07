@@ -7,7 +7,7 @@ import 'package:weather_app/features/weather/models/forecast.dart';
 import 'package:weather_app/features/weather/repositories/weather_repository_provider.dart';
 import 'package:weather_app/features/weather/view_model/weather_view_model.dart';
 
-import '../features/weather/mocks/mock_weather_repository.mocks.dart';
+import '../mocks/mock_weather_repository.mocks.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
