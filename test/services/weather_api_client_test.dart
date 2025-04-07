@@ -2,7 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/models/forecast.dart';
+import 'package:weather_app/features/weather/models/forecast.dart';
 import 'package:weather_app/services/weather_api_client.dart';
 
 import '../mocks/mock_firebase_functions.mocks.dart';
