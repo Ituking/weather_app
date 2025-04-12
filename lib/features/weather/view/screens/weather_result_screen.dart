@@ -10,7 +10,7 @@ import '../../components/temperature_text.dart';
 import '../../components/weather_description_text.dart';
 import '../../components/weather_icon.dart';
 import '../../components/wind_speed_text.dart';
-import '../../view_model/providers/city_weather_notifier_provider.dart';
+import '../../view_model/providers/async_weather_view_model_provider.dart';
 import 'error_display_screen.dart';
 
 /// [WeatherResultScreen]は、指定された都市の天気情報を表示する画面です。
@@ -25,61 +25,35 @@ class WeatherResultScreen extends ConsumerStatefulWidget {
 class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
   @override
   Widget build(BuildContext context) {
-    // cityWeatherNotifierProviderを利用して天気情報を取得
-    final weatherResult = ref.watch(cityWeatherNotifierProvider);
+    final weatherResult = ref.watch(asyncWeatherViewModelProvider);
 
     return Scaffold(
       body: Stack(
         children: [
           const BackgroundImage(),
           Center(
-            // データの状態に応じたウィジェットを返す
             child: weatherResult.when(
-              // データ取得成功時の処理
-              data: (data) {
-                // 成功時のResultをさらに確認
-                return data.when(
-                  success: (forecast) {
-                    // データの存在確認
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CityNameText(cityName: forecast.city), // 都市名
-                        Gap(8),
-                        TemperatureText(
-                            temperature: forecast.temperature), // 気温
-                        Gap(8),
-                        HumidityText(humidity: forecast.humidity.toInt()), // 湿度
-                        Gap(8),
-                        WindSpeedText(windSpeed: forecast.windSpeed), // 風速
-                        Gap(8),
-                        WeatherDescriptionText(
-                            weatherDescription: forecast.description), // 天気の説明
-                        Gap(8),
-                        WeatherIcon(iconCode: "${forecast.icon}@2x"), // 天気アイコン
-                        Gap(20),
-                        const AppBackButton(), // 戻るボタン
-                      ],
-                    );
-                  },
-                  failure: (error) {
-                    // データ取得失敗時のエラーメッセージを表示
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(error.message), // エラーメッセージを表示
-                      ],
-                    );
-                  },
-                );
-              },
-              // 非同期処理でエラーが発生した場合の処理
-              error: (e, s) {
-                return const ErrorDisplayScreen();
-              },
-              // データ取得中の処理
-              loading: () =>
-                  const CircularProgressIndicator(), // ローディングインジケーターを表示
+              data: (forecast) => Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CityNameText(cityName: forecast.city),
+                  Gap(8),
+                  TemperatureText(temperature: forecast.temperature),
+                  Gap(8),
+                  HumidityText(humidity: forecast.humidity.toInt()),
+                  Gap(8),
+                  WindSpeedText(windSpeed: forecast.windSpeed),
+                  Gap(8),
+                  WeatherDescriptionText(
+                      weatherDescription: forecast.description),
+                  Gap(8),
+                  WeatherIcon(iconCode: "${forecast.icon}@2x"),
+                  Gap(20),
+                  const AppBackButton(),
+                ],
+              ),
+              error: (e, s) => const ErrorDisplayScreen(),
+              loading: () => const CircularProgressIndicator(),
             ),
           ),
         ],
