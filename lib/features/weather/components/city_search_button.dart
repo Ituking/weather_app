@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/extensions/api_error_ui_message.dart';
+import '../../../core/network/api_error.dart';
 import '../../../core/strings/city_search_button_strings.dart';
+import '../view_model/providers/async_weather_view_model_provider.dart';
 import '../view_model/providers/city_name_validator_provider.dart';
-import '../view_model/providers/city_search_view_model_provider.dart';
-import '../view_model/providers/city_weather_notifier_provider.dart';
 import '../view_model/providers/error_view_model_provider.dart';
 import '../view_model/providers/text_editing_controller_provider.dart';
 
@@ -51,11 +52,8 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
 
   @override
   Widget build(BuildContext context) {
-    // 状態を取得
-    final cityWeatherNotifier = ref.watch(cityWeatherNotifierProvider.notifier);
-    final isLoading = ref.watch(citySearchViewModelProvider).isLoading;
-
-    // テーマを取得
+    final weatherState = ref.watch(asyncWeatherViewModelProvider);
+    final isLoading = weatherState.isLoading;
     final theme = Theme.of(context);
 
     return isLoading
@@ -64,42 +62,33 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
             onPressed: isValid
                 ? () async {
                     final cityName = controller.text.trim();
-
-                    // 入力が空でない場合のみ処理を実行。
-                    if (cityName.isNotEmpty) {
-                      await cityWeatherNotifier.fetchWeather(cityName);
-
-                      // APIレスポンスに基づいて遷移を制御。
-                      final weatherResult =
-                          ref.read(cityWeatherNotifierProvider);
-
-                      weatherResult.when(
-                        data: (result) {
-                          result.when(
-                            success: (forecast) {
-                              final cityNameFromApi = forecast.city;
-                              ref
-                                  .read(citySearchViewModelProvider.notifier)
-                                  .navigateToResultScreen(cityNameFromApi);
-                            },
-                            failure: (error) {
-                              final errorMessage = error.message;
-                              ref
-                                  .read(errorViewModelProvider.notifier)
-                                  .setErrorMessage(errorMessage);
-                              context.go('/error', extra: errorMessage);
-                            },
-                          );
-                        },
-                        loading: () =>
-                            const CircularProgressIndicator(), // ローディング中。
-                        error: (err, stack) {
-                          context.go('/error', extra: {
-                            'message': err.toString(),
-                          });
-                        },
-                      );
+                    if (cityName.isEmpty) {
+                      return;
                     }
+
+                    final notifier =
+                        ref.read(asyncWeatherViewModelProvider.notifier);
+
+                    await notifier.fetchWeather(cityName);
+
+                    final state = ref.read(asyncWeatherViewModelProvider);
+
+                    state.when(
+                      data: (forecast) {
+                        controller.clear();
+
+                        context.push('/result');
+                      },
+                      error: (e, _) {
+                        final errorMessage =
+                            e is ApiError ? e.uiMessage : '不明なエラーが発生しました';
+                        ref
+                            .read(errorViewModelProvider.notifier)
+                            .setErrorMessage(errorMessage);
+                        context.go('/error', extra: errorMessage);
+                      },
+                      loading: () => const CircularProgressIndicator(),
+                    );
                   }
                 : null,
             style: ElevatedButton.styleFrom(
