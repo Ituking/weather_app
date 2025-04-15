@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/logger/app_log.dart';
-import '../models/forecast.dart';
-import '../repositories/unified_weather_repository_provider.dart';
+import '../../../../core/logger/app_log.dart';
+import '../../../../data/repositories/weather/repositories/unified_weather_repository_provider.dart';
+import '../../../../domain/models/weather/models/forecast.dart';
 
 class AsyncWeatherViewModel extends AsyncNotifier<Forecast> {
   @override
