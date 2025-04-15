@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-import '../../components/app_back_button.dart';
-import '../../components/background_image.dart';
-import '../../components/city_name_text.dart';
-import '../../components/humidity_text.dart';
-import '../../components/temperature_text.dart';
-import '../../components/weather_description_text.dart';
-import '../../components/weather_icon.dart';
-import '../../components/wind_speed_text.dart';
-import '../../view_model/providers/async_weather_view_model_provider.dart';
+import '../../../../ui/weather/view_model/providers/async_weather_view_model_provider.dart';
+import '../../../../ui/weather/widgets/app_back_button.dart';
+import '../../../../ui/weather/widgets/background_image.dart';
+import '../../../../ui/weather/widgets/city_name_text.dart';
+import '../../../../ui/weather/widgets/humidity_text.dart';
+import '../../../../ui/weather/widgets/temperature_text.dart';
+import '../../../../ui/weather/widgets/weather_description_text.dart';
+import '../../../../ui/weather/widgets/weather_icon.dart';
+import '../../../../ui/weather/widgets/wind_speed_text.dart';
 import 'error_display_screen.dart';
 
 /// [WeatherResultScreen]は、指定された都市の天気情報を表示する画面です。
