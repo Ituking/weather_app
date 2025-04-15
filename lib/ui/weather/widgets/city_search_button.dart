@@ -5,10 +5,10 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/api_error_ui_message.dart';
 import '../../../core/network/api_error.dart';
 import '../../../core/strings/city_search_button_strings.dart';
-import '../view_model/providers/async_weather_view_model_provider.dart';
-import '../view_model/providers/city_name_validator_provider.dart';
-import '../view_model/providers/error_view_model_provider.dart';
-import '../view_model/providers/text_editing_controller_provider.dart';
+import '../../../ui/weather/view_model/providers/async_weather_view_model_provider.dart';
+import '../../../ui/weather/view_model/providers/city_name_validator_provider.dart';
+import '../../../ui/weather/view_model/providers/error_view_model_provider.dart';
+import '../../../ui/weather/view_model/providers/text_editing_controller_provider.dart';
 
 /// 都市名を検索するボタンウィジェット。
 ///
