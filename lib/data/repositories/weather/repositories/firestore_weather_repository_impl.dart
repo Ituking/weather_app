@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../../core/network/api_error.dart';
-import '../../../core/network/response/result.dart';
-import '../models/forecast.dart';
+import '../../../../core/network/api_error.dart';
+import '../../../../core/network/response/result.dart';
+import '../../../../domain/models/weather/models/forecast.dart';
 import 'firestore_weather_repository.dart';
 
 /// Firestoreから天気データを取得するリポジトリ
