@@ -3,7 +3,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import '../../../../core/logger/app_log.dart';
 import '../../../../core/network/api_error.dart';
 import '../../../../core/network/response/result.dart';
-import '../../../../domain/models/weather/models/forecast.dart';
+import '../../../../domain/models/weather/forecast.dart';
 import '../../../services/weather/services/i_weather_api_client.dart';
 import 'weather_repository.dart';
 
