@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/models/weather/models/forecast.dart';
+import '../../../domain/models/weather/forecast.dart';
 
 part 'city_search_state.freezed.dart';
 

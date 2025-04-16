@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../data/repositories/weather/repositories/firestore_weather_repository.dart';
-import '../../../../data/repositories/weather/repositories/firestore_weather_repository_provider.dart';
+import '../../../data/repositories/weather/firestore_weather_repository.dart';
+import '../../../data/repositories/weather/firestore_weather_repository_provider.dart';
 import 'city_search_state.dart';
 import 'providers/app_router_provider.dart';
 
