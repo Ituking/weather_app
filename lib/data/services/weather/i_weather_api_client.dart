@@ -1,5 +1,5 @@
 import '../../../../core/network/response/result.dart';
-import '../../../../domain/models/weather/models/forecast.dart';
+import '../../../../domain/models/weather/forecast.dart';
 
 /// 天気データを取得するAPIクライアントのインターフェース
 abstract class IWeatherApiClient {

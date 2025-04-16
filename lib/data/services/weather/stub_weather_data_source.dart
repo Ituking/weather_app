@@ -1,6 +1,6 @@
 import '../../../../core/network/api_error.dart';
 import '../../../../core/network/response/result.dart';
-import '../../../../domain/models/weather/models/forecast.dart';
+import '../../../../domain/models/weather/forecast.dart';
 import 'i_weather_api_client.dart';
 
 /// [StubWeatherDataSource]クラスは、[IWeatherApiClient]のスタブ実装です。
