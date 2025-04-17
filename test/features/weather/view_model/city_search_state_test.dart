@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_app/features/weather/view_model/city_search_state.dart';
+import 'package:weather_app/ui/weather/view_model/city_search_state.dart';
 
 void main() {
   // CitySearchStateのユニットテスト

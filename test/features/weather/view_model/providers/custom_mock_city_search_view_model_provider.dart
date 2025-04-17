@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/features/weather/view_model/city_search_state.dart';
+import 'package:weather_app/ui/weather/view_model/city_search_state.dart';
 
 import '../../mocks/custom_mock_city_search_view_model.dart';
 
