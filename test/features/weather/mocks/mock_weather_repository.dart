@@ -1,5 +1,5 @@
 import 'package:mockito/annotations.dart';
-import 'package:weather_app/features/weather/repositories/weather_repository.dart';
+import 'package:weather_app/data/repositories/weather/weather_repository.dart';
 
 @GenerateMocks([WeatherRepository])
 void main() {}

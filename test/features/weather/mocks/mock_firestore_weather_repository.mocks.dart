@@ -7,9 +7,9 @@ import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:weather_app/core/network/response/result.dart' as _i2;
-import 'package:weather_app/features/weather/models/forecast.dart' as _i5;
-import 'package:weather_app/features/weather/repositories/firestore_weather_repository.dart'
+import 'package:weather_app/data/repositories/weather/firestore_weather_repository.dart'
     as _i3;
+import 'package:weather_app/domain/models/weather/forecast.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
