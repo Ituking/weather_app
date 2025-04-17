@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/strings/app_back_button_strings.dart';
-import 'package:weather_app/features/weather/components/app_back_button.dart';
+import 'package:weather_app/ui/weather/widgets/app_back_button.dart';
 
 void main() {
   group('AppBackButtonのテスト', () {

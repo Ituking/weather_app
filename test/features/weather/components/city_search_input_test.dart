@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/strings/city_name_validator_strings.dart';
 import 'package:weather_app/core/strings/city_search_input_strings.dart';
-import 'package:weather_app/features/weather/components/city_search_input.dart';
+import 'package:weather_app/ui/weather/widgets/city_search_input.dart';
 
 import '../mocks/mock_firebase.dart';
 
