@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/features/weather/models/forecast.dart';
-import 'package:weather_app/features/weather/repositories/weather_repository_provider.dart';
-import 'package:weather_app/features/weather/services/stub_weather_data_source.dart';
-import 'package:weather_app/features/weather/services/weather_api_client_provider.dart';
+import 'package:weather_app/data/repositories/weather/weather_repository_provider.dart';
+import 'package:weather_app/data/services/weather/stub_weather_data_source.dart';
+import 'package:weather_app/data/services/weather/weather_api_client_provider.dart';
+import 'package:weather_app/domain/models/weather/forecast.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
