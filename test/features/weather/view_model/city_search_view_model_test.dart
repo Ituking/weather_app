@@ -3,9 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/features/weather/models/forecast.dart';
-import 'package:weather_app/features/weather/repositories/firestore_weather_repository_provider.dart';
-import 'package:weather_app/features/weather/view_model/providers/city_search_view_model_provider.dart';
+import 'package:weather_app/data/repositories/weather/firestore_weather_repository_provider.dart';
+import 'package:weather_app/domain/models/weather/forecast.dart';
+import 'package:weather_app/ui/weather/view_model/providers/city_search_view_model_provider.dart';
 
 import '../mocks/mock_firestore_weather_repository.mocks.dart';
 
