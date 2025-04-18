@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/api_error.dart';
 import 'package:weather_app/core/network/response/result.dart';
-import 'package:weather_app/features/weather/models/forecast.dart';
-import 'package:weather_app/features/weather/repositories/weather_repository_impl.dart';
+import 'package:weather_app/data/repositories/weather/weather_repository_impl.dart';
+import 'package:weather_app/domain/models/weather/forecast.dart';
 
 import '../mocks/mock_weather_api_client.mocks.dart';
 
