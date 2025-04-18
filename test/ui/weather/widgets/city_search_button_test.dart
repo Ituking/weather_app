@@ -52,30 +52,5 @@ void main() {
           find.text(CitySearchButtonStrings.buttonLabelSearch), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsNothing);
     });
-
-    // testWidgets('ローディング状態に遷移するとCircularProgressIndicatorが表示される',
-    //     (WidgetTester tester) async {
-    //   await tester.pumpWidget(UncontrolledProviderScope(
-    //     container: container,
-    //     child: const MaterialApp(
-    //       home: Scaffold(
-    //         body: CitySearchButton(),
-    //       ),
-    //     ),
-    //   ));
-
-    //   expect(
-    //       find.text(CitySearchButtonStrings.buttonLabelSearch), findsOneWidget);
-    //   expect(find.byType(CircularProgressIndicator), findsNothing);
-
-    //   container.read(customMockCitySearchViewModelProvider.notifier).setState(
-    //         CitySearchState(isLoading: true),
-    //       );
-    //   await tester.pump();
-
-    //   expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    //   expect(
-    //       find.text(CitySearchButtonStrings.buttonLabelSearch), findsNothing);
-    // });
   });
 }
