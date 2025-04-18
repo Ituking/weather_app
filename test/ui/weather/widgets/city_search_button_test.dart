@@ -5,8 +5,8 @@ import 'package:weather_app/core/firebase/providers/firebase_functions_provider.
 import 'package:weather_app/core/strings/city_search_button_strings.dart';
 import 'package:weather_app/ui/weather/widgets/city_search_button.dart';
 
-import '../../../features/weather/mocks/custom_mock_city_search_view_model.dart';
-import '../../../features/weather/mocks/mock_firebase_functions.mocks.dart';
+import '../../../test_helpers/mocks/custom_mock_city_search_view_model.dart';
+import '../../../test_helpers/mocks/mock_firebase_functions.mocks.dart';
 import '../view_model/providers/custom_mock_city_search_view_model_provider.dart';
 
 void main() {
