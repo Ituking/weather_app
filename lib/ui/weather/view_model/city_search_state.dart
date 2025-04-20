@@ -1,0 +1,16 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../domain/models/weather/forecast.dart';
+
+part 'city_search_state.freezed.dart';
+
+/// [CitySearchState]は、都市検索に関連する状態を保持するデータモデルです。
+@freezed
+class CitySearchState with _$CitySearchState {
+  factory CitySearchState({
+    @Default('') String cityName, // 検索される都市の名前。
+    @Default(false) bool isLoading, // データのロード状態。
+    String? errorMessage, // エラーメッセージ、存在する場合は非null。
+    Forecast? weather,
+  }) = _CitySearchState;
+}
