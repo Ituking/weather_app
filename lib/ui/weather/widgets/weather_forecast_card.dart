@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../../../core/theme/weather_forecast_card_theme.dart';
 import 'city_name_text.dart';
 import 'humidity_text.dart';
 import 'temperature_text.dart';
@@ -28,14 +29,14 @@ class WeatherForecastCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cardTheme = Theme.of(context).extension<WeatherForecastCardTheme>()!;
+
     return Card(
-      color: Colors.grey[850],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      color: cardTheme.backgroundColor,
+      shape: cardTheme.shape,
       margin: const EdgeInsets.symmetric(horizontal: 24),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: cardTheme.padding,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
