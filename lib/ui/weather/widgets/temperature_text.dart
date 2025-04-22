@@ -10,7 +10,7 @@ class TemperatureText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '${TemperatureTextStrings.textLabelTemperature} ${temperature.toStringAsFixed(1)} ${TemperatureTextStrings.unitCelsius}',
+      '${temperature.toStringAsFixed(1)} ${TemperatureTextStrings.unitCelsius}',
       style: const TextStyle(
         fontSize: 26,
         color: Colors.white,

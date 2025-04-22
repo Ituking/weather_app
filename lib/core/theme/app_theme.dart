@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'weather_forecast_card_theme.dart';
+
 /// アプリケーション全体のテーマ設定を提供します。
 class AppTheme {
   static const Color primaryColor = Color(0xFF1DABED);
@@ -43,5 +45,14 @@ class AppTheme {
         foregroundColor: Colors.white,
       ),
     ),
+    extensions: <ThemeExtension<dynamic>>[
+      const WeatherForecastCardTheme(
+        backgroundColor: Color(0xFF2C2C2E),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
+        padding: EdgeInsets.all(16),
+      ),
+    ],
   );
 }
