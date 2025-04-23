@@ -9,6 +9,7 @@ import '../../../ui/weather/view_model/providers/async_weather_view_model_provid
 import '../../../ui/weather/view_model/providers/city_name_validator_provider.dart';
 import '../../../ui/weather/view_model/providers/error_view_model_provider.dart';
 import '../../../ui/weather/view_model/providers/text_editing_controller_provider.dart';
+import '../../core/widgets/app_elevated_button.dart';
 
 /// 都市名を検索するボタンウィジェット。
 ///
@@ -54,11 +55,11 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
   Widget build(BuildContext context) {
     final weatherState = ref.watch(asyncWeatherViewModelProvider);
     final isLoading = weatherState.isLoading;
-    final theme = Theme.of(context);
 
     return isLoading
         ? const CircularProgressIndicator()
-        : ElevatedButton(
+        : AppElevatedButton(
+            text: CitySearchButtonStrings.buttonLabelSearch,
             onPressed: isValid
                 ? () async {
                     final cityName = controller.text.trim();
@@ -91,17 +92,6 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
                     );
                   }
                 : null,
-            style: ElevatedButton.styleFrom(
-              foregroundColor: theme.colorScheme.onPrimary,
-              backgroundColor: theme.primaryColor,
-              minimumSize: const Size(200, 50),
-              textStyle: theme.textTheme.bodyLarge
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            child: const Text(
-              CitySearchButtonStrings.buttonLabelSearch,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
           );
   }
 }
