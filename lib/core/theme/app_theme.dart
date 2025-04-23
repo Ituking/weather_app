@@ -55,7 +55,7 @@ class AppTheme {
         lightShadowColor: Colors.white,
         darkShadowColor: Color(0xFFA3B1C6),
         borderRadius: 30.0,
-        elevation: 4.0,
+        elevation: 12.0,
         shadowBlurRadius: 15.0,
         pressedBlurRadius: 8.0,
         pressedScale: 0.96,
