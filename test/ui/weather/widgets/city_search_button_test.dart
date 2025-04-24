@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/firebase/providers/firebase_functions_provider.dart';
 import 'package:weather_app/core/strings/city_search_button_strings.dart';
+import 'package:weather_app/core/theme/app_theme.dart';
 import 'package:weather_app/ui/weather/widgets/city_search_button.dart';
 
 import '../../../test_helpers/mocks/custom_mock_city_search_view_model.dart';
@@ -27,8 +28,9 @@ void main() {
     testWidgets('CitySearchButtonが表示される', (WidgetTester tester) async {
       await tester.pumpWidget(UncontrolledProviderScope(
         container: container,
-        child: const MaterialApp(
-          home: Scaffold(
+        child: MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const Scaffold(
             body: CitySearchButton(),
           ),
         ),
@@ -41,7 +43,8 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(UncontrolledProviderScope(
         container: container,
-        child: const MaterialApp(
+        child: MaterialApp(
+          theme: AppTheme.lightTheme,
           home: Scaffold(
             body: CitySearchButton(),
           ),
