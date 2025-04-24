@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/strings/app_back_button_strings.dart';
+import 'package:weather_app/core/theme/app_theme.dart';
 import 'package:weather_app/ui/weather/widgets/app_back_button.dart';
 
 void main() {
@@ -9,9 +10,10 @@ void main() {
     testWidgets('AppBackButtonが表示される', (WidgetTester tester) async {
       // テスト対象のウィジェットを構築
       await tester.pumpWidget(
-        const ProviderScope(
+        ProviderScope(
           child: MaterialApp(
-            home: Scaffold(
+            theme: AppTheme.lightTheme,
+            home: const Scaffold(
               body: AppBackButton(),
             ),
           ),
@@ -25,9 +27,10 @@ void main() {
     testWidgets('AppBackButtonに正しいテキストが表示される', (WidgetTester tester) async {
       // テスト対象のウィジェットを構築
       await tester.pumpWidget(
-        const ProviderScope(
+        ProviderScope(
           child: MaterialApp(
-            home: Scaffold(
+            theme: AppTheme.lightTheme,
+            home: const Scaffold(
               body: AppBackButton(),
             ),
           ),
