@@ -8,55 +8,44 @@ import 'firestore_weather_repository.dart';
 /// Firestoreから天気データを取得するリポジトリ
 class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
   @override
-  Future<Result<Forecast>> fetchForecast(String cityName) async {
-    try {
-      final snapshot = await FirebaseFirestore.instance
-          .collection('weather')
-          .doc(cityName)
-          .collection('forecasts')
-          .orderBy('timestamp', descending: true)
-          .limit(1)
-          .get();
+  Future<Result<List<Forecast>>> fetchForecast(String cityName) async {
+    {
+      try {
+        final snapshot = await FirebaseFirestore.instance
+            .collection('weather')
+            .doc(cityName)
+            .collection('forecasts')
+            .orderBy('timestamp', descending: true)
+            .limit(5)
+            .get();
 
-      if (snapshot.docs.isEmpty) {
+        if (snapshot.docs.isEmpty) {
+          return Result.failure(
+            ApiError(type: ApiErrorType.notFound, message: 'データが存在しません'),
+          );
+        }
+
+        final forecasts = snapshot.docs.map((doc) {
+          final data = doc.data();
+
+          return Forecast(
+            id: doc.id,
+            city: data['city'] ?? '',
+            description: data['description'] ?? '',
+            temperature: (data['temperature'] ?? 0).toDouble(),
+            humidity: (data['humidity'] ?? 0).toDouble(),
+            windSpeed: (data['windSpeed'] ?? 0).toDouble(),
+            icon: data['icon'] ?? '',
+            timestamp: data['timestamp'] ?? 0,
+          );
+        }).toList();
+
+        return Result.success(forecasts);
+      } catch (e) {
         return Result.failure(
-          ApiError(type: ApiErrorType.notFound, message: 'データが存在しません'),
+          ApiError(type: ApiErrorType.unknown, message: e.toString()),
         );
       }
-
-      final weatherData = snapshot.docs.first.data();
-
-      // 必須フィールドの存在確認
-      if (weatherData['temperature'] == null ||
-          weatherData['humidity'] == null ||
-          weatherData['windSpeed'] == null ||
-          weatherData['description'] == null ||
-          weatherData['city'] == null ||
-          weatherData['icon'] == null) {
-        return Result.failure(
-          ApiError(
-            type: ApiErrorType.unknown,
-            message: '天気データの形式が不正です',
-          ),
-        );
-      }
-
-      // Forecastオブジェクト生成
-      final forecast = Forecast(
-        id: snapshot.docs.first.id,
-        city: weatherData['city'],
-        description: weatherData['description'],
-        temperature: weatherData['temperature'].toDouble(),
-        humidity: weatherData['humidity'].toDouble(),
-        windSpeed: weatherData['windSpeed'].toDouble(),
-        icon: weatherData['icon'],
-      );
-
-      return Result.success(forecast);
-    } catch (e) {
-      return Result.failure(
-        ApiError(type: ApiErrorType.unknown, message: e.toString()),
-      );
     }
   }
 }
