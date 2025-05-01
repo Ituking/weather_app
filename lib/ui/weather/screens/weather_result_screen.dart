@@ -5,7 +5,8 @@ import 'package:gap/gap.dart';
 import '../../../../ui/weather/view_model/providers/async_weather_view_model_provider.dart';
 import '../../../../ui/weather/widgets/background_image.dart';
 import '../widgets/app_back_button.dart';
-import '../widgets/weather_forecast_card.dart';
+import '../widgets/daily_forecast_card.dart';
+import '../widgets/today_weather_card.dart';
 import 'error_display_screen.dart';
 
 /// [WeatherResultScreen]は、指定された都市の天気情報を表示する画面です。
@@ -26,27 +27,36 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
       body: Stack(
         children: [
           const BackgroundImage(),
-          Align(
-            alignment: Alignment.center,
-            child: weatherResult.when(
-              data: (forecast) => Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
+          weatherResult.when(
+            data: (forecasts) {
+              debugPrint('取得できた件数: ${forecasts.length}件');
+              return ListView(
+                padding: const EdgeInsets.symmetric(vertical: 32),
                 children: [
-                  WeatherForecastCard(
-                    cityName: forecast.city,
-                    temperature: forecast.temperature,
-                    humidity: forecast.humidity.toInt(),
-                    windSpeed: forecast.windSpeed,
-                    description: forecast.description,
-                    iconCode: forecast.icon,
+                  TodayWeatherCard(
+                    cityName: forecasts.first.city,
+                    temperature: forecasts.first.temperature,
+                    humidity: forecasts.first.humidity.toInt(),
+                    windSpeed: forecasts.first.windSpeed,
+                    description: forecasts.first.description,
+                    iconCode: forecasts.first.icon,
                   ),
-                  Gap(20),
+                  const Gap(20),
+                  ...forecasts.skip(1).map(
+                        (forecast) => DailyForecastCard(
+                          temperature: forecast.temperature,
+                          description: forecast.description,
+                          iconCode: forecast.icon,
+                        ),
+                      ),
+                  const Gap(20),
                   const AppBackButton(),
                 ],
-              ),
-              error: (e, s) => const ErrorDisplayScreen(),
-              loading: () => const Center(child: CircularProgressIndicator()),
+              );
+            },
+            error: (e, s) => const ErrorDisplayScreen(),
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
             ),
           ),
         ],
