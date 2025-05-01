@@ -1,5 +1,5 @@
 import '../../../../core/network/response/result.dart';
-import '../../../../domain/models/weather/forecast.dart';
+import '../../../domain/models/weather/forecast.dart';
 import 'firestore_weather_repository.dart';
 import 'weather_repository.dart';
 
@@ -14,12 +14,19 @@ class UnifiedWeatherRepository implements WeatherRepository {
   });
 
   @override
-  Future<Result<Forecast>> getWeather(String cityName) async {
+  Future<Result<List<Forecast>>> getWeather(String cityName) async {
     final firestoreResult = await firestoreRepository.fetchForecast(cityName);
 
     return firestoreResult.maybeWhen(
-      success: (forecast) => Result.success(forecast),
-      orElse: () => apiRepository.getWeather(cityName),
+      success: (forecastList) => Result.success(forecastList),
+      orElse: () async {
+        final apiResult = await apiRepository.getWeather(cityName);
+
+        return apiResult.when(
+          success: (forecastList) => Result.success(forecastList),
+          failure: (error) => Result.failure(error),
+        );
+      },
     );
   }
 }
