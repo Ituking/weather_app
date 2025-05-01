@@ -29,7 +29,6 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
           const BackgroundImage(),
           weatherResult.when(
             data: (forecasts) {
-              debugPrint('取得できた件数: ${forecasts.length}件');
               return ListView(
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 children: [
