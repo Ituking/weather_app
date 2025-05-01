@@ -27,6 +27,7 @@ mixin _$Forecast {
   double get temperature => throw _privateConstructorUsedError;
   double get windSpeed => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
+  int get timestamp => throw _privateConstructorUsedError;
 
   /// Serializes this Forecast to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +51,8 @@ abstract class $ForecastCopyWith<$Res> {
       double humidity,
       double temperature,
       double windSpeed,
-      String icon});
+      String icon,
+      int timestamp});
 }
 
 /// @nodoc
@@ -75,6 +77,7 @@ class _$ForecastCopyWithImpl<$Res, $Val extends Forecast>
     Object? temperature = null,
     Object? windSpeed = null,
     Object? icon = null,
+    Object? timestamp = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -105,6 +108,10 @@ class _$ForecastCopyWithImpl<$Res, $Val extends Forecast>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -124,7 +131,8 @@ abstract class _$$ForecastImplCopyWith<$Res>
       double humidity,
       double temperature,
       double windSpeed,
-      String icon});
+      String icon,
+      int timestamp});
 }
 
 /// @nodoc
@@ -147,6 +155,7 @@ class __$$ForecastImplCopyWithImpl<$Res>
     Object? temperature = null,
     Object? windSpeed = null,
     Object? icon = null,
+    Object? timestamp = null,
   }) {
     return _then(_$ForecastImpl(
       id: null == id
@@ -177,6 +186,10 @@ class __$$ForecastImplCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -191,7 +204,8 @@ class _$ForecastImpl extends _Forecast {
       this.humidity = 0.0,
       this.temperature = 0.0,
       this.windSpeed = 0.0,
-      this.icon = ''})
+      this.icon = '',
+      this.timestamp = 0})
       : super._();
 
   factory _$ForecastImpl.fromJson(Map<String, dynamic> json) =>
@@ -218,10 +232,13 @@ class _$ForecastImpl extends _Forecast {
   @override
   @JsonKey()
   final String icon;
+  @override
+  @JsonKey()
+  final int timestamp;
 
   @override
   String toString() {
-    return 'Forecast(id: $id, city: $city, description: $description, humidity: $humidity, temperature: $temperature, windSpeed: $windSpeed, icon: $icon)';
+    return 'Forecast(id: $id, city: $city, description: $description, humidity: $humidity, temperature: $temperature, windSpeed: $windSpeed, icon: $icon, timestamp: $timestamp)';
   }
 
   @override
@@ -239,13 +256,15 @@ class _$ForecastImpl extends _Forecast {
                 other.temperature == temperature) &&
             (identical(other.windSpeed, windSpeed) ||
                 other.windSpeed == windSpeed) &&
-            (identical(other.icon, icon) || other.icon == icon));
+            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, city, description, humidity,
-      temperature, windSpeed, icon);
+      temperature, windSpeed, icon, timestamp);
 
   /// Create a copy of Forecast
   /// with the given fields replaced by the non-null parameter values.
@@ -271,7 +290,8 @@ abstract class _Forecast extends Forecast {
       final double humidity,
       final double temperature,
       final double windSpeed,
-      final String icon}) = _$ForecastImpl;
+      final String icon,
+      final int timestamp}) = _$ForecastImpl;
   const _Forecast._() : super._();
 
   factory _Forecast.fromJson(Map<String, dynamic> json) =
@@ -291,6 +311,8 @@ abstract class _Forecast extends Forecast {
   double get windSpeed;
   @override
   String get icon;
+  @override
+  int get timestamp;
 
   /// Create a copy of Forecast
   /// with the given fields replaced by the non-null parameter values.

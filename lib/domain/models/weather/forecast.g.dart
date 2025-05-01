@@ -15,6 +15,7 @@ _$ForecastImpl _$$ForecastImplFromJson(Map<String, dynamic> json) =>
       temperature: (json['temperature'] as num?)?.toDouble() ?? 0.0,
       windSpeed: (json['windSpeed'] as num?)?.toDouble() ?? 0.0,
       icon: json['icon'] as String? ?? '',
+      timestamp: (json['timestamp'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$ForecastImplToJson(_$ForecastImpl instance) =>
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$ForecastImplToJson(_$ForecastImpl instance) =>
       'temperature': instance.temperature,
       'windSpeed': instance.windSpeed,
       'icon': instance.icon,
+      'timestamp': instance.timestamp,
     };

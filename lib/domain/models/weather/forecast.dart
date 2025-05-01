@@ -13,6 +13,7 @@ class Forecast with _$Forecast {
     @Default(0.0) double temperature,
     @Default(0.0) double windSpeed,
     @Default('') String icon,
+    @Default(0) int timestamp,
   }) = _Forecast;
 
   const Forecast._();
