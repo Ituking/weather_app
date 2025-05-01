@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
 
-class WeatherForecastCardTheme
-    extends ThemeExtension<WeatherForecastCardTheme> {
+class TodayWeatherCardTheme extends ThemeExtension<TodayWeatherCardTheme> {
   final Color backgroundColor;
   final ShapeBorder shape;
   final EdgeInsets padding;
 
-  const WeatherForecastCardTheme({
+  const TodayWeatherCardTheme({
     required this.backgroundColor,
     required this.shape,
     required this.padding,
   });
 
   @override
-  ThemeExtension<WeatherForecastCardTheme> copyWith({
+  ThemeExtension<TodayWeatherCardTheme> copyWith({
     Color? backgroundColor,
     ShapeBorder? shape,
     EdgeInsets? padding,
   }) =>
-      WeatherForecastCardTheme(
+      TodayWeatherCardTheme(
         backgroundColor: backgroundColor ?? this.backgroundColor,
         shape: shape ?? this.shape,
         padding: padding ?? this.padding,
       );
 
   @override
-  WeatherForecastCardTheme lerp(
-      ThemeExtension<WeatherForecastCardTheme>? other, double t) {
-    if (other is! WeatherForecastCardTheme) {
+  TodayWeatherCardTheme lerp(
+      ThemeExtension<TodayWeatherCardTheme>? other, double t) {
+    if (other is! TodayWeatherCardTheme) {
       return this;
     }
-    return WeatherForecastCardTheme(
+    return TodayWeatherCardTheme(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
       shape: shape,
       padding: EdgeInsets.lerp(padding, other.padding, t)!,
