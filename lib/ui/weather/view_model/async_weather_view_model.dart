@@ -4,10 +4,10 @@ import '../../../../core/logger/app_log.dart';
 import '../../../data/repositories/weather/unified_weather_repository_provider.dart';
 import '../../../domain/models/weather/forecast.dart';
 
-class AsyncWeatherViewModel extends AsyncNotifier<Forecast> {
+class AsyncWeatherViewModel extends AsyncNotifier<List<Forecast>> {
   @override
-  Future<Forecast> build() {
-    throw UnimplementedError();
+  Future<List<Forecast>> build() async {
+    return [];
   }
 
   Future<void> fetchWeather(String cityName) async {
@@ -17,7 +17,16 @@ class AsyncWeatherViewModel extends AsyncNotifier<Forecast> {
     final result = await repo.getWeather(cityName);
 
     result.when(
-      success: (forecast) => state = AsyncData(forecast),
+      success: (forecasts) {
+        if (forecasts.isNotEmpty) {
+          state = AsyncData(forecasts);
+        } else {
+          state = AsyncError(
+            Exception('天気データが空です'),
+            StackTrace.current,
+          );
+        }
+      },
       failure: (e) {
         AppLog.error(
           message: '天気取得失敗（$cityName）: ${e.message}',
