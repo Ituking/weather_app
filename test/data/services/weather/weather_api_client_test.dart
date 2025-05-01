@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/response/result.dart';
 import 'package:weather_app/data/services/weather/weather_api_client.dart';
-import 'package:weather_app/domain/models/weather/forecast.dart';
 
 import '../../../test_helpers/mocks/mock_firebase_functions.mocks.dart';
 
@@ -27,11 +26,26 @@ void main() {
           .thenReturn(mockCallable);
 
       when(mockCallableResult.data).thenReturn({
-        'city': 'Tokyo',
-        'description': 'Sunny',
-        'temperature': 25.0,
-        'humidity': 60.0,
-        'windSpeed': 5.0,
+        'current': {
+          'city': 'Tokyo',
+          'description': 'Sunny',
+          'temperature': 25.0,
+          'humidity': 60.0,
+          'windSpeed': 5.0,
+          'icon': '01d',
+          'timestamp': 1234567890,
+        },
+        'forecast': [
+          {
+            'city': 'Tokyo',
+            'description': 'Sunny',
+            'temperature': 24.0,
+            'humidity': 55.0,
+            'windSpeed': 4.5,
+            'icon': '01d',
+            'timestamp': 1234567891,
+          }
+        ],
       });
 
       when(mockCallable.call({'city': 'Tokyo'}))
@@ -39,15 +53,15 @@ void main() {
 
       final result = await client.fetchWeather('Tokyo');
 
-      expect(result, isA<Success<Forecast>>());
+      expect(result, isA<Success<Map<String, dynamic>>>());
 
       result.when(
-        success: (forecast) {
-          expect(forecast.city, 'Tokyo');
-          expect(forecast.description, 'Sunny');
-          expect(forecast.temperature, 25.0);
-          expect(forecast.humidity, 60.0);
-          expect(forecast.windSpeed, 5.0);
+        success: (data) {
+          expect(data['current']['city'], 'Tokyo');
+          expect(data['current']['description'], 'Sunny');
+          expect(data['current']['temperature'], 25.0);
+          expect(data['current']['humidity'], 60.0);
+          expect(data['current']['windSpeed'], 5.0);
         },
         failure: (_) => fail('Expected success but got failure'),
       );
@@ -62,8 +76,8 @@ void main() {
 
       final result = await client.fetchWeather('InvalidCity');
 
-      expect(result, isA<Failure<Forecast>>());
-      final error = (result as Failure<Forecast>).error;
+      expect(result, isA<Failure<Map<String, dynamic>>>());
+      final error = (result as Failure<Map<String, dynamic>>).error;
       expect(error.message, 'Not found');
     });
   });
