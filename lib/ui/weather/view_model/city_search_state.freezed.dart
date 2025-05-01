@@ -20,7 +20,7 @@ mixin _$CitySearchState {
   bool get isLoading => throw _privateConstructorUsedError; // データのロード状態。
   String? get errorMessage =>
       throw _privateConstructorUsedError; // エラーメッセージ、存在する場合は非null。
-  Forecast? get weather => throw _privateConstructorUsedError;
+  List<Forecast> get weatherList => throw _privateConstructorUsedError;
 
   /// Create a copy of CitySearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -39,9 +39,7 @@ abstract class $CitySearchStateCopyWith<$Res> {
       {String cityName,
       bool isLoading,
       String? errorMessage,
-      Forecast? weather});
-
-  $ForecastCopyWith<$Res>? get weather;
+      List<Forecast> weatherList});
 }
 
 /// @nodoc
@@ -62,7 +60,7 @@ class _$CitySearchStateCopyWithImpl<$Res, $Val extends CitySearchState>
     Object? cityName = null,
     Object? isLoading = null,
     Object? errorMessage = freezed,
-    Object? weather = freezed,
+    Object? weatherList = null,
   }) {
     return _then(_value.copyWith(
       cityName: null == cityName
@@ -77,25 +75,11 @@ class _$CitySearchStateCopyWithImpl<$Res, $Val extends CitySearchState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      weather: freezed == weather
-          ? _value.weather
-          : weather // ignore: cast_nullable_to_non_nullable
-              as Forecast?,
+      weatherList: null == weatherList
+          ? _value.weatherList
+          : weatherList // ignore: cast_nullable_to_non_nullable
+              as List<Forecast>,
     ) as $Val);
-  }
-
-  /// Create a copy of CitySearchState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ForecastCopyWith<$Res>? get weather {
-    if (_value.weather == null) {
-      return null;
-    }
-
-    return $ForecastCopyWith<$Res>(_value.weather!, (value) {
-      return _then(_value.copyWith(weather: value) as $Val);
-    });
   }
 }
 
@@ -111,10 +95,7 @@ abstract class _$$CitySearchStateImplCopyWith<$Res>
       {String cityName,
       bool isLoading,
       String? errorMessage,
-      Forecast? weather});
-
-  @override
-  $ForecastCopyWith<$Res>? get weather;
+      List<Forecast> weatherList});
 }
 
 /// @nodoc
@@ -133,7 +114,7 @@ class __$$CitySearchStateImplCopyWithImpl<$Res>
     Object? cityName = null,
     Object? isLoading = null,
     Object? errorMessage = freezed,
-    Object? weather = freezed,
+    Object? weatherList = null,
   }) {
     return _then(_$CitySearchStateImpl(
       cityName: null == cityName
@@ -148,10 +129,10 @@ class __$$CitySearchStateImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      weather: freezed == weather
-          ? _value.weather
-          : weather // ignore: cast_nullable_to_non_nullable
-              as Forecast?,
+      weatherList: null == weatherList
+          ? _value._weatherList
+          : weatherList // ignore: cast_nullable_to_non_nullable
+              as List<Forecast>,
     ));
   }
 }
@@ -163,7 +144,8 @@ class _$CitySearchStateImpl implements _CitySearchState {
       {this.cityName = '',
       this.isLoading = false,
       this.errorMessage,
-      this.weather});
+      final List<Forecast> weatherList = const <Forecast>[]})
+      : _weatherList = weatherList;
 
   @override
   @JsonKey()
@@ -176,12 +158,19 @@ class _$CitySearchStateImpl implements _CitySearchState {
   @override
   final String? errorMessage;
 // エラーメッセージ、存在する場合は非null。
+  final List<Forecast> _weatherList;
+// エラーメッセージ、存在する場合は非null。
   @override
-  final Forecast? weather;
+  @JsonKey()
+  List<Forecast> get weatherList {
+    if (_weatherList is EqualUnmodifiableListView) return _weatherList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_weatherList);
+  }
 
   @override
   String toString() {
-    return 'CitySearchState(cityName: $cityName, isLoading: $isLoading, errorMessage: $errorMessage, weather: $weather)';
+    return 'CitySearchState(cityName: $cityName, isLoading: $isLoading, errorMessage: $errorMessage, weatherList: $weatherList)';
   }
 
   @override
@@ -195,12 +184,13 @@ class _$CitySearchStateImpl implements _CitySearchState {
                 other.isLoading == isLoading) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.weather, weather) || other.weather == weather));
+            const DeepCollectionEquality()
+                .equals(other._weatherList, _weatherList));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, cityName, isLoading, errorMessage, weather);
+  int get hashCode => Object.hash(runtimeType, cityName, isLoading,
+      errorMessage, const DeepCollectionEquality().hash(_weatherList));
 
   /// Create a copy of CitySearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -217,7 +207,7 @@ abstract class _CitySearchState implements CitySearchState {
       {final String cityName,
       final bool isLoading,
       final String? errorMessage,
-      final Forecast? weather}) = _$CitySearchStateImpl;
+      final List<Forecast> weatherList}) = _$CitySearchStateImpl;
 
   @override
   String get cityName; // 検索される都市の名前。
@@ -226,7 +216,7 @@ abstract class _CitySearchState implements CitySearchState {
   @override
   String? get errorMessage; // エラーメッセージ、存在する場合は非null。
   @override
-  Forecast? get weather;
+  List<Forecast> get weatherList;
 
   /// Create a copy of CitySearchState
   /// with the given fields replaced by the non-null parameter values.

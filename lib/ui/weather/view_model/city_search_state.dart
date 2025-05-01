@@ -11,6 +11,6 @@ class CitySearchState with _$CitySearchState {
     @Default('') String cityName, // 検索される都市の名前。
     @Default(false) bool isLoading, // データのロード状態。
     String? errorMessage, // エラーメッセージ、存在する場合は非null。
-    Forecast? weather,
+    @Default(<Forecast>[]) List<Forecast> weatherList,
   }) = _CitySearchState;
 }
