@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'weather_icon.dart';
 
 class DailyForecastCard extends StatelessWidget {
-  final double temperature;
+  final String dayLabel;
+  final double minTemperature;
+  final double maxTemperature;
   final String description;
   final String iconCode;
 
   const DailyForecastCard({
     super.key,
-    required this.temperature,
+    required this.dayLabel,
+    required this.minTemperature,
+    required this.maxTemperature,
     required this.description,
     required this.iconCode,
   });
@@ -20,8 +24,10 @@ class DailyForecastCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: ListTile(
         leading: WeatherIcon(iconCode: "$iconCode@2x"),
-        title: Text('$temperature°C'),
-        subtitle: Text(description),
+        title: Text(dayLabel),
+        subtitle: Text(
+            'Min: ${minTemperature.toStringAsFixed(1)}°C  Max: ${maxTemperature.toStringAsFixed(1)}°C'),
+        trailing: Text(description),
       ),
     );
   }
