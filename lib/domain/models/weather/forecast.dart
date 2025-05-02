@@ -11,6 +11,8 @@ class Forecast with _$Forecast {
     @Default('') String description,
     @Default(0.0) double humidity,
     @Default(0.0) double temperature,
+    @Default(0.0) double minTemp,
+    @Default(0.0) double maxTemp,
     @Default(0.0) double windSpeed,
     @Default('') String icon,
     @Default(0) int timestamp,
