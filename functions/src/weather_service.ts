@@ -32,7 +32,11 @@ interface WeatherData {
 
 interface DailyForecast {
   dt: number;
-  temp: { day: number };
+  temp: {
+    day: number;
+    min: number;
+    max: number;
+  };
   humidity: number;
   wind_speed: number;
   weather: { description: string; icon: string }[];
@@ -83,6 +87,8 @@ export async function fetchWeatherFromAPI(city: string): Promise<{ current: Weat
   const forecast: WeatherData[] = (response.data.daily.slice(1, 6) as DailyForecast[]).map((day) => ({
     city,
     temperature: day.temp.day,
+    minTemp: day.temp.min,
+    maxTemp: day.temp.max,
     humidity: day.humidity,
     windSpeed: day.wind_speed,
     description: day.weather[0].description,
