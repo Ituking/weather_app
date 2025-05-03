@@ -30,33 +30,35 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
           const BackgroundImage(),
           weatherResult.when(
             data: (forecasts) {
-              return ListView(
-                padding: const EdgeInsets.symmetric(vertical: 32),
-                children: [
-                  TodayWeatherCard(
-                    cityName: forecasts.first.city,
-                    temperature: forecasts.first.temperature,
-                    humidity: forecasts.first.humidity.toInt(),
-                    windSpeed: forecasts.first.windSpeed,
-                    description: forecasts.first.description,
-                    iconCode: forecasts.first.icon,
-                  ),
-                  const Gap(20),
-                  ...forecasts.skip(1).map(
-                    (forecast) {
-                      return DailyForecastCard(
-                        dayLabel:
-                            DateFormatUtil.formatToDayLabel(forecast.timestamp),
-                        minTemperature: forecast.minTemp,
-                        maxTemperature: forecast.maxTemp,
-                        description: forecast.description,
-                        iconCode: forecast.icon,
-                      );
-                    },
-                  ),
-                  const Gap(20),
-                  const AppBackButton(),
-                ],
+              return SafeArea(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  children: [
+                    TodayWeatherCard(
+                      cityName: forecasts.first.city,
+                      temperature: forecasts.first.temperature,
+                      humidity: forecasts.first.humidity.toInt(),
+                      windSpeed: forecasts.first.windSpeed,
+                      description: forecasts.first.description,
+                      iconCode: forecasts.first.icon,
+                    ),
+                    const Gap(20),
+                    ...forecasts.skip(1).map(
+                      (forecast) {
+                        return DailyForecastCard(
+                          dayLabel: DateFormatUtil.formatToDayLabel(
+                              forecast.timestamp),
+                          minTemperature: forecast.minTemp,
+                          maxTemperature: forecast.maxTemp,
+                          description: forecast.description,
+                          iconCode: forecast.icon,
+                        );
+                      },
+                    ),
+                    const Gap(20),
+                    const AppBackButton(),
+                  ],
+                ),
               );
             },
             error: (e, s) => const ErrorDisplayScreen(),
