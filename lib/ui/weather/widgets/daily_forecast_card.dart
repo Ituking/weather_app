@@ -26,7 +26,7 @@ class DailyForecastCard extends StatelessWidget {
         leading: WeatherIcon(iconCode: "$iconCode@2x"),
         title: Text(dayLabel),
         subtitle: Text(
-            'Min: ${minTemperature.toStringAsFixed(1)}°C  Max: ${maxTemperature.toStringAsFixed(1)}°C'),
+            'Min: ${minTemperature.floor()}°C  Max: ${maxTemperature.floor()}°C'),
         trailing: Text(description),
       ),
     );
