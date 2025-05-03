@@ -39,20 +39,21 @@ class TodayWeatherCard extends StatelessWidget {
         padding: cardTheme.padding,
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: CityNameText(cityName: cityName),
             ),
-            Gap(16),
+            const Gap(12),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 WeatherIcon(iconCode: "$iconCode@2x"),
-                Gap(16),
+                const Gap(12),
                 TemperatureText(temperature: temperature),
               ],
             ),
-            Gap(16),
+            const Gap(12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
