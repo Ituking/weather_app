@@ -34,7 +34,7 @@ class TodayWeatherCard extends StatelessWidget {
     return Card(
       color: cardTheme.backgroundColor,
       shape: cardTheme.shape,
-      margin: const EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Padding(
         padding: cardTheme.padding,
         child: Column(
