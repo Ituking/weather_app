@@ -43,7 +43,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                       iconCode: forecasts.first.icon,
                     ),
                     const Gap(20),
-                    ...forecasts.skip(1).map(
+                    ...forecasts.skip(1).take(5).map(
                       (forecast) {
                         return DailyForecastCard(
                           dayLabel: DateFormatUtil.formatToDayLabel(
