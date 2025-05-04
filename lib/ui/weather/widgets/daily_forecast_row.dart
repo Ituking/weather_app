@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import 'weather_icon.dart';
 
@@ -29,7 +30,7 @@ class DailyForecastRow extends StatelessWidget {
             iconCode: "$iconCode@2x",
             size: 50,
           ),
-          const SizedBox(width: 12),
+          const Gap(12),
           Expanded(
             flex: 4,
             child: Column(
@@ -42,7 +43,7 @@ class DailyForecastRow extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const Gap(4),
                 Text(
                   'Min: ${minTemperature.floor()}°C  Max: ${maxTemperature.floor()}°C',
                   style: const TextStyle(
