@@ -40,7 +40,8 @@ class DailyForecastRow extends StatelessWidget {
                   dayLabel,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const Gap(4),
@@ -48,7 +49,7 @@ class DailyForecastRow extends StatelessWidget {
                   'Min: ${minTemperature.floor()}°C  Max: ${maxTemperature.floor()}°C',
                   style: const TextStyle(
                     color: Colors.white70,
-                    fontSize: 12,
+                    fontSize: 14,
                   ),
                 ),
               ],
