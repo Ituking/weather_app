@@ -6,7 +6,7 @@ import '../../../../ui/weather/view_model/providers/async_weather_view_model_pro
 import '../../../../ui/weather/widgets/background_image.dart';
 import '../../../core/utils/date_format_util.dart';
 import '../widgets/app_back_button.dart';
-import '../widgets/daily_forecast_block.dart';
+import '../widgets/daily_forecast_card.dart';
 import '../widgets/daily_forecast_row.dart';
 import '../widgets/today_weather_card.dart';
 import 'error_display_screen.dart';
@@ -61,7 +61,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                       iconCode: today.icon,
                     ),
                     const Gap(20),
-                    DailyForecastBlock(forecastRows: forecastRows),
+                    DailyForecastCard(forecastRows: forecastRows),
                     const Gap(20),
                     const AppBackButton(),
                   ],

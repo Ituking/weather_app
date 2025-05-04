@@ -1,33 +1,26 @@
 import 'package:flutter/material.dart';
 
-import 'weather_icon.dart';
+import 'daily_forecast_row.dart';
 
 class DailyForecastCard extends StatelessWidget {
-  final String dayLabel;
-  final double minTemperature;
-  final double maxTemperature;
-  final String description;
-  final String iconCode;
+  final List<DailyForecastRow> forecastRows;
 
   const DailyForecastCard({
     super.key,
-    required this.dayLabel,
-    required this.minTemperature,
-    required this.maxTemperature,
-    required this.description,
-    required this.iconCode,
+    required this.forecastRows,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.grey[850],
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: ListTile(
-        leading: WeatherIcon(iconCode: "$iconCode@2x"),
-        title: Text(dayLabel),
-        subtitle: Text(
-            'Min: ${minTemperature.floor()}°C  Max: ${maxTemperature.floor()}°C'),
-        trailing: Text(description),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        child: Column(
+          children: forecastRows,
+        ),
       ),
     );
   }
