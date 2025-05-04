@@ -6,7 +6,8 @@ import '../../../../ui/weather/view_model/providers/async_weather_view_model_pro
 import '../../../../ui/weather/widgets/background_image.dart';
 import '../../../core/utils/date_format_util.dart';
 import '../widgets/app_back_button.dart';
-import '../widgets/daily_forecast_card.dart';
+import '../widgets/daily_forecast_block.dart';
+import '../widgets/daily_forecast_row.dart';
 import '../widgets/today_weather_card.dart';
 import 'error_display_screen.dart';
 
@@ -30,31 +31,37 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
           const BackgroundImage(),
           weatherResult.when(
             data: (forecasts) {
+              final today = forecasts.first;
+
+              final forecastRows = forecasts
+                  .skip(1)
+                  .take(5)
+                  .map(
+                    (forecast) => DailyForecastRow(
+                      dayLabel:
+                          DateFormatUtil.formatToDayLabel(forecast.timestamp),
+                      minTemperature: forecast.minTemp,
+                      maxTemperature: forecast.maxTemp,
+                      description: forecast.description,
+                      iconCode: forecast.icon,
+                    ),
+                  )
+                  .toList();
+
               return SafeArea(
                 child: ListView(
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   children: [
                     TodayWeatherCard(
-                      cityName: forecasts.first.city,
-                      temperature: forecasts.first.temperature,
-                      humidity: forecasts.first.humidity.toInt(),
-                      windSpeed: forecasts.first.windSpeed,
-                      description: forecasts.first.description,
-                      iconCode: forecasts.first.icon,
+                      cityName: today.city,
+                      temperature: today.temperature,
+                      humidity: today.humidity.toInt(),
+                      windSpeed: today.windSpeed,
+                      description: today.description,
+                      iconCode: today.icon,
                     ),
                     const Gap(20),
-                    ...forecasts.skip(1).take(5).map(
-                      (forecast) {
-                        return DailyForecastCard(
-                          dayLabel: DateFormatUtil.formatToDayLabel(
-                              forecast.timestamp),
-                          minTemperature: forecast.minTemp,
-                          maxTemperature: forecast.maxTemp,
-                          description: forecast.description,
-                          iconCode: forecast.icon,
-                        );
-                      },
-                    ),
+                    DailyForecastBlock(forecastRows: forecastRows),
                     const Gap(20),
                     const AppBackButton(),
                   ],
