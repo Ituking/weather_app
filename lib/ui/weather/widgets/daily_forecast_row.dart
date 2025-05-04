@@ -25,7 +25,10 @@ class DailyForecastRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          WeatherIcon(iconCode: "$iconCode@2x"),
+          WeatherIcon(
+            iconCode: "$iconCode@2x",
+            size: 50,
+          ),
           const SizedBox(width: 12),
           Expanded(
             flex: 4,

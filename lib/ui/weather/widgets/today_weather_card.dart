@@ -48,7 +48,10 @@ class TodayWeatherCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                WeatherIcon(iconCode: "$iconCode@2x"),
+                WeatherIcon(
+                  iconCode: "$iconCode@2x",
+                  size: 72,
+                ),
                 const Gap(12),
                 TemperatureText(temperature: temperature),
               ],
