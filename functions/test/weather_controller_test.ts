@@ -118,6 +118,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
       description: "雲",
       icon: "04d",
     });
+
     assert.isFalse(fetchWeatherStub.called);
   });
 
@@ -129,10 +130,49 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
       rawRequest: {},
       auth: null,
     } as unknown as functions.https.CallableRequest<unknown>;
+
     const result = await wrapped(mockRequest);
 
     assert.isTrue(fetchWeatherStub.calledOnce);
     assert.isTrue(saveWeatherStub.calledOnce);
+
+    expect(result.current).to.deep.include({
+      city: "Tokyo",
+      temperature: 8.98,
+      humidity: 27,
+      windSpeed: 9.77,
+      description: "雲",
+      icon: "04d",
+    });
+  });
+
+  it("Firestoreに昨日の日付のデータがある場合、APIを呼び出す", async () => {
+    const yesterdayTimestamp = Math.floor((Date.now() - 24 * 60 * 60 * 1000) / 1000); // 昨日
+
+    getStub.resolves({
+      exists: true,
+      data: () => ({
+        city: "Tokyo",
+        temperature: 12.34,
+        humidity: 50,
+        windSpeed: 3.21,
+        description: "曇り",
+        icon: "03d",
+        timestamp: yesterdayTimestamp, // 昨日のデータ
+      }),
+    } as unknown);
+
+    const mockRequest = {
+      data: { city: "Tokyo" },
+      rawRequest: {},
+      auth: null,
+    } as unknown as functions.https.CallableRequest<unknown>;
+
+    const result = await wrapped(mockRequest);
+
+    assert.isTrue(fetchWeatherStub.calledOnce, "APIが呼び出されるべき");
+    assert.isTrue(saveWeatherStub.calledOnce, "Firestore保存が行われるべき");
+
     expect(result.current).to.deep.include({
       city: "Tokyo",
       temperature: 8.98,
