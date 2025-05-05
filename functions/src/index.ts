@@ -6,6 +6,3 @@ if (!admin.apps.length) {
 export * from "./weather_controller";
 export * from "./weather_service";
 
-export * from "./news_controller";
-export * from "./news_service";
-
