@@ -36,9 +36,13 @@ export const getWeatherForCity = functions.https.onCall(
       if (currentSnapshot.exists) {
         const currentData = currentSnapshot.data();
         const dataTimestamp = currentData?.timestamp ?? 0;
+
+        const currentDataDate = new Date(dataTimestamp * 1000).toDateString(); // 秒→ms
+        const nowDate = new Date().toDateString(); // 現在のUTC日付
         const diff = now - dataTimestamp;
 
-        if (diff < CACHE_DURATION_SECONDS) {
+        // 6時間以内かつデータが今日のものである場合のみキャッシュを使用
+        if (diff < CACHE_DURATION_SECONDS && currentDataDate === nowDate) {
           console.log(`Firestoreキャッシュから${city}の天気データを取得（再取得不要）`);
 
           // Firestoreから5日間の予報を取得
