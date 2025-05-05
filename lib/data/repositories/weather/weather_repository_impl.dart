@@ -20,27 +20,32 @@ class WeatherRepositoryImpl implements WeatherRepository {
   /// [cityName] - 天気データを取得する都市の名前。
   /// 戻り値 - [Result]オブジェクトで、成功時には[Forecast]を含みます。
   @override
-  Future<Result<Forecast>> getWeather(String cityName) async {
+  Future<Result<List<Forecast>>> getWeather(String cityName) async {
     try {
       final result = await apiClient.fetchWeather(cityName);
 
       AppLog.debug(message: 'fetchWeather result: $result');
 
-      final data = result.when(
-        success: (weatherResponse) => weatherResponse.toJson(),
-        failure: (error) => 'Error: ${error.message}',
+      final wrappedResult = result.when<Result<List<Forecast>>>(
+        success: (apiData) {
+          final current =
+              Forecast.fromJson(Map<String, dynamic>.from(apiData['current']));
+          final forecastList = (apiData['forecast'] as List)
+              .map((item) => Forecast.fromJson(Map<String, dynamic>.from(item)))
+              .toList();
+
+          return Result.success([current, ...forecastList]);
+        },
+        failure: (error) => Result.failure(error),
       );
 
-      AppLog.debug(message: 'WeatherResponse Data: $data');
-
-      return result;
+      return wrappedResult;
     } on FirebaseFunctionsException catch (e, stackTrace) {
       AppLog.error(
         message: 'FirebaseFunctionsException in getWeather: ${e.message}',
         exception: e,
         stackTrace: stackTrace,
       );
-
       return Result.failure(ApiError(
         type: ApiErrorType.internalServerError,
         message: e.message ?? 'Unknown Firebase error',
@@ -51,11 +56,12 @@ class WeatherRepositoryImpl implements WeatherRepository {
         exception: e,
         stackTrace: stackTrace,
       );
-
-      return Result.failure(ApiError(
-        type: ApiErrorType.unknown,
-        message: e.toString(),
-      ));
+      return Result.failure(
+        ApiError(
+          type: ApiErrorType.unknown,
+          message: e.toString(),
+        ),
+      );
     }
   }
 }

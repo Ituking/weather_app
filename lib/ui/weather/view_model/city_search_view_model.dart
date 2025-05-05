@@ -39,8 +39,15 @@ class CitySearchViewModel extends Notifier<CitySearchState> {
       final forecastResult =
           await _firestoreWeatherRepository.fetchForecast(state.cityName);
 
-      forecastResult.when(success: (forecast) {
-        state = state.copyWith(isLoading: false, weather: forecast);
+      forecastResult.when(success: (forecasts) {
+        if (forecasts.isNotEmpty) {
+          state = state.copyWith(isLoading: false, weatherList: forecasts);
+        } else {
+          state = state.copyWith(
+            isLoading: false,
+            errorMessage: '天気情報が見つかりませんでした。',
+          );
+        }
       }, failure: (error) {
         state = state.copyWith(
           isLoading: false,

@@ -21,27 +21,34 @@ type WeatherData = {
   windSpeed: number;
   description: string;
   icon: string;
+  timestamp: number;
 };
 
 describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
   let fetchWeatherStub: sinon.SinonStub;
   let saveWeatherStub: sinon.SinonStub;
   let getStub: sinon.SinonStub;
-  let wrapped: WrappedV2CallableFunction<Promise<WeatherData>>;
+  let wrapped: WrappedV2CallableFunction<Promise<{ current: WeatherData; forecast: WeatherData[] }>>;
 
   beforeEach(() => {
-    wrapped = testEnv.wrap(getWeatherForCity) as WrappedV2CallableFunction<Promise<WeatherData>>;
+    wrapped = testEnv.wrap(getWeatherForCity) as WrappedV2CallableFunction<Promise<{ current: WeatherData; forecast: WeatherData[] }>>;
+
 
     fetchWeatherStub = sinon
       .stub(weatherService, "fetchWeatherFromAPI")
       .resolves({
-        city: "Tokyo",
-        temperature: 8.98,
-        humidity: 27,
-        windSpeed: 9.77,
-        description: "雲",
-        icon: "04d",
+        current: {
+          city: "Tokyo",
+          temperature: 8.98,
+          humidity: 27,
+          windSpeed: 9.77,
+          description: "雲",
+          icon: "04d",
+          timestamp: Math.floor(Date.now() / 1000),
+        },
+        forecast: [],
       });
+
 
     saveWeatherStub = sinon
       .stub(weatherService, "saveWeatherToFirestore")
@@ -50,18 +57,25 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
     // Firestoreのモック
     const collectionStub = sinon.stub();
     const docStub = sinon.stub();
-    const forecastsCollectionStub = sinon.stub();
-    const orderByStub = sinon.stub();
-    const limitStub = sinon.stub();
+    const currentDocStub = sinon.stub();
+    const forecastOrderByStub = sinon.stub();
     getStub = sinon.stub();
 
     collectionStub.withArgs("weather").returns({ doc: docStub });
-    docStub.withArgs("Tokyo").returns({ collection: forecastsCollectionStub });
-    forecastsCollectionStub
-      .withArgs("forecasts")
-      .returns({ orderBy: orderByStub });
-    orderByStub.withArgs("timestamp", "desc").returns({ limit: limitStub });
-    limitStub.withArgs(1).returns({ get: getStub });
+
+    docStub.withArgs("Tokyo").returns({
+      collection: (subName: string) => {
+        if (subName === "current") return { doc: currentDocStub };
+        if (subName === "forecast") return { orderBy: forecastOrderByStub };
+        return {};
+      },
+    });
+
+    currentDocStub.withArgs("data").returns({ get: getStub });
+
+    forecastOrderByStub.withArgs("timestamp").returns({
+      get: sinon.stub().resolves({ docs: [] }),
+    });
 
     sinon.stub(admin.firestore(), "collection").callsFake(collectionStub);
   });
@@ -76,19 +90,16 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
 
   it("Firestoreにデータがある場合、APIを呼ばずにデータを返す", async () => {
     getStub.resolves({
-      empty: false,
-      docs: [
-        {
-          data: () => ({
-            city: "Tokyo",
-            temperature: 8.98,
-            humidity: 27,
-            windSpeed: 9.77,
-            description: "雲",
-            icon: "04d",
-          }),
-        },
-      ],
+      exists: true,
+      data: () => ({
+        city: "Tokyo",
+        temperature: 8.98,
+        humidity: 27,
+        windSpeed: 9.77,
+        description: "雲",
+        icon: "04d",
+        timestamp: Math.floor(Date.now() / 1000),
+      }),
     } as unknown);
 
     const mockRequest = {
@@ -99,7 +110,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
 
     const result = await wrapped(mockRequest);
 
-    expect(result).to.deep.include({
+    expect(result.current).to.deep.include({
       city: "Tokyo",
       temperature: 8.98,
       humidity: 27,
@@ -111,7 +122,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
   });
 
   it("Firestoreにデータがない場合、APIから取得して保存する", async () => {
-    getStub.resolves({ empty: true, docs: [] } as unknown);
+    getStub.resolves({ exists: false } as unknown);
 
     const mockRequest = {
       data: { city: "Tokyo" },
@@ -122,7 +133,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
 
     assert.isTrue(fetchWeatherStub.calledOnce);
     assert.isTrue(saveWeatherStub.calledOnce);
-    expect(result).to.deep.include({
+    expect(result.current).to.deep.include({
       city: "Tokyo",
       temperature: 8.98,
       humidity: 27,

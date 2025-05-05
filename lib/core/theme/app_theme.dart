@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_elevated_button_theme.dart';
-import 'weather_forecast_card_theme.dart';
+import 'today_weather_card_theme.dart';
 
 /// アプリケーション全体のテーマ設定を提供します。
 class AppTheme {
@@ -41,7 +41,7 @@ class AppTheme {
       foregroundColor: Colors.white,
     ),
     extensions: <ThemeExtension<dynamic>>[
-      const WeatherForecastCardTheme(
+      const TodayWeatherCardTheme(
         backgroundColor: Color(0xFF2C2C2E),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),

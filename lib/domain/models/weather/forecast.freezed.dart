@@ -25,8 +25,11 @@ mixin _$Forecast {
   String get description => throw _privateConstructorUsedError;
   double get humidity => throw _privateConstructorUsedError;
   double get temperature => throw _privateConstructorUsedError;
+  double get minTemp => throw _privateConstructorUsedError;
+  double get maxTemp => throw _privateConstructorUsedError;
   double get windSpeed => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
+  int get timestamp => throw _privateConstructorUsedError;
 
   /// Serializes this Forecast to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,8 +52,11 @@ abstract class $ForecastCopyWith<$Res> {
       String description,
       double humidity,
       double temperature,
+      double minTemp,
+      double maxTemp,
       double windSpeed,
-      String icon});
+      String icon,
+      int timestamp});
 }
 
 /// @nodoc
@@ -73,8 +79,11 @@ class _$ForecastCopyWithImpl<$Res, $Val extends Forecast>
     Object? description = null,
     Object? humidity = null,
     Object? temperature = null,
+    Object? minTemp = null,
+    Object? maxTemp = null,
     Object? windSpeed = null,
     Object? icon = null,
+    Object? timestamp = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -97,6 +106,14 @@ class _$ForecastCopyWithImpl<$Res, $Val extends Forecast>
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
               as double,
+      minTemp: null == minTemp
+          ? _value.minTemp
+          : minTemp // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxTemp: null == maxTemp
+          ? _value.maxTemp
+          : maxTemp // ignore: cast_nullable_to_non_nullable
+              as double,
       windSpeed: null == windSpeed
           ? _value.windSpeed
           : windSpeed // ignore: cast_nullable_to_non_nullable
@@ -105,6 +122,10 @@ class _$ForecastCopyWithImpl<$Res, $Val extends Forecast>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -123,8 +144,11 @@ abstract class _$$ForecastImplCopyWith<$Res>
       String description,
       double humidity,
       double temperature,
+      double minTemp,
+      double maxTemp,
       double windSpeed,
-      String icon});
+      String icon,
+      int timestamp});
 }
 
 /// @nodoc
@@ -145,8 +169,11 @@ class __$$ForecastImplCopyWithImpl<$Res>
     Object? description = null,
     Object? humidity = null,
     Object? temperature = null,
+    Object? minTemp = null,
+    Object? maxTemp = null,
     Object? windSpeed = null,
     Object? icon = null,
+    Object? timestamp = null,
   }) {
     return _then(_$ForecastImpl(
       id: null == id
@@ -169,6 +196,14 @@ class __$$ForecastImplCopyWithImpl<$Res>
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
               as double,
+      minTemp: null == minTemp
+          ? _value.minTemp
+          : minTemp // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxTemp: null == maxTemp
+          ? _value.maxTemp
+          : maxTemp // ignore: cast_nullable_to_non_nullable
+              as double,
       windSpeed: null == windSpeed
           ? _value.windSpeed
           : windSpeed // ignore: cast_nullable_to_non_nullable
@@ -177,6 +212,10 @@ class __$$ForecastImplCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -190,8 +229,11 @@ class _$ForecastImpl extends _Forecast {
       this.description = '',
       this.humidity = 0.0,
       this.temperature = 0.0,
+      this.minTemp = 0.0,
+      this.maxTemp = 0.0,
       this.windSpeed = 0.0,
-      this.icon = ''})
+      this.icon = '',
+      this.timestamp = 0})
       : super._();
 
   factory _$ForecastImpl.fromJson(Map<String, dynamic> json) =>
@@ -214,14 +256,23 @@ class _$ForecastImpl extends _Forecast {
   final double temperature;
   @override
   @JsonKey()
+  final double minTemp;
+  @override
+  @JsonKey()
+  final double maxTemp;
+  @override
+  @JsonKey()
   final double windSpeed;
   @override
   @JsonKey()
   final String icon;
+  @override
+  @JsonKey()
+  final int timestamp;
 
   @override
   String toString() {
-    return 'Forecast(id: $id, city: $city, description: $description, humidity: $humidity, temperature: $temperature, windSpeed: $windSpeed, icon: $icon)';
+    return 'Forecast(id: $id, city: $city, description: $description, humidity: $humidity, temperature: $temperature, minTemp: $minTemp, maxTemp: $maxTemp, windSpeed: $windSpeed, icon: $icon, timestamp: $timestamp)';
   }
 
   @override
@@ -237,15 +288,19 @@ class _$ForecastImpl extends _Forecast {
                 other.humidity == humidity) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
+            (identical(other.minTemp, minTemp) || other.minTemp == minTemp) &&
+            (identical(other.maxTemp, maxTemp) || other.maxTemp == maxTemp) &&
             (identical(other.windSpeed, windSpeed) ||
                 other.windSpeed == windSpeed) &&
-            (identical(other.icon, icon) || other.icon == icon));
+            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, city, description, humidity,
-      temperature, windSpeed, icon);
+      temperature, minTemp, maxTemp, windSpeed, icon, timestamp);
 
   /// Create a copy of Forecast
   /// with the given fields replaced by the non-null parameter values.
@@ -270,8 +325,11 @@ abstract class _Forecast extends Forecast {
       final String description,
       final double humidity,
       final double temperature,
+      final double minTemp,
+      final double maxTemp,
       final double windSpeed,
-      final String icon}) = _$ForecastImpl;
+      final String icon,
+      final int timestamp}) = _$ForecastImpl;
   const _Forecast._() : super._();
 
   factory _Forecast.fromJson(Map<String, dynamic> json) =
@@ -288,9 +346,15 @@ abstract class _Forecast extends Forecast {
   @override
   double get temperature;
   @override
+  double get minTemp;
+  @override
+  double get maxTemp;
+  @override
   double get windSpeed;
   @override
   String get icon;
+  @override
+  int get timestamp;
 
   /// Create a copy of Forecast
   /// with the given fields replaced by the non-null parameter values.

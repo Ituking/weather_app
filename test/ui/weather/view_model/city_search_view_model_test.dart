@@ -54,19 +54,19 @@ void main() {
       );
 
       when(mockFirestoreWeatherRepository.fetchForecast(cityName))
-          .thenAnswer((_) async => Result.success(testForecast));
+          .thenAnswer((_) async => Result.success([testForecast]));
 
       await viewModel.fetchWeather();
 
       // 正常に天気情報が取得されたことを確認
       expect(viewModel.state.isLoading, isFalse);
-      expect(viewModel.state.weather, isNotNull);
-      expect(viewModel.state.weather!.temperature,
+      expect(viewModel.state.weatherList, isNotNull);
+      expect(viewModel.state.weatherList.first.temperature,
           equals(testForecast.temperature));
-      expect(viewModel.state.weather!.city, cityName);
-      expect(viewModel.state.weather!.description, 'Sunny');
-      expect(viewModel.state.weather!.windSpeed, 5.0);
-      expect(viewModel.state.weather!.humidity, 70.0);
+      expect(viewModel.state.weatherList.first.city, cityName);
+      expect(viewModel.state.weatherList.first.description, 'Sunny');
+      expect(viewModel.state.weatherList.first.windSpeed, 5.0);
+      expect(viewModel.state.weatherList.first.humidity, 70.0);
       expect(viewModel.state.errorMessage, isNull);
     });
 
@@ -87,7 +87,7 @@ void main() {
 
       // エラーメッセージが設定されていることを確認
       expect(viewModel.state.isLoading, isFalse);
-      expect(viewModel.state.weather, isNull);
+      expect(viewModel.state.weatherList, isEmpty);
       expect(viewModel.state.errorMessage, isNotEmpty);
     });
 

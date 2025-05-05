@@ -27,17 +27,17 @@ void main() {
       final result = await repository.getWeather('Tokyo');
 
       // 成功かどうかをチェック
-      expect(result, isA<Success<Forecast>>());
+      expect(result, isA<Success<List<Forecast>>>());
 
       // 成功時の結果を取得
-      final weatherResponse = (result as Success<Forecast>).value;
+      final weatherResponse = (result as Success<List<Forecast>>).value;
 
       // データが期待通りか確認
-      expect(weatherResponse, isA<Forecast>());
-      expect(weatherResponse.temperature, 20.0);
-      expect(weatherResponse.description, 'Sunny');
-      expect(weatherResponse.windSpeed, 5.0);
-      expect(weatherResponse.humidity, 70);
+      expect(weatherResponse, isA<List<Forecast>>());
+      expect(weatherResponse.first.temperature, 20.0);
+      expect(weatherResponse.first.description, 'Sunny');
+      expect(weatherResponse.first.windSpeed, 5.0);
+      expect(weatherResponse.first.humidity, 70);
     });
 
     test('API呼び出し失敗時にResult.failureを返す', () async {
@@ -48,7 +48,7 @@ void main() {
       final result = await repository.getWeather('InvalidCity');
 
       // 失敗かどうかをチェック
-      expect(result, isA<Failure<Forecast>>());
+      expect(result, isA<Failure<List<Forecast>>>());
     });
   });
 }

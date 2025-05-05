@@ -9,7 +9,7 @@ import '../../../test_helpers/mocks/mock_weather_api_client.mocks.dart';
 
 void main() {
   group('WeatherRepositoryImplのテスト', () {
-    late MockWeatherApiClient mockApiClient; // WeatherApiClientのモック
+    late MockIWeatherApiClient mockApiClient; // WeatherApiClientのモック
     late WeatherRepositoryImpl repository; // テスト対象のリポジトリ
 
     final forecast = Forecast(
@@ -19,10 +19,12 @@ void main() {
       temperature: 20.0,
       humidity: 70.0,
       windSpeed: 5.0,
+      icon: '01d',
+      timestamp: 1710000000,
     );
 
     setUp(() {
-      mockApiClient = MockWeatherApiClient();
+      mockApiClient = MockIWeatherApiClient();
 
       // WeatherRepositoryImplのインスタンスを作成
       repository = WeatherRepositoryImpl(apiClient: mockApiClient);
@@ -30,22 +32,28 @@ void main() {
 
     test('成功時にWeatherResponseを返す', () async {
       // fetchWeatherのモック設定
-      when(mockApiClient.fetchWeather('Tokyo'))
-          .thenAnswer((_) async => Result.success(forecast));
+      when(mockApiClient.fetchWeather('Tokyo')).thenAnswer(
+        (_) async => Result.success(
+          {
+            'current': forecast.toJson(),
+            'forecast': [],
+          },
+        ),
+      );
 
       // 天気データを取得
       final result = await repository.getWeather('Tokyo');
 
       // 成功したかを検証
-      expect(result, isA<Success<Forecast>>());
-      final weatherData = (result as Success<Forecast>).value;
+      expect(result, isA<Success<List<Forecast>>>());
+      final weatherData = (result as Success<List<Forecast>>).value;
 
       // 取得したデータの検証
-      expect(weatherData.city, 'Tokyo');
-      expect(weatherData.temperature, 20.0);
-      expect(weatherData.description, 'Sunny');
-      expect(weatherData.windSpeed, 5.0);
-      expect(weatherData.humidity, 70);
+      expect(weatherData.first.city, 'Tokyo');
+      expect(weatherData.first.temperature, 20.0);
+      expect(weatherData.first.description, 'Sunny');
+      expect(weatherData.first.windSpeed, 5.0);
+      expect(weatherData.first.humidity, 70);
     });
 
     test('無効な都市名で失敗時に適切なエラーを返す', () async {
@@ -58,8 +66,8 @@ void main() {
       final result = await repository.getWeather('InvalidCity');
 
       // 失敗したかを検証
-      expect(result, isA<Failure<Forecast>>());
-      final error = (result as Failure<Forecast>).error;
+      expect(result, isA<Failure<List<Forecast>>>());
+      final error = (result as Failure<List<Forecast>>).error;
 
       // エラーメッセージが正しいか確認
       expect(error.message, '天気データの取得に失敗');

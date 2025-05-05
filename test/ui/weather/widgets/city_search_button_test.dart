@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/firebase/providers/firebase_functions_provider.dart';
 import 'package:weather_app/core/strings/city_search_button_strings.dart';
 import 'package:weather_app/core/theme/app_theme.dart';
+import 'package:weather_app/ui/core/widgets/app_elevated_button.dart';
+import 'package:weather_app/ui/weather/view_model/providers/text_editing_controller_provider.dart';
 import 'package:weather_app/ui/weather/widgets/city_search_button.dart';
 
 import '../../../test_helpers/mocks/custom_mock_city_search_view_model.dart';
@@ -36,7 +38,12 @@ void main() {
         ),
       ));
 
-      expect(find.byType(ElevatedButton), findsOneWidget);
+      final controller = container.read(textEditingControllerProvider);
+      controller.text = 'Tokyo';
+
+      await tester.pump();
+
+      expect(find.byType(AppElevatedButton), findsOneWidget);
     });
 
     testWidgets('初期状態で"Search"が表示され、CircularProgressIndicatorが表示されない',
@@ -50,6 +57,10 @@ void main() {
           ),
         ),
       ));
+
+      final controller = container.read(textEditingControllerProvider);
+      controller.text = 'Tokyo';
+      await tester.pump();
 
       expect(
           find.text(CitySearchButtonStrings.buttonLabelSearch), findsOneWidget);

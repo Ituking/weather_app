@@ -43,19 +43,19 @@ class MockWeatherRepository extends _i1.Mock implements _i3.WeatherRepository {
   }
 
   @override
-  _i4.Future<_i2.Result<_i5.Forecast>> getWeather(String? cityName) =>
+  _i4.Future<_i2.Result<List<_i5.Forecast>>> getWeather(String? cityName) =>
       (super.noSuchMethod(
         Invocation.method(
           #getWeather,
           [cityName],
         ),
-        returnValue: _i4.Future<_i2.Result<_i5.Forecast>>.value(
-            _FakeResult_0<_i5.Forecast>(
+        returnValue: _i4.Future<_i2.Result<List<_i5.Forecast>>>.value(
+            _FakeResult_0<List<_i5.Forecast>>(
           this,
           Invocation.method(
             #getWeather,
             [cityName],
           ),
         )),
-      ) as _i4.Future<_i2.Result<_i5.Forecast>>);
+      ) as _i4.Future<_i2.Result<List<_i5.Forecast>>>);
 }

@@ -4,8 +4,11 @@ import 'package:gap/gap.dart';
 
 import '../../../../ui/weather/view_model/providers/async_weather_view_model_provider.dart';
 import '../../../../ui/weather/widgets/background_image.dart';
+import '../../../core/utils/date_format_util.dart';
 import '../widgets/app_back_button.dart';
-import '../widgets/weather_forecast_card.dart';
+import '../widgets/daily_forecast_card.dart';
+import '../widgets/daily_forecast_row.dart';
+import '../widgets/today_weather_card.dart';
 import 'error_display_screen.dart';
 
 /// [WeatherResultScreen]は、指定された都市の天気情報を表示する画面です。
@@ -26,27 +29,48 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
       body: Stack(
         children: [
           const BackgroundImage(),
-          Align(
-            alignment: Alignment.center,
-            child: weatherResult.when(
-              data: (forecast) => Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  WeatherForecastCard(
-                    cityName: forecast.city,
-                    temperature: forecast.temperature,
-                    humidity: forecast.humidity.toInt(),
-                    windSpeed: forecast.windSpeed,
-                    description: forecast.description,
-                    iconCode: forecast.icon,
-                  ),
-                  Gap(20),
-                  const AppBackButton(),
-                ],
-              ),
-              error: (e, s) => const ErrorDisplayScreen(),
-              loading: () => const Center(child: CircularProgressIndicator()),
+          weatherResult.when(
+            data: (forecasts) {
+              final today = forecasts.first;
+
+              final forecastRows = forecasts
+                  .skip(1)
+                  .take(5)
+                  .map(
+                    (forecast) => DailyForecastRow(
+                      dayLabel:
+                          DateFormatUtil.formatToDayLabel(forecast.timestamp),
+                      minTemperature: forecast.minTemp,
+                      maxTemperature: forecast.maxTemp,
+                      description: forecast.description,
+                      iconCode: forecast.icon,
+                    ),
+                  )
+                  .toList();
+
+              return SafeArea(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  children: [
+                    TodayWeatherCard(
+                      cityName: today.city,
+                      temperature: today.temperature,
+                      humidity: today.humidity.toInt(),
+                      windSpeed: today.windSpeed,
+                      description: today.description,
+                      iconCode: today.icon,
+                    ),
+                    const Gap(20),
+                    DailyForecastCard(forecastRows: forecastRows),
+                    const Gap(20),
+                    const AppBackButton(),
+                  ],
+                ),
+              );
+            },
+            error: (e, s) => const ErrorDisplayScreen(),
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
             ),
           ),
         ],

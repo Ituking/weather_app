@@ -44,19 +44,19 @@ class MockFirestoreWeatherRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Result<_i5.Forecast>> fetchForecast(String? cityName) =>
+  _i4.Future<_i2.Result<List<_i5.Forecast>>> fetchForecast(String? cityName) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchForecast,
           [cityName],
         ),
-        returnValue: _i4.Future<_i2.Result<_i5.Forecast>>.value(
-            _FakeResult_0<_i5.Forecast>(
+        returnValue: _i4.Future<_i2.Result<List<_i5.Forecast>>>.value(
+            _FakeResult_0<List<_i5.Forecast>>(
           this,
           Invocation.method(
             #fetchForecast,
             [cityName],
           ),
         )),
-      ) as _i4.Future<_i2.Result<_i5.Forecast>>);
+      ) as _i4.Future<_i2.Result<List<_i5.Forecast>>>);
 }

@@ -6,5 +6,5 @@ abstract class WeatherRepository {
   /// 指定された都市名の天気データを取得します。
   ///
   /// [cityName] : 天気データを取得する都市の名前。
-  Future<Result<Forecast>> getWeather(String cityName);
+  Future<Result<List<Forecast>>> getWeather(String cityName);
 }

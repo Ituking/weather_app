@@ -4,6 +4,6 @@ import '../../../../domain/models/weather/forecast.dart';
 import '../async_weather_view_model.dart';
 
 final asyncWeatherViewModelProvider =
-    AsyncNotifierProvider<AsyncWeatherViewModel, Forecast>(
+    AsyncNotifierProvider<AsyncWeatherViewModel, List<Forecast>>(
   AsyncWeatherViewModel.new,
 );
