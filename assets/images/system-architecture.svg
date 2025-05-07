@@ -73,6 +73,11 @@
   <rect x="360" y="260" width="40" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
   <text x="380" y="275" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">log</text>
 
+  <!-- Batch Job to Logging -->
+  <path d="M 350 580 L 250 320" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <rect x="280" y="340" width="40" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="300" y="355" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">log</text>
+
   <!-- Arrow marker -->
   <defs>
     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
