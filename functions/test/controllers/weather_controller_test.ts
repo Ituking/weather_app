@@ -9,8 +9,8 @@ if (!admin.apps.length) {
   admin.initializeApp();
 }
 
-import { getWeatherForCity } from "../src/weather_controller";
-import * as weatherService from "../src/weather_service";
+import { getWeatherForCity } from "../../src/controllers/weather_controller";
+import * as weatherService from "../../src/services/weather_service";
 
 const testEnv = firebaseFunctionsTest();
 

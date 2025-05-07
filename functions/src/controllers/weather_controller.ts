@@ -1,7 +1,7 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 
-import { fetchWeatherFromAPI, saveWeatherToFirestore } from "./weather_service";
+import { fetchWeatherFromAPI, saveWeatherToFirestore } from "../services/weather_service";
 
 const db = admin.firestore();
 
