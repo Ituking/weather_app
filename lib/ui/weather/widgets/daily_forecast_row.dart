@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../../../core/theme/daily_forecast_card_theme.dart';
 import 'weather_icon.dart';
 
 class DailyForecastRow extends StatelessWidget {
@@ -21,6 +22,8 @@ class DailyForecastRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).extension<DailyForecastCardTheme>()!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
@@ -38,19 +41,12 @@ class DailyForecastRow extends StatelessWidget {
               children: [
                 Text(
                   dayLabel,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: theme.dayLabelStyle,
                 ),
                 const Gap(4),
                 Text(
                   'Min: ${minTemperature.floor()}°C  Max: ${maxTemperature.floor()}°C',
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
+                  style: theme.tempRangeStyle,
                 ),
               ],
             ),
@@ -61,7 +57,7 @@ class DailyForecastRow extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Text(
                 description,
-                style: const TextStyle(color: Colors.white, fontSize: 13),
+                style: theme.descriptionStyle,
               ),
             ),
           ),
