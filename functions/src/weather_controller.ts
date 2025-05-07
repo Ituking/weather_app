@@ -10,8 +10,7 @@ interface WeatherRequest {
   city: string;
 }
 
-// キャッシュ有効時間（6時間 = 6 * 60分 * 60秒）
-const CACHE_DURATION_SECONDS = 6 * 60 * 60;
+const CACHE_DURATION_SECONDS = 1 * 60 * 60; // 1時間（3600秒）
 
 /**
  * 都市の天気を取得するCloud Function
