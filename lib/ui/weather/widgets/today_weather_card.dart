@@ -29,14 +29,14 @@ class TodayWeatherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardTheme = Theme.of(context).extension<TodayWeatherCardTheme>()!;
+    final theme = Theme.of(context).extension<TodayWeatherCardTheme>()!;
 
     return Card(
-      color: cardTheme.backgroundColor,
-      shape: cardTheme.shape,
+      color: theme.backgroundCardColor,
+      shape: theme.cardShape,
       margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Padding(
-        padding: cardTheme.padding,
+        padding: theme.cardPadding,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
