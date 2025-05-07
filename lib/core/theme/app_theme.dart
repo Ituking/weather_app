@@ -42,13 +42,7 @@ class AppTheme {
       foregroundColor: Colors.white,
     ),
     extensions: <ThemeExtension<dynamic>>[
-      const TodayWeatherCardTheme(
-        backgroundColor: Color(0xFF2C2C2E),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
-        ),
-        padding: EdgeInsets.all(16),
-      ),
+      TodayWeatherCardTheme.defaultTheme,
       DailyForecastCardTheme.defaultTheme,
       const AppElevatedButtonTheme(
         backgroundColor: AppTheme.primaryColor,
