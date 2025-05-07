@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TodayWeatherCardTheme extends ThemeExtension<TodayWeatherCardTheme> {
-  final Color backgroundColor;
-  final ShapeBorder shape;
-  final EdgeInsets padding;
+  final Color backgroundCardColor;
+  final ShapeBorder cardShape;
+  final EdgeInsets cardPadding;
 
   const TodayWeatherCardTheme({
-    required this.backgroundColor,
-    required this.shape,
-    required this.padding,
+    required this.backgroundCardColor,
+    required this.cardShape,
+    required this.cardPadding,
   });
 
   @override
@@ -18,9 +18,9 @@ class TodayWeatherCardTheme extends ThemeExtension<TodayWeatherCardTheme> {
     EdgeInsets? padding,
   }) =>
       TodayWeatherCardTheme(
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        shape: shape ?? this.shape,
-        padding: padding ?? this.padding,
+        backgroundCardColor: backgroundColor ?? backgroundCardColor,
+        cardShape: shape ?? cardShape,
+        cardPadding: padding ?? cardPadding,
       );
 
   @override
@@ -30,9 +30,18 @@ class TodayWeatherCardTheme extends ThemeExtension<TodayWeatherCardTheme> {
       return this;
     }
     return TodayWeatherCardTheme(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
-      shape: shape,
-      padding: EdgeInsets.lerp(padding, other.padding, t)!,
+      backgroundCardColor:
+          Color.lerp(backgroundCardColor, other.backgroundCardColor, t)!,
+      cardShape: cardShape,
+      cardPadding: EdgeInsets.lerp(cardPadding, other.cardPadding, t)!,
     );
   }
+
+  static const defaultTheme = TodayWeatherCardTheme(
+    backgroundCardColor: Color(0xFF2C2C2E),
+    cardShape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+    ),
+    cardPadding: EdgeInsets.all(16),
+  );
 }
