@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_elevated_button_theme.dart';
+import 'daily_forecast_card_theme.dart';
 import 'today_weather_card_theme.dart';
 
 /// アプリケーション全体のテーマ設定を提供します。
@@ -48,6 +49,7 @@ class AppTheme {
         ),
         padding: EdgeInsets.all(16),
       ),
+      DailyForecastCardTheme.defaultTheme,
       const AppElevatedButtonTheme(
         backgroundColor: AppTheme.primaryColor,
         textColor: Colors.white,
