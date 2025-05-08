@@ -35,7 +35,7 @@ Weather Appは、位置情報または都市名を入力することでその地
 ### システム構成図
 
 <p align="center">
-  <img src="assets/images/system-architecture.svg" alt="System Architecture" width="700"/>
+  <img src="assets/images/system-architecture.png" alt="System Architecture" width="700"/>
 </p>
 
 ---
