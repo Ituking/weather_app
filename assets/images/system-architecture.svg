@@ -1,3 +1,93 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
-  <rect width="100" height="100" fill="blue" />
+<svg viewBox="0 0 900 650" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="900" height="650" fill="#f8f9fa" rx="10" ry="10" />
+
+  <!-- Title -->
+  <text x="450" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">
+    Weather Forecast App System Configuration
+  </text>
+
+  <!-- Flutter Mobile App -->
+  <rect x="150" y="100" width="200" height="100" rx="10" ry="10" fill="#42A5F5" stroke="#1976D2" stroke-width="2" />
+  <text x="250" y="150" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">Flutter Mobile App</text>
+  <text x="250" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">(User Interface)</text>
+
+  <!-- Cloud Functions -->
+  <rect x="550" y="100" width="200" height="100" rx="10" ry="10" fill="#0D47A1" stroke="#002171" stroke-width="2" />
+  <text x="650" y="140" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">Cloud Functions</text>
+  <text x="650" y="165" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">(API Handler)</text>
+
+  <!-- OpenWeatherMap API -->
+  <rect x="550" y="250" width="200" height="100" rx="10" ry="10" fill="#78909C" stroke="#455A64" stroke-width="2" />
+  <text x="650" y="290" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">OpenWeatherMap</text>
+  <text x="650" y="315" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">(External API)</text>
+
+  <!-- Cloud Firestore -->
+  <rect x="550" y="400" width="200" height="100" rx="10" ry="10" fill="#FFCA28" stroke="#F57C00" stroke-width="2" />
+  <text x="650" y="440" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Cloud Firestore</text>
+  <text x="650" y="465" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">(Real-time Database)</text>
+
+  <!-- Weather Display -->
+  <rect x="150" y="400" width="200" height="100" rx="10" ry="10" fill="#42A5F5" stroke="#1976D2" stroke-width="2" />
+  <text x="250" y="440" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">Weather Display</text>
+  <text x="250" y="465" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">(Flutter App)</text>
+
+  <!-- Daily Batch Job -->
+  <rect x="350" y="550" width="200" height="60" rx="10" ry="10" fill="#8E24AA" stroke="#6A1B9A" stroke-width="2" />
+  <text x="450" y="580" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">Daily Batch Job</text>
+  <text x="450" y="600" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">毎日 0:01 実行 - 前日データ削除</text>
+
+  <!-- Cloud Logging -->
+  <rect x="50" y="250" width="200" height="80" rx="10" ry="10" fill="#6D4C41" stroke="#4E342E" stroke-width="2" />
+  <text x="150" y="280" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">Cloud Logging</text>
+  <text x="150" y="300" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">ログ可視化・監視</text>
+
+  <!-- Arrows -->
+  <path d="M 350 150 L 550 150" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <rect x="425" y="130" width="50" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="450" y="145" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">1</text>
+
+  <path d="M 650 200 L 650 250" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <rect x="630" y="215" width="40" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="650" y="230" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">2</text>
+
+  <path d="M 550 300 L 450 300 L 450 175 L 550 175" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <rect x="430" y="280" width="40" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="450" y="295" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">3</text>
+
+  <path d="M 600 200 L 600 400" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <rect x="580" y="325" width="40" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">4</text>
+
+  <path d="M 550 450 L 350 450" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <rect x="425" y="430" width="50" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="450" y="445" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">5</text>
+
+  <!-- Batch Job to Firestore -->
+  <path d="M 450 550 L 650 500" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <rect x="540" y="490" width="40" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="560" y="505" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">6</text>
+
+  <!-- Cloud Functions to Logging -->
+  <path d="M 550 150 L 250 290" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <rect x="360" y="260" width="40" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="380" y="275" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">log</text>
+
+  <!-- Batch Job to Logging -->
+  <path d="M 350 580 L 250 320" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <rect x="280" y="340" width="40" height="20" rx="10" ry="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="300" y="355" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">log</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <rect x="200" y="620" width="500" height="25" rx="5" ry="5" fill="white" stroke="#ddd" stroke-width="1" />
+  <text x="450" y="638" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">
+    Data Flow: User Input → API Processing → Data Storage → Real-time Display + Logging & Cleanup
+  </text>
 </svg>
