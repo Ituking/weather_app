@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/strings/app_back_button_strings.dart';
 import '../../core/widgets/app_elevated_button.dart';
 
 /// [AppBackButton]は、天気検索画面に遷移するボタンです。
@@ -10,8 +10,10 @@ class AppBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return AppElevatedButton(
-      text: AppBackButtonStrings.buttonLabelBack,
+      text: l10n.backButtonLabel,
       onPressed: () => context.go('/'),
     );
   }
