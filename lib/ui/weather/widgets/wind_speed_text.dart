@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/wind_speed_text_strings.dart';
-
 /// [WindSpeedText]は、風速を表示するためのテキストウィジェットです。
 class WindSpeedText extends StatelessWidget {
   final double windSpeed;
@@ -13,7 +11,7 @@ class WindSpeedText extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Text(
-      '${l10n.windSpeedLabel} ${windSpeed.toStringAsFixed(1)}${WindSpeedTextStrings.unitMetersPerSecond}',
+      '${l10n.windSpeedLabel} ${windSpeed.toStringAsFixed(1)}${l10n.windSpeedUnit}',
       style: const TextStyle(
         fontSize: 18,
         color: Colors.white,
