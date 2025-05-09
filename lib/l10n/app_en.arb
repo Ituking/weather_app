@@ -1,0 +1,51 @@
+{
+  "@@locale": "en",
+  "backButtonLabel": "Back",
+  "@backButtonLabel": {
+    "description": "Label text for the back button"
+  },
+  "cityNameEmptyError": "Please enter a city name.",
+  "cityNameInvalidError": "City name must contain only letters and spaces.",
+  "@cityNameEmptyError": {
+    "description": "Error message shown when the city name field is empty"
+  },
+  "@cityNameInvalidError": {
+    "description": "Error message shown when the city name input contains invalid characters"
+  },
+  "searchButtonLabel": "Search",
+  "@searchButtonLabel": {
+    "description": "Label for the city search button"
+  },
+  "cityNameHintExample": "Tokyo",
+  "@cityNameHintExample": {
+    "description": "Hint example for city name input field"
+  },
+  "humidityLabel": "Humidity:",
+  "@humidityLabel": {
+    "description": "Label for humidity value"
+  },
+  "humidityUnit": "%",
+  "@humidityUnit": {
+    "description": "Unit symbol for humidity percentage"
+  },
+  "temperatureUnit": "°C",
+  "@temperatureUnit": {
+    "description": "Unit symbol for temperature in Celsius"
+  },
+  "weatherDescriptionLabel": "Weather:",
+  "@weatherDescriptionLabel": {
+    "description": "Label for weather description"
+  },
+  "windSpeedLabel": "Wind speed:",
+  "@windSpeedLabel": {
+    "description": "Label for wind speed display"
+  },
+  "windSpeedUnit": "m/s",
+  "@windSpeedUnit": {
+    "description": "Unit symbol for wind speed in meters per second"
+  },
+  "unknownError": "Something went wrong. Please try again.",
+  "@unknownError": {
+    "description": "Fallback error message shown when the cause is unknown"
+  }
+}

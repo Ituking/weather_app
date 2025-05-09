@@ -1,0 +1,51 @@
+{
+  "@@locale": "vi",
+  "backButtonLabel": "Quay lại",
+  "@backButtonLabel": {
+    "description": "Nhãn trên nút quay lại"
+  },
+  "cityNameEmptyError": "Vui lòng nhập tên thành phố.",
+  "@cityNameEmptyError": {
+    "description": "Thông báo lỗi khi tên thành phố bị để trống"
+  },
+  "cityNameInvalidError": "Tên thành phố chỉ được chứa chữ cái và khoảng trắng.",
+  "@cityNameInvalidError": {
+    "description": "Thông báo lỗi khi tên thành phố chứa ký tự không hợp lệ"
+  },
+  "searchButtonLabel": "Tìm kiếm",
+  "@searchButtonLabel": {
+    "description": "Nhãn cho nút tìm kiếm"
+  },
+  "cityNameHintExample": "Tokyo",
+  "@cityNameHintExample": {
+    "description": "Gợi ý ví dụ cho trường nhập tên thành phố"
+  },
+  "humidityLabel": "Độ ẩm:",
+  "@humidityLabel": {
+    "description": "Nhãn hiển thị độ ẩm"
+  },
+  "humidityUnit": "%",
+  "@humidityUnit": {
+    "description": "Ký hiệu phần trăm cho độ ẩm"
+  },
+  "temperatureUnit": "°C",
+  "@temperatureUnit": {
+    "description": "Đơn vị độ C cho nhiệt độ"
+  },
+  "weatherDescriptionLabel": "Thời tiết:",
+  "@weatherDescriptionLabel": {
+    "description": "Nhãn hiển thị mô tả thời tiết"
+  },
+  "windSpeedLabel": "Tốc độ gió:",
+  "@windSpeedLabel": {
+    "description": "Nhãn hiển thị tốc độ gió"
+  },
+  "windSpeedUnit": "m/s",
+  "@windSpeedUnit": {
+    "description": "Đơn vị mét/giây cho tốc độ gió"
+  },
+  "unknownErrorMessage": "Đã xảy ra lỗi không mong muốn.",
+  "@unknownErrorMessage": {
+    "description": "Hiển thị khi xảy ra lỗi không xác định."
+  }
+}

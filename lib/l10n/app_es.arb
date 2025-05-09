@@ -1,0 +1,51 @@
+{
+  "@@locale": "es",
+  "backButtonLabel": "Atrás",
+  "@backButtonLabel": {
+    "description": "Texto de la etiqueta para el botón de retroceso"
+  },
+  "cityNameEmptyError": "Por favor, ingrese el nombre de la ciudad.",
+  "@cityNameEmptyError": {
+    "description": "Mensaje de error que se muestra cuando el campo del nombre de la ciudad está vacío"
+  },
+  "cityNameInvalidError": "El nombre de la ciudad solo debe contener letras y espacios.",
+  "@cityNameInvalidError": {
+    "description": "Mensaje de error que se muestra cuando la entrada del nombre de la ciudad contiene caracteres inválidos"
+  },
+  "searchButtonLabel": "Buscar",
+  "@searchButtonLabel": {
+    "description": "Etiqueta para el botón de búsqueda de ciudad"
+  },
+  "cityNameHintExample": "Tokio",
+  "@cityNameHintExample": {
+    "description": "Ejemplo de sugerencia para el campo de entrada del nombre de la ciudad"
+  },
+  "humidityLabel": "Humedad:",
+  "@humidityLabel": {
+    "description": "Etiqueta para el valor de humedad"
+  },
+  "humidityUnit": "%",
+  "@humidityUnit": {
+    "description": "Símbolo de unidad para el porcentaje de humedad"
+  },
+  "temperatureUnit": "°C",
+  "@temperatureUnit": {
+    "description": "Símbolo de unidad para la temperatura en grados Celsius"
+  },
+  "weatherDescriptionLabel": "Clima:",
+  "@weatherDescriptionLabel": {
+    "description": "Etiqueta para la descripción del clima"
+  },
+  "windSpeedLabel": "Velocidad del viento:",
+  "@windSpeedLabel": {
+    "description": "Etiqueta para la visualización de la velocidad del viento"
+  },
+  "windSpeedUnit": "m/s",
+  "@windSpeedUnit": {
+    "description": "Símbolo de unidad para la velocidad del viento en metros por segundo"
+  },
+  "unknownErrorMessage": "Se ha producido un error inesperado.",
+  "@unknownErrorMessage": {
+    "description": "Se muestra cuando ocurre un error desconocido."
+  }
+}
