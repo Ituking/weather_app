@@ -37,7 +37,9 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
     controller = ref.read(textEditingControllerProvider);
 
     // 都市名のバリデータをProviderから取得し、入力内容の変更を検知してバリデーションを実行。
-    final validator = ref.read(cityNameValidatorProvider);
+    final l10n = AppLocalizations.of(context)!;
+    final validator = ref.read(cityNameValidatorProvider(l10n));
+
     controller.addListener(() {
       setState(() {
         isValid = validator.validate(controller.text);

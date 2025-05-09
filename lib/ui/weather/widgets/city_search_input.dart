@@ -23,7 +23,8 @@ class CitySearchInputState extends ConsumerState<CitySearchInput> {
     final l10n = AppLocalizations.of(context)!;
     final viewModel = ref.watch(citySearchViewModelProvider.notifier);
     final controller = ref.watch(textEditingControllerProvider);
-    final validator = ref.watch(cityNameValidatorProvider);
+    final validator = ref.watch(cityNameValidatorProvider(l10n));
+
     // 現在のテーマデータを取得します。
     final theme = Theme.of(context);
 
