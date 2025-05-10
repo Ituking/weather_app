@@ -47,5 +47,13 @@
   "unknownErrorMessage": "Ocorreu um erro inesperado.",
   "@unknownErrorMessage": {
     "description": "Exibido quando ocorre um erro desconhecido."
+  },
+  "searchTabLabel": "Pesquisar",
+  "@searchTabLabel": {
+    "description": "Rótulo da guia de pesquisa na barra de navegação inferior"
+  },
+  "settingsTabLabel": "Configurações",
+  "@settingsTabLabel": {
+    "description": "Rótulo da guia de configurações na barra de navegação inferior"
   }
 }

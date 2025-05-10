@@ -47,5 +47,13 @@
   "unknownErrorMessage": "Ein unerwarteter Fehler ist aufgetreten.",
   "@unknownErrorMessage": {
     "description": "Wird angezeigt, wenn ein unbekannter Fehler auftritt."
+  },
+  "searchTabLabel": "Suche",
+  "@searchTabLabel": {
+    "description": "Beschriftung für den Such-Tab in der unteren Navigationsleiste"
+  },
+  "settingsTabLabel": "Einstellungen",
+  "@settingsTabLabel": {
+    "description": "Beschriftung für den Einstellungen-Tab in der unteren Navigationsleiste"
   }
 }

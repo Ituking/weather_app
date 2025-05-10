@@ -47,5 +47,13 @@
   "unknownError": "Something went wrong. Please try again.",
   "@unknownError": {
     "description": "Fallback error message shown when the cause is unknown"
+  },
+  "searchTabLabel": "Search",
+  "@searchTabLabel": {
+  "description": "Label for the search tab in the bottom navigation bar"
+  },
+  "settingsTabLabel": "Settings",
+  "@settingsTabLabel": {
+  "description": "Label for the settings tab in the bottom navigation bar"
   }
 }

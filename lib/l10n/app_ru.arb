@@ -47,5 +47,13 @@
   "unknownErrorMessage": "Произошла непредвиденная ошибка.",
   "@unknownErrorMessage": {
     "description": "Отображается при возникновении неизвестной ошибки."
+  },
+  "searchTabLabel": "Поиск",
+  "@searchTabLabel": {
+    "description": "Ярлык вкладки поиска в нижней панели навигации"
+  },
+  "settingsTabLabel": "Настройки",
+  "@settingsTabLabel": {
+    "description": "Ярлык вкладки настроек в нижней панели навигации"
   }
 }

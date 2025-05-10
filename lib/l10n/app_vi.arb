@@ -47,5 +47,13 @@
   "unknownErrorMessage": "Đã xảy ra lỗi không mong muốn.",
   "@unknownErrorMessage": {
     "description": "Hiển thị khi xảy ra lỗi không xác định."
+  },
+  "searchTabLabel": "Tìm kiếm",
+  "@searchTabLabel": {
+    "description": "Nhãn cho tab tìm kiếm trong thanh điều hướng dưới cùng"
+  },
+  "settingsTabLabel": "Cài đặt",
+  "@settingsTabLabel": {
+    "description": "Nhãn cho tab cài đặt trong thanh điều hướng dưới cùng"
   }
 }

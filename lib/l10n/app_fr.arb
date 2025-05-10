@@ -47,5 +47,13 @@
   "unknownErrorMessage": "Une erreur inattendue s'est produite.",
   "@unknownErrorMessage": {
     "description": "Affiché lorsqu'une erreur inconnue se produit."
+  },
+  "searchTabLabel": "Rechercher",
+  "@searchTabLabel": {
+    "description": "Étiquette de l’onglet Rechercher dans la barre de navigation inférieure"
+  },
+  "settingsTabLabel": "Paramètres",
+  "@settingsTabLabel": {
+    "description": "Étiquette de l’onglet Paramètres dans la barre de navigation inférieure"
   }
 }

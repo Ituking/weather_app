@@ -47,5 +47,13 @@
   "unknownErrorMessage": "予期しないエラーが発生しました。",
   "@unknownErrorMessage": {
     "description": "不明なエラーが発生した際に表示されるメッセージ。"
+  },
+  "searchTabLabel": "検索",
+  "@searchTabLabel": {
+    "description": "ボトムナビゲーションバーの検索タブのラベル"
+  },
+  "settingsTabLabel": "設定",
+  "@settingsTabLabel": {
+    "description": "ボトムナビゲーションバーの設定タブのラベル"
   }
 }

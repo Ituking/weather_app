@@ -47,5 +47,13 @@
   "unknownErrorMessage": "حدث خطأ غير متوقع.",
   "@unknownErrorMessage": {
     "description": "يتم عرضه عند حدوث خطأ غير معروف."
+  },
+  "searchTabLabel": "بحث",
+  "@searchTabLabel": {
+    "description": "تسمية علامة تبويب البحث في شريط التنقل السفلي"
+  },
+  "settingsTabLabel": "الإعدادات",
+  "@settingsTabLabel": {
+    "description": "تسمية علامة تبويب الإعدادات في شريط التنقل السفلي"
   }
 }
