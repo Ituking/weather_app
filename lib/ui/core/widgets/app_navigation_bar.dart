@@ -17,17 +17,22 @@ class AppNavigationBar extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigationShell.currentIndex,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
-          NavigationDestination(icon: Icon(Icons.settings), label: 'Settings'),
-        ],
         onDestinationSelected: (index) {
           navigationShell.goBranch(
             index,
-            // 現在選択中のタブを再タップしてもトップに戻さない
             initialLocation: index == navigationShell.currentIndex,
           );
         },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
       ),
     );
   }
