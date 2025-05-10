@@ -48,6 +48,10 @@
   "@unknownErrorMessage": {
     "description": "不明なエラーが発生した際に表示されるメッセージ。"
   },
+  "languageSelectionTitle": "言語設定",
+  "@languageSelectionTitle": {
+    "description": "アプリの言語を変更する画面のタイトル"
+  },
   "searchTabLabel": "検索",
   "@searchTabLabel": {
     "description": "ボトムナビゲーションバーの検索タブのラベル"

@@ -48,6 +48,10 @@
   "@unknownErrorMessage": {
     "description": "当发生未知错误时显示。"
   },
+  "languageSelectionTitle": "语言设置",
+  "@languageSelectionTitle": {
+    "description": "用于更改应用语言的屏幕标题"
+  },
   "searchTabLabel": "搜索",
   "@searchTabLabel": {
     "description": "底部导航栏中搜索选项卡的标签"

@@ -48,6 +48,10 @@
   "@unknownErrorMessage": {
     "description": "يتم عرضه عند حدوث خطأ غير معروف."
   },
+  "languageSelectionTitle": "إعدادات اللغة",
+  "@languageSelectionTitle": {
+    "description": "عنوان شاشة إعداد اللغة للتطبيق"
+  },
   "searchTabLabel": "بحث",
   "@searchTabLabel": {
     "description": "تسمية علامة تبويب البحث في شريط التنقل السفلي"

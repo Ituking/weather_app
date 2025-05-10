@@ -48,6 +48,10 @@
   "@unknownErrorMessage": {
     "description": "Hiển thị khi xảy ra lỗi không xác định."
   },
+  "languageSelectionTitle": "Cài đặt ngôn ngữ",
+  "@languageSelectionTitle": {
+    "description": "Tiêu đề của màn hình thay đổi ngôn ngữ ứng dụng"
+  },
   "searchTabLabel": "Tìm kiếm",
   "@searchTabLabel": {
     "description": "Nhãn cho tab tìm kiếm trong thanh điều hướng dưới cùng"

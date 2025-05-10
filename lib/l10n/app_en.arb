@@ -48,6 +48,10 @@
   "@unknownError": {
     "description": "Fallback error message shown when the cause is unknown"
   },
+  "languageSelectionTitle": "Language Settings",
+  "@languageSelectionTitle": {
+    "description": "Title for the screen to change app language"
+  },
   "searchTabLabel": "Search",
   "@searchTabLabel": {
   "description": "Label for the search tab in the bottom navigation bar"

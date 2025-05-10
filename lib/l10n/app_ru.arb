@@ -48,6 +48,10 @@
   "@unknownErrorMessage": {
     "description": "Отображается при возникновении неизвестной ошибки."
   },
+  "languageSelectionTitle": "Настройки языка",
+  "@languageSelectionTitle": {
+    "description": "Заголовок экрана для изменения языка приложения"
+  },
   "searchTabLabel": "Поиск",
   "@searchTabLabel": {
     "description": "Ярлык вкладки поиска в нижней панели навигации"

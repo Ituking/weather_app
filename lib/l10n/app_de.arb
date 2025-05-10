@@ -48,6 +48,10 @@
   "@unknownErrorMessage": {
     "description": "Wird angezeigt, wenn ein unbekannter Fehler auftritt."
   },
+  "languageSelectionTitle": "Spracheinstellungen",
+  "@languageSelectionTitle": {
+    "description": "Titel des Bildschirms zum Ändern der App-Sprache"
+  },
   "searchTabLabel": "Suche",
   "@searchTabLabel": {
     "description": "Beschriftung für den Such-Tab in der unteren Navigationsleiste"
