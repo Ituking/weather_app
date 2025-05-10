@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../widgets/language_option_tile.dart';
@@ -10,8 +11,12 @@ class LanguageSelectorScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Select language')),
+      appBar: AppBar(
+        title: Text(l10n.languageSelectionTitle),
+      ),
       body: ListView(
         children: const [
           // 言語選択肢のリスト
