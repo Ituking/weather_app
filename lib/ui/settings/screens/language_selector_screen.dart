@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/i18n/locale_metadata.dart';
 import '../widgets/language_option_tile.dart';
 
 /// 言語選択画面。
@@ -17,20 +18,16 @@ class LanguageSelectorScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.languageSelectionTitle),
       ),
-      body: ListView(
-        children: const [
-          // 言語選択肢のリスト
-          LanguageOptionTile(languageCode: 'en', label: 'English'),
-          LanguageOptionTile(languageCode: 'ja', label: '日本語'),
-          LanguageOptionTile(languageCode: 'vi', label: 'Tiếng Việt'),
-          LanguageOptionTile(languageCode: 'es', label: 'Español'),
-          LanguageOptionTile(languageCode: 'fr', label: 'Français'),
-          LanguageOptionTile(languageCode: 'zh', label: '中文'),
-          LanguageOptionTile(languageCode: 'ar', label: 'العربية'),
-          LanguageOptionTile(languageCode: 'de', label: 'Deutsch'),
-          LanguageOptionTile(languageCode: 'ru', label: 'Русский'),
-          LanguageOptionTile(languageCode: 'pt', label: 'Português'),
-        ],
+      body: ListView.builder(
+        itemCount: supportedLocalesMetadata.length,
+        itemBuilder: (context, index) {
+          final meta = supportedLocalesMetadata[index];
+          return LanguageOptionTile(
+            languageCode: meta.languageCode,
+            label: meta.label,
+            flag: meta.flag,
+          );
+        },
       ),
     );
   }
