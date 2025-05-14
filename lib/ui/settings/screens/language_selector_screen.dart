@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/i18n/locale_metadata.dart';
+import '../../core/widgets/app_header.dart';
 import '../widgets/language_option_tile.dart';
 
 /// 言語選択画面。
@@ -15,8 +16,9 @@ class LanguageSelectorScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.languageSelectionTitle),
+      appBar: AppHeader(
+        title: l10n.languageSelectionTitle,
+        showBackButton: false,
       ),
       body: ListView.builder(
         itemCount: supportedLocalesMetadata.length,
