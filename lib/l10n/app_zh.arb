@@ -16,7 +16,7 @@
   "@searchButtonLabel": {
     "description": "城市搜索按钮的标签"
   },
-  "cityNameHintExample": "东京",
+  "cityNameHintExample": "北京",
   "@cityNameHintExample": {
     "description": "城市名称输入字段的提示示例"
   },

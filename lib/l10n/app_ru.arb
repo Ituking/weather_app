@@ -16,7 +16,7 @@
   "@searchButtonLabel": {
     "description": "Метка для кнопки поиска города"
   },
-  "cityNameHintExample": "Токио",
+  "cityNameHintExample": "Москва",
   "@cityNameHintExample": {
     "description": "Пример подсказки для поля ввода названия города"
   },

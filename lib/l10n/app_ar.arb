@@ -16,7 +16,7 @@
   "@searchButtonLabel": {
     "description": "تسمية زر البحث عن المدينة"
   },
-  "cityNameHintExample": "طوكيو",
+  "cityNameHintExample": "الرياض",
   "@cityNameHintExample": {
     "description": "مثال تلميح لحقل إدخال اسم المدينة"
   },

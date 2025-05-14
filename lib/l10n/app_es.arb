@@ -16,7 +16,7 @@
   "@searchButtonLabel": {
     "description": "Etiqueta para el botón de búsqueda de ciudad"
   },
-  "cityNameHintExample": "Tokio",
+  "cityNameHintExample": "Madrid",
   "@cityNameHintExample": {
     "description": "Ejemplo de sugerencia para el campo de entrada del nombre de la ciudad"
   },

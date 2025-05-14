@@ -16,7 +16,7 @@
   "@searchButtonLabel": {
     "description": "Label for the city search button"
   },
-  "cityNameHintExample": "Tokyo",
+  "cityNameHintExample": "New York",
   "@cityNameHintExample": {
     "description": "Hint example for city name input field"
   },
