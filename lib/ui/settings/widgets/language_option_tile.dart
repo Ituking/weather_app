@@ -8,11 +8,13 @@ import '../../../core/i18n/providers/locale_notifier_provider.dart';
 class LanguageOptionTile extends ConsumerWidget {
   final String languageCode;
   final String label;
+  final String flag;
 
   const LanguageOptionTile({
     super.key,
     required this.languageCode,
     required this.label,
+    required this.flag,
   });
 
   @override
@@ -21,8 +23,10 @@ class LanguageOptionTile extends ConsumerWidget {
     final isSelected = selectedLocale?.languageCode == languageCode;
 
     return ListTile(
+      leading: Text(flag, style: const TextStyle(fontSize: 28)),
       title: Text(label),
-      trailing: isSelected ? const Icon(Icons.check) : null,
+      trailing:
+          isSelected ? const Icon(Icons.check, color: Colors.green) : null,
       onTap: () {
         ref.read(localeNotifierProvider.notifier).setLocale(languageCode);
       },
