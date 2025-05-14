@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/strings/city_search_input_strings.dart';
 import '../../../ui/weather/view_model/providers/city_name_validator_provider.dart';
 import '../../../ui/weather/view_model/providers/city_search_view_model_provider.dart';
 import '../../../ui/weather/view_model/providers/text_editing_controller_provider.dart';
@@ -20,9 +20,11 @@ class CitySearchInputState extends ConsumerState<CitySearchInput> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final viewModel = ref.watch(citySearchViewModelProvider.notifier);
     final controller = ref.watch(textEditingControllerProvider);
-    final validator = ref.watch(cityNameValidatorProvider);
+    final validator = ref.watch(cityNameValidatorProvider(l10n));
+
     // 現在のテーマデータを取得します。
     final theme = Theme.of(context);
 
@@ -34,8 +36,7 @@ class CitySearchInputState extends ConsumerState<CitySearchInput> {
         filled: true, // 背景を塗りつぶします。
         fillColor:
             Colors.white.withAlpha((0.8 * 255).toInt()), // 背景色を白の半透明に設定します。
-        hintText:
-            CitySearchInputStrings.hintTextCityNameExample, // ヒントテキストを設定します。
+        hintText: l10n.cityNameHintExample, // ヒントテキストを設定します。
         labelStyle:
             TextStyle(color: theme.hintColor), // ラベルスタイルをテーマのヒントカラーに設定します。
         border: OutlineInputBorder(

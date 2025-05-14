@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app/core/firebase/providers/firebase_functions_provider.dart';
-import 'package:weather_app/core/strings/city_search_button_strings.dart';
 import 'package:weather_app/core/theme/app_theme.dart';
 import 'package:weather_app/ui/core/widgets/app_elevated_button.dart';
 import 'package:weather_app/ui/weather/view_model/providers/text_editing_controller_provider.dart';
@@ -32,6 +33,14 @@ void main() {
         container: container,
         child: MaterialApp(
           theme: AppTheme.lightTheme,
+          locale: const Locale('ja'),
+          supportedLocales: const [Locale('ja')],
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
           home: const Scaffold(
             body: CitySearchButton(),
           ),
@@ -52,6 +61,14 @@ void main() {
         container: container,
         child: MaterialApp(
           theme: AppTheme.lightTheme,
+          locale: const Locale('ja'),
+          supportedLocales: const [Locale('ja')],
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
           home: Scaffold(
             body: CitySearchButton(),
           ),
@@ -62,8 +79,11 @@ void main() {
       controller.text = 'Tokyo';
       await tester.pump();
 
-      expect(
-          find.text(CitySearchButtonStrings.buttonLabelSearch), findsOneWidget);
+      final localizedText =
+          AppLocalizations.of(tester.element(find.byType(CitySearchButton)))!
+              .searchButtonLabel;
+
+      expect(find.text(localizedText), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsNothing);
     });
   });

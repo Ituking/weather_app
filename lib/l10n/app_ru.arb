@@ -1,0 +1,63 @@
+{
+  "@@locale": "ru",
+  "backButtonLabel": "Назад",
+  "@backButtonLabel": {
+    "description": "Текст метки для кнопки 'Назад'"
+  },
+  "cityNameEmptyError": "Пожалуйста, введите название города.",
+  "@cityNameEmptyError": {
+    "description": "Сообщение об ошибке, отображаемое, когда поле названия города пусто"
+  },
+  "cityNameInvalidError": "Название города должно содержать только буквы и пробелы.",
+  "@cityNameInvalidError": {
+    "description": "Сообщение об ошибке, отображаемое, когда название города содержит недопустимые символы"
+  },
+  "searchButtonLabel": "Поиск",
+  "@searchButtonLabel": {
+    "description": "Метка для кнопки поиска города"
+  },
+  "cityNameHintExample": "Токио",
+  "@cityNameHintExample": {
+    "description": "Пример подсказки для поля ввода названия города"
+  },
+  "humidityLabel": "Влажность:",
+  "@humidityLabel": {
+    "description": "Метка для значения влажности"
+  },
+  "humidityUnit": "%",
+  "@humidityUnit": {
+    "description": "Символ единицы для процента влажности"
+  },
+  "temperatureUnit": "°C",
+  "@temperatureUnit": {
+    "description": "Символ единицы для температуры в градусах Цельсия"
+  },
+  "weatherDescriptionLabel": "Погода:",
+  "@weatherDescriptionLabel": {
+    "description": "Метка для описания погоды"
+  },
+  "windSpeedLabel": "Скорость ветра:",
+  "@windSpeedLabel": {
+    "description": "Метка для отображения скорости ветра"
+  },
+  "windSpeedUnit": "м/с",
+  "@windSpeedUnit": {
+    "description": "Символ единицы для скорости ветра в метрах в секунду"
+  },
+  "unknownErrorMessage": "Произошла непредвиденная ошибка.",
+  "@unknownErrorMessage": {
+    "description": "Отображается при возникновении неизвестной ошибки."
+  },
+  "languageSelectionTitle": "Настройки языка",
+  "@languageSelectionTitle": {
+    "description": "Заголовок экрана для изменения языка приложения"
+  },
+  "searchTabLabel": "Поиск",
+  "@searchTabLabel": {
+    "description": "Ярлык вкладки поиска в нижней панели навигации"
+  },
+  "settingsTabLabel": "Настройки",
+  "@settingsTabLabel": {
+    "description": "Ярлык вкладки настроек в нижней панели навигации"
+  }
+}

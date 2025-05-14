@@ -1,0 +1,63 @@
+{
+  "@@locale": "de",
+  "backButtonLabel": "Zurück",
+  "@backButtonLabel": {
+    "description": "Beschriftung für die Zurück-Schaltfläche"
+  },
+  "cityNameEmptyError": "Bitte geben Sie einen Stadtnamen ein.",
+  "@cityNameEmptyError": {
+    "description": "Fehlermeldung, wenn das Feld für den Stadtnamen leer ist"
+  },
+  "cityNameInvalidError": "Der Stadtname darf nur Buchstaben und Leerzeichen enthalten.",
+  "@cityNameInvalidError": {
+    "description": "Fehlermeldung, wenn der Stadtname ungültige Zeichen enthält"
+  },
+  "searchButtonLabel": "Suchen",
+  "@searchButtonLabel": {
+    "description": "Beschriftung für die Stadtsuch-Schaltfläche"
+  },
+  "cityNameHintExample": "Tokio",
+  "@cityNameHintExample": {
+    "description": "Beispielhinweis für das Stadtnameneingabefeld"
+  },
+  "humidityLabel": "Luftfeuchtigkeit:",
+  "@humidityLabel": {
+    "description": "Beschriftung für den Luftfeuchtigkeitswert"
+  },
+  "humidityUnit": "%",
+  "@humidityUnit": {
+    "description": "Einheitssymbol für Luftfeuchtigkeit in Prozent"
+  },
+  "temperatureUnit": "°C",
+  "@temperatureUnit": {
+    "description": "Einheitssymbol für Temperatur in Celsius"
+  },
+  "weatherDescriptionLabel": "Wetter:",
+  "@weatherDescriptionLabel": {
+    "description": "Beschriftung für die Wetterbeschreibung"
+  },
+  "windSpeedLabel": "Windgeschwindigkeit:",
+  "@windSpeedLabel": {
+    "description": "Beschriftung für die Anzeige der Windgeschwindigkeit"
+  },
+  "windSpeedUnit": "m/s",
+  "@windSpeedUnit": {
+    "description": "Einheitssymbol für Windgeschwindigkeit in Metern pro Sekunde"
+  },
+  "unknownErrorMessage": "Ein unerwarteter Fehler ist aufgetreten.",
+  "@unknownErrorMessage": {
+    "description": "Wird angezeigt, wenn ein unbekannter Fehler auftritt."
+  },
+  "languageSelectionTitle": "Spracheinstellungen",
+  "@languageSelectionTitle": {
+    "description": "Titel des Bildschirms zum Ändern der App-Sprache"
+  },
+  "searchTabLabel": "Suche",
+  "@searchTabLabel": {
+    "description": "Beschriftung für den Such-Tab in der unteren Navigationsleiste"
+  },
+  "settingsTabLabel": "Einstellungen",
+  "@settingsTabLabel": {
+    "description": "Beschriftung für den Einstellungen-Tab in der unteren Navigationsleiste"
+  }
+}

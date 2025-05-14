@@ -1,0 +1,63 @@
+{
+  "@@locale": "ja",
+  "backButtonLabel": "戻る",
+  "@backButtonLabel": {
+    "description": "戻るボタンに表示されるテキスト"
+  },
+  "cityNameEmptyError": "都市名を入力してください。",
+  "cityNameInvalidError": "都市名は英字とスペースのみを使用してください。",
+  "@cityNameEmptyError": {
+    "description": "都市名フィールドが空のときに表示されるエラーメッセージ"
+  },
+  "@cityNameInvalidError": {
+    "description": "都市名が無効な文字を含んでいるときに表示されるエラーメッセージ"
+  },
+  "searchButtonLabel": "検索",
+  "@searchButtonLabel": {
+    "description": "都市検索ボタンに表示されるテキスト"
+  },
+  "cityNameHintExample": "Tokyo",
+  "@cityNameHintExample": {
+    "description": "都市名入力欄に表示される例（ヒント）"
+  },
+  "humidityLabel": "湿度:",
+  "@humidityLabel": {
+    "description": "湿度のラベル表示"
+  },
+  "humidityUnit": "%",
+  "@humidityUnit": {
+    "description": "湿度の単位記号"
+  },
+  "temperatureUnit": "°C",
+  "@temperatureUnit": {
+    "description": "摂氏温度の単位記号"
+  },
+  "weatherDescriptionLabel": "天気:",
+  "@weatherDescriptionLabel": {
+    "description": "天気説明のラベル"
+  },
+  "windSpeedLabel": "風速:",
+  "@windSpeedLabel": {
+    "description": "風速のラベル"
+  },
+  "windSpeedUnit": "m/s",
+  "@windSpeedUnit": {
+    "description": "風速の単位（メートル毎秒）"
+  },
+  "unknownErrorMessage": "予期しないエラーが発生しました。",
+  "@unknownErrorMessage": {
+    "description": "不明なエラーが発生した際に表示されるメッセージ。"
+  },
+  "languageSelectionTitle": "言語設定",
+  "@languageSelectionTitle": {
+    "description": "アプリの言語を変更する画面のタイトル"
+  },
+  "searchTabLabel": "検索",
+  "@searchTabLabel": {
+    "description": "ボトムナビゲーションバーの検索タブのラベル"
+  },
+  "settingsTabLabel": "設定",
+  "@settingsTabLabel": {
+    "description": "ボトムナビゲーションバーの設定タブのラベル"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "@@locale": "ar",
+  "backButtonLabel": "رجوع",
+  "@backButtonLabel": {
+    "description": "نص التسمية لزر الرجوع"
+  },
+  "cityNameEmptyError": "يرجى إدخال اسم المدينة.",
+  "@cityNameEmptyError": {
+    "description": "رسالة الخطأ المعروضة عند ترك حقل اسم المدينة فارغًا"
+  },
+  "cityNameInvalidError": "يجب أن يحتوي اسم المدينة على أحرف ومسافات فقط.",
+  "@cityNameInvalidError": {
+    "description": "رسالة الخطأ المعروضة عندما يحتوي إدخال اسم المدينة على أحرف غير صالحة"
+  },
+  "searchButtonLabel": "بحث",
+  "@searchButtonLabel": {
+    "description": "تسمية زر البحث عن المدينة"
+  },
+  "cityNameHintExample": "طوكيو",
+  "@cityNameHintExample": {
+    "description": "مثال تلميح لحقل إدخال اسم المدينة"
+  },
+  "humidityLabel": "الرطوبة:",
+  "@humidityLabel": {
+    "description": "تسمية لقيمة الرطوبة"
+  },
+  "humidityUnit": "%",
+  "@humidityUnit": {
+    "description": "رمز الوحدة لنسبة الرطوبة"
+  },
+  "temperatureUnit": "°م",
+  "@temperatureUnit": {
+    "description": "رمز الوحدة لدرجة الحرارة بالدرجة المئوية"
+  },
+  "weatherDescriptionLabel": "الطقس:",
+  "@weatherDescriptionLabel": {
+    "description": "تسمية لوصف الطقس"
+  },
+  "windSpeedLabel": "سرعة الرياح:",
+  "@windSpeedLabel": {
+    "description": "تسمية لعرض سرعة الرياح"
+  },
+  "windSpeedUnit": "م/ث",
+  "@windSpeedUnit": {
+    "description": "رمز الوحدة لسرعة الرياح بالأمتار في الثانية"
+  },
+  "unknownErrorMessage": "حدث خطأ غير متوقع.",
+  "@unknownErrorMessage": {
+    "description": "يتم عرضه عند حدوث خطأ غير معروف."
+  },
+  "languageSelectionTitle": "إعدادات اللغة",
+  "@languageSelectionTitle": {
+    "description": "عنوان شاشة إعداد اللغة للتطبيق"
+  },
+  "searchTabLabel": "بحث",
+  "@searchTabLabel": {
+    "description": "تسمية علامة تبويب البحث في شريط التنقل السفلي"
+  },
+  "settingsTabLabel": "الإعدادات",
+  "@settingsTabLabel": {
+    "description": "تسمية علامة تبويب الإعدادات في شريط التنقل السفلي"
+  }
+}

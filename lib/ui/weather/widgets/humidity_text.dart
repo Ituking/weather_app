@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../core/strings/humidity_text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// [HumidityText]は、湿度を表示するためのテキストウィジェットです。
 class HumidityText extends StatelessWidget {
@@ -9,8 +8,10 @@ class HumidityText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Text(
-      '${HumidityTextStrings.textLabelHumidity} $humidity${HumidityTextStrings.unitPercentage}',
+      '${l10n.humidityLabel} $humidity${l10n.humidityUnit}',
       style: const TextStyle(
         fontSize: 20,
         color: Colors.white,

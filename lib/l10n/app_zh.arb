@@ -1,0 +1,63 @@
+{
+  "@@locale": "zh",
+  "backButtonLabel": "返回",
+  "@backButtonLabel": {
+    "description": "返回按钮的标签文本"
+  },
+  "cityNameEmptyError": "请输入城市名称。",
+  "@cityNameEmptyError": {
+    "description": "当城市名称字段为空时显示的错误消息"
+  },
+  "cityNameInvalidError": "城市名称只能包含字母和空格。",
+  "@cityNameInvalidError": {
+    "description": "当城市名称输入包含无效字符时显示的错误消息"
+  },
+  "searchButtonLabel": "搜索",
+  "@searchButtonLabel": {
+    "description": "城市搜索按钮的标签"
+  },
+  "cityNameHintExample": "东京",
+  "@cityNameHintExample": {
+    "description": "城市名称输入字段的提示示例"
+  },
+  "humidityLabel": "湿度：",
+  "@humidityLabel": {
+    "description": "湿度值的标签"
+  },
+  "humidityUnit": "%",
+  "@humidityUnit": {
+    "description": "湿度百分比的单位符号"
+  },
+  "temperatureUnit": "°C",
+  "@temperatureUnit": {
+    "description": "摄氏温度的单位符号"
+  },
+  "weatherDescriptionLabel": "天气：",
+  "@weatherDescriptionLabel": {
+    "description": "天气描述的标签"
+  },
+  "windSpeedLabel": "风速：",
+  "@windSpeedLabel": {
+    "description": "风速显示的标签"
+  },
+  "windSpeedUnit": "米/秒",
+  "@windSpeedUnit": {
+    "description": "风速的单位符号，单位为米每秒"
+  },
+  "unknownErrorMessage": "发生了意外错误。",
+  "@unknownErrorMessage": {
+    "description": "当发生未知错误时显示。"
+  },
+  "languageSelectionTitle": "语言设置",
+  "@languageSelectionTitle": {
+    "description": "用于更改应用语言的屏幕标题"
+  },
+  "searchTabLabel": "搜索",
+  "@searchTabLabel": {
+    "description": "底部导航栏中搜索选项卡的标签"
+  },
+  "settingsTabLabel": "设置",
+  "@settingsTabLabel": {
+    "description": "底部导航栏中设置选项卡的标签"
+  }
+}

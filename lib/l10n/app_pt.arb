@@ -1,0 +1,63 @@
+{
+  "@@locale": "pt",
+  "backButtonLabel": "Voltar",
+  "@backButtonLabel": {
+    "description": "Texto do rótulo para o botão de voltar"
+  },
+  "cityNameEmptyError": "Por favor, insira o nome da cidade.",
+  "@cityNameEmptyError": {
+    "description": "Mensagem de erro exibida quando o campo do nome da cidade está vazio"
+  },
+  "cityNameInvalidError": "O nome da cidade deve conter apenas letras e espaços.",
+  "@cityNameInvalidError": {
+    "description": "Mensagem de erro exibida quando a entrada do nome da cidade contém caracteres inválidos"
+  },
+  "searchButtonLabel": "Pesquisar",
+  "@searchButtonLabel": {
+    "description": "Rótulo para o botão de pesquisa de cidade"
+  },
+  "cityNameHintExample": "Tóquio",
+  "@cityNameHintExample": {
+    "description": "Exemplo de dica para o campo de entrada do nome da cidade"
+  },
+  "humidityLabel": "Umidade:",
+  "@humidityLabel": {
+    "description": "Rótulo para o valor da umidade"
+  },
+  "humidityUnit": "%",
+  "@humidityUnit": {
+    "description": "Símbolo da unidade para porcentagem de umidade"
+  },
+  "temperatureUnit": "°C",
+  "@temperatureUnit": {
+    "description": "Símbolo da unidade para temperatura em Celsius"
+  },
+  "weatherDescriptionLabel": "Clima:",
+  "@weatherDescriptionLabel": {
+    "description": "Rótulo para a descrição do clima"
+  },
+  "windSpeedLabel": "Velocidade do vento:",
+  "@windSpeedLabel": {
+    "description": "Rótulo para exibição da velocidade do vento"
+  },
+  "windSpeedUnit": "m/s",
+  "@windSpeedUnit": {
+    "description": "Símbolo da unidade para velocidade do vento em metros por segundo"
+  },
+  "unknownErrorMessage": "Ocorreu um erro inesperado.",
+  "@unknownErrorMessage": {
+    "description": "Exibido quando ocorre um erro desconhecido."
+  },
+  "languageSelectionTitle": "Configurações de idioma",
+  "@languageSelectionTitle": {
+    "description": "Título da tela para alterar o idioma do aplicativo"
+  },
+  "searchTabLabel": "Pesquisar",
+  "@searchTabLabel": {
+    "description": "Rótulo da guia de pesquisa na barra de navegação inferior"
+  },
+  "settingsTabLabel": "Configurações",
+  "@settingsTabLabel": {
+    "description": "Rótulo da guia de configurações na barra de navegação inferior"
+  }
+}

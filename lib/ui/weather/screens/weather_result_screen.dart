@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import '../../../../ui/weather/view_model/providers/async_weather_view_model_provider.dart';
 import '../../../../ui/weather/widgets/background_image.dart';
 import '../../../core/utils/date_format_util.dart';
-import '../widgets/app_back_button.dart';
 import '../widgets/daily_forecast_card.dart';
 import '../widgets/daily_forecast_row.dart';
 import '../widgets/today_weather_card.dart';
@@ -62,8 +61,6 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                     ),
                     const Gap(20),
                     DailyForecastCard(forecastRows: forecastRows),
-                    const Gap(20),
-                    const AppBackButton(),
                   ],
                 ),
               );

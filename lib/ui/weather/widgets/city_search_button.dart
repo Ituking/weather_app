@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/extensions/api_error_ui_message.dart';
 import '../../../core/network/api_error.dart';
-import '../../../core/strings/city_search_button_strings.dart';
 import '../../../ui/weather/view_model/providers/async_weather_view_model_provider.dart';
 import '../../../ui/weather/view_model/providers/city_name_validator_provider.dart';
 import '../../../ui/weather/view_model/providers/error_view_model_provider.dart';
@@ -37,7 +37,9 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
     controller = ref.read(textEditingControllerProvider);
 
     // 都市名のバリデータをProviderから取得し、入力内容の変更を検知してバリデーションを実行。
-    final validator = ref.read(cityNameValidatorProvider);
+    final l10n = AppLocalizations.of(context)!;
+    final validator = ref.read(cityNameValidatorProvider(l10n));
+
     controller.addListener(() {
       setState(() {
         isValid = validator.validate(controller.text);
@@ -53,13 +55,14 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final weatherState = ref.watch(asyncWeatherViewModelProvider);
     final isLoading = weatherState.isLoading;
 
     return isLoading
         ? const CircularProgressIndicator()
         : AppElevatedButton(
-            text: CitySearchButtonStrings.buttonLabelSearch,
+            text: l10n.searchButtonLabel,
             onPressed: isValid
                 ? () async {
                     final cityName = controller.text.trim();
@@ -82,7 +85,7 @@ class _CitySearchButtonState extends ConsumerState<CitySearchButton> {
                       },
                       error: (e, _) {
                         final errorMessage =
-                            e is ApiError ? e.uiMessage : '不明なエラーが発生しました';
+                            e is ApiError ? e.uiMessage : l10n.unknownError;
                         ref
                             .read(errorViewModelProvider.notifier)
                             .setErrorMessage(errorMessage);

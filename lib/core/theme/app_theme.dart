@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_elevated_button_theme.dart';
+import 'app_navigation_bar_theme.dart';
 import 'daily_forecast_card_theme.dart';
 import 'today_weather_card_theme.dart';
 
@@ -41,10 +42,30 @@ class AppTheme {
       backgroundColor: primaryColor,
       foregroundColor: Colors.white,
     ),
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: AppNavigationBarTheme.defaultTheme.backgroundColor,
+      indicatorColor: AppNavigationBarTheme.defaultTheme.indicatorColor,
+      labelTextStyle: WidgetStateProperty.all(
+        AppNavigationBarTheme.defaultTheme.labelTextStyle,
+      ),
+      iconTheme: WidgetStateProperty.resolveWith(
+        (states) {
+          if (states.contains(WidgetState.selected)) {
+            return IconThemeData(
+              color: AppNavigationBarTheme.defaultTheme.selectedItemColor,
+            );
+          }
+          return IconThemeData(
+            color: AppNavigationBarTheme.defaultTheme.unselectedItemColor,
+          );
+        },
+      ),
+    ),
     extensions: <ThemeExtension<dynamic>>[
       TodayWeatherCardTheme.defaultTheme,
       DailyForecastCardTheme.defaultTheme,
       AppElevatedButtonTheme.defaultTheme,
+      AppNavigationBarTheme.defaultTheme,
     ],
   );
 }
