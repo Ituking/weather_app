@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/i18n/locale_metadata.dart';
+import '../../../core/i18n/providers/locale_notifier_provider.dart';
 import '../../core/widgets/app_header.dart';
 import '../widgets/language_option_tile.dart';
 
@@ -14,6 +15,8 @@ class LanguageSelectorScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
+    final selected = ref.watch(localeNotifierProvider);
+    final localeController = ref.read(localeNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppHeader(
@@ -28,6 +31,8 @@ class LanguageSelectorScreen extends ConsumerWidget {
             languageCode: meta.languageCode,
             label: meta.label,
             flag: meta.flag,
+            isSelected: selected?.languageCode == meta.languageCode,
+            onTap: () => localeController.setLocale(meta.languageCode),
           );
         },
       ),
