@@ -16,7 +16,7 @@
   "@searchButtonLabel": {
     "description": "Beschriftung für die Stadtsuch-Schaltfläche"
   },
-  "cityNameHintExample": "Tokio",
+  "cityNameHintExample": "Berlin",
   "@cityNameHintExample": {
     "description": "Beispielhinweis für das Stadtnameneingabefeld"
   },

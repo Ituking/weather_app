@@ -16,7 +16,7 @@
   "@searchButtonLabel": {
     "description": "Étiquette pour le bouton de recherche de ville"
   },
-  "cityNameHintExample": "Tokyo",
+  "cityNameHintExample": "Paris",
   "@cityNameHintExample": {
     "description": "Exemple d'indice pour le champ de saisie du nom de la ville"
   },

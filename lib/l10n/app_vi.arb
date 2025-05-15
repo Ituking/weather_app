@@ -16,7 +16,7 @@
   "@searchButtonLabel": {
     "description": "Nhãn cho nút tìm kiếm"
   },
-  "cityNameHintExample": "Tokyo",
+  "cityNameHintExample": "Hà Nội",
   "@cityNameHintExample": {
     "description": "Gợi ý ví dụ cho trường nhập tên thành phố"
   },
