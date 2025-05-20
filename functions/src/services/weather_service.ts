@@ -68,7 +68,7 @@ export async function fetchWeatherFromAPI(city: string): Promise<{ current: Weat
 
   const { lat, lon } = await fetchLatLon(city);
 
-  const oneCallUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=metric&lang=ja&appid=${OPENWEATHER_API_KEY}`;
+  const oneCallUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=metric&lang=en&appid=${OPENWEATHER_API_KEY}`;
 
   const response = await axios.get(oneCallUrl);
 
