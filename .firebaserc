@@ -4,5 +4,11 @@
     "test": "weatherapptest-f7454"
   },
   "targets": {},
-  "etags": {}
+  "etags": {
+    "weatherappdev-af5fa": {
+      "extensionInstances": {
+        "firestore-translate-text": "9c9332ea0dfc1be1297e99f5432119afed42172e395213936c8b0a0a1a1d7f59"
+      }
+    }
+  }
 }
