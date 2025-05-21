@@ -7,6 +7,7 @@
   "etags": {
     "weatherappdev-af5fa": {
       "extensionInstances": {
+        "firestore-translate-current-city": "b9b19f8baa9673231a0199ba944b68646aae5f89533957191f5dd6e173a33534",
         "firestore-translate-current-description": "c0b78a25f4fc584f8af75f51674815ca4e6cf1667bba95513704e665e67e7f0b",
         "firestore-translate-text": "9c9332ea0dfc1be1297e99f5432119afed42172e395213936c8b0a0a1a1d7f59"
       }
