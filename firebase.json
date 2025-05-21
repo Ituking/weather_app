@@ -61,6 +61,7 @@
     }
   ],
   "extensions": {
-    "firestore-translate-text": "firebase/firestore-translate-text@0.1.23"
+    "firestore-translate-text": "firebase/firestore-translate-text@0.1.23",
+    "firestore-translate-current-description": "firebase/firestore-translate-text@0.1.23"
   }
 }
