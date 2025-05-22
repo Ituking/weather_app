@@ -1,5 +1,5 @@
 import '../../../../core/network/api_error.dart';
-import '../../../../core/network/response/result.dart';
+import '../../../core/network/response/api_result.dart';
 import 'i_weather_api_client.dart';
 
 /// [StubWeatherDataSource]クラスは、[IWeatherApiClient]のスタブ実装です。
@@ -7,17 +7,17 @@ import 'i_weather_api_client.dart';
 /// テスト目的で使用され、固定されたデータを返します。
 class StubWeatherDataSource implements IWeatherApiClient {
   @override
-  Future<Result<Map<String, dynamic>>> fetchWeather(String cityName) async {
+  Future<ApiResult<Map<String, dynamic>>> fetchWeather(String cityName) async {
     // 無効な都市名が指定された場合、エラーレスポンスを返す
     if (cityName == 'InvalidCity') {
-      return Result.failure(ApiError(
+      return ApiResult.failure(ApiError(
         type: ApiErrorType.unknown,
         message: 'Failed to fetch weather data',
       ));
     }
 
     // 有効な都市名が指定された場合、固定された天気データを返します。
-    return Result.success(
+    return ApiResult.success(
       {
         'current': {
           'id': 'stub_id_123',

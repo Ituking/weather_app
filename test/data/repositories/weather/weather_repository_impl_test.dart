@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/api_error.dart';
-import 'package:weather_app/core/network/response/result.dart';
+import 'package:weather_app/core/network/response/api_result.dart';
 import 'package:weather_app/data/repositories/weather/weather_repository_impl.dart';
 import 'package:weather_app/domain/models/weather/forecast.dart';
 
@@ -33,7 +33,7 @@ void main() {
     test('成功時にWeatherResponseを返す', () async {
       // fetchWeatherのモック設定
       when(mockApiClient.fetchWeather('Tokyo')).thenAnswer(
-        (_) async => Result.success(
+        (_) async => ApiResult.success(
           {
             'current': forecast.toJson(),
             'forecast': [],
@@ -59,7 +59,7 @@ void main() {
     test('無効な都市名で失敗時に適切なエラーを返す', () async {
       // fetchWeatherがエラーを返すようにモック設定
       when(mockApiClient.fetchWeather('InvalidCity')).thenAnswer((_) async =>
-          Result.failure(
+          ApiResult.failure(
               ApiError(type: ApiErrorType.unknown, message: '天気データの取得に失敗')));
 
       // 天気データ取得を試みる

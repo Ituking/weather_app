@@ -2,8 +2,8 @@ import 'package:cloud_functions/cloud_functions.dart';
 
 import '../../../../core/logger/app_log.dart';
 import '../../../../core/network/api_error.dart';
-import '../../../../core/network/response/result.dart';
 import '../../../../domain/models/weather/forecast.dart';
+import '../../../core/network/response/api_result.dart';
 import '../../services/weather/i_weather_api_client.dart';
 import 'weather_repository.dart';
 
@@ -18,15 +18,15 @@ class WeatherRepositoryImpl implements WeatherRepository {
   /// 指定された都市名[cityName]の天気データを取得します。
   ///
   /// [cityName] - 天気データを取得する都市の名前。
-  /// 戻り値 - [Result]オブジェクトで、成功時には[Forecast]を含みます。
+  /// 戻り値 - [ApiResult]オブジェクトで、成功時には[Forecast]を含みます。
   @override
-  Future<Result<List<Forecast>>> getWeather(String cityName) async {
+  Future<ApiResult<List<Forecast>>> getWeather(String cityName) async {
     try {
       final result = await apiClient.fetchWeather(cityName);
 
       AppLog.debug(message: 'fetchWeather result: $result');
 
-      final wrappedResult = result.when<Result<List<Forecast>>>(
+      final wrappedResult = result.when<ApiResult<List<Forecast>>>(
         success: (apiData) {
           final current =
               Forecast.fromJson(Map<String, dynamic>.from(apiData['current']));
@@ -34,9 +34,9 @@ class WeatherRepositoryImpl implements WeatherRepository {
               .map((item) => Forecast.fromJson(Map<String, dynamic>.from(item)))
               .toList();
 
-          return Result.success([current, ...forecastList]);
+          return ApiResult.success([current, ...forecastList]);
         },
-        failure: (error) => Result.failure(error),
+        failure: (error) => ApiResult.failure(error),
       );
 
       return wrappedResult;
@@ -46,7 +46,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
         exception: e,
         stackTrace: stackTrace,
       );
-      return Result.failure(ApiError(
+      return ApiResult.failure(ApiError(
         type: ApiErrorType.internalServerError,
         message: e.message ?? 'Unknown Firebase error',
       ));
@@ -56,7 +56,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
         exception: e,
         stackTrace: stackTrace,
       );
-      return Result.failure(
+      return ApiResult.failure(
         ApiError(
           type: ApiErrorType.unknown,
           message: e.toString(),
