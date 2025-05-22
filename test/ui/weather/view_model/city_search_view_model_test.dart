@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/network/api_error.dart';
-import 'package:weather_app/core/network/response/result.dart';
+import 'package:weather_app/core/network/response/api_result.dart';
 import 'package:weather_app/data/repositories/weather/firestore_weather_repository_provider.dart';
 import 'package:weather_app/domain/models/weather/forecast.dart';
 import 'package:weather_app/ui/weather/view_model/providers/city_search_view_model_provider.dart';
@@ -54,7 +54,7 @@ void main() {
       );
 
       when(mockFirestoreWeatherRepository.fetchForecast(cityName))
-          .thenAnswer((_) async => Result.success([testForecast]));
+          .thenAnswer((_) async => ApiResult.success([testForecast]));
 
       await viewModel.fetchWeather();
 
@@ -78,7 +78,7 @@ void main() {
       const cityName = 'Tokyo';
       viewModel.updateCityName(cityName);
       when(mockFirestoreWeatherRepository.fetchForecast(cityName))
-          .thenAnswer((_) async => const Result.failure(ApiError(
+          .thenAnswer((_) async => const ApiResult.failure(ApiError(
                 type: ApiErrorType.unknown,
                 message: 'Failed to fetch weather',
               )));

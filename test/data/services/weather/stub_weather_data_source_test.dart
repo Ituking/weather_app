@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_app/core/network/response/result.dart';
+import 'package:weather_app/core/network/response/api_result.dart';
 import 'package:weather_app/data/repositories/weather/weather_repository_provider.dart';
 import 'package:weather_app/data/services/weather/stub_weather_data_source.dart';
 import 'package:weather_app/data/services/weather/weather_api_client_provider.dart';
@@ -40,7 +40,7 @@ void main() {
       expect(weatherResponse.first.humidity, 70);
     });
 
-    test('API呼び出し失敗時にResult.failureを返す', () async {
+    test('API呼び出し失敗時にApiResult.failureを返す', () async {
       // weatherRepositoryProviderからリポジトリを取得
       final repository = container.read(weatherRepositoryProvider);
 

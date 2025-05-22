@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../core/network/api_error.dart';
-import '../../../../core/network/response/result.dart';
 import '../../../../domain/models/weather/forecast.dart';
+import '../../../core/network/response/api_result.dart';
 import 'firestore_weather_repository.dart';
 
 /// Firestoreから天気データを取得するリポジトリ
 class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
   @override
-  Future<Result<List<Forecast>>> fetchForecast(String cityName) async {
+  Future<ApiResult<List<Forecast>>> fetchForecast(String cityName) async {
     {
       try {
         final snapshot = await FirebaseFirestore.instance
@@ -20,7 +20,7 @@ class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
             .get();
 
         if (snapshot.docs.isEmpty) {
-          return Result.failure(
+          return ApiResult.failure(
             ApiError(type: ApiErrorType.notFound, message: 'データが存在しません'),
           );
         }
@@ -40,9 +40,9 @@ class FirestoreWeatherRepositoryImpl implements FirestoreWeatherRepository {
           );
         }).toList();
 
-        return Result.success(forecasts);
+        return ApiResult.success(forecasts);
       } catch (e) {
-        return Result.failure(
+        return ApiResult.failure(
           ApiError(type: ApiErrorType.unknown, message: e.toString()),
         );
       }
