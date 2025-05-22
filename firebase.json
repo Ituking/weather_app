@@ -59,5 +59,10 @@
         "npm --prefix \"$RESOURCE_DIR\" run build"
       ]
     }
-  ]
+  ],
+  "extensions": {
+    "firestore-translate-current-description": "firebase/firestore-translate-text@0.1.23",
+    "firestore-translate-current-city": "firebase/firestore-translate-text@0.1.23",
+    "firestore-translate-forecast-description": "firebase/firestore-translate-text@0.1.23"
+  }
 }

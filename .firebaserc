@@ -4,5 +4,13 @@
     "test": "weatherapptest-f7454"
   },
   "targets": {},
-  "etags": {}
+  "etags": {
+    "weatherappdev-af5fa": {
+      "extensionInstances": {
+        "firestore-translate-current-city": "b9b19f8baa9673231a0199ba944b68646aae5f89533957191f5dd6e173a33534",
+        "firestore-translate-current-description": "c0b78a25f4fc584f8af75f51674815ca4e6cf1667bba95513704e665e67e7f0b",
+        "firestore-translate-forecast-description": "3b60e98f521987e7489fe1a12b30d6aaea443a209035c04f0efe95e896c9a0b0"
+      }
+    }
+  }
 }
