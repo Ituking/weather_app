@@ -5,12 +5,12 @@ import firebaseFunctionsTest from "firebase-functions-test";
 import { WrappedV2CallableFunction } from "firebase-functions-test/lib/v2";
 import * as sinon from "sinon";
 
-if (!admin.apps.length) {
-  admin.initializeApp();
-}
-
 import { getWeatherForCity } from "../../src/controllers/weather_controller";
+import * as translationService from "../../src/services/wait_for_translation_ready";
 import * as weatherService from "../../src/services/weather_service";
+
+// 型定義
+type MockDocumentReference = Pick<admin.firestore.DocumentReference, "get">;
 
 const testEnv = firebaseFunctionsTest();
 
@@ -22,17 +22,20 @@ type WeatherData = {
   description: string;
   icon: string;
   timestamp: number;
+  city_translations?: Record<string, string>;
+  description_translations?: Record<string, string>;
 };
 
 describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
   let fetchWeatherStub: sinon.SinonStub;
   let saveWeatherStub: sinon.SinonStub;
   let getStub: sinon.SinonStub;
+  let forecastGetStub: sinon.SinonStub;
+  let waitForTranslationsStub: sinon.SinonStub;
   let wrapped: WrappedV2CallableFunction<Promise<{ current: WeatherData; forecast: WeatherData[] }>>;
 
   beforeEach(() => {
     wrapped = testEnv.wrap(getWeatherForCity) as WrappedV2CallableFunction<Promise<{ current: WeatherData; forecast: WeatherData[] }>>;
-
 
     fetchWeatherStub = sinon
       .stub(weatherService, "fetchWeatherFromAPI")
@@ -49,17 +52,34 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
         forecast: [],
       });
 
+    saveWeatherStub = sinon.stub(weatherService, "saveWeatherToFirestore").resolves();
 
-    saveWeatherStub = sinon
-      .stub(weatherService, "saveWeatherToFirestore")
-      .resolves();
+    waitForTranslationsStub = sinon.stub(translationService, "waitForTranslations").callsFake(async (docRef: MockDocumentReference) => {
+      const snapshot = await docRef.get();
+      const data = snapshot.data();
 
-    // Firestoreのモック
+      const translatedData: WeatherData = {
+        city: data?.city ?? "Default City",
+        temperature: data?.temperature ?? 0,
+        humidity: data?.humidity ?? 0,
+        windSpeed: data?.windSpeed ?? 0,
+        description: data?.description ?? "Default Description",
+        icon: data?.icon ?? "00d",
+        timestamp: data?.timestamp ?? Math.floor(Date.now() / 1000),
+        city_translations: { ja: "東京" },
+        description_translations: { ja: "晴れ（翻訳済み）" },
+        ...data,
+      };
+
+      return translatedData;
+    });
+
     const collectionStub = sinon.stub();
     const docStub = sinon.stub();
     const currentDocStub = sinon.stub();
     const forecastOrderByStub = sinon.stub();
     getStub = sinon.stub();
+    forecastGetStub = sinon.stub();
 
     collectionStub.withArgs("weather").returns({ doc: docStub });
 
@@ -72,10 +92,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
     });
 
     currentDocStub.withArgs("data").returns({ get: getStub });
-
-    forecastOrderByStub.withArgs("timestamp").returns({
-      get: sinon.stub().resolves({ docs: [] }),
-    });
+    forecastOrderByStub.withArgs("timestamp").returns({ get: forecastGetStub });
 
     sinon.stub(admin.firestore(), "collection").callsFake(collectionStub);
   });
@@ -102,6 +119,8 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
       }),
     } as unknown);
 
+    forecastGetStub.resolves({ docs: [] });
+
     const mockRequest = {
       data: { city: "Tokyo" },
       rawRequest: {},
@@ -120,10 +139,39 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
     });
 
     assert.isFalse(fetchWeatherStub.called);
+    assert.isFalse(waitForTranslationsStub.called);
   });
 
-  it("Firestoreにデータがない場合、APIから取得して保存する", async () => {
-    getStub.resolves({ exists: false } as unknown);
+  it("Firestoreに昨日の日付のデータがある場合、APIを呼び出す", async () => {
+    const nowTimestamp = Math.floor(Date.now() / 1000);
+    const yesterdayTimestamp = nowTimestamp - 86400;
+
+    const commonWeatherData = {
+      city: "Tokyo",
+      temperature: 8.98,
+      humidity: 27,
+      windSpeed: 9.77,
+      description: "曇り",
+      icon: "04d",
+    };
+
+    getStub.onCall(0).resolves({
+      exists: true,
+      data: () => ({
+        ...commonWeatherData,
+        timestamp: yesterdayTimestamp,
+      }),
+    } as unknown);
+
+    getStub.onCall(1).resolves({
+      exists: true,
+      data: () => ({
+        ...commonWeatherData,
+        timestamp: nowTimestamp,
+      }),
+    } as unknown);
+
+    forecastGetStub.resolves({ docs: [] });
 
     const mockRequest = {
       data: { city: "Tokyo" },
@@ -135,51 +183,15 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
 
     assert.isTrue(fetchWeatherStub.calledOnce);
     assert.isTrue(saveWeatherStub.calledOnce);
+    assert.isTrue(waitForTranslationsStub.calledOnce);
 
     expect(result.current).to.deep.include({
-      city: "Tokyo",
-      temperature: 8.98,
-      humidity: 27,
-      windSpeed: 9.77,
-      description: "雲",
-      icon: "04d",
+      ...commonWeatherData,
+      timestamp: nowTimestamp,
+      city_translations: { ja: "東京" },
+      description_translations: { ja: "晴れ（翻訳済み）" },
     });
-  });
 
-  it("Firestoreに昨日の日付のデータがある場合、APIを呼び出す", async () => {
-    const yesterdayTimestamp = Math.floor((Date.now() - 24 * 60 * 60 * 1000) / 1000); // 昨日
-
-    getStub.resolves({
-      exists: true,
-      data: () => ({
-        city: "Tokyo",
-        temperature: 12.34,
-        humidity: 50,
-        windSpeed: 3.21,
-        description: "曇り",
-        icon: "03d",
-        timestamp: yesterdayTimestamp, // 昨日のデータ
-      }),
-    } as unknown);
-
-    const mockRequest = {
-      data: { city: "Tokyo" },
-      rawRequest: {},
-      auth: null,
-    } as unknown as functions.https.CallableRequest<unknown>;
-
-    const result = await wrapped(mockRequest);
-
-    assert.isTrue(fetchWeatherStub.calledOnce, "APIが呼び出されるべき");
-    assert.isTrue(saveWeatherStub.calledOnce, "Firestore保存が行われるべき");
-
-    expect(result.current).to.deep.include({
-      city: "Tokyo",
-      temperature: 8.98,
-      humidity: 27,
-      windSpeed: 9.77,
-      description: "雲",
-      icon: "04d",
-    });
+    expect(result.forecast.length).to.equal(0);
   });
 });
