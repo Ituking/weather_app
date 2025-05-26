@@ -1,6 +1,7 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 
+import { waitForTranslations } from "../services/wait_for_translation_ready";
 import { fetchWeatherFromAPI, saveWeatherToFirestore } from "../services/weather_service";
 
 const db = admin.firestore();
@@ -61,9 +62,16 @@ export const getWeatherForCity = functions.https.onCall(
 
       console.log(`APIから取得してFirestoreに保存: ${city}`);
 
+      // 翻訳が揃うまで待機して読み込み
+      const currentTranslated = await waitForTranslations(cityDoc.collection("current").doc("data"));
+      const forecastSnapshot = await cityDoc.collection("forecast").orderBy("timestamp").get();
+      const forecastTranslated = await Promise.all(
+        forecastSnapshot.docs.map((doc) => waitForTranslations(doc.ref))
+      );
+
       return {
-        current: weatherData.current,
-        forecast: weatherData.forecast,
+        current: currentTranslated,
+        forecast: forecastTranslated,
       };
     } catch (error) {
       console.error(`${city}の天気データ取得・保存に失敗:`, error);
