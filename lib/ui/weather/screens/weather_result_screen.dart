@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../domain/models/weather/extensions/forecast_extensions.dart';
 import '../../../../ui/weather/view_model/providers/async_weather_view_model_provider.dart';
 import '../../../../ui/weather/widgets/background_image.dart';
+import '../../../core/i18n/providers/locale_notifier_provider.dart';
 import '../../../core/utils/date_format_util.dart';
 import '../widgets/daily_forecast_card.dart';
 import '../widgets/daily_forecast_row.dart';
@@ -23,6 +25,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
   @override
   Widget build(BuildContext context) {
     final weatherResult = ref.watch(asyncWeatherViewModelProvider);
+    final locale = ref.watch(localeNotifierProvider)?.countryCode ?? 'en';
 
     return Scaffold(
       body: Stack(
@@ -41,7 +44,7 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                           DateFormatUtil.formatToDayLabel(forecast.timestamp),
                       minTemperature: forecast.minTemp,
                       maxTemperature: forecast.maxTemp,
-                      description: forecast.description,
+                      description: forecast.localizedDescription(locale),
                       iconCode: forecast.icon,
                     ),
                   )
@@ -52,11 +55,11 @@ class _WeatherResultScreenState extends ConsumerState<WeatherResultScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   children: [
                     TodayWeatherCard(
-                      cityName: today.city,
+                      cityName: today.localizedCity(locale),
                       temperature: today.temperature,
                       humidity: today.humidity.toInt(),
                       windSpeed: today.windSpeed,
-                      description: today.description,
+                      description: today.localizedDescription(locale),
                       iconCode: today.icon,
                     ),
                     const Gap(20),
