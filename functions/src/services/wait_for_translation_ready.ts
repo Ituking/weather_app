@@ -46,12 +46,12 @@ export async function waitForTranslations(
       const snapshot = await docRef.get();
       const data = snapshot.data();
 
-      console.log(`データ取得完了: ${snapshot.exists ? "存在" : "不存在"}`);
+      console.log(`データ取得完了: ${snapshot.exists ? "存在しています" : "存在していません"}`);
 
       if (data) {
         console.log("翻訳フィールド確認:");
-        console.log(`- city_translations: ${data.city_translations ? "存在" : "不存在"}`);
-        console.log(`- description_translations: ${data.description_translations ? "存在" : "不存在"}`);
+        console.log(`- city_translations: ${data.city_translations ? "存在しています" : "存在していません"}`);
+        console.log(`- description_translations: ${data.description_translations ? "存在しています" : "存在していません"}`);
 
         if (data.city_translations && data.description_translations) {
           console.log(`=== 翻訳処理完了（試行回数: ${i + 1}）===`);
