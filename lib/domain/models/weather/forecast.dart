@@ -8,7 +8,9 @@ class Forecast with _$Forecast {
   const factory Forecast({
     @Default('') String id,
     @Default('') String city,
+    @Default({}) Map<String, String> cityTranslations,
     @Default('') String description,
+    @Default({}) Map<String, String> descriptionTranslations,
     @Default(0.0) double humidity,
     @Default(0.0) double temperature,
     @Default(0.0) double minTemp,

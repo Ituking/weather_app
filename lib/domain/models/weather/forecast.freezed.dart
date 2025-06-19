@@ -22,7 +22,11 @@ Forecast _$ForecastFromJson(Map<String, dynamic> json) {
 mixin _$Forecast {
   String get id => throw _privateConstructorUsedError;
   String get city => throw _privateConstructorUsedError;
+  Map<String, String> get cityTranslations =>
+      throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  Map<String, String> get descriptionTranslations =>
+      throw _privateConstructorUsedError;
   double get humidity => throw _privateConstructorUsedError;
   double get temperature => throw _privateConstructorUsedError;
   double get minTemp => throw _privateConstructorUsedError;
@@ -49,7 +53,9 @@ abstract class $ForecastCopyWith<$Res> {
   $Res call(
       {String id,
       String city,
+      Map<String, String> cityTranslations,
       String description,
+      Map<String, String> descriptionTranslations,
       double humidity,
       double temperature,
       double minTemp,
@@ -76,7 +82,9 @@ class _$ForecastCopyWithImpl<$Res, $Val extends Forecast>
   $Res call({
     Object? id = null,
     Object? city = null,
+    Object? cityTranslations = null,
     Object? description = null,
+    Object? descriptionTranslations = null,
     Object? humidity = null,
     Object? temperature = null,
     Object? minTemp = null,
@@ -94,10 +102,18 @@ class _$ForecastCopyWithImpl<$Res, $Val extends Forecast>
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
+      cityTranslations: null == cityTranslations
+          ? _value.cityTranslations
+          : cityTranslations // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      descriptionTranslations: null == descriptionTranslations
+          ? _value.descriptionTranslations
+          : descriptionTranslations // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
       humidity: null == humidity
           ? _value.humidity
           : humidity // ignore: cast_nullable_to_non_nullable
@@ -141,7 +157,9 @@ abstract class _$$ForecastImplCopyWith<$Res>
   $Res call(
       {String id,
       String city,
+      Map<String, String> cityTranslations,
       String description,
+      Map<String, String> descriptionTranslations,
       double humidity,
       double temperature,
       double minTemp,
@@ -166,7 +184,9 @@ class __$$ForecastImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? city = null,
+    Object? cityTranslations = null,
     Object? description = null,
+    Object? descriptionTranslations = null,
     Object? humidity = null,
     Object? temperature = null,
     Object? minTemp = null,
@@ -184,10 +204,18 @@ class __$$ForecastImplCopyWithImpl<$Res>
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
+      cityTranslations: null == cityTranslations
+          ? _value._cityTranslations
+          : cityTranslations // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      descriptionTranslations: null == descriptionTranslations
+          ? _value._descriptionTranslations
+          : descriptionTranslations // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
       humidity: null == humidity
           ? _value.humidity
           : humidity // ignore: cast_nullable_to_non_nullable
@@ -226,7 +254,9 @@ class _$ForecastImpl extends _Forecast {
   const _$ForecastImpl(
       {this.id = '',
       this.city = '',
+      final Map<String, String> cityTranslations = const {},
       this.description = '',
+      final Map<String, String> descriptionTranslations = const {},
       this.humidity = 0.0,
       this.temperature = 0.0,
       this.minTemp = 0.0,
@@ -234,7 +264,9 @@ class _$ForecastImpl extends _Forecast {
       this.windSpeed = 0.0,
       this.icon = '',
       this.timestamp = 0})
-      : super._();
+      : _cityTranslations = cityTranslations,
+        _descriptionTranslations = descriptionTranslations,
+        super._();
 
   factory _$ForecastImpl.fromJson(Map<String, dynamic> json) =>
       _$$ForecastImplFromJson(json);
@@ -245,9 +277,28 @@ class _$ForecastImpl extends _Forecast {
   @override
   @JsonKey()
   final String city;
+  final Map<String, String> _cityTranslations;
+  @override
+  @JsonKey()
+  Map<String, String> get cityTranslations {
+    if (_cityTranslations is EqualUnmodifiableMapView) return _cityTranslations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_cityTranslations);
+  }
+
   @override
   @JsonKey()
   final String description;
+  final Map<String, String> _descriptionTranslations;
+  @override
+  @JsonKey()
+  Map<String, String> get descriptionTranslations {
+    if (_descriptionTranslations is EqualUnmodifiableMapView)
+      return _descriptionTranslations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_descriptionTranslations);
+  }
+
   @override
   @JsonKey()
   final double humidity;
@@ -272,7 +323,7 @@ class _$ForecastImpl extends _Forecast {
 
   @override
   String toString() {
-    return 'Forecast(id: $id, city: $city, description: $description, humidity: $humidity, temperature: $temperature, minTemp: $minTemp, maxTemp: $maxTemp, windSpeed: $windSpeed, icon: $icon, timestamp: $timestamp)';
+    return 'Forecast(id: $id, city: $city, cityTranslations: $cityTranslations, description: $description, descriptionTranslations: $descriptionTranslations, humidity: $humidity, temperature: $temperature, minTemp: $minTemp, maxTemp: $maxTemp, windSpeed: $windSpeed, icon: $icon, timestamp: $timestamp)';
   }
 
   @override
@@ -282,8 +333,12 @@ class _$ForecastImpl extends _Forecast {
             other is _$ForecastImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.city, city) || other.city == city) &&
+            const DeepCollectionEquality()
+                .equals(other._cityTranslations, _cityTranslations) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            const DeepCollectionEquality().equals(
+                other._descriptionTranslations, _descriptionTranslations) &&
             (identical(other.humidity, humidity) ||
                 other.humidity == humidity) &&
             (identical(other.temperature, temperature) ||
@@ -299,8 +354,20 @@ class _$ForecastImpl extends _Forecast {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, city, description, humidity,
-      temperature, minTemp, maxTemp, windSpeed, icon, timestamp);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      city,
+      const DeepCollectionEquality().hash(_cityTranslations),
+      description,
+      const DeepCollectionEquality().hash(_descriptionTranslations),
+      humidity,
+      temperature,
+      minTemp,
+      maxTemp,
+      windSpeed,
+      icon,
+      timestamp);
 
   /// Create a copy of Forecast
   /// with the given fields replaced by the non-null parameter values.
@@ -322,7 +389,9 @@ abstract class _Forecast extends Forecast {
   const factory _Forecast(
       {final String id,
       final String city,
+      final Map<String, String> cityTranslations,
       final String description,
+      final Map<String, String> descriptionTranslations,
       final double humidity,
       final double temperature,
       final double minTemp,
@@ -340,7 +409,11 @@ abstract class _Forecast extends Forecast {
   @override
   String get city;
   @override
+  Map<String, String> get cityTranslations;
+  @override
   String get description;
+  @override
+  Map<String, String> get descriptionTranslations;
   @override
   double get humidity;
   @override
