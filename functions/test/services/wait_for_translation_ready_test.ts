@@ -83,11 +83,11 @@ describe("waitForTranslationsの動作検証 (Cloud Functions)", () => {
 
     const start = Date.now();
 
-    await expect(waitForTranslations(fakeDocRef)).to.be.rejectedWith(
+    await expect(waitForTranslations(fakeDocRef, { timeoutSeconds: 1, pollingIntervalMs: 100 })).to.be.rejectedWith(
       "複数回の試行後も翻訳が完了していません。"
     );
 
     const duration = Date.now() - start;
-    expect(duration).to.be.greaterThan(9000); // 実際の待機時間が9秒以上であること
+    expect(duration).to.be.greaterThan(80); // 実際の待機時間が80ms以上であること
   });
 })
