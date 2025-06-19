@@ -139,7 +139,7 @@ describe("getWeatherForCityの動作検証 (Cloud Functions)", () => {
     });
 
     assert.isFalse(fetchWeatherStub.called);
-    assert.isFalse(waitForTranslationsStub.called);
+    assert.isTrue(waitForTranslationsStub.called);
   });
 
   it("Firestoreに昨日の日付のデータがある場合、APIを呼び出す", async () => {
